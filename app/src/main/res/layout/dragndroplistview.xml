@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content">
+  <com.ussol.employeetracker.dragdrop.DragNDropListView
+  	android:id="@+id/android:list"
+	android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="50dip">
+  </com.ussol.employeetracker.dragdrop.DragNDropListView>
+  
+  <LinearLayout
+      android:id="@+id/bottom_control_bar"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:background="@color/grey_light"
+      android:gravity="center_vertical|center_horizontal" >
+
+		<Button
+		    android:id="@+id/btnSortSave"
+		    android:layout_width="wrap_content"
+		    android:layout_height="match_parent"
+		    android:drawableLeft="@drawable/searchitem"
+		    android:text="@string/userTitleSearchItemSetting" />
+
+			<Button
+			    android:id="@+id/btnSortCancel"
+			    android:layout_width="wrap_content"
+			    android:layout_height="match_parent"
+			    android:drawableLeft="@drawable/back"
+			    android:text="@string/titleBack" />
+
+	</LinearLayout>
+</RelativeLayout>

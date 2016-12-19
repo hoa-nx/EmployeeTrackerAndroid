@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <PreferenceCategory android:title="Thiết lập công việc chạy nền" >
+		<SwitchPreference
+			android:key="config_enableBackgroundJob"
+			android:title="Cấu hình cho phép thực hiện job tự động" 
+		/>
+		<SwitchPreference
+			android:key="config_notDisplaySentMessage"
+			android:title="Không hiển thị các tin nhắn đã gửi , đã bỏ qua" 
+		/>
+		<SwitchPreference
+			android:key="config_enableSendSmsBirthdayConfiguration"
+			android:title="Tự động gửi sms chúc mừng SN" 
+		/>
+		<SwitchPreference
+			android:key="config_enableSendSmsYasumiConfiguration"
+			android:title="Tự động gửi sms cám ơn đã cống hiến khi nghỉ việc" 
+		/>	
+		<SwitchPreference
+			android:key="config_enableSendSmsTrainingConfiguration"
+			android:title="Tự động gửi sms sau khi kết thúc thử việc" 
+		/>	
+		<EditTextPreference
+            android:name="SimSendSms"
+            android:defaultValue="0967808590"
+            android:key="config_SimSendSms"
+            android:summary="Sim dùng để gửi SMS"
+            android:title="Sim số dùng để gửi text message" />
+		<EditTextPreference
+            android:name="config_birthdayMsgCode"
+            android:defaultValue="1"
+            android:key="config_birthdayMsgCode"
+            android:summary="Mã của message template dùng để gửi tin nhắn chúc mừng SN"
+            android:title="Mã số tin nhắn mừng sinh nhật" />
+		<EditTextPreference
+            android:name="config_yasumiMsgCode"
+            android:defaultValue="2"
+            android:key="config_yasumiMsgCode"
+            android:summary="Mã của message template dùng để gửi tin nhắn khi nghỉ việc"
+            android:title="Mã số tin nhắn nghỉ việc" />
+		<EditTextPreference
+            android:name="config_yasumiMsgReceiverPhone"
+            android:defaultValue=""
+            android:key="config_yasumiMsgReceiverPhone"
+            android:summary="Thông báo khi nghỉ việc - người nhận"
+            android:title="List người nhận SMS khi có nhân viên nghỉ việc" />
+		<EditTextPreference
+            android:name="config_trainingMsgCode"
+            android:defaultValue="3"
+            android:key="config_trainingMsgCode"
+            android:summary="Mã của message template dùng để gửi tin nhắn dành cho nhân viên mới được nhận chính thức"
+            android:title="Mã tin nhắn khi nhận nhân viên chính thức" />
+		<EditTextPreference
+            android:name="config_trainingMsgReceiverPhone"
+            android:defaultValue=""
+            android:key="config_trainingMsgReceiverPhone"
+            android:summary="Thông báo khi nhận nhân viên chính thức.Phân cách bằng dấu ;"
+            android:title="List người nhận SMS khi nhận chính thức NV mới" />
+	</PreferenceCategory>
+	
+    <PreferenceCategory android:title="Thiết lập trình tự sort dữ liệu" >
+		<SwitchPreference
+			android:key="config_enableSortFirstItem"
+			android:title="Chỉ sort theo item đầu tiên" 
+		/>
+	</PreferenceCategory>
+    <PreferenceCategory android:title="Thiết lập backup dữ liệu" >
+		<SwitchPreference
+			android:key="config_enableGoogleDriveBackup"
+			android:title="Cho phép tự động upload Google Drive" 
+		/>
+	</PreferenceCategory>    
+	<PreferenceCategory android:title="Thiết lập năm xử lý tại biểu đồ" >
+		<EditTextPreference
+            android:name="config_YearProcessing"
+            android:defaultValue="2015"
+            android:key="config_YearProcessing"
+            android:summary="Chỉ định năm tài chính sử dụng vẽ biểu đồ" 
+            android:title="Năm xử lý" />
+	</PreferenceCategory>    
+	<PreferenceCategory android:title="Thiết lập số tháng dùng để thống kê nhân viên" >
+		<EditTextPreference
+            android:name="config_KeikenMonthProcessing"
+            android:defaultValue="3"
+            android:key="config_KeikenMonthProcessing"
+            android:summary="Chỉ định số tháng thâm niên" 
+            android:title="Số tháng thâm niên" />
+	</PreferenceCategory>	
+	<PreferenceCategory android:title="Thiết lập hiển thị tại biểu đồ" >
+		<SwitchPreference
+			android:key="config_displayDescriptionOnChart"
+			android:title="Hiển thị thông tin mô tả trên các biểu đồ" 
+		/>
+		<SwitchPreference
+			android:key="config_displayValueOnClick"
+			android:title="Hiển thị thông tin trị tổng kết khi click vào từng item trên các biểu đồ" 
+		/>		
+	</PreferenceCategory>    
+	
+    <PreferenceCategory android:title="Thiết lập tỉ lệ thuế" >
+        <EditTextPreference
+            android:name="BHXH(%)"
+            android:defaultValue="7.0"
+            android:key="config_BHXH"
+            android:summary="Chỉ định tỉ lệ đóng bảo hiểm xã hội của người lao động"
+            android:title="BHXH(%)" />
+        
+        <EditTextPreference
+            android:name="BHYT(%)"
+            android:defaultValue="7.0"
+            android:key="config_BHYT"
+            android:summary="Chỉ định tỉ lệ đóng bảo hiểm y tế của người lao động"
+            android:title="BHYT(%)" />
+        
+        <EditTextPreference
+            android:name="BHTN(%)"
+            android:defaultValue="7.0"
+            android:key="config_BHTN"
+            android:summary="Chỉ định tỉ lệ đóng bảo hiểm thất nghiệp của người lao động"
+            android:title="BHTN(%)" />
+    </PreferenceCategory>
+    
+    <PreferenceCategory android:title="Thiết lập giảm trừ" >
+        <EditTextPreference
+            android:name="Giảm trừ bản thân(VNĐ)"
+            android:defaultValue="4000000.0"
+            android:key="config_SelfMoney"
+            android:summary="Chỉ định số tiền giảm trừ bản thân"
+            android:title="Giảm trừ bản thân(VNĐ)" />
+        
+        <EditTextPreference
+            android:name="Giảm trừ người phụ thuộc(VNĐ)"
+            android:defaultValue="1600000.0"
+            android:key="config_DependPeopleMoney"
+            android:summary="Chỉ định số tiền giảm trừ của 1 người phụ thuộc"
+            android:title="Giảm trừ người phụ thuộc(VNĐ)" />
+        
+        <EditTextPreference
+            android:name="Giảm trừ cố định khác(VNĐ)"
+            android:defaultValue="0.0"
+            android:key="config_OtherMinus"
+            android:summary="Chỉ định số tiền giảm trừ khác(cố định)"
+            android:title="Giảm trừ cố định khác(VNĐ)" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Cài đặt phụ cấp tiếng Nhật" >
+        <EditTextPreference
+            android:name="N1"
+            android:defaultValue="150"
+            android:key="config_JapaneseN1"
+            android:summary="Chỉ định phụ cấp tiếng Nhật N1"
+            android:title="N1" />
+        
+        <EditTextPreference
+            android:name="N2"
+            android:defaultValue="120"
+            android:key="config_JapaneseN2"
+            android:summary="Chỉ định phụ cấp tiếng Nhật N2"
+            android:title="N2" />
+        
+        <EditTextPreference
+            android:name="N3"
+            android:defaultValue="80"
+            android:key="config_JapaneseN3"
+            android:summary="Chỉ định phụ cấp tiếng Nhật N3"
+            android:title="N3" />
+        <EditTextPreference
+            android:name="N4"
+            android:defaultValue="50"
+            android:key="config_JapaneseN4"
+            android:summary="Chỉ định phụ cấp tiếng Nhật N4"
+            android:title="N4" />
+        <EditTextPreference
+            android:name="N5"
+            android:defaultValue="25"
+            android:key="config_JapaneseN5"
+            android:summary="Chỉ định phụ cấp tiếng Nhật N5"
+            android:title="N5" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Cài đặt phụ cấp nghiệp vụ" >
+        <EditTextPreference
+            android:name="B1"
+            android:defaultValue="10"
+            android:key="config_BusinessLevel1"
+            android:summary="Chỉ định phụ cấp nghiệp vụ bậc 1"
+            android:title="Bậc 1" />
+        
+        <EditTextPreference
+            android:name="B2"
+            android:defaultValue="20"
+            android:key="config_BusinessLevel2"
+            android:summary="Chỉ định phụ cấp nghiệp vụ bậc 2"
+            android:title="Bậc 2" />
+        <EditTextPreference
+            android:name="B3"
+            android:defaultValue="30"
+            android:key="config_BusinessLevel3"
+            android:summary="Chỉ định phụ cấp nghiệp vụ bậc 3"
+            android:title="Bậc 3" />
+        <EditTextPreference
+            android:name="B4"
+            android:defaultValue="40"
+            android:key="config_BusinessLevel4"
+            android:summary="Chỉ định phụ cấp nghiệp vụ bậc 4"
+            android:title="Bậc 4" />
+        <EditTextPreference
+            android:name="B5"
+            android:defaultValue="10"
+            android:key="config_BusinessLevel5"
+            android:summary="Chỉ định phụ cấp nghiệp vụ bậc 5"
+            android:title="Bậc 5" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Cài đặt phụ cấp phòng chuyên biệt" >
+        <EditTextPreference
+            android:name="M1"
+            android:defaultValue="10"
+            android:key="config_RoomLevel1"
+            android:summary="Chỉ định phụ cấp phòng chuyên biệt mức 1"
+            android:title="Mức 1" />
+        
+        <EditTextPreference
+            android:name="M2"
+            android:defaultValue="20"
+            android:key="config_RoomLevel2"
+            android:summary="Chỉ định phụ cấp phòng chuyên biệt mức 2"
+            android:title="Mức 2" />
+        
+        <EditTextPreference
+            android:name="M3"
+            android:defaultValue="30"
+            android:key="config_RoomLevel3"
+            android:summary="Chỉ định phụ cấp phòng chuyên biệt mức 3"
+            android:title="Mức 3" />
+        
+        <EditTextPreference
+            android:name="M4"
+            android:defaultValue="40"
+            android:key="config_RoomLevel4"
+            android:summary="Chỉ định phụ cấp phòng chuyên biệt mức 4"
+            android:title="Mức 4" />
+        
+        <EditTextPreference
+            android:name="M5"
+            android:defaultValue="50"
+            android:key="config_RoomLevel5"
+            android:summary="Chỉ định phụ cấp phòng chuyên biệt mức 5"
+            android:title="Mức 5" />
+    </PreferenceCategory>
+    
+    <PreferenceCategory android:title="Cài đặt gửi mail(GMAIL)" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="config_ReportSendMail"
+            android:summary="Có gửi/không gửi mail sau khi tạo report.Sẽ tự động bật data(3G) nên sẽ tốn phí. "
+            android:title="Gửi mail sau khi tạo report" android:selectable="true" android:enabled="true"/>
+        <EditTextPreference
+            android:name="Email các người nhận báo cáo"
+            android:defaultValue="xuanhoa97@gmail.com"
+            android:key="config_ReportSendMailTo"
+            android:dependency="config_ReportSendMail"
+            android:summary="Email các người nhận báo cáo.Trường hợp nhiều người thì cách nhau bằng dấu ;"
+            android:title="Email các người nhận báo cáo" />
+        
+        <EditTextPreference
+            android:name="Tài khoản dùng để gửi mail(From)"
+            android:defaultValue="xuanhoa97@gmail.com"
+            android:key="config_EmailAccount"
+            android:summary="Tài khoản mail"
+            android:title="Tài khoản dùng để gửi mail(From)" />
+    	<EditTextPreference
+            android:name="Tên người dùng(email)"
+            android:defaultValue="xuanhoa97"
+            android:key="config_EmailUser"
+            android:summary="Tài khoản mail"
+            android:title="Tên người dùng(email)" />
+        <EditTextPreference
+            android:name="Mật khẩu của mail"
+            android:defaultValue="12345"
+            android:key="config_EmailPass"
+            android:password="true"
+            android:summary="Mật khẩu login của mail"
+            android:title="Mật khẩu mail" />
+            
+    </PreferenceCategory>
+    
+    <!-- <PreferenceCategory android:title="Thay đổi mật khẩu đăng nhập" >
+        <EditTextPreference
+            android:name="Thay đổi mật khẩu đăng nhập"
+            android:defaultValue="12345"
+            android:key="config_PassLogin"
+            android:password="true"
+            android:selectable="true"
+            android:summary="Chỉ định mật khẩu khi đăng nhập"
+            android:title="Nhập mật khẩu mới" />
+    </PreferenceCategory> -->
+        
+    <PreferenceCategory android:title="Sử dụng mật khẩu" >
+		<SwitchPreference
+			android:key="config_enablePassCode"
+			android:title="Sử dụng mật khẩu" 
+		/>
+	</PreferenceCategory>
+	
+</PreferenceScreen>

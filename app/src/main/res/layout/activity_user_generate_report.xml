@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <!-- header -->
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="90dp"
+        android:visibility="gone" >
+    </RelativeLayout>
+    <!-- body -->
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:gravity="bottom"
+                android:paddingBottom="55dp"
+                android:paddingTop="0dp" >
+
+				<RadioGroup
+				    android:id="@+id/radExportType"
+				    android:layout_width="fill_parent"
+				    android:layout_height="wrap_content"
+				    android:layout_alignParentLeft="true"
+				    android:layout_alignParentTop="true"
+				    android:gravity="center_horizontal"
+				    android:orientation="horizontal" >
+
+					<RadioButton
+					    android:id="@+id/radPDF"
+					    android:layout_width="wrap_content"
+					    android:layout_height="wrap_content"
+					    android:checked="true"
+					    android:drawableLeft="@drawable/pdf"
+					    android:text="@string/titlePDF" />
+
+				    <RadioButton
+				        android:id="@+id/radExcel"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:checked="false"
+				        android:drawableLeft="@drawable/excel4"
+				        android:text="@string/titleEXCEL" />
+
+				</RadioGroup>
+                
+                <Button
+                    android:id="@+id/btnReportByTeam"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/btnReportByDept"
+                    android:drawableLeft="@drawable/pdf"
+                    android:ellipsize="none"
+                    android:gravity="left|center_vertical"
+                    android:text="@string/menu_exp_group_team" />
+
+                <Button
+                    android:id="@+id/btnReportByDept"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/radExportType"
+                    android:drawableLeft="@drawable/pdf"
+                    android:ellipsize="none"
+                    android:gravity="left|center_vertical"
+                    android:text="@string/menu_exp_group_dept" />
+
+                <Button
+                    android:id="@+id/btnReportByPosition"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/btnReportByTeam"
+                    android:drawableLeft="@drawable/pdf"
+                    android:ellipsize="none"
+                    android:gravity="left|center_vertical"
+                    android:text="@string/menu_exp_group_position" />
+
+                <Button
+                    android:id="@+id/btnReportBySex"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/btnReportByPosition"
+                    android:drawableLeft="@drawable/pdf"
+                    android:ellipsize="none"
+                    android:gravity="left|center_vertical"
+                    android:text="@string/menu_exp_group_sex" />
+
+                <Button
+                    android:id="@+id/btnReportByJapaneseLevel"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/btnReportBySex"
+                    android:drawableLeft="@drawable/pdf"
+                    android:ellipsize="none"
+                    android:gravity="left|center_vertical"
+                    android:text="@string/menu_exp_group_japanese" />
+
+                <Button
+                    android:id="@+id/btnReportByBusinessKbn"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/btnReportByJapaneseLevel"
+                    android:drawableLeft="@drawable/pdf"
+                    android:ellipsize="none"
+                    android:gravity="left|center_vertical"
+                    android:text="@string/menu_exp_group_business_kbn" />
+
+                <Button
+                    android:id="@+id/btnReportByNone"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/btnReportByBusinessKbn"
+                    android:drawableLeft="@drawable/pdf"
+                    android:ellipsize="none"
+                    android:gravity="left|center_vertical"
+                    android:text="@string/menu_exp_group_none" />
+
+                <Button
+                    android:id="@+id/btnOutputPDFCancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/btnReportBySalary"
+                    android:layout_marginTop="14dp"
+                    android:drawableLeft="@drawable/back"
+                    android:gravity="left|center_vertical"
+                    android:text="@string/titleBack"
+                    android:visibility="visible" />
+
+                <Button
+                    android:id="@+id/btnReportBySalary"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/btnReportByNone"
+                    android:drawableLeft="@drawable/pdf"
+                    android:ellipsize="none"
+                    android:gravity="left|center_vertical"
+                    android:text="@string/menu_exp_group_salary" />
+              
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+		<!-- footer -->
+
+        <RelativeLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/grey"
+            android:gravity="center"
+            android:visibility="gone" >
+
+        </RelativeLayout>
+
+</LinearLayout>

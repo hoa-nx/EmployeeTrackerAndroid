@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+        <!-- header -->
+        <RelativeLayout 
+            android:layout_width="fill_parent" 
+            android:layout_height="0dp">
+        </RelativeLayout>
+		<!-- body -->
+        <ScrollView 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" 
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                 <RelativeLayout
+                     android:layout_width="fill_parent"
+                     android:layout_height="fill_parent"
+                     android:layout_alignParentBottom="true"
+                     android:layout_alignParentLeft="true"
+                     android:gravity="bottom"
+                     android:paddingBottom="55dp"
+                     android:paddingTop="0dp" >
+
+                     <TextView
+                         android:id="@+id/lblTeamCode"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_alignParentTop="true"
+                         android:layout_marginTop="10dp"
+                         android:text="@string/teamTitleCode"
+                         android:textAppearance="?android:attr/textAppearanceMedium" />
+				
+				    <TextView
+				        android:id="@+id/txtTeamCode"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentLeft="true"
+				        android:layout_alignParentRight="true"
+				        android:layout_below="@+id/lblTeamCode"
+				        android:layout_marginLeft="10dp"
+				        android:layout_marginTop="10dp"
+				        android:text=""
+				        android:textAppearance="?android:attr/textAppearanceMedium" />
+				
+				    <TextView
+				        android:id="@+id/lblTeamName"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentLeft="true"
+				        android:layout_below="@+id/txtTeamCode"
+				        android:layout_marginTop="10dp"
+				        android:text="@string/teamTitleName"
+				        android:textAppearance="?android:attr/textAppearanceMedium" />
+				
+				    <EditText
+				        android:id="@+id/txtTeamName"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentLeft="true"
+				        android:layout_alignParentRight="true"
+				        android:layout_below="@+id/lblTeamName"
+				        android:layout_marginTop="10dp"
+				        android:background="@drawable/edittext_modified_states"
+				        android:hint="@string/teamTitleName"
+				        android:inputType="textCapWords"
+				        android:singleLine="true"
+				        android:textColor="@color/grey" />
+				
+				    <TextView
+				        android:id="@+id/lblTeamDept"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentLeft="true"
+				        android:layout_below="@+id/txtTeamName"
+				        android:layout_marginTop="10dp"
+				        android:text="@string/teamTitleDept"
+				        android:textAppearance="?android:attr/textAppearanceMedium" />
+				
+				    <EditText
+				        android:id="@+id/txtTeamDept"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentLeft="true"
+				        android:layout_below="@+id/lblTeamDept"
+				        android:layout_marginTop="10dp"
+				        android:layout_toLeftOf="@+id/btnTeamDept"
+				        android:ems="10"
+				        android:focusable="false"
+				        android:focusableInTouchMode="false"
+				        android:hint="@string/teamTitleDept" >
+				
+				        <requestFocus />
+				    </EditText>
+				
+				    <Button
+				        android:id="@+id/btnTeamDept"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignBottom="@+id/txtTeamDept"
+				        android:layout_alignParentRight="true"
+				        android:layout_below="@+id/lblTeamDept"
+				        android:background="@android:color/transparent"
+				        android:drawableStart="@drawable/search"
+				        android:minWidth="48dip" />
+				
+				    <TextView
+				        android:id="@+id/lblTeamLeader"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentLeft="true"
+				        android:layout_alignParentRight="true"
+				        android:layout_below="@+id/txtTeamDept"
+				        android:layout_marginTop="10dp"
+				        android:text="@string/teamTitleManager"
+				        android:textAppearance="?android:attr/textAppearanceMedium" />
+				
+				    <EditText
+				        android:id="@+id/txtTeamLeader"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentLeft="true"
+				        android:layout_alignRight="@+id/txtTeamDept"
+				        android:layout_below="@+id/lblTeamLeader"
+				        android:layout_marginTop="10dp"
+				        android:clickable="false"
+				        android:ems="10"
+				        android:focusable="false"
+				        android:focusableInTouchMode="false"
+				        android:hint="@string/teamTitleManager" />
+				
+				    <Button
+				        android:id="@+id/btnTeamLeader"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignBottom="@+id/txtTeamLeader"
+				        android:layout_alignLeft="@+id/btnTeamDept"
+				        android:layout_alignParentRight="true"
+				        android:layout_below="@+id/lblTeamLeader"
+				        android:background="@android:color/transparent"
+				        android:drawableStart="@drawable/search"
+				        android:minWidth="48dip" />
+
+				    <TextView
+				        android:id="@+id/lblTeamNote"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentLeft="true"
+				        android:layout_below="@+id/txtTeamLeader"
+				        android:layout_marginTop="10dp"
+				        android:text="@string/teamTitleNote"
+				        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+				    <EditText
+				        android:id="@+id/txtTeamNote"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentLeft="true"
+				        android:layout_alignParentRight="true"
+				        android:layout_below="@+id/lblTeamNote"
+				        android:layout_marginTop="10dp"
+				        android:background="@drawable/edittext_modified_states"
+				        android:ems="10"
+				        android:hint="@string/teamTitleNote"
+				        android:inputType="textMultiLine|textCapWords"
+				        android:lines="2"
+				        android:textColor="@color/grey" />
+
+				    <TextView
+				        android:id="@+id/txtTeamDeptCode"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_above="@+id/txtTeamDept"
+				        android:layout_alignParentRight="true"
+				        android:visibility="gone"
+				        android:text="0" />
+
+				    <TextView
+				        android:id="@+id/txtTeamLeaderCode"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_above="@+id/txtTeamLeader"
+				        android:layout_alignParentRight="true"
+				        android:visibility="gone"
+				        android:text="0" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+        </ScrollView>
+		<!-- footer -->
+
+        <RelativeLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+			android:background="#455A64"
+			android:gravity="center">
+
+            <Button
+                android:id="@+id/btnTeamSave"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:drawableStart="@drawable/save_back"
+                android:text="@string/titleSave" />
+
+             <Button
+                 android:id="@+id/btnTeamCancel"
+                 android:layout_width="wrap_content"
+                 android:layout_height="match_parent"
+                 android:layout_alignParentTop="true"
+                 android:layout_toRightOf="@+id/btnTeamSave"
+                 android:drawableStart="@drawable/back"
+                 android:text="@string/titleBack" />
+
+        </RelativeLayout>
+
+</LinearLayout>

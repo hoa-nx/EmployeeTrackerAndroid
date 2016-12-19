@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+        <!-- header -->
+
+		<RelativeLayout
+		    android:layout_width="fill_parent"
+		    android:layout_height="90dp"
+		    android:visibility="gone" >
+       </RelativeLayout>
+		<!-- body -->
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:gravity="bottom"
+                android:paddingBottom="55dp"
+                android:paddingTop="0dp" >
+
+                <TextView
+                    android:id="@+id/lblUserJapanese"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/userTitleJapanese"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/txtUserJapanese"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lblUserJapanese"
+                    android:layout_marginTop="5dp"
+                    android:layout_toLeftOf="@+id/btnUserJapanese"
+                    android:layout_toRightOf="@+id/chkUserJapanese"
+                    android:background="@drawable/edittext_modified_states"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/userTitleJapanese"
+                    android:textColor="@color/grey" >
+
+                    <requestFocus />
+                </EditText>
+
+                <Button
+                    android:id="@+id/btnUserJapanese"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/txtUserJapanese"
+                    android:layout_alignBottom="@+id/txtUserJapanese"
+                    android:layout_alignParentRight="true"
+                    android:background="@android:color/transparent"
+                    android:drawableStart="@drawable/search"
+                    android:enabled="false"
+                    android:minWidth="48dip" />
+
+                <TextView
+                    android:id="@+id/lblUserAllowance_business"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/btnUserJapanese"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/userTitleAllowanceBusiness"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/txtUserAllowance_business"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/txtUserJapanese"
+                    android:layout_alignRight="@+id/txtUserJapanese"
+                    android:layout_below="@+id/lblUserAllowance_business"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/edittext_modified_states"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/userTitleAllowanceBusiness"
+                    android:textColor="@color/grey" />
+
+                <!--<Switch
+                    android:id="@+id/txtUserBusinessKbn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtUserAllowance_business"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@+id/chkUserAllowance_business"
+                    android:gravity="left|start"
+                    android:enabled="false"
+                    android:textOff="@string/userTitleBusinessKbnHonyaku"
+                    android:textOn="@string/userTitleBusinessKbnDevelop" />-->
+
+                <com.ussol.employeetracker.helpers.SegmentedGroup
+                    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/segUserBusinessKbn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtUserAllowance_business"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    segmentedgroup:border_width="1dp"
+                    segmentedgroup:checked_text_color="@color/OrangeRed"
+                    segmentedgroup:corner_radius="5dp"
+                    segmentedgroup:tint_color="@color/DarkSlateGray"
+                    android:checkedButton="@+id/radDev"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true">
+
+                    <RadioButton
+                        android:id="@+id/radDev"
+                        style="@style/RadioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="LTV"
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/radPD"
+                        style="@style/RadioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PD"
+                        tools:textSize="14sp"
+                        android:textSize="14sp" />
+                    <RadioButton
+                        android:id="@+id/radOther"
+                        style="@style/RadioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Khác(tổng vụ...)"
+                        tools:textSize="14sp"
+                        android:textSize="14sp" />
+                    <RadioButton
+                        android:id="@+id/radAll"
+                        style="@style/RadioButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tất cả"
+                        tools:textSize="14sp"
+                        android:textSize="14sp" />
+
+                </com.ussol.employeetracker.helpers.SegmentedGroup>
+
+                <Button
+                    android:id="@+id/btnUserAllowance_business"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/txtUserAllowance_business"
+                    android:layout_alignBottom="@+id/txtUserAllowance_business"
+                    android:layout_alignParentRight="true"
+                    android:background="@android:color/transparent"
+                    android:drawableStart="@drawable/search"
+                    android:enabled="false" />
+
+                <!--<CheckBox
+                    android:id="@+id/chkUserBusinessKbn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/btnUserAllowance_business"
+                    android:layout_toLeftOf="@+id/txtUserAllowance_business" />-->
+
+                <CheckBox
+                    android:id="@+id/chkUserJapanese"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/txtUserJapanese" />
+
+                <CheckBox
+                    android:id="@+id/chkUserAllowance_business"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignTop="@+id/txtUserAllowance_business" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+    <!-- footer -->
+
+        <RelativeLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/grey_light"
+            android:gravity="center" >
+
+            <Button
+                android:id="@+id/btnSearchItemSetting"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:drawableLeft="@drawable/save_back"
+                android:text="@string/userTitleSearchItemSetting"
+                android:visibility="visible" />
+
+             <Button
+                 android:id="@+id/btnSearchItemSettingCancel"
+                 android:layout_width="wrap_content"
+                 android:layout_height="match_parent"
+                 android:layout_alignParentTop="true"
+                 android:layout_toRightOf="@+id/btnSearchItemSetting"
+                 android:drawableLeft="@drawable/back"
+                 android:text="@string/titleBack"
+                 android:visibility="visible" />
+
+        </RelativeLayout>
+
+</LinearLayout>

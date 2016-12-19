@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <!-- header -->
+
+    <RelativeLayout
+        android:id="@+id/user_his_header"
+        android:layout_width="fill_parent"
+        android:layout_height="110dp"
+        android:visibility="visible" >
+
+        <TextView
+            android:id="@+id/txtImgFullPath"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/imgUser"
+            android:layout_width="85dp"
+            android:layout_height="92dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:adjustViewBounds="true"
+            android:src="@drawable/user"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/lblUserHisCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
+            android:paddingTop="0dp"
+            android:text="@string/userhisdeptTitleUserGroup"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/lblUserHisName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/lblUserHisCode"
+            android:layout_marginTop="5dp"
+            android:paddingTop="5dp"
+            android:text="@string/userTitleName"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/txtUserHisName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/lblUserHisName"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/edittext_modified_states"
+            android:clickable="false"
+            android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:hint="@string/userTitleName"
+            android:inputType="textCapWords|textPersonName"
+            android:paddingTop="5dp"
+            android:singleLine="true"
+            android:textColor="@color/grey"
+            android:visibility="gone" >
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:id="@+id/txtUserHisCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/lblUserHisName"
+            android:layout_alignRight="@+id/txtUserHisName"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/lblUserHisDeptStartDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/lblUserHisCode"
+            android:layout_marginTop="5dp"
+            android:paddingTop="5dp"
+            android:text="@string/userhisdeptTitleDateStart"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/txtUserHisDeptStartDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/lblUserHisDeptStartDate"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/edittext_modified_states"
+            android:ems="10"
+            android:hint="@string/userhisdeptTitleDateStart"
+            android:inputType="date"
+            android:paddingTop="5dp"
+            android:singleLine="true"
+            android:textColor="@color/grey" />
+
+        <Button
+            android:id="@+id/btnUserHisDeptStartDate"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/txtUserHisDeptStartDate"
+            android:layout_alignBottom="@+id/txtUserHisDeptStartDate"
+            android:layout_toRightOf="@+id/txtUserHisDeptStartDate"
+            android:background="@drawable/calendar"
+            android:maxHeight="32dip" />
+
+        <ImageButton
+            android:id="@+id/imgUserHisDeptList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnUserHisDeptStartDate"
+            android:layout_alignLeft="@+id/btnUserHisDeptStartDate"
+            android:src="@drawable/report_user_1" />
+
+        <TextView
+            android:id="@+id/txtUserHisDept_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/lblUserHisCode"
+            android:layout_toRightOf="@+id/imgUserHisDeptList"
+            android:background="@drawable/in_date_number_icon"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+	<include layout="@layout/sep_indicator" android:layout_width="fill_parent" android:layout_height="wrap_content"  />
+    <!-- body -->
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top"
+                android:paddingTop="0dp" >
+
+                <TextView
+                    android:id="@+id/lblUserHisDeptNewDept"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="5dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/userhisdeptTitleNewDept"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/txtUserHisDeptNewDept"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lblUserHisDeptNewDept"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@+id/chkUserHisDeptNewDept"
+                    android:clickable="false"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:enabled="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/userhisdeptTitleNewDept" />
+
+                <TextView
+                    android:id="@+id/lblUserHisDeptNewTeam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/chkUserHisDeptNewDept"
+                    android:layout_marginTop="5dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/userhisdeptTitleNewTeam"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/lblUserHisDeptNote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/chkUserHisDeptNewPosition"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/userhisposTitleNote"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/txtUserHisDeptNote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/lblUserHisDeptNote"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/edittext_modified_states"
+                    android:ems="10"
+                    android:hint="@string/userTitleNote"
+                    android:inputType="textAutoComplete|textMultiLine"
+                    android:lines="3"
+                    android:textColor="@color/grey" />
+
+                <TextView
+                    android:id="@+id/txtUserHisDeptNewDeptCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/txtUserHisDeptNewDept"
+                    android:layout_alignBottom="@+id/txtUserHisDeptNewDept"
+                    android:layout_alignParentRight="true"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/txtUserHisDeptNewTeamCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/btnUserHisDeptNewDept"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/txtUserHisDeptNewDept"
+                    android:layout_toRightOf="@+id/txtUserHisDeptNewDept"
+                    android:drawableStart="@drawable/search"
+                    android:enabled="false"
+                    android:minWidth="48dip" />
+
+                <CheckBox
+                    android:id="@+id/chkUserHisDeptNewDept"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignTop="@+id/txtUserHisDeptNewDept" />
+
+                <TextView
+                    android:id="@+id/lblUserHisDeptNewPosition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/chkUserHisDeptNewTeam"
+                    android:layout_marginTop="5dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/userhisposTitleNewPosition"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                <CheckBox
+                    android:id="@+id/chkUserHisDeptNewPosition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/lblUserHisDeptNewPosition" />
+
+                <EditText
+                    android:id="@+id/txtUserHisDeptNewPosition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lblUserHisDeptNewPosition"
+                    android:layout_toRightOf="@+id/chkUserHisDeptNewPosition"
+                    android:clickable="false"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:enabled="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/userhisposTitleNewPosition" />
+
+                <CheckBox
+                    android:id="@+id/chkUserHisDeptNewTeam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/lblUserHisDeptNewTeam" />
+
+                <EditText
+                    android:id="@+id/txtUserHisDeptNewTeam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lblUserHisDeptNewTeam"
+                    android:layout_toRightOf="@+id/chkUserHisDeptNewTeam"
+                    android:clickable="false"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:enabled="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/userhisdeptTitleNewTeam" />
+
+                <Button
+                    android:id="@+id/btnUserHisDeptNewTeam"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/txtUserHisDeptNewTeam"
+                    android:layout_alignLeft="@+id/btnUserHisDeptNewDept"
+                    android:enabled="false"
+                    android:drawableStart="@drawable/search" />
+
+                <Button
+                    android:id="@+id/btnUserHisDeptNewPosition"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/txtUserHisDeptNewPosition"
+                    android:layout_alignLeft="@+id/btnUserHisDeptNewTeam"
+                    android:enabled="false"
+                    android:drawableStart="@drawable/search" />
+
+                <TextView
+                    android:id="@+id/txtUserHisDeptNewPositionCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+    <!-- footer -->
+
+    <RelativeLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#455A64"
+        android:gravity="center" >
+
+        <Button
+            android:id="@+id/btnUserSave"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableStart="@drawable/save_back"
+            android:text="@string/titleSave" />
+
+        <Button
+            android:id="@+id/btnUserCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/btnUserSave"
+            android:drawableStart="@drawable/back"
+            android:text="@string/titleBack" />
+    </RelativeLayout>
+
+</LinearLayout>

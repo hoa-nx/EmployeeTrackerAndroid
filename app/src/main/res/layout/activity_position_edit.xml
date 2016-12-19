@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+        <!-- header -->
+        <RelativeLayout 
+            android:layout_width="fill_parent" 
+            android:layout_height="0dp">
+        </RelativeLayout>
+		<!-- body -->
+        <ScrollView 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" 
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+				<RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="bottom"
+                    android:paddingBottom="55dp"
+                    android:paddingTop="0dp" >
+
+                    <TextView
+                        android:id="@+id/lblPositionCode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/positionTitleCode"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                   <TextView
+                       android:id="@+id/txtPositionCode"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_alignParentLeft="true"
+                       android:layout_alignParentRight="true"
+                       android:layout_below="@+id/lblPositionCode"
+                       android:layout_marginLeft="10dp"
+                       android:layout_marginTop="10dp"
+                       android:text=""
+                       android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                   <TextView
+                       android:id="@+id/lblPositionName"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_alignParentLeft="true"
+                       android:layout_below="@+id/txtPositionCode"
+                       android:layout_marginTop="10dp"
+                       android:text="@string/positionTitleName"
+                       android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                   <EditText
+                       android:id="@+id/txtPositionName"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_alignParentLeft="true"
+                       android:layout_alignParentRight="true"
+                       android:layout_below="@+id/lblPositionName"
+                       android:layout_marginTop="10dp"
+                       android:background="@drawable/edittext_modified_states"
+                       android:hint="@string/positionTitleName"
+                       android:inputType="textCapWords"
+                       android:singleLine="true"
+                       android:textColor="@color/grey" />
+
+                   <TextView
+                       android:id="@+id/lblPositionFJNCode"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_alignParentLeft="true"
+                       android:layout_below="@+id/txtPositionName"
+                       android:layout_marginTop="10dp"
+                       android:text="@string/positionTitleCodeFJN"
+                       android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                   <EditText
+                       android:id="@+id/txtPositionFJNCode"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_alignParentLeft="true"
+                       android:layout_below="@+id/lblPositionFJNCode"
+                       android:layout_marginTop="10dp"
+                       android:layout_toLeftOf="@+id/btnPositionFJNCode"
+                       android:ems="10"
+                       android:hint="@string/positionTitleCodeFJN"
+                       android:inputType="text"
+                       android:selectAllOnFocus="true"
+                       android:typeface="normal"
+                       android:textSize="18sp">
+
+                       <requestFocus />
+                   </EditText>
+
+                   <Button
+                       android:id="@+id/btnPositionFJNCode"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_alignBottom="@+id/txtPositionFJNCode"
+                       android:layout_alignParentRight="true"
+                       android:layout_below="@+id/lblPositionFJNCode"
+                       android:background="@android:color/transparent"
+                       android:drawableStart="@drawable/search"
+                       android:minWidth="48dip" />
+
+                   <TextView
+                       android:id="@+id/lblPositionMinMonth"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_alignParentLeft="true"
+                       android:layout_alignParentRight="true"
+                       android:layout_below="@+id/btnPositionFJNCode"
+                       android:layout_marginTop="10dp"
+                       android:text="@string/positionTitleMinMonth"
+                       android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                    <Button
+                       android:id="@+id/btnPositionMinMonth"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_alignBottom="@+id/txtPositionMinMonth"
+                       android:layout_alignLeft="@+id/btnPositionFJNCode"
+                       android:layout_alignParentRight="true"
+                       android:layout_below="@+id/lblPositionMinMonth"
+                       android:background="@android:color/transparent"
+                       android:drawableStart="@drawable/search" />
+
+                   <EditText
+                       android:id="@+id/txtPositionNote"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_alignParentLeft="true"
+                       android:layout_alignParentRight="true"
+                       android:layout_below="@+id/lblPositionNote"
+                       android:layout_marginTop="10dp"
+                       android:background="@drawable/edittext_modified_states"
+                       android:ems="10"
+                       android:hint="@string/positionTitleNote"
+                       android:inputType="textCapWords|textMultiLine"
+                       android:lines="3"
+                       android:minLines="3"
+                       android:textColor="@color/grey" />
+
+                   <TextView
+                       android:id="@+id/lblPositionAllowance"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_alignParentLeft="true"
+                       android:layout_alignParentRight="true"
+                       android:layout_below="@+id/txtPositionMinMonth"
+                       android:text="@string/positionTitleAllowance"
+                       android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                   <EditText
+                       android:id="@+id/txtPositionAllowance"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_alignParentLeft="true"
+					   android:layout_below="@+id/lblPositionAllowance"
+                       android:ems="10"
+                       android:hint="@string/positionTitleAllowance"
+                       android:inputType="numberDecimal"
+					   android:layout_alignRight="@+id/txtPositionMinMonth"
+					   android:layout_alignEnd="@+id/txtPositionMinMonth" />
+
+                    <EditText
+                        android:id="@+id/txtPositionMinMonth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="11dp"
+                        android:ems="10"
+                        android:hint="@string/positionTitleMinMonth"
+                        android:inputType="number"
+                        android:selectAllOnFocus="true"
+                        android:layout_below="@+id/lblPositionMinMonth"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+
+					<TextView
+                        android:id="@+id/lblPositionLevel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/positionTitleLevel"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+						android:layout_below="@+id/txtPositionAllowance"
+						android:layout_alignParentLeft="true"
+						android:layout_alignParentStart="true" />
+
+					<TextView
+                       android:id="@+id/lblPositionNote"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                        android:text="@string/positionTitleNote"
+                       android:textAppearance="?android:attr/textAppearanceMedium"
+						android:layout_marginTop="7dp"
+						android:layout_below="@+id/txtPositionLevel"
+						android:layout_alignLeft="@+id/txtPositionLevel"
+						android:layout_alignStart="@+id/txtPositionLevel" />
+
+					<EditText
+                        android:id="@+id/txtPositionLevel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/positionTitleLevel"
+						android:layout_below="@+id/lblPositionLevel"
+						android:layout_alignParentLeft="true"
+						android:layout_alignParentStart="true"
+						android:inputType="number" />
+
+				</RelativeLayout>
+			</LinearLayout>
+
+        </ScrollView>
+		<!-- footer -->
+
+        <RelativeLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+			android:background="#455A64"
+			android:gravity="center" >
+
+            <Button
+                android:id="@+id/btnPositionSave"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:drawableStart="@drawable/save_back"
+                android:text="@string/titleSave" />
+
+             <Button
+                 android:id="@+id/btnPositionCancel"
+                 android:layout_width="wrap_content"
+                 android:layout_height="match_parent"
+                 android:layout_alignParentTop="true"
+                 android:layout_toRightOf="@+id/btnPositionSave"
+                 android:drawableStart="@drawable/back"
+                 android:text="@string/titleBack" />
+
+        </RelativeLayout>
+
+</LinearLayout>

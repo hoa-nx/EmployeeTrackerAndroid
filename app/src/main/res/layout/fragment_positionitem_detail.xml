@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+	<ScrollView
+	    android:id="@+id/ScrollView01"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+	    android:fillViewport="true"
+	    android:layout_marginBottom="50dip">
+		<LinearLayout
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical">
+
+	    	<TableLayout
+	    	    xmlns:android="http://schemas.android.com/apk/res/android"
+	    	    android:layout_width="match_parent"
+	    	    android:layout_height="match_parent"
+
+	    	    android:stretchColumns="1" >
+			 			
+			    <!-- Row 1 with 2 columns -->
+
+			    <TableRow
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:gravity="center_horizontal" >
+					
+			        <TextView
+			            android:id="@+id/lblPositionCode"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_weight="1"
+			            android:gravity="left"
+			            android:padding="10dip"
+			            android:text="@string/positionTitleCode"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+			        
+			        <TextView
+			            android:id="@+id/txtPositionCode"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_weight="1"
+			            android:gravity="left"
+			            android:padding="10dip"
+			            android:text="@string/titleSearch"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+			        
+			    </TableRow>  
+				 <!-- Row 2 with 2 columns -->
+
+			    <TableRow
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:gravity="center_horizontal" >
+
+			        <TextView
+			            android:id="@+id/lblPositionName"
+			            android:layout_width="wrap_content"
+			            android:layout_height="match_parent"
+			            android:layout_gravity="center|left"
+			            android:layout_weight="1"
+			            android:gravity="left"
+			            android:padding="10dip"
+			            android:text="@string/positionTitleName"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+			        <TextView
+			            android:id="@+id/txtPositionName"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_gravity="left"
+			            android:layout_weight="1"
+			            android:gravity="center"
+			            android:padding="10dip"
+			            android:text="@string/titleSearch"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+			    </TableRow>  
+			    <!-- Row 3 with 2 columns -->
+
+			    <TableRow
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:gravity="center_horizontal" >
+
+			        <TextView
+			            android:id="@+id/lbPositionCodeFJN"
+			            android:layout_width="wrap_content"
+			            android:layout_height="match_parent"
+			            android:layout_gravity="center|left"
+			            android:layout_weight="1"
+			            android:gravity="left"
+			            android:padding="10dip"
+			            android:text="@string/positionTitleCodeFJN"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+			        <TextView
+			            android:id="@+id/txtPositionCodeFJN"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_gravity="start"
+			            android:layout_weight="1"
+			            android:gravity="center"
+			            android:padding="10dip"
+			            android:text="@string/titleSearch"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+			    </TableRow>  
+			     <!-- Row 4 with 2 columns -->
+
+			    <TableRow
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:gravity="center_horizontal" >
+
+			        <TextView
+			            android:id="@+id/lblPositionMinMonth"
+			            android:layout_width="wrap_content"
+			            android:layout_height="match_parent"
+			            android:layout_gravity="center|left"
+			            android:layout_weight="1"
+			            android:gravity="left"
+			            android:padding="10dip"
+			            android:text="@string/positionTitleMinMonth"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+			        <TextView
+			            android:id="@+id/txtPositionMinMonth"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_gravity="start"
+			            android:layout_weight="1"
+			            android:gravity="center"
+			            android:inputType="number"
+			            android:padding="10dip"
+			            android:text="@string/titleSearch"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+			    </TableRow>  
+			    
+			    <TableRow
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:gravity="center_horizontal" >
+
+			        <TextView
+			            android:id="@+id/lblPositionAllowance"
+			            android:layout_width="wrap_content"
+			            android:layout_height="match_parent"
+			            android:layout_gravity="center|left"
+			            android:layout_weight="1"
+			            android:gravity="left"
+			            android:padding="10dip"
+			            android:text="@string/positionTitleAllowance"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+			        <TextView
+			            android:id="@+id/txtPositionAllowance"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_gravity="start"
+			            android:layout_weight="1"
+			            android:gravity="center"
+			            android:inputType="number"
+			            android:padding="10dip"
+			            android:text="@string/titleSearch"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+			    </TableRow>
+				<TableRow
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:gravity="center_horizontal" >
+
+					<TextView
+						android:id="@+id/lblPositionLevel"
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:layout_gravity="center|left"
+						android:layout_weight="1"
+						android:gravity="left"
+						android:padding="10dip"
+						android:text="@string/positionTitleLevel"
+						android:textAppearance="?android:attr/textAppearanceMedium" />
+
+					<TextView
+						android:id="@+id/txtPositionLevel"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_gravity="start"
+						android:layout_weight="1"
+						android:gravity="center"
+						android:inputType="number"
+						android:padding="10dip"
+						android:text="@string/titleSearch"
+						android:textAppearance="?android:attr/textAppearanceMedium" />
+
+				</TableRow>
+				<!-- Row 4 with 2 columns -->
+
+			    <TableRow
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:gravity="center_horizontal" >
+
+			        <TextView
+			            android:id="@+id/lblPositionNote"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_gravity="start"
+			            android:layout_weight="1"
+			            android:gravity="left"
+			            android:padding="10dip"
+			            android:text="@string/positionTitleNote"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+			        <TextView
+			            android:id="@+id/txtPositionNote"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_gravity="start"
+			            android:layout_weight="1"
+			            android:gravity="center"
+			            android:padding="10dip"
+			            android:text="@string/titleSearch"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+			    </TableRow>  
+			</TableLayout>
+	    </LinearLayout>
+	    
+     </ScrollView>
+     
+     <LinearLayout android:id="@+id/bottom_control_bar"
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:visibility="gone"
+		>
+
+		<Button
+		    android:id="@+id/btnPositionUpdate"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:text="@string/titleEdit" />
+
+	</LinearLayout>
+</RelativeLayout>

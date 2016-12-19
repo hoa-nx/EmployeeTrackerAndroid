@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+  	<Button
+  	    android:id="@+id/btnInitData"
+  	    android:layout_width="match_parent"
+  	    android:layout_height="wrap_content"
+  	    android:drawableLeft="@drawable/initdata"
+  	    android:gravity="left|center_vertical"
+  	    android:text="@string/titleInitData" />
+
+	<Button
+	    android:id="@+id/btnBackup"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:drawableLeft="@drawable/backup_restore"
+	    android:gravity="left|center_vertical"
+	    android:text="@string/titleBackup" />
+
+	<Button
+	    android:id="@+id/btnRestore"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:drawableLeft="@drawable/backup_restore"
+	    android:gravity="left|center_vertical"
+	    android:text="@string/titleRestore" />
+
+	<Button
+	    android:id="@+id/btnImportUserCsv"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:drawableLeft="@drawable/imp"
+	    android:gravity="left|center_vertical"
+	    android:text="@string/titleImportUserCsv" />
+
+</LinearLayout>

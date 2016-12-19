@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/positionaddcopy"
+          android:title="@string/maddcopy" />
+    <item android:id="@+id/positiondetail"
+          android:title="@string/mdetail" />
+    <item android:id="@+id/positionedit"
+          android:title="@string/medit" />
+    <item android:id="@+id/positiondelete"
+          android:title="@string/mdelete" />
+</menu>

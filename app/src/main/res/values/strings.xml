@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Quản lý nhân sự</string>
+    <string name="menu_settings">Cài đặt hệ thống</string>
+    <string name="title_activity_main">Quản lý nhân sự</string>
+    <string name="indicator_height">3dip</string>
+    <!-- menu chung -->
+    <string name="menu_search_item_settings">Điều kiện lọc dữ liệu</string>
+    <string name="menu_sort_item_settings">Trình tự sắp xếp</string>
+    <string name="menu_notification">Thông báo </string>
+    <!-- thông tin mail -->
+    <string name="host">smtp.gmail.com</string>
+    <string name="smtpPort">465</string>
+    <string name="socketFactoryPort">465</string>
+    <string name="propHost">mail.smtp.host</string>
+    <string name="propDebug">mail.debug</string>
+    <string name="propAuth">mail.smtp.auth</string>
+    <string name="propSmtpPort">mail.smtp.port</string>
+    <string name="propSocketFactoryPort">mail.smtp.socketFactory.port</string>
+    <string name="propSocketFactoryClass">mail.smtp.socketFactory.class</string>
+    <string name="propSocketFactoryFallback">mail.smtp.socketFactory.fallback</string>
+    <string name="msg_email_fail">Email was not sent</string>
+    <string name="msg_email_send_exception">Could not send email - </string>
+    <string name="mail_domain">fujinet.net</string>
+    <!-- common context menu -->
+    <string name="maddnew">Thêm mới</string>
+    <string name="mdetail">Xem chi tiết</string>
+    <string name="medit">Chỉnh sửa</string>
+    <string name="mdelete">Xóa</string>
+    <string name="maddcopy">Sao chép và tạo mới</string>
+    <string name="mcall">Gọi</string>
+    <string name="mshowhistory">Cập nhật phòng ban-nhóm&#8230;</string>
+    <string name="mtitleUser">""</string>
+    <!-- common title -->
+    <string name="titleSearch">&#8230;</string>
+    <string name="titleAddNew">Tạo mới</string>
+    <string name="titleEdit">Chỉnh sửa</string>
+    <string name="titleDelete">Xóa</string>
+    <string name="titleUnDelete">Phục hồi</string>
+    <string name="titleSave">Lưu</string>
+    <string name="titleCancel">Hủy</string>
+    <string name="titleYes">Đồng ý</string>
+    <string name="titleNo">Không</string>
+    <string name="titleBoy">Nam</string>
+    <string name="titleGirl">Nữ</string>
+    <string name="titleAlone">Độc thân</string>
+    <string name="titleGetMarried">Đã kết hôn</string>
+    <string name="titleDatabaseTool">Thao tác dữ liệu</string>
+    <string name="titleBackup">Sao lưu dữ liệu</string>
+    <string name="titleRestore">Phục hồi dữ liệu</string>
+    <string name="titleInitData">Khởi tạo dữ liệu master</string>
+    <string name="titleImportUserCsv">Nhập dữ liệu nhân viên(txt)</string>
+    <string name="titleIsDirector">Director</string>
+    <string name="titleIsDeputy">Deputy</string>
+    <string name="titleIsManager">Manager</string>
+    <string name="titleIsLeader">Leader</string>
+    <string name="titleNoDefine">Không chỉ định</string>
+    <string name="titleNotFoundData">Không có dữ liệu</string>
+    <string name="titleOutputPdf">Xuất dữ liệu...</string>
+    <string name="titleProcessing">Đang xử lý, xin vui lòng chờ&#8230;</string>
+    <string name="titleAll">Tất cả</string>
+    <string name="titleSortAsc">Tăng dần</string>
+    <string name="titleSortDesc">Giảm dần</string>
+    <string name="titleEXCEL">Excel</string>
+    <string name="titlePDF">PDF</string>
+    <string name="titleBack">Trở về</string>
+    <string name="titleNoItemSelected">Không có dòng nào được chọn</string>
+    <string name="titleContactList">Tạo nhân viên từ danh bạ</string>
+
+    <!-- menu phần group by -->
+    <string name="menu_exp_group_dept">Nhóm theo phòng ban</string>
+    <string name="menu_exp_group_team">Nhóm theo team</string>
+    <string name="menu_exp_group_position">Nhóm theo chức vụ</string>
+    <string name="menu_exp_group_sex">Nhóm theo giới tính</string>
+    <string name="menu_exp_group_japanese">Nhóm theo trình độ Nhật ngữ</string>
+    <string name="menu_exp_group_business_kbn">Nhóm theo chuyên môn</string>
+    <string name="menu_exp_group_keiken">Nhóm theo thâm niên công ty</string>
+    <string name="menu_exp_group_keiken_labor">Nhóm theo thâm niên labor</string>
+    <string name="menu_exp_group_none">Danh sách nhân viên</string>
+    <string name="menu_exp_group_yasumi">Nhóm theo nghỉ việc/làm việc</string>
+    <string name="menu_exp_group_keiken_ussol">Nhóm theo thâm niên labor</string>
+    <string name="menu_exp_group_labour">Nhóm theo KeepLabor/Ngoài KeepLabor</string>
+    <string name="menu_exp_group_salary">Nhóm theo lương</string>
+    <string name="menu_exp_group_customer">Nhóm theo khách hàng</string>
+    <string name="menu_exp_group_yasumi_yearmonth">Nhóm nghỉ việc theo năm tháng</string>
+    <string name="menu_exp_group_contract_yearmonth">Nhóm nhận chính thức NV theo năm tháng</string>
+    <string name="menu_exp_group_training_year">Nhóm NV nhận thử việc trong năm</string>
+    <string name="menu_exp_group_contract_year">Nhóm NV nhận chính thức trong năm</string>
+    <string name="menu_exp_group_notcontract_year">Nhóm NV không nhận sau thử việc</string>
+    <string name="menu_exp_group_contract_less_month">Nhóm nhận chính thức trong năm có thâm niên nhỏ hơn {N} tháng</string>
+    <string name="menu_exp_group_staff_current_position_not_satified">Nhóm NV có chức vụ không phù hợp với thâm niên</string>
+
+    <!-- màn hình output PDF -->
+    <string name="pdf_sort">Trình tự sắp xếp</string>
+
+    <string-array name="sort_arrays">
+        <item>Mã nhân viên</item>
+        <item>Phòng ban</item>
+        <item>Nhóm-tổ</item>
+        <item>Chức vụ</item>
+        <item>Ngày vào công ty</item>
+        <item>Ngày vào nhóm labor</item>
+        <item>Trình độ nhật ngữ</item>
+    </string-array>
+    <!-- Master phòng ban -->
+    <string name="deptTitleCode">Mã phòng ban</string>
+    <string name="deptTitleName">Tên phòng ban</string>
+    <string name="deptTitleManager">Trưởng phòng</string>
+    <string name="deptTitleVice">Phó phòng </string>
+    <string name="deptTitleCreateDate">Ngày thành lập </string>
+    <string name="deptTitleNote">Ghi chú</string>
+    <string name="deptBtnEdit">Chỉnh sửa</string>
+    <string name="deptBtnSave">Lưu</string>
+    <string name="deptBtnAdd">Tạo mới</string>
+    <string name="deptBtnCancel">Hủy</string>
+    <string name="deptTitleInfor">Thông tin chi tiết phòng ban</string>
+
+    <!-- Master tổ nhóm -->
+    <string name="teamTitleCode">Mã nhóm</string>
+    <string name="teamTitleName">Tên nhóm</string>
+    <string name="teamTitleManager">Trưởng nhóm</string>
+    <string name="teamTitleVice">Phó nhóm </string>
+    <string name="teamTitleDept">Phòng ban </string>
+    <string name="teamTitleCreateDate">Ngày thành lập </string>
+    <string name="teamTitleNote">Ghi chú</string>
+    <string name="teamBtnUpdate">Chỉnh sửa</string>
+    <string name="teamTitleInfor">Thông tin chi tiết nhóm</string>
+    <!-- Master chức vụ -->
+    <string name="positionTitleCode">Mã chức vụ</string>
+    <string name="positionTitleName">Tên chức vụ</string>
+    <string name="positionTitleCodeFJN">Mã FJN</string>
+    <string name="positionTitleMinMonth">Số tháng </string>
+    <string name="positionTitleAllowance">Phụ cấp</string>
+    <string name="positionTitleLevel">Level</string>
+    <string name="positionTitleNote">Ghi chú</string>
+    <string name="positionBtnUpdate">Chỉnh sửa</string>
+    <string name="positionTitleInfor">Thông tin chi tiết chức vụ</string>
+    <!-- Master nhân viên -->
+    <string name="userTitleList">Danh sách nhân viên</string>
+    <string name="userTitleInfor">Thông tin chi tiết nhân viên</string>
+    <string name="userTitleTabBasic">Cơ bản</string>
+    <string name="userTitleTabWork">Ban-nhóm</string>
+    <string name="userTitleTabOther">Khác</string>
+    <string name="userTitleCode">Mã nhân viên</string>
+    <string name="userTitleName">Tên nhân viên</string>
+    <string name="userTitleGoogleId">Google.Id</string>
+    <string name="userTitleSex">Giới tính</string>
+    <string name="userTitleMarried">Đã kết hôn</string>
+    <string name="userTitleBirthday">Sinh ngày</string>
+    <string name="userTitleAddress">Địa chỉ</string>
+    <string name="userTitleHome_tel">Điện thoại nhà</string>
+    <string name="userTitleMobile">Di động</string>
+    <string name="userTitleEmail">Email</string>
+    <string name="userTitleFax">Fax</string>
+    <string name="userTitlePositionCode">Mã chức vụ</string>
+    <string name="userTitlePositionName">Chức vụ</string>
+    <string name="userTitleDeptCode">Mã phòng ban</string>
+    <string name="userTitleDeptName">Phòng ban</string>
+    <string name="userTitleTeamCode">Mã nhóm</string>
+    <string name="userTitleTeamName">Nhóm(team)</string>
+    <string name="userTitleLearnTraining_date">Ngày bắt đầu học việc</string>
+    <string name="userTitleLearnTraining_dateEnd">Ngày kết thúc học việc</string>
+    <string name="userTitleTraining_date">Ngày bắt đầu thử việc</string>
+    <string name="userTitleTraining_dateEnd">Ngày kết thúc thử việc</string>
+    <string name="userTitleIn_date">Ngày ký HĐ</string>
+    <string name="userTitleJoin_date">Ngày tham gia nhóm labor</string>
+    <string name="userTitleOut_date">Ngày cuối cùng làm việc</string>
+    <string name="userTitleChkOut_date">Đã nghỉ việc</string>
+    <string name="userTitleNote">Ghi chú</string>
+    <string name="userTitleTag1">Tag 1</string>
+    <string name="userTitleTag2">Tag 2</string>
+    <string name="userTitleJapanese">Trình độ nhật ngữ</string>
+    <string name="userTitleAllowanceBusiness">Phụ cấp nghiệp vụ</string>
+    <string name="userTitleSalary_NotAllowance">Lương cơ bản</string>
+    <string name="userTitleSalary_Allowance">Tổng lương(chưa tính bonus)</string>
+    <string name="userTitleSalaryTotal">Tổng lương</string>
+    <string name="userTitleCustomer">Khách hàng</string>
+    <string name="userTitleBusinessKbn">Chuyên môn</string>
+    <string name="userTitleBusinessKbnDevelop">Lập trình</string>
+    <string name="userTitleBusinessKbnHonyaku">Phiên dịch</string>
+    <string name="userTitleBusinessKbnOther">Khác(tổng vụ...)</string>
+    <string name="userTitleLabour_Out_date">Ngày kết thúc labor</string>
+    <string name="userTitleIsLabour">Nhân viên nhóm labor(hiện tại)</string>
+    <string name="userTitlePositionGroup">Nhóm chức danh</string>
+    <string name="userTitleProgram">Năng suất lập trình</string>
+    <string name="userTitleDetailDesign">Năng suất TKCT</string>
+    <string name="userTitleUserKbn">Nhân viên/Khách hàng</string>
+    <string name="userTitleUserKbnEmp">Nhân viên</string>
+    <string name="userTitleUserKbnCustomer">Khách hàng</string>
+    <string name="userTitleUserAllowanceRoom">Phụ cấp phòng chuyên biệt</string>
+    <string name="userTitleUserKeikenConvertToFJN">Qui đổi KN(tháng)</string>
+	<string name="userTitleEstimatePoint">Hệ số đánh giá</string>
+
+    <!-- Man hinh setting dieu kien search cho cac list -->
+    <string name="userTitleSearchItem">Điều kiện lọc dữ liệu</string>
+    <string name="userTitleSearchItemSetting">Thiết lập</string>
+    <string name="userTitleSearchItemCancel">Hủy</string>
+    <string name="userTitleSearchItemAllDept">Không chỉ định phòng ban</string>
+    <string name="userTitleSearchItemAllTeam">Không chỉ định team</string>
+     <string name="userTitleSearchItemAllPosition">Không chỉ định chức vụ</string>
+     <string name="userTitleSearchItemIncludeTrialStaff">Bao gồm cả thử việc</string>
+        
+    <!-- Màn hình lịch sử phòng ban của nhân viên -->
+    <string name="userHisTitleInfor">Cập nhật thông tin nhân viên</string>
+    <string name="userhisdeptTitleUserGroup">Danh sách nhân viên</string>
+    <string name="userhisdeptTitleTabMain">LS Ban-Nhóm</string>
+    <string name="userhisdeptTitleDateStart">Ngày hiệu lực</string>
+    <string name="userhisdeptTitleNewDept">Phòng ban mới</string>
+    <string name="userhisdeptTitleNewTeam">Nhóm mới</string>
+    <string name="userhisdeptTitleNote">Ghi chú</string>
+    <!-- Màn hình lịch sử chức vụ của nhân viên -->
+    <string name="userhisposTitleTabOther">LS Khác</string>
+    <string name="userhisposTitleDateStart">Ngày hiệu lực</string>
+    <string name="userhisposTitleNewPosition">Cấp bậc mới</string>
+    <string name="userhisposTitleNote">Ghi chú</string>
+    <string name="userhisotherTitleJapanese">C/c tiếng nhật mới</string>
+    <string name="userhisotherTitleAllowance_Business">Phụ cấp nghiệp vụ mới</string>
+    <string name="userhisotherTitleSalary">Thông tin lương mức lương</string>
+    <string name="userhisotherTitleSalaryAll">Lương mới</string>
+    <string name="userhisotherTitleSalaryNextMY">XL tiếp theo</string>
+    <string name="userhisotherTitleSalaryPercent">Tỉ lệ tăng(%)</string>
+    <string name="userhisotherTitleSalaryStandard">Tăng chuẩn</string>
+    <string name="userhisotherTitleSalaryActualUp">Tăng thực tế</string>
+    <!-- màn hình chỉ định điều kiện search -->
+    <string name="menu_report_search">Tìm kiếm</string>
+    <string name="menu_report_searchitem">Chỉ định điều kiện lọc dữ liệu</string>
+    <string name="menu_report_sortlist">Trình tự sắp xếp</string>
+    <!-- màn hình gửi message -->
+    <string name="send_sms_titleInfo">Gửi tin nhắn</string>
+    <string name="send_sms_titleSend">Gửi tin</string>
+    <string name="send_sms_titleContent">Nội dung tin nhắn</string>
+    <string name="send_sms_titleSendConfirm">Bạn có muốn gửi nội dung tin nhắn này cho các nhân viên đã chọn?</string>
+    <!-- file dialog -->
+    <string name="filedialog_titleInfo">Hộp thoại file</string>
+    <string name="location">Đường dẫn</string>
+    <string name="cant_read_folder">Thư mục này không thể đọc!</string>
+    <string name="nnew">Tạo mới</string>
+    <string name="select">Chọn file</string>
+    <string name="file_name">Tên file:</string>
+    <string name="cancel">Hủy bỏ</string>
+    <string name="create">Lưu</string>
+    <string name="no_data">Không có dữ liệu</string>
+
+    <!-- <color name="gray">#ffff0000</color> -->
+
+    <string name="err">Lỗi</string>
+    <!-- pull down to refresh -->
+    <string name="pull_to_refresh_pull">Pull to refresh...</string>
+    <string name="pull_to_refresh_release">Release to refresh...</string>
+    <string name="pull_to_refresh_loading">Loading...</string>
+    <string name="pull_to_refresh_done">Done...</string>
+    <string name="title_activity_contact_list">Danh bạ</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="passcode">PIN</string>
+    <string name="passcode_manage">Manage passcode</string>
+    <string name="passcode_enter_old_passcode">Enter your old passcode</string>
+    <string name="passcode_re_enter_passcode">Re-enter your passcode</string>
+    <string name="passcode_change_passcode">Change passcode</string>
+    <string name="passcode_set">Passcode set</string>
+    <string name="passcode_wrong_passcode">Wrong passcode, please try again.</string>
+    <string name="passcode_preference_title">Passcode lock</string>
+    <string name="passcode_turn_off">Turn passcode off</string>
+    <string name="passcode_turn_on">Turn passcode on</string>
+    <string name="passcodelock_prompt_message">Enter your PIN</string>
+    <string name="passcodelock_hint"></string>
+    <string name="passcodelock_numpad_0">0</string>
+    <string name="passcodelock_numpad_1">1</string>
+    <string name="passcodelock_numpad_2">2</string>
+    <string name="passcodelock_numpad_3">3</string>
+    <string name="passcodelock_numpad_4">4</string>
+    <string name="passcodelock_numpad_5">5</string>
+    <string name="passcodelock_numpad_6">6</string>
+    <string name="passcodelock_numpad_7">7</string>
+    <string name="passcodelock_numpad_8">8</string>
+    <string name="passcodelock_numpad_9">9</string>
+
+    <!-- Preference keys -->
+    <string name="pref_key_passcode_toggle">turn_passcode_on_off</string>
+    <string name="pref_key_change_passcode">change_passcode</string>
+
+    <!-- Content description -->
+    <string name="cd_passcodelock_logo">PasscodeLock logo image</string>
+    <string name="title_activity_chart_yasumi_year_month">Biểu đồ so sánh nghỉ việc</string>
+    <string name="title_activity_chart">Biểu đồ thông tin</string>
+    <string name="title_activity_chart_staff_status_stacked_bar">Biểu đồ tình hình nhân sự</string>
+    <string name="title_activity_alarm_job_service">Cấu hình công việc chạy nền</string>
+    <string name="action_settings">Settings</string>
+    <!-- SwipeListView -->
+    <string name="appName">SwipeListView </string>
+    <string name="open">Open</string>
+    <string name="googlePlay">Google Play</string>
+    <string name="uninstall">Uninstall</string>
+    <string name="cantOpen">Can\'t open this application</string>
+    <string name="settings">Settings</string>
+    <string name="mode">Swipe Mode</string>
+    <string name="left">Left</string>
+    <string name="right">Right</string>
+    <string name="both">Both</string>
+    <string name="leftAction">Left Action</string>
+    <string name="reveal">Reveal</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="choice">Choice</string>
+    <string name="rightAction">Right Action</string>
+    <string name="rightOffset">Right Offset (%1$s dp)</string>
+    <string name="leftOffset">Left Offset (%1$s dp)</string>
+    <string name="dp">dp</string>
+    <string name="animationTime">Animation Time (Default: 0)</string>
+    <string name="milliseconds">Milliseconds</string>
+    <string name="openOnLongPress">Open On Long Press</string>
+    <string name="about">About</string>
+    <string name="aboutMessage">This is just a simple demo for the Open Source SwipeListView Android Library by 47 Degrees. Find all source, documentation and packaged downloads at GitHub. Cheers!</string>
+    <string name="ok">Ok</string>
+    <string name="visit47">Visit </string>
+    <string name="goToGitHub">Go to </string>
+    <string name="dontShow">Don\'t show this message again</string>
+    <string name="others">Others</string>
+    <string name="loading">Loading</string>
+    <string name="newTag">New!</string>
+    <string name="discard">Discard</string>
+    <string name="title_activity_swipe_list_view">Danh sách thông báo</string>
+    <string name="title_activity_swipe_settings">Setting danh sách</string>
+    <string name="title_activity_message_template_list">Danh sách template</string>
+    <string name="title_activity_message_template_edit">Chỉnh sửa template</string>
+    <string name="title_activity_message_template_add">Tạo mới template</string>
+
+</resources>

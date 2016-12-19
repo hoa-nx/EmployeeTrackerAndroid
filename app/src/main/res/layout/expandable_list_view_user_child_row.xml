@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="3dip" >
+
+    <!-- ListRow Left sied Thumbnail image -->
+
+    <RelativeLayout
+        android:id="@+id/thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dip"
+        android:padding="3dip" >
+
+        <ImageView
+            android:id="@+id/imgListUser"
+            android:layout_width="80dip"
+            android:layout_height="100dip"
+            android:layout_marginTop="2dp"
+            android:adjustViewBounds="true"
+            android:alpha="0.5"
+            android:tint="#00A7C0DC"
+            android:src="@drawable/user_info" />
+
+        <TextView
+            android:id="@+id/txtOtherInfomation"
+            android:layout_width="80dip"
+            android:layout_height="100dip"
+            android:layout_marginTop="2dp"
+            android:text="↑TS1"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/DarkOrange"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            tools:layout_alignParentTop="true" />
+    </RelativeLayout >
+
+    <!-- Address Of Message -->
+
+
+    <TextView
+        android:id="@+id/txtListUserInfor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/thumbnail"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:text="Dept X"
+        android:textColor="@color/Blue"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        android:typeface="sans" />
+
+    <!-- Date of receive -->
+
+    <TextView
+        android:id="@+id/txtListUserCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imgListUser"
+        android:text=""
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/txtUserImgFullPath"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imgListUser"
+        android:text="1"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/txtListUserFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/txtListUserInfor"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:text="Nguyen Van A"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:typeface="normal" />
+
+    <CheckBox
+        android:id="@+id/chkListUserSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/txtListUserInfor"
+        android:layout_centerVertical="true"
+        android:checked="false"
+        android:focusable="false"
+        android:textSize="0dp" />
+
+    <RatingBar
+        android:id="@+id/txtUserKeikenRate"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtListUserFullName"
+        android:layout_below="@+id/txtListUserFullName"
+        android:clickable="false"
+        android:fitsSystemWindows="true"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:numStars="10"
+        android:stepSize="0.1" />
+
+    <TextView
+        android:id="@+id/txtIn_date_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtUserKeikenRate"
+        android:layout_below="@+id/txtUserKeikenRate"
+        android:background="@drawable/in_date_number_icon"
+        android:gravity="center"
+        android:text="00"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:visibility="visible" />
+
+
+    <TextView
+        android:id="@+id/txtJoin_date_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/txtIn_date_count"
+        android:layout_alignBottom="@+id/txtIn_date_count"
+        android:layout_marginLeft="21dp"
+        android:layout_toRightOf="@+id/txtIn_date_count"
+        android:background="@drawable/join_date_number_icon"
+        android:gravity="fill"
+        android:text="00"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/txtMobile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtIn_date_count"
+        android:layout_below="@+id/txtIn_date_count"
+        android:layout_toLeftOf="@+id/txtDetailDesign_count"
+        android:text="0918xxx"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/txtProgram_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtMobile"
+        android:layout_alignRight="@+id/txtUserKeikenRate"
+        android:background="@drawable/program_number_icon"
+        android:gravity="center"
+        android:text="00"
+        android:textColor="@color/White"
+        android:textStyle="bold"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/txtDetailDesign_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtMobile"
+        android:layout_marginRight="19dp"
+        android:layout_toLeftOf="@+id/txtProgram_count"
+        android:background="@drawable/detaildesign_number_icon"
+        android:gravity="end"
+        android:text="00"
+        android:textColor="@color/White"
+        android:textStyle="bold"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/txtEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/thumbnail"
+        android:layout_alignLeft="@+id/txtMobile"
+        android:layout_alignRight="@+id/txtListUserYasumiDate"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/txtListUserJapaneseLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="N4"
+        android:textColor="@color/DarkSlateBlue"
+        android:layout_alignTop="@+id/txtProgram_count"
+        android:layout_toRightOf="@+id/txtProgram_count"
+        android:layout_marginLeft="25dp" />
+
+    <TextView
+        android:id="@+id/txtListUserYasumiDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imgListUserYasumi"
+        android:layout_alignRight="@+id/chkListUserSelect"
+        android:layout_toRightOf="@+id/imgListUserYasumi"
+        android:singleLine="true"
+        android:text="2000/01/01"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/Red"
+        android:textSize="12dp" />
+
+    <ImageView
+        android:id="@+id/imgListUserYasumi"
+        android:layout_width="16dip"
+        android:layout_height="20dip"
+        android:layout_above="@+id/txtEmail"
+        android:layout_alignRight="@+id/txtDetailDesign_count"
+        android:adjustViewBounds="true"
+        android:scaleType="fitStart"
+        android:src="@drawable/employee_yasumi" />
+
+</RelativeLayout>

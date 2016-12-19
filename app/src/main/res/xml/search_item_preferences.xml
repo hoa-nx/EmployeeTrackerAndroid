@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory android:title="Configuration" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="pre_isCurrentLabour"
+            android:summary="Nhân viên thuộc nhóm labour(danh sách tính với khách hàng)"
+            android:title="Nhân viên thuộc nhóm labour" 
+            android:selectable="true" 
+            android:enabled="true"/>
+        
+        <EditTextPreference
+            android:name="Phòng ban"
+            android:defaultValue=""
+            android:key="pre_Dept"
+            android:summary="Phòng ban"
+            android:title="Phòng ban" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="pre_chkDept"
+            android:summary="Trường hợp mà gắn check thì sẽ xem xét điều kiện"
+            android:title="Chỉ định có tìm kiếm theo phòng ban không" 
+            android:selectable="true" 
+            android:enabled="true"/>
+        
+        <EditTextPreference
+            android:name="Nhóm"
+            android:defaultValue=""
+            android:key="pre_Team"
+            android:summary="Nhóm"
+            android:title="Nhóm" />
+		<CheckBoxPreference
+            android:defaultValue="false"
+            android:key="pre_chkTeam"
+            android:summary="Trường hợp mà gắn check thì sẽ xem xét điều kiện"
+            android:title="Chỉ định có tìm kiếm theo nhóm không" 
+            android:selectable="true" 
+            android:enabled="true"/>
+        
+		<EditTextPreference
+            android:name="Chức vụ"
+            android:defaultValue=""
+            android:key="pre_Position"
+            android:summary="Chức vụ"
+            android:title="Chức vụ" />
+		<CheckBoxPreference
+            android:defaultValue="false"
+            android:key="pre_chkPosition"
+            android:summary="Trường hợp mà gắn check thì sẽ xem xét điều kiện"
+            android:title="Chỉ định có tìm kiếm theo chức vụ không" 
+            android:selectable="true" 
+            android:enabled="true"/>
+        
+		<CheckBoxPreference 
+		    android:defaultValue="false"
+            android:key="pre_enabledJapanese"
+            android:summary="Check hay khong check vao dieu kien bang tieng Nhat"
+            android:title="Check hay khong check vao dieu kien bang tieng Nhat" 
+            android:selectable="true" 
+            android:enabled="false"/>
+
+   		<EditTextPreference
+            android:name="Trình độ nhật ngữ"
+            android:defaultValue=""
+            android:key="pre_Japanese"
+            android:summary="Trình độ nhật ngữ"
+            android:title="Trình độ nhật ngữ" />
+		<CheckBoxPreference 
+		    android:defaultValue="false"
+            android:key="pre_enabledAllowance_Business"
+            android:summary="Check hay khong check vao dieu kien phu cap nghiep vu"
+            android:title="Check hay khong check vao dieu kien phu cap nghiep vu" 
+            android:selectable="true" 
+            android:enabled="false"/>
+		<EditTextPreference
+            android:name="Phụ cấp nghiệp vụ"
+            android:defaultValue=""
+            android:key="pre_Allowance_Business"
+            android:summary="Phụ cấp nghiệp vụ"
+            android:title="Phụ cấp nghiệp vụ" />
+		<EditTextPreference
+            android:name="chuyên môn"
+            android:defaultValue=""
+            android:key="pre_Business_Kbn"
+            android:summary="chuyên môn"
+            android:title="chuyên môn" />
+		<CheckBoxPreference 
+		    android:defaultValue="false"
+            android:key="pre_chkBusiness_Kbn"
+            android:summary="Check hay khong check vao dieu kien chuyên môn"
+            android:title="Check hay khong check vao dieu kien chuyên môn" 
+            android:selectable="true" 
+            android:enabled="false"/>
+		<EditTextPreference
+            android:name="Nhóm chức danh"
+            android:defaultValue=""
+            android:key="pre_Position_Group"
+            android:summary="Nhóm chức danh"
+            android:title="Nhóm chức danh" />
+		<EditTextPreference
+            android:name="Nhân viên đã xóa"
+            android:defaultValue=""
+            android:key="pre_UserDelete"
+            android:summary="Nhân viên đã xóa"
+            android:title="Nhân viên đã xóa" />
+		<EditTextPreference
+            android:name="Nhân viên đã nghỉ việc"
+            android:defaultValue=""
+            android:key="pre_UserOutDate"
+            android:summary="Nhân viên đã nghỉ việc"
+            android:title="Nhân viên đã nghỉ việc" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

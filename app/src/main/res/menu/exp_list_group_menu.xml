@@ -1,0 +1,132 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    
+     <item android:id="@+id/menu_exp_group_search"
+	     android:title="@string/menu_report_search"
+	     android:orderInCategory="100"
+	     android:showAsAction="always"
+	     android:icon="@drawable/search"/>
+    <item android:id="@+id/menu_exp_group_searchitem"
+	     android:title="@string/menu_report_searchitem"
+	     android:orderInCategory="100"
+	     android:showAsAction="always"
+	     android:icon="@drawable/searchitem"/> 
+    <item android:id="@+id/menu_exp_group_sortlist"
+        android:title="@string/menu_report_sortlist"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:icon="@drawable/sort_list_small" />
+    
+    <item android:id="@+id/menu_exp_group_dept"
+        android:title="@string/menu_exp_group_dept"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/department"
+         />
+    <item android:id="@+id/menu_exp_group_team"
+        android:title="@string/menu_exp_group_team"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/users_group2" />
+    
+    <item android:id="@+id/menu_exp_group_position"
+        android:title="@string/menu_exp_group_position"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/position" />
+    
+    <item android:id="@+id/menu_exp_group_sex"
+        android:title="@string/menu_exp_group_sex"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/position" />
+    
+    <item android:id="@+id/menu_exp_group_japanese"
+        android:title="@string/menu_exp_group_japanese"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/position" />
+    
+    <item android:id="@+id/menu_exp_group_business_kbn"
+        android:title="@string/menu_exp_group_business_kbn"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/position" />
+    
+    <item android:id="@+id/menu_exp_group_keiken"
+        android:title="@string/menu_exp_group_keiken"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/position" />
+    
+    <item android:id="@+id/menu_exp_group_keiken_labor"
+        android:title="@string/menu_exp_group_keiken_labor"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/position" />
+    
+    <item android:id="@+id/menu_exp_group_labour"
+        android:title="@string/menu_exp_group_labour"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/position" />
+    
+    <item android:id="@+id/menu_exp_group_yasumi"
+        android:title="@string/menu_exp_group_yasumi"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/position" />
+
+     <item android:id="@+id/menu_exp_group_yasumi_yearmonth"
+        android:title="@string/menu_exp_group_yasumi_yearmonth"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/position" />
+        
+    <item android:id="@+id/menu_exp_group_salary_basic"
+        android:title="@string/menu_exp_group_salary"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/position" />
+    
+    <item android:id="@+id/menu_exp_group_customer"
+        android:title="@string/menu_exp_group_customer"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/position" />
+    
+    <item android:id="@+id/menu_exp_group_contract_yearmonth"
+        android:title="@string/menu_exp_group_contract_yearmonth"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/position" />
+
+	<item android:id="@+id/menu_exp_group_training_year"
+        android:title="@string/menu_exp_group_training_year"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/position" />
+
+	<item android:id="@+id/menu_exp_group_contract_year"
+        android:title="@string/menu_exp_group_contract_year"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/position" />
+	
+	<item android:id="@+id/menu_exp_group_notcontract_year"
+        android:title="@string/menu_exp_group_notcontract_year"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/position" />	
+        
+	<item android:id="@+id/menu_exp_group_contract_less_month"
+        android:title="@string/menu_exp_group_contract_less_month"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/position" />
+    <item android:id="@+id/menu_exp_group_staff_current_position_not_satified"
+        android:title="@string/menu_exp_group_staff_current_position_not_satified"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/position" />
+
+</menu>

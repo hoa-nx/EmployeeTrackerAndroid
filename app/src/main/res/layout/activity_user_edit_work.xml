@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+        <!-- header -->
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="90dp"
+            android:visibility="gone" >
+        </RelativeLayout>
+		<!-- body -->
+        <ScrollView 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" 
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                 <RelativeLayout
+                     android:layout_width="fill_parent"
+                     android:layout_height="match_parent"
+                     android:layout_alignParentBottom="true"
+                     android:layout_alignParentLeft="true"
+                     android:gravity="bottom"
+                     android:paddingBottom="55dp"
+                     android:paddingTop="0dp" >
+
+                     <TextView
+                         android:id="@+id/lblUserDeptName"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_marginTop="5dp"
+                         android:text="@string/userTitleDeptName"
+                         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                     <EditText
+                         android:id="@+id/txtUserDeptName"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_below="@+id/lblUserDeptName"
+                         android:layout_marginTop="5dp"
+                         android:layout_toLeftOf="@+id/btnUserDeptName"
+                         android:clickable="false"
+                         android:ems="10"
+                         android:focusable="false"
+                         android:focusableInTouchMode="false"
+                         android:hint="@string/userTitleDeptName" >
+
+                         <requestFocus />
+                     </EditText>
+
+                     <TextView
+                         android:id="@+id/txtUserDeptCode"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignBaseline="@+id/lblUserDeptName"
+                         android:layout_alignBottom="@+id/lblUserDeptName"
+                         android:layout_alignParentRight="true"
+                         android:layout_marginTop="5dp"
+                         android:text="0"
+                         android:textAppearance="?android:attr/textAppearanceMedium"
+                         android:visibility="gone" />
+
+                     <TextView
+                         android:id="@+id/lblUserTeamName"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_below="@+id/txtUserDeptName"
+                         android:layout_marginTop="5dp"
+                         android:hint="@string/userTitleTeamName"
+                         android:text="@string/userTitleTeamName"
+                         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                     <EditText
+                         android:id="@+id/txtUserTeamName"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_alignRight="@+id/txtUserDeptName"
+                         android:layout_below="@+id/lblUserTeamName"
+                         android:layout_marginTop="5dp"
+                         android:clickable="false"
+                         android:ems="10"
+                         android:focusable="false"
+                         android:focusableInTouchMode="false"
+                         android:hint="@string/userTitleTeamName" />
+
+                     <TextView
+                         android:id="@+id/txtUserTeamCode"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_above="@+id/txtUserTeamName"
+                         android:layout_alignParentRight="true"
+                         android:layout_marginTop="5dp"
+                         android:text="0"
+                         android:visibility="gone" />
+
+                     <TextView
+                         android:id="@+id/lblUserPositionName"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_below="@+id/btnUserTeamName"
+                         android:layout_marginTop="5dp"
+                         android:text="@string/userTitlePositionName"
+                         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                     <EditText
+                         android:id="@+id/txtUserPositionName"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_alignRight="@+id/txtUserTeamName"
+                         android:layout_below="@+id/lblUserPositionName"
+                         android:layout_marginTop="5dp"
+                         android:clickable="false"
+                         android:ems="10"
+                         android:focusable="false"
+                         android:focusableInTouchMode="false"
+                         android:hint="@string/userTitlePositionName" />
+
+                     <TextView
+                         android:id="@+id/txtUserPositionCode"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentRight="true"
+                         android:layout_below="@+id/btnUserTeamName"
+                         android:text="0"
+                         android:visibility="gone" 
+                         />
+                     <!--  Hoc viec-->
+
+                     <TextView
+                         android:id="@+id/lblUserLearnTraining_date"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_alignParentRight="true"
+                         android:layout_below="@+id/btnUserPositionName"
+                         android:layout_marginTop="5dp"
+                         android:text="@string/userTitleLearnTraining_date"
+                         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                     <EditText
+                         android:id="@+id/txtUserLearnTraining_date"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_alignRight="@+id/txtUserLearnTraining_dateEnd"
+                         android:layout_below="@+id/lblUserLearnTraining_date"
+                         android:layout_marginTop="5dp"
+                         android:background="@drawable/edittext_modified_states"
+                         android:ems="10"
+                         android:gravity="center_vertical|left"
+                         android:hint="@string/userTitleLearnTraining_date"
+                         android:inputType="date"
+                         android:longClickable="true"
+                         android:textColor="@color/grey" />
+                     
+						<Button
+                         android:id="@+id/btnUserLearnTraining_date"
+                         style="?android:attr/buttonStyleSmall"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_above="@+id/lblUserLearnTraining_dateEnd"
+                         android:layout_alignTop="@+id/txtUserLearnTraining_date"
+                         android:layout_toRightOf="@+id/txtUserLearnTraining_date"
+                         android:background="@drawable/calendar2" />
+						
+						<!--  Hoc viec -->
+						<TextView
+                         android:id="@+id/lblUserLearnTraining_dateEnd"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_alignParentRight="true"
+                         android:layout_below="@+id/txtUserLearnTraining_date"
+                         android:text="@string/userTitleLearnTraining_dateEnd"
+                         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                     <EditText
+                         android:id="@+id/txtUserLearnTraining_dateEnd"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_below="@+id/lblUserLearnTraining_dateEnd"
+                         android:layout_toLeftOf="@+id/btnUserIn_date"
+                         android:background="@drawable/edittext_modified_states"
+                         android:ems="10"
+                         android:gravity="center_vertical|left"
+                         android:hint="@string/userTitleLearnTraining_dateEnd"
+                         android:inputType="date"
+                         android:longClickable="true"
+                         android:textColor="@color/grey" />
+
+						<Button
+						    android:id="@+id/btnUserLearnTraining_dateEnd"
+						    style="?android:attr/buttonStyleSmall"
+						    android:layout_width="wrap_content"
+						    android:layout_height="wrap_content"
+						    android:layout_above="@+id/lblUserTraining_date"
+						    android:layout_alignLeft="@+id/btnUserIn_date"
+						    android:layout_alignRight="@+id/btnUserIn_date"
+						    android:layout_alignTop="@+id/txtUserLearnTraining_dateEnd"
+						    android:background="@drawable/calendar2" />
+
+						<!--  Hoc End-->
+                     
+						<Button
+                         android:id="@+id/btnUserTraining_date"
+                         style="?android:attr/buttonStyleSmall"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_above="@+id/lblUserTraining_dateEnd"
+                         android:layout_alignTop="@+id/txtUserTraining_date"
+                         android:layout_toRightOf="@+id/txtUserTraining_date"
+                         android:background="@drawable/calendar2" />
+
+                     <EditText
+                         android:id="@+id/txtUserIn_date"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_alignRight="@+id/txtUserTraining_date"
+                         android:layout_below="@+id/lblUserIn_date"
+                         android:layout_marginTop="5dp"
+                         android:background="@drawable/edittext_modified_states"
+                         android:ems="10"
+                         android:hint="@string/userTitleIn_date"
+                         android:inputType="date"
+                         android:longClickable="true"
+                         android:textColor="@color/grey" />
+
+                     <TextView
+                         android:id="@+id/lblUserOut_date"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_below="@+id/txtUserJoin_date"
+                         android:layout_marginTop="5dp"
+                         android:text="@string/userTitleOut_date"
+                         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                     <EditText
+                         android:id="@+id/txtUserOut_date"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignLeft="@+id/txtUserJoin_date"
+                         android:layout_below="@+id/lblUserOut_date"
+                         android:layout_marginTop="5dp"
+                         android:layout_toLeftOf="@+id/btnUserTraining_date"
+                         android:background="@drawable/edittext_modified_states"
+                         android:ems="10"
+                         android:enabled="false"
+                         android:hint="@string/userTitleOut_date"
+                         android:inputType="date"
+                         android:longClickable="true"
+                         android:textColor="@color/grey" />
+
+                     <TextView
+                         android:id="@+id/lblUserLabour_Out_date"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_below="@+id/txtUserOut_date"
+                         android:layout_marginTop="5dp"
+                         android:text="@string/userTitleLabour_Out_date"
+                         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                     <EditText
+                         android:id="@+id/txtUserLabour_Out_date"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_below="@+id/lblUserLabour_Out_date"
+                         android:layout_marginTop="5dp"
+                         android:layout_toLeftOf="@+id/btnUserTraining_date"
+                         android:background="@drawable/edittext_modified_states"
+                         android:ems="10"
+                         android:hint="@string/userTitleLabour_Out_date"
+                         android:inputType="date"
+                         android:longClickable="true"
+                         android:textColor="@color/grey" />
+
+                     
+
+                     <Button
+                         android:id="@+id/btnUserIn_date"
+                         style="?android:attr/buttonStyleSmall"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignBottom="@+id/txtUserIn_date"
+                         android:layout_alignLeft="@+id/btnUserTraining_date"
+                         android:layout_alignRight="@+id/btnUserTraining_date"
+                         android:layout_alignTop="@+id/txtUserIn_date"
+                         android:background="@drawable/calendar" />
+
+                     <Button
+                         android:id="@+id/btnUserOut_date"
+                         style="?android:attr/buttonStyleSmall"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignBottom="@+id/txtUserOut_date"
+                         android:layout_alignLeft="@+id/btnUserJoin_date"
+                         android:layout_alignRight="@+id/btnUserJoin_date"
+                         android:layout_alignTop="@+id/txtUserOut_date"
+                         android:background="@drawable/calendar" />
+
+                     <Button
+                         android:id="@+id/btnUserLabour_Out_date"
+                         style="?android:attr/buttonStyleSmall"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignBottom="@+id/txtUserLabour_Out_date"
+                         android:layout_alignLeft="@+id/btnUserOut_date"
+                         android:layout_alignRight="@+id/btnUserOut_date"
+                         android:layout_alignTop="@+id/txtUserLabour_Out_date"
+                         android:background="@drawable/calendar" />
+
+                     
+
+                     <Button
+                         android:id="@+id/btnUserJoin_date"
+                         style="?android:attr/buttonStyleSmall"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignBottom="@+id/txtUserJoin_date"
+                         android:layout_alignLeft="@+id/btnUserIn_date"
+                         android:layout_alignRight="@+id/btnUserIn_date"
+                         android:layout_alignTop="@+id/txtUserJoin_date"
+                         android:background="@drawable/calendar" />
+
+                     <TextView
+                         android:id="@+id/lblUserTraining_dateEnd"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_alignParentRight="true"
+                         android:layout_below="@+id/txtUserTraining_date"
+                         android:text="@string/userTitleTraining_dateEnd"
+                         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                     <EditText
+                         android:id="@+id/txtUserTraining_dateEnd"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_below="@+id/lblUserTraining_dateEnd"
+                         android:layout_toLeftOf="@+id/btnUserIn_date"
+                         android:background="@drawable/edittext_modified_states"
+                         android:ems="10"
+                         android:gravity="center_vertical|left"
+                         android:hint="@string/userTitleTraining_dateEnd"
+                         android:inputType="date"
+                         android:longClickable="true"
+                         android:textColor="@color/grey" />
+						<Button
+                         android:id="@+id/btnUserTraining_dateEnd"
+                         style="?android:attr/buttonStyleSmall"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_above="@+id/lblUserIn_date"
+                         android:layout_alignLeft="@+id/btnUserIn_date"
+                         android:layout_alignRight="@+id/btnUserIn_date"
+                         android:layout_alignTop="@+id/txtUserTraining_dateEnd"
+                         android:background="@drawable/calendar2" />
+
+                     <ToggleButton
+                         android:id="@+id/tbtUserIsLabour"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignBottom="@+id/lblUserIsLabour"
+                         android:layout_below="@+id/btnUserLabour_Out_date"
+                         android:layout_toLeftOf="@+id/btnUserPositionName"
+                         android:layout_toRightOf="@+id/lblUserIsLabour"
+                         android:background="@drawable/custom_toggle_button"
+                         android:text=""
+                         android:textOff=""
+                         android:textOn="" />
+
+                     
+
+                     <TextView
+                         android:id="@+id/lblUserIsLabour"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_below="@+id/txtUserLabour_Out_date"
+                         android:paddingTop="5dp"
+                         android:text="@string/userTitleIsLabour"
+                         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                     <TextView
+                         android:id="@+id/lblUserIn_date"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_below="@+id/txtUserTraining_dateEnd"
+                         android:text="@string/userTitleIn_date"
+                         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                     <TextView
+                         android:id="@+id/lblUserKeikenConvertFJN"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_below="@+id/txtUserIn_date"
+                         android:text="@string/userTitleUserKeikenConvertToFJN"
+                         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                     <EditText
+                         android:id="@+id/txtUserKeikenConvertFJN"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_alignRight="@+id/lblUserJoin_date"
+                         android:layout_below="@+id/lblUserKeikenConvertFJN"
+                         android:background="@drawable/edittext_modified_states"
+                         android:ems="10"
+                         android:hint="@string/userTitleUserKeikenConvertToFJN"
+                         android:inputType="number|numberSigned"
+                         android:textColor="@color/grey" />
+
+                     <EditText
+                         android:id="@+id/txtUserJoin_date"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_below="@+id/lblUserJoin_date"
+                         android:layout_toLeftOf="@+id/btnUserJoin_date"
+                         android:background="@drawable/edittext_modified_states"
+                         android:ems="10"
+                         android:hint="@string/userTitleJoin_date"
+                         android:inputType="date"
+                         android:longClickable="true"
+                         android:textColor="@color/grey" />
+
+                     <TextView
+                         android:id="@+id/lblUserTraining_date"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_below="@+id/txtUserLearnTraining_dateEnd"
+                         android:text="@string/userTitleTraining_date"
+                         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                     <EditText
+                         android:id="@+id/txtUserTraining_date"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_below="@+id/lblUserTraining_date"
+                         android:background="@drawable/edittext_modified_states"
+                         android:ems="10"
+                         android:gravity="center_vertical|left"
+                         android:hint="@string/userTitleTraining_date"
+                         android:inputType="date"
+                         android:longClickable="true"
+                         android:textColor="@color/grey" />
+
+                     <CheckBox
+                         android:id="@+id/chkUserOut_date"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignTop="@+id/btnUserOut_date"
+                         android:layout_toRightOf="@+id/btnUserOut_date"
+                         android:text="@string/userTitleChkOut_date"
+                         android:textSize="11sp" />
+
+                     <TextView
+                         android:id="@+id/lblUserJoin_date"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_below="@+id/txtUserKeikenConvertFJN"
+                         android:text="@string/userTitleJoin_date"
+                         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                     <Button
+                         android:id="@+id/btnUserDeptName"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignBottom="@+id/txtUserDeptName"
+                         android:layout_alignParentRight="true"
+                         android:background="@android:color/transparent"
+                         android:drawableStart="@drawable/search"
+                         android:minWidth="48dip" />
+
+                     <Button
+                         android:id="@+id/btnUserPositionName"
+                         style="?android:attr/buttonStyleSmall"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignBottom="@+id/txtUserPositionName"
+                         android:layout_alignParentRight="true"
+                         android:background="@android:color/transparent"
+                         android:drawableStart="@drawable/search" />
+
+                     <Button
+                         android:id="@+id/btnUserTeamName"
+                         style="?android:attr/buttonStyleSmall"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignBottom="@+id/txtUserTeamName"
+                         android:layout_alignParentRight="true"
+                         android:background="@android:color/transparent"
+                         android:drawableStart="@drawable/search" />
+
+                 </RelativeLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+		<!-- footer -->
+
+        <RelativeLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/grey"
+            android:gravity="center"
+            android:visibility="gone"  >
+
+            <Button
+			    android:id="@+id/btnUserSaveWork"
+			    android:layout_width="wrap_content"
+			    android:layout_height="match_parent"
+			    android:text="@string/titleSave"
+			    android:visibility="gone"
+			    />
+
+             <Button
+                 android:id="@+id/btnUserCancel"
+                 android:layout_width="wrap_content"
+                 android:layout_height="match_parent"
+                 android:layout_alignParentTop="true"
+                 android:layout_toRightOf="@+id/btnUserSaveWork"
+                 android:text="@string/titleCancel" 
+                 android:visibility="gone"
+                 />
+
+        </RelativeLayout>
+
+</LinearLayout>

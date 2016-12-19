@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+        <!-- header -->
+        <RelativeLayout 
+            android:layout_width="fill_parent" 
+            android:layout_height="0dp">
+        </RelativeLayout>
+		<!-- body -->
+        <ScrollView 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" 
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                 <RelativeLayout
+                     android:layout_width="fill_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_alignParentBottom="true"
+                     android:layout_alignParentLeft="true"
+                     android:gravity="bottom"
+                     android:paddingBottom="55dp"
+                     android:paddingTop="0dp" >
+
+                     <TextView
+                         android:id="@+id/lblSendSmsContent"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginTop="5dp"
+                         android:text="@string/send_sms_titleContent"
+                         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                     <EditText
+                         android:id="@+id/txtSendSmsContent"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_alignParentRight="true"
+                         android:layout_below="@+id/lblSendSmsContent"
+                         android:layout_marginTop="5dp"
+                         android:background="@drawable/edittext_modified_states"
+                         android:ems="10"
+                         android:gravity="top"
+                         android:hint="@string/send_sms_titleContent"
+                         android:inputType="textAutoComplete|textMultiLine"
+                         android:lines="5"
+                         android:textColor="@color/grey" >
+
+                         <requestFocus />
+                     </EditText>
+
+                     <TextView
+                         android:id="@+id/lblSendSmsAttachFile"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_below="@+id/txtSendSmsContent"
+                         android:layout_marginTop="10dp"
+                         android:text="Đính kèm file"
+                         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                     <CheckBox
+                         android:id="@+id/chkSendSms"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_below="@+id/lblSendSmsAttachFile"
+                         android:checked="true"
+                         android:text="Tin nhắn" />
+
+                     <CheckBox
+                         android:id="@+id/chkSendMail"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignBaseline="@+id/chkSendSms"
+                         android:layout_alignBottom="@+id/chkSendSms"
+                         android:layout_toRightOf="@+id/chkSendSms"
+                         android:text="Email" />
+
+                     <ImageButton
+                         android:id="@+id/btnSendSmsAttachFile"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:enabled="false"
+                         android:layout_below="@+id/txtSendSmsContent"
+                         android:layout_toRightOf="@+id/lblSendSmsContent"
+                         android:src="@drawable/attach_file" />
+
+                 </RelativeLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+		<!-- footer -->
+
+        <RelativeLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/LightGrey"
+            android:gravity="center" >
+
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:drawableLeft="@drawable/sendmail"
+                android:text="@string/send_sms_titleSend" />
+
+            <Button
+                android:id="@+id/btnSendCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/btnBack"
+                android:drawableStart="@drawable/back"
+                android:text="@string/titleBack" />
+
+        </RelativeLayout>
+
+</LinearLayout>

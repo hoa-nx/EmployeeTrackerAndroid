@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <!-- header -->
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="90dp"
+        android:visibility="gone" >
+    </RelativeLayout>
+    <!-- body -->
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:gravity="bottom"
+                android:paddingBottom="55dp"
+                android:paddingTop="0dp" >
+
+                <TextView
+                    android:id="@+id/lblUserJapanese"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/userTitleJapanese"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/txtUserJapanese"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/lblUserJapanese"
+                    android:layout_marginTop="3dp"
+                    android:layout_toLeftOf="@+id/btnUserJapanese"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/userTitleJapanese" >
+
+                    <requestFocus />
+                </EditText>
+
+                <Button
+                    android:id="@+id/btnUserJapanese"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/txtUserJapanese"
+                    android:layout_alignBottom="@+id/txtUserJapanese"
+                    android:layout_alignParentRight="true"
+                    android:background="@android:color/transparent"
+                    android:drawableStart="@drawable/search"
+                    android:minWidth="48dip" />
+
+                <TextView
+                    android:id="@+id/lblUserAllowance_business"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/btnUserJapanese"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/userTitleAllowanceBusiness"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/txtUserAllowance_business"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/lblUserAllowance_business"
+                    android:layout_marginTop="3dp"
+                    android:layout_toLeftOf="@+id/btnUserAllowance_business"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/userTitleAllowanceBusiness" />
+
+                <TextView
+                    android:id="@+id/lblUserPositionGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/lblUserBusinessKbn"
+                    android:layout_marginTop="35dp"
+                    android:text="@string/userTitlePositionGroup"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/txtUserPositionGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/lblUserProgram"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/lblUserCustomer"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/userTitleProgram"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:visibility="gone" />
+
+                <SeekBar
+                    android:id="@+id/sbaUserProgram"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/lblUserProgram"
+                    android:layout_marginTop="5dp"
+                    android:layout_toLeftOf="@+id/btnUserAllowance_business"
+                    android:max="100"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/lblUserDetailDesign"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/sbaUserProgram"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/userTitleDetailDesign"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:visibility="gone" />
+
+                <SeekBar
+                    android:id="@+id/sbaUserDetailDesign"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/lblUserDetailDesign"
+                    android:layout_marginTop="5dp"
+                    android:layout_toLeftOf="@+id/btnUserAllowance_business"
+                    android:max="100"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/txtUserProgram"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/btnUserAllowance_business"
+                    android:layout_alignTop="@+id/sbaUserProgram"
+                    android:text="0"
+                    android:textColor="@color/Blue"
+                    android:textSize="20sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/txtUserDetailDesign"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/txtUserProgram"
+                    android:layout_alignTop="@+id/sbaUserDetailDesign"
+                    android:text="0"
+                    android:textColor="@color/Blue"
+                    android:textSize="20sp"
+                    android:visibility="gone" />
+
+                <EditText
+                    android:id="@+id/txtUserNote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/lblUserNote"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/edittext_modified_states"
+                    android:ems="10"
+                    android:hint="@string/userTitleNote"
+                    android:inputType="textAutoComplete|textMultiLine"
+                    android:lines="2"
+                    android:textColor="@color/grey" />
+
+                <ToggleButton
+                    android:id="@+id/tbtUserPositionGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/btnUserAllowance_business"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@+id/lblUserPositionGroup"
+                    android:background="@android:color/transparent"
+                    android:drawableLeft="@drawable/role"
+                    android:textOff=""
+                    android:textOn="" />
+
+                <CheckBox
+                    android:id="@+id/chkUserDeveloper"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/chkUserHonyaku"
+                    android:layout_alignBottom="@+id/chkUserHonyaku"
+                    android:layout_alignParentLeft="true"
+                    android:checked="true"
+                    android:text="@string/userTitleBusinessKbnDevelop" />
+
+                <TextView
+                    android:id="@+id/lblUserCustomer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/lblUserPositionGroup"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/userTitleCustomer"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/lblUserKbn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/lblUserPositionGroup"
+                    android:paddingTop="12dp"
+                    android:text="@string/userTitleUserKbn"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <RadioGroup
+                    android:id="@+id/radUserKbn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/lblUserKbn"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/radEmp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:paddingTop="6dp"
+                        android:text="@string/userTitleUserKbnEmp" />
+
+                    <RadioButton
+                        android:id="@+id/radCustomer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/userTitleUserKbnCustomer" />
+                </RadioGroup>
+
+                <TextView
+                    android:id="@+id/lblUserNote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/tbtUserCustomerGroup"
+                    android:text="@string/userTitleNote"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/lblUserCustomerGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignTop="@+id/tbtUserCustomerGroup"
+                    android:text="Khách hàng"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <ToggleButton
+                    android:id="@+id/tbtUserCustomerGroup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/tbtUserPositionGroup"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/radUserKbn"
+                    android:layout_marginTop="13dp"
+                    android:background="@android:color/transparent"
+                    android:drawableLeft="@drawable/users_group_customer"
+                    android:textOff=""
+                    android:textOn="" />
+
+                <EditText
+                    android:id="@+id/txtUserAllowance_Room"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/lblUserAllowance_Room"
+                    android:layout_toLeftOf="@+id/btnUserAllowance_business"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/userTitleUserAllowanceRoom" />
+
+                <Button
+                    android:id="@+id/btnUserAllowance_Room"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/txtUserAllowance_Room"
+                    android:layout_alignBottom="@+id/txtUserAllowance_Room"
+                    android:layout_alignParentRight="true"
+                    android:background="@android:color/transparent"
+                    android:drawableStart="@drawable/search" />
+
+                <TextView
+                    android:id="@+id/lblUserAllowance_Room"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/btnUserAllowance_business"
+                    android:text="@string/userTitleUserAllowanceRoom"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/lblUserBusinessKbn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/btnUserAllowance_Room"
+                    android:text="@string/userTitleBusinessKbn"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <Button
+                    android:id="@+id/btnUserAllowance_business"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/txtUserAllowance_business"
+                    android:layout_alignBottom="@+id/txtUserAllowance_business"
+                    android:layout_alignParentRight="true"
+                    android:background="@android:color/transparent"
+                    android:drawableStart="@drawable/search" />
+
+                <CheckBox
+                    android:id="@+id/chkUserHonyaku"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/userTitleBusinessKbnHonyaku"
+                    android:layout_below="@+id/lblUserBusinessKbn"
+                    android:layout_alignRight="@+id/lblUserAllowance_Room"
+                    android:layout_alignEnd="@+id/lblUserAllowance_Room" />
+
+                <CheckBox
+                    android:id="@+id/chkUserOther"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/userTitleBusinessKbnOther"
+                    android:layout_alignBaseline="@+id/chkUserHonyaku"
+                    android:layout_alignBottom="@+id/chkUserHonyaku"
+                    android:layout_toRightOf="@+id/chkUserHonyaku"
+                    android:layout_toEndOf="@+id/chkUserHonyaku"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginStart="13dp" />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+    <!-- footer -->
+
+    <RelativeLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/grey"
+        android:gravity="center"
+        android:visibility="gone" >
+
+        <Button
+            android:id="@+id/btnUserSaveOther"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/titleSave"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnUserCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/btnUserSaveOther"
+            android:text="@string/titleCancel"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <!-- header -->
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="90dp"
+            android:visibility="gone" >
+        </RelativeLayout>
+		<!-- body -->
+        <ScrollView 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" 
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                 <RelativeLayout
+                     android:layout_width="fill_parent"
+                     android:layout_height="350dp"
+                     android:layout_alignParentBottom="true"
+                     android:layout_alignParentLeft="true"
+                     android:gravity="bottom"
+                     android:paddingBottom="55dp"
+                     android:paddingTop="0dp" >
+
+                     <TextView
+                         android:id="@+id/txtUserDeptCode"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentRight="true"
+                         android:layout_marginTop="5dp"
+                         android:text="0"
+                         android:textAppearance="?android:attr/textAppearanceMedium"
+                         android:visibility="gone" />
+
+                     <TextView
+                         android:id="@+id/txtUserTeamCode"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentRight="true"
+                         android:layout_marginTop="5dp"
+                         android:text="0"
+                         android:visibility="gone" />
+
+                     <TextView
+                         android:id="@+id/txtUserPositionCode"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentRight="true"
+                         android:text="0"
+                         android:visibility="gone" />
+
+                     <ToggleButton
+                         android:id="@+id/tbtSearchItemDept"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignRight="@+id/chkSearchItemIncludeTrialStaff"
+                         android:layout_marginTop="5dp"
+                         android:layout_toRightOf="@+id/chkSearchItemDept"
+                         android:drawableLeft="@drawable/department"
+                         android:enabled="false"
+                         android:text="@string/userTitleDeptName"
+                         android:textOff="@string/userTitleSearchItemAllDept"
+                         android:textOn="@string/userTitleDeptName" />
+
+                     <ToggleButton
+                         android:id="@+id/tbtSearchItemTeam"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignLeft="@+id/tbtSearchItemDept"
+                         android:layout_alignRight="@+id/tbtSearchItemDept"
+                         android:layout_below="@+id/tbtSearchItemDept"
+                         android:drawableLeft="@drawable/users_group"
+                         android:enabled="false"
+                         android:text="@string/userTitleTeamName"
+                         android:textOff="@string/userTitleSearchItemAllTeam"
+                         android:textOn="@string/userTitleTeamName" />
+
+                     <ToggleButton
+                         android:id="@+id/tbtSearchItemPosition"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignLeft="@+id/tbtSearchItemTeam"
+                         android:layout_alignRight="@+id/tbtSearchItemTeam"
+                         android:layout_below="@+id/tbtSearchItemTeam"
+                         android:drawableLeft="@drawable/position"
+                         android:enabled="false"
+                         android:text="@string/userTitlePositionName"
+                         android:textOff="@string/userTitleSearchItemAllPosition"
+                         android:textOn="@string/userTitlePositionName" />
+
+                     <CheckBox
+                         android:id="@+id/chkSearchItemDelete"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_below="@+id/tbtSearchItemPosition"
+                         android:text="Đã xóa"
+                         android:textColor="@color/black" />
+
+                     <CheckBox
+                         android:id="@+id/chkSearchItemOutDate"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignBaseline="@+id/chkSearchItemDelete"
+                         android:layout_alignBottom="@+id/chkSearchItemDelete"
+                         android:layout_alignParentRight="true"
+                         android:text="Đã nghỉ việc"
+                         android:textColor="@color/Black"
+                         android:visibility="gone" />
+
+                     <CheckBox
+                         android:id="@+id/chkSearchItemCurrentLabour"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_below="@+id/chkSearchItemDelete"
+                         android:text="Nhóm labor"
+                         android:textColor="@color/black" />
+
+                     <CheckBox
+                         android:id="@+id/chkSearchItemDept"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignBaseline="@+id/tbtSearchItemDept"
+                         android:layout_alignBottom="@+id/tbtSearchItemDept"
+                         android:layout_alignParentLeft="true"
+                         android:layout_marginTop="5dp" />
+
+                     <CheckBox
+                         android:id="@+id/chkSearchItemTeam"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_alignTop="@+id/tbtSearchItemTeam"
+                         android:layout_marginTop="5dp" />
+
+                     <CheckBox
+                         android:id="@+id/chkSearchItemPosition"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_alignTop="@+id/tbtSearchItemPosition"
+                         android:layout_marginTop="5dp" />
+
+                     <com.ussol.employeetracker.helpers.SegmentedGroup
+                         xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+                         android:id="@+id/segUserYasumiKbn"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_alignParentRight="true"
+                         android:layout_below="@+id/chkSearchItemCurrentLabour"
+                         android:layout_margin="10dp"
+                         android:background="#455A64"
+                         android:gravity="left|start"
+                         android:orientation="horizontal"
+                         app:border_width="1dp"
+                         app:checked_text_color="#ff33b5e5"
+                         app:corner_radius="5dp"
+                         segmentedgroup:tint_color="@android:color/holo_green_light" >
+
+                         <RadioButton
+                             android:id="@+id/radOnlyYamsumi"
+                             style="@style/RadioButton"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:text="Nghỉ việc" />
+
+                         <RadioButton
+                             android:id="@+id/radWorking"
+                             style="@style/RadioButton"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:text="Đang làm việc" />
+
+                         <RadioButton
+                             android:id="@+id/radAllUser"
+                             style="@style/RadioButton"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:text="Toàn bộ" />
+                     </com.ussol.employeetracker.helpers.SegmentedGroup>
+
+                     <CheckBox
+                         android:id="@+id/chkSearchItemIncludeTrialStaff"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignRight="@+id/segUserYasumiKbn"
+                         android:layout_below="@+id/tbtSearchItemPosition"
+                         android:checked="true"
+                         android:text="@string/userTitleSearchItemIncludeTrialStaff"
+                         android:textColor="@color/black" />
+
+                 </RelativeLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+		<!-- footer -->
+
+        <RelativeLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/grey_light"
+            android:gravity="center" >
+
+            <Button
+                android:id="@+id/btnSearchItemSetting"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:drawableLeft="@drawable/save_back"
+                android:text="@string/userTitleSearchItemSetting"
+                android:visibility="visible" />
+
+             <Button
+                 android:id="@+id/btnSearchItemSettingCancel"
+                 android:layout_width="wrap_content"
+                 android:layout_height="match_parent"
+                 android:layout_alignParentTop="true"
+                 android:layout_toRightOf="@+id/btnSearchItemSetting"
+                 android:drawableLeft="@drawable/back"
+                 android:text="@string/titleBack"
+                 android:visibility="visible" />
+
+        </RelativeLayout>
+
+</LinearLayout>

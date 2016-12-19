@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ussol.employeetracker"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.WRITE_SMS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="com.sec.android.provider.badge.permission.READ" />
+    <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE" />
+	
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="23" />
+
+    <application
+        android:name=".EmployeeTrackerApplication"
+        android:debuggable="true"
+        android:icon="@drawable/ic_app"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.DeviceDefault.Light" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main" >
+        </activity>
+        -->
+
+        <activity
+            android:name=".MasterActivity"
+            uiOptions="splitActionBarWhenNarrow"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/title_activity_main"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name=".DetailDepartmentActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/deptTitleInfor"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name=".EditDepartmentActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/deptTitleInfor"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name=".DetailTeamActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/teamTitleInfor"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name=".EditTeamActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/teamTitleInfor"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name=".DetailPositionActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/positionTitleInfor"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name=".EditPositionActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/positionTitleInfor"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name=".EditUserMainActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/userTitleInfor"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name=".DatabaseToolActivity"
+            android:label="@string/titleDatabaseTool" >
+        </activity>
+        <activity
+            android:name=".ListUserMainActivity"
+            android:label="@string/userTitleList" >
+        </activity>
+        <!--
+         <activity 
+             android:theme="@android:style/Theme.Dialog"
+             android:theme="@style/styleActivityDialog"
+             android:name=".ListUserMainActivity"
+             android:label="@string/userTitleList">
+         </activity>
+        -->
+        <activity
+            android:name=".ExpandableListUserActivity"
+            android:label="@string/userTitleList" >
+        </activity>
+        <activity
+            android:name=".ContactListActivity"
+            android:label="@string/titleContactList" >
+        </activity>
+        <activity
+            android:name=".GenerateReport"
+            android:label="@string/titleOutputPdf" >
+        </activity>
+        <activity
+            android:name=".SearchItemMainActivity"
+            android:label="@string/userTitleSearchItem"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" >
+        </activity>
+        <activity android:name=".SearchItemTabFirstAcivity" >
+        </activity>
+        <activity android:name=".SearchItemTabSecondAcivity" >
+        </activity>
+        <activity
+            android:name=".DragNDropListActivity"
+            android:label="@string/menu_sort_item_settings"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog" >
+        </activity>
+        <activity android:name=".SystemConfigPreferencesActivity" >
+        </activity>
+        <activity
+            android:name=".HisUserMainActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/userHisTitleInfor"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name=".ExpandableListUserHisActivity"
+            android:label="@string/userTitleList" >
+        </activity>
+        <activity
+            android:name=".SendSmsActivity"
+            android:label="@string/send_sms_titleInfo" >
+        </activity>
+        <activity
+            android:name=".SendMailActivity"
+            android:label="@string/send_sms_titleInfo" >
+        </activity>
+        <activity
+            android:name=".filedialog.FileDialog"
+            android:label="@string/filedialog_titleInfo" >
+        </activity>
+        <activity
+            android:name=".DatabaseToGoogleDriveActivity"
+            android:label="Google Drive Backup" >
+        </activity>
+        <!--
+        <provider            
+             android:name="com.example.MyCloudProvider"            
+             android:authorities="com.example.mycloudprovider"            
+             android:exported="true"            
+             android:grantUriPermissions="true"            
+             android:permission="android.permission.MANAGE_DOCUMENTS"            
+             android:enabled="true">            
+			<intent-filter>                
+                 <action android:name="android.content.action.DOCUMENTS_PROVIDER" />            
+        	</intent-filter>        
+		</provider>
+        -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".ContactListActivity"
+            android:label="@string/titleContactList" >
+        </activity>
+        <!--
+             <service android:name=".BackgroundService" />
+    	<receiver android:name="AlarmReceiver">
+    	    <intent-filter>
+			<action android:name="android.intent.action.PACKAGE_REPLACED"/>
+			<data android:path="com.ussol.employeetracker" android:scheme="package"/>
+			</intent-filter>
+    	    
+    	</receiver>
+        -->
+
+        <activity
+            android:name=".passcodelock.PasscodeUnlockActivity"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name=".passcodelock.PasscodeManagePasswordActivity"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name=".ChartYasumiYearMonthActivity"
+            android:label="@string/title_activity_chart_yasumi_year_month" >
+        </activity>
+        <activity
+            android:name=".ChartActivity"
+            android:label="@string/title_activity_chart" >
+        </activity>
+        <activity
+            android:name=".ChartStaffStatusStackedBarActivity"
+            android:label="@string/title_activity_chart_staff_status_stacked_bar" >
+        </activity>
+        <activity
+            android:name=".helpers.ChartFragmentList"
+            android:label="@string/title_activity_chart_staff_status_stacked_bar" >
+        </activity>
+        <activity
+            android:name=".ChartStaffStatusPDWorkingPDTrainingPDYasumiStackedBarChartFrag"
+            android:label="@string/title_activity_chart_staff_status_stacked_bar" >
+        </activity>
+        <activity
+            android:name=".ChartStaffStatusStackedBarChartFrag"
+            android:label="@string/title_activity_chart_staff_status_stacked_bar" >
+        </activity>
+        <activity
+            android:name=".ChartStaffStatusWorkingStackedBarChartFrag"
+            android:label="@string/title_activity_chart_staff_status_stacked_bar" >
+        </activity>
+        <activity
+            android:name=".ChartStaffStatusWorkingTrainingStackedBarChartFrag"
+            android:label="@string/title_activity_chart_staff_status_stacked_bar" >
+        </activity>
+        <activity
+            android:name=".ChartStaffStatusWorkingTrainingYasumiStackedBarChartFrag"
+            android:label="@string/title_activity_chart_staff_status_stacked_bar" >
+        </activity>
+        <activity
+            android:name=".ChartStaffStatusTreeYearMonthActivity"
+            android:label="@string/title_activity_chart_staff_status_stacked_bar" >
+        </activity>
+        <activity
+            android:name=".ChartStaffStatusWorkingTrainingThreeYearActivity"
+            android:label="@string/title_activity_chart_staff_status_stacked_bar" >
+        </activity>
+        
+        <activity
+            android:name=".AlarmJobServiceActivity"
+            android:label="@string/title_activity_alarm_job_service" >
+        </activity>
+
+        <service
+            android:name=".services.AlarmJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <activity
+            android:name=".SwipeListViewActivity"
+            android:label="@string/title_activity_swipe_list_view" >
+        </activity>
+        <activity
+            android:name=".SwipeSettingsActivity"
+            android:label="@string/title_activity_swipe_settings" >
+        </activity>
+        <activity
+            android:name=".MessageTemplateListActivity"
+            android:label="@string/title_activity_message_template_list" >
+        </activity>
+        <activity
+            android:name=".MessageTemplateEditActivity"
+            android:label="@string/title_activity_message_template_edit" >
+        </activity>
+        <activity
+            android:name=".MessageTemplateAddActivity"
+            android:label="@string/title_activity_message_template_add" >
+        </activity>
+    </application>
+
+</manifest>

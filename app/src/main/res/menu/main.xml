@@ -1,0 +1,23 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_search_item_settings"
+        android:title="@string/menu_search_item_settings"
+        android:orderInCategory="100"
+        android:icon="@drawable/searchitem"
+        android:showAsAction="always" />
+	<item android:id="@+id/menu_sort_item_settings"
+        android:title="@string/menu_report_sortlist"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:icon="@drawable/sort_list_small" />
+	<item android:id="@+id/menu_config_item_settings"
+        android:title="@string/menu_settings"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:icon="@drawable/gnome_system_config" />
+	<item android:id="@+id/menu_backup_item_settings"
+        android:title="@string/menu_settings"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:icon="@drawable/backup" />
+		
+</menu>

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+        <!-- header -->
+        <RelativeLayout 
+            android:layout_width="fill_parent" 
+            android:layout_height="0dp">
+        </RelativeLayout>
+		<!-- body -->
+        <ScrollView 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" 
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                 <RelativeLayout
+                     android:layout_width="fill_parent"
+                     android:layout_height="fill_parent"
+                     android:layout_alignParentBottom="true"
+                     android:layout_alignParentLeft="true"
+                     android:gravity="bottom"
+                     android:paddingBottom="55dp"
+                     android:paddingTop="0dp" >
+
+                     <TextView
+                         android:id="@+id/lblDepartmentCode"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_alignParentLeft="true"
+                         android:layout_alignParentTop="true"
+                         android:layout_marginTop="10dp"
+                         android:text="@string/deptTitleCode"
+                         android:textAppearance="?android:attr/textAppearanceMedium" />
+				
+				    <TextView
+				        android:id="@+id/txtDepartmentCode"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentLeft="true"
+				        android:layout_alignParentRight="true"
+				        android:layout_below="@+id/lblDepartmentCode"
+				        android:layout_marginLeft="10dp"
+				        android:layout_marginTop="10dp"
+				        android:text=""
+				        android:textAppearance="?android:attr/textAppearanceMedium" />
+				
+				    <TextView
+				        android:id="@+id/lblDepartmentName"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentLeft="true"
+				        android:layout_below="@+id/txtDepartmentCode"
+				        android:layout_marginTop="10dp"
+				        android:text="@string/deptTitleName"
+				        android:textAppearance="?android:attr/textAppearanceMedium" />
+				
+				    <EditText
+				        android:id="@+id/txtDepartmentName"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentLeft="true"
+				        android:layout_alignParentRight="true"
+				        android:layout_below="@+id/lblDepartmentName"
+				        android:layout_marginTop="10dp"
+				        android:background="@drawable/edittext_modified_states"
+				        android:hint="@string/deptTitleName"
+				        android:inputType="textCapWords"
+				        android:singleLine="true"
+				        android:textColor="@color/grey" />
+				
+				    <TextView
+				        android:id="@+id/lblDepartmentManager"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentLeft="true"
+				        android:layout_below="@+id/txtDepartmentName"
+				        android:layout_marginTop="10dp"
+				        android:text="@string/deptTitleManager"
+				        android:textAppearance="?android:attr/textAppearanceMedium" />
+				
+				    <EditText
+				        android:id="@+id/txtDepartmentManager"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentLeft="true"
+				        android:layout_below="@+id/lblDepartmentManager"
+				        android:layout_marginTop="10dp"
+				        android:layout_toLeftOf="@+id/btnDepartmentManager"
+				        android:ems="10"
+				        android:focusable="false"
+				        android:focusableInTouchMode="false"
+				        android:hint="@string/deptTitleManager" >
+				
+				        <requestFocus />
+				    </EditText>
+				
+				    <Button
+				        android:id="@+id/btnDepartmentManager"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignBottom="@+id/txtDepartmentManager"
+				        android:layout_alignParentRight="true"
+				        android:layout_below="@+id/lblDepartmentManager"
+				        android:background="@android:color/transparent"
+				        android:drawableStart="@drawable/search"
+				        android:minWidth="48dip" />
+				
+				    <TextView
+				        android:id="@+id/lblDepartmentVice"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentLeft="true"
+				        android:layout_alignRight="@+id/lblDepartmentManager"
+				        android:layout_below="@+id/txtDepartmentManager"
+				        android:layout_marginTop="10dp"
+				        android:text="@string/deptTitleVice"
+				        android:textAppearance="?android:attr/textAppearanceMedium" />
+				
+				    <EditText
+				        android:id="@+id/txtDepartmentVice"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentLeft="true"
+				        android:layout_alignRight="@+id/txtDepartmentManager"
+				        android:layout_below="@+id/lblDepartmentVice"
+				        android:layout_marginTop="10dp"
+				        android:clickable="false"
+				        android:ems="10"
+				        android:focusable="false"
+				        android:focusableInTouchMode="false"
+				        android:hint="@string/deptTitleVice" />
+				
+				    <Button
+				        android:id="@+id/btnDepartmentVice"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignBottom="@+id/txtDepartmentVice"
+				        android:layout_alignLeft="@+id/btnDepartmentManager"
+				        android:layout_alignParentRight="true"
+				        android:layout_below="@+id/lblDepartmentVice"
+				        android:background="@android:color/transparent"
+				        android:drawableStart="@drawable/search" />
+
+				    <EditText
+				        android:id="@+id/txtDepartmentNote"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentLeft="true"
+				        android:layout_alignParentRight="true"
+				        android:layout_below="@+id/lblDepartmentNote"
+				        android:layout_marginTop="10dp"
+				        android:background="@drawable/edittext_modified_states"
+				        android:ems="10"
+				        android:hint="@string/deptTitleNote"
+				        android:inputType="textMultiLine"
+				        android:lines="3"
+				        android:textColor="@color/grey" />
+
+				    <TextView
+				        android:id="@+id/txtDepartmentManagerCode"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_above="@+id/txtDepartmentManager"
+				        android:layout_alignParentRight="true"
+				        android:text="0"
+				        android:visibility="gone" 
+				        />
+
+				    <TextView
+				        android:id="@+id/txtDepartmentViceCode"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_above="@+id/btnDepartmentVice"
+				        android:layout_alignParentRight="true"
+				        android:text="0"
+				        android:visibility="gone" 
+				        />
+
+				    <TextView
+				        android:id="@+id/lblDepartmentCreateDate"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentLeft="true"
+				        android:layout_alignParentRight="true"
+				        android:layout_below="@+id/txtDepartmentVice"
+				        android:layout_marginTop="10dp"
+				        android:text="@string/deptTitleCreateDate"
+				        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+				    <EditText
+				        android:id="@+id/txtDepartmentCreateDate"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignParentLeft="true"
+				        android:layout_alignRight="@+id/txtDepartmentVice"
+				        android:layout_below="@+id/lblDepartmentCreateDate"
+				        android:layout_marginTop="10dp"
+				        android:background="@drawable/edittext_modified_states"
+				        android:ems="10"
+				        android:hint="@string/deptTitleCreateDate"
+				        android:inputType="date" android:text=""/>
+
+				    <TextView
+				        android:id="@+id/lblDepartmentNote"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_alignLeft="@+id/txtDepartmentCreateDate"
+				        android:layout_below="@+id/txtDepartmentCreateDate"
+				        android:layout_marginTop="12dp"
+				        android:text="@string/deptTitleNote"
+				        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+				    <Button
+				        android:id="@+id/btnCreateDate"
+				        style="?android:attr/buttonStyleSmall"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_below="@+id/lblDepartmentCreateDate"
+				        android:layout_toRightOf="@+id/txtDepartmentCreateDate"
+				        android:background="@drawable/calendar"
+				        android:maxHeight="32dip" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+        </ScrollView>
+		<!-- footer -->
+
+        <RelativeLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#455A64"
+            android:gravity="center" >
+
+            <Button
+                android:id="@+id/btnDeptSave"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:drawableStart="@drawable/save_back"
+                android:text="@string/deptBtnSave" />
+             <Button
+                 android:id="@+id/btnDeptCancel"
+                 android:layout_width="wrap_content"
+                 android:layout_height="match_parent"
+                 android:layout_alignParentTop="true"
+                 android:layout_toRightOf="@+id/btnDeptSave"
+                 android:drawableStart="@drawable/back"
+                 android:text="@string/titleBack" />
+
+        </RelativeLayout>
+
+</LinearLayout>

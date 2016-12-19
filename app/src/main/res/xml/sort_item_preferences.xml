@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <PreferenceCategory android:title="Configuration" >
+ 										
+        <EditTextPreference
+            android:name="Sort item 1"
+            android:defaultValue="Phòng ban"
+            android:key="pre_SortItem_1"
+            android:summary="Sort item 1"
+            android:title="Sort item 1" />
+   		<EditTextPreference
+            android:name="Sort item 2"
+            android:defaultValue="Nhóm-tổ"
+            android:key="pre_SortItem_2"
+            android:summary="Sort item 2"
+            android:title="Sort item 2" />
+   		<EditTextPreference
+            android:name="Sort item 3"
+            android:defaultValue="Chức vụ"
+            android:key="pre_SortItem_3"
+            android:summary="Sort item 3"
+            android:title="Sort item 3" />
+   		<EditTextPreference
+            android:name="Sort item 4"
+            android:defaultValue="Mã nhân viên"
+            android:key="pre_SortItem_4"
+            android:summary="Sort item 4"
+            android:title="Sort item 4" />
+   		<EditTextPreference
+            android:name="Sort item 5"
+            android:defaultValue="Tên nhân viên"
+            android:key="pre_SortItem_5"
+            android:summary="Sort item 5"
+            android:title="Sort item 5" />
+   		<EditTextPreference
+            android:name="Sort item 6"
+            android:defaultValue="Ngày sinh"
+            android:key="pre_SortItem_6"
+            android:summary="Sort item 6"
+            android:title="Sort item 6" />
+   		<EditTextPreference
+            android:name="Sort item 7"
+            android:defaultValue="Giới tính"
+            android:key="pre_SortItem_7"
+            android:summary="Sort item 7"
+            android:title="Sort item 7" />
+   		<EditTextPreference
+            android:name="Sort item 8"
+            android:defaultValue="Ngày ký HĐLĐ"
+            android:key="pre_SortItem_8"
+            android:summary="Sort item 8"
+            android:title="Sort item 8" />
+   		<EditTextPreference
+            android:name="Sort item 9"
+            android:defaultValue="Ngày vào nhóm labor"
+            android:key="pre_SortItem_9"
+            android:summary="Sort item 9"
+            android:title="Sort item 9" />
+   		<EditTextPreference
+            android:name="Sort item 10"
+            android:defaultValue="Trình độ nhật ngữ"
+            android:key="pre_SortItem_10"
+            android:summary="Sort item 10"
+            android:title="Sort item 10" />
+		<EditTextPreference
+            android:name="Sort item 11"
+            android:defaultValue="Ngày vào công ty"
+            android:key="pre_SortItem_11"
+            android:summary="Sort item 11"
+            android:title="Sort item 11" />
+		<EditTextPreference
+            android:name="Sort item 12"
+            android:defaultValue="Ngày nghỉ việc"
+            android:key="pre_SortItem_12"
+            android:summary="Sort item 12"
+            android:title="Sort item 12" />
+		<EditTextPreference
+            android:name="Sort item 13"
+            android:defaultValue="Lương cơ bản"
+            android:key="pre_SortItem_13"
+            android:summary="Sort item 13"
+            android:title="Sort item 13" />
+		<EditTextPreference
+            android:name="Sort by(Asc,Desc)"
+            android:defaultValue="Trình tự sort tăng hay giảm"
+            android:key="pre_SortBy"
+            android:summary="Sort order"
+            android:title="Sort order" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

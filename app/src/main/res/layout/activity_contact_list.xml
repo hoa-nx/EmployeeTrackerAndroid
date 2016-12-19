@@ -1,0 +1,102 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:orientation="vertical"
+    tools:context=".ContactListActivity" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#5b74a8"
+        android:id="@+id/frag">
+
+        <TextView
+            android:id="@+id/srchHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search.."
+            android:textSize="16dp"
+            android:textColor="#000"
+            android:layout_gravity="center" />
+
+        <SearchView
+            android:background="#5b74a8"
+            android:padding="8dp"
+            android:id="@+id/searchView"
+            android:drawableLeft="@android:drawable/ic_menu_search"
+            android:layout_width="wrap_content"
+            android:singleLine="true"
+            android:layout_gravity="right"
+            android:layout_height="wrap_content"></SearchView>
+    </FrameLayout>
+
+    <ListView
+        android:id="@+id/contacts_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_control_bar"
+        android:layout_below="@+id/frag" >
+</ListView>
+
+    <RelativeLayout
+       android:id="@+id/bottom_control_bar"
+       android:layout_width="fill_parent"
+       android:layout_height="50dp"
+       android:layout_alignParentBottom="true"
+       android:layout_weight="1"
+	   android:background="#455A64"
+	   android:gravity="center"
+	   >
+
+		<TableLayout
+	    	    android:layout_width="match_parent"
+	    	    android:layout_height="match_parent"
+				android:background="#455A64"
+				android:gravity="center"
+	    	    >
+			    <!-- Row 1 with 4 columns -->
+
+			    <TableRow
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:dividerPadding="1dp"
+			        android:gravity="center_horizontal"
+			        android:showDividers="beginning|middle|end" >
+
+			        <ImageButton
+			            android:id="@+id/btnSelectAll"
+			            style="?android:attr/buttonStyleSmall"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:scaleType="centerInside"
+			            android:src="@drawable/checked_checkbox"
+
+						/>
+
+			        <ImageButton
+			            android:id="@+id/btnSchedule_button"
+			            style="?android:attr/buttonStyleSmall"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:src="@drawable/unchecked_checkbox" />
+
+			        <ImageButton
+			            android:id="@+id/btnCancel_button"
+			            style="?android:attr/buttonStyleSmall"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:src="@drawable/user_add2" />
+
+			        <ImageButton
+			            android:id="@+id/btnBack"
+			            style="?android:attr/buttonStyleSmall"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:src="@drawable/round_arrow_left" />
+      
+			    </TableRow>  
+		</TableLayout>
+	</RelativeLayout>
+</RelativeLayout>

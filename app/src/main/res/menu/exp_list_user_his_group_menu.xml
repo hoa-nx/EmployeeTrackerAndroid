@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+     <item android:id="@+id/menu_exp_group_searchitem"
+	     android:title="@string/menu_report_searchitem"
+	     android:orderInCategory="100"
+	     android:showAsAction="always"
+	     android:icon="@drawable/searchitem"/>
+    <item android:id="@+id/menu_exp_group_sortlist"
+        android:title="@string/menu_report_sortlist"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:icon="@drawable/sort_list_small" />
+    
+</menu>
+

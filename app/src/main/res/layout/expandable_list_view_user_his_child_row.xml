@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/WhiteSmoke"
+    android:clickable="false"
+    android:descendantFocusability="blocksDescendants"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:longClickable="false"
+    android:orientation="horizontal"
+    android:padding="3dip" >
+
+    <!-- ListRow Left sied Thumbnail image -->
+
+    <LinearLayout
+        android:id="@+id/thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dip"
+        android:padding="3dip" >
+
+        <ImageView
+            android:id="@+id/imgListUser"
+            android:layout_width="80dip"
+            android:layout_height="100dip"
+            android:layout_marginTop="2dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/user_info"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtListUserCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imgListUser"
+        android:text=""
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/txtUserImgFullPath"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imgListUser"
+        android:text="1"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/txtIn_date_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:background="@drawable/in_date_number_icon"
+        android:gravity="center"
+        android:text="00"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/txtJoin_date_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@+id/txtIn_date_count"
+        android:background="@drawable/join_date_number_icon"
+        android:gravity="center"
+        android:text="00"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/txtCodeRecord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="22dp"
+        android:layout_toRightOf="@+id/txtJoin_date_count"
+        android:background="@drawable/detaildesign_number_icon"
+        android:gravity="center"
+        android:text="-"
+        android:textColor="@color/White"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/txtProgram_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/txtCodeRecord"
+        android:layout_marginLeft="23dp"
+        android:layout_toRightOf="@+id/txtCodeRecord"
+        android:background="@drawable/program_number_icon"
+        android:gravity="center"
+        android:text="00"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/txtListUserInfor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/txtListUserFullName"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="5dp"
+        android:textColor="@color/Blue"
+        android:textSize="12dp"
+        android:textStyle="bold"
+        android:typeface="sans" />
+
+    <TextView
+        android:id="@+id/txtListUserJapaneseLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/thumbnail"
+        android:textColor="@color/Blue"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/txtListUserAllowance_Business"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/thumbnail"
+        android:layout_alignLeft="@+id/txtJoin_date_count"
+        android:textColor="@color/Blue"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/txtListUserFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/thumbnail"
+        android:layout_alignParentTop="true"
+        android:text="Nguyen Van A"
+        android:textColor="@color/Black"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:typeface="normal" />
+
+</RelativeLayout>

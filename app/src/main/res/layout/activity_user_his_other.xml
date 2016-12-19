@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <!-- header -->
+
+    <RelativeLayout
+        android:id="@+id/user_his_header"
+        android:layout_width="fill_parent"
+        android:layout_height="110dp"
+        android:visibility="gone" >
+
+        <TextView
+            android:id="@+id/txtImgFullPath"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/imgUser"
+            android:layout_width="85dp"
+            android:layout_height="92dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:adjustViewBounds="true"
+            android:src="@drawable/user"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/lblUserHisCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
+            android:paddingTop="0dp"
+            android:text="@string/userhisdeptTitleUserGroup"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/lblUserHisName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/lblUserHisCode"
+            android:layout_marginTop="5dp"
+            android:paddingTop="5dp"
+            android:text="@string/userTitleName"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/txtUserHisName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/lblUserHisName"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/edittext_modified_states"
+            android:clickable="false"
+            android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:hint="@string/userTitleName"
+            android:inputType="textCapWords|textPersonName"
+            android:paddingTop="5dp"
+            android:singleLine="true"
+            android:textColor="@color/grey"
+            android:visibility="gone" >
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:id="@+id/txtUserHisCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/lblUserHisName"
+            android:layout_alignRight="@+id/txtUserHisName"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/lblUserHisDeptStartDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/lblUserHisCode"
+            android:layout_marginTop="5dp"
+            android:paddingTop="5dp"
+            android:text="@string/userhisdeptTitleDateStart"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/txtUserHisDeptStartDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/lblUserHisDeptStartDate"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/edittext_modified_states"
+            android:ems="10"
+            android:hint="@string/userhisdeptTitleDateStart"
+            android:inputType="date"
+            android:paddingTop="5dp"
+            android:singleLine="true"
+            android:textColor="@color/grey" />
+
+        <Button
+            android:id="@+id/btnUserHisDeptStartDate"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/txtUserHisDeptStartDate"
+            android:layout_alignBottom="@+id/txtUserHisDeptStartDate"
+            android:layout_toRightOf="@+id/txtUserHisDeptStartDate"
+            android:background="@drawable/calendar"
+            android:maxHeight="32dip" />
+
+        <ImageButton
+            android:id="@+id/imgUserHisDeptList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnUserHisDeptStartDate"
+            android:layout_alignLeft="@+id/btnUserHisDeptStartDate"
+            android:src="@drawable/report_user_1" />
+
+    </RelativeLayout>
+	<include layout="@layout/sep_indicator" android:layout_width="fill_parent" android:layout_height="wrap_content"  />
+    <!-- body -->
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="653dp"
+                android:gravity="top"
+                android:paddingTop="0dp" >
+
+                <TextView
+                    android:id="@+id/lblUserHisNewJapanese"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="5dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/userhisotherTitleJapanese"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/lblUserHisNewAllowance_Business"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/chkUserHisNewJapanese"
+                    android:layout_marginTop="5dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/userhisotherTitleAllowance_Business"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/lblUserHisNote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/chkUserHisNewAllowance_Business"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/userhisposTitleNote"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:visibility="gone" />
+
+                <EditText
+                    android:id="@+id/txtUserHisNote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/lblUserHisNote"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/edittext_modified_states"
+                    android:ems="10"
+                    android:hint="@string/userTitleNote"
+                    android:inputType="textAutoComplete|textMultiLine"
+                    android:lines="3"
+                    android:textColor="@color/grey"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/txtUserHisDeptNewDeptCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/txtUserHisDeptNewTeamCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:visibility="gone" />
+
+                <CheckBox
+                    android:id="@+id/chkUserHisNewJapanese"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/lblUserHisNewJapanese" />
+
+                <CheckBox
+                    android:id="@+id/chkUserHisNewAllowance_Business"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/lblUserHisNewAllowance_Business" />
+
+                <EditText
+                    android:id="@+id/txtUserHisNewJapanese"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lblUserHisNewJapanese"
+                    android:layout_toRightOf="@+id/chkUserHisNewJapanese"
+                    android:clickable="false"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/userhisotherTitleJapanese" />
+
+                <Button
+                    android:id="@+id/btnUserHisNewJapanese"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/txtUserHisNewJapanese"
+                    android:layout_toRightOf="@+id/txtUserHisNewJapanese"
+                    android:drawableStart="@drawable/search"
+                    android:enabled="false"
+                    android:minWidth="48dip" />
+
+                <EditText
+                    android:id="@+id/txtUserHisNewAllowance_Business"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lblUserHisNewAllowance_Business"
+                    android:layout_toRightOf="@+id/chkUserHisNewAllowance_Business"
+                    android:clickable="false"
+                    android:ems="10"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/userhisotherTitleAllowance_Business" />
+
+                <Button
+                    android:id="@+id/btnUserHisNewAllowance_Business"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/txtUserHisNewAllowance_Business"
+                    android:layout_alignLeft="@+id/btnUserHisNewJapanese"
+                    android:drawableStart="@drawable/search"
+                    android:enabled="false" />
+
+                <CheckBox
+                    android:id="@+id/chkUserHisNewSalary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lblUserHisNewSalary"
+                    android:layout_toLeftOf="@+id/txtUserHisNewJapanese" />
+
+                <TextView
+                    android:id="@+id/lblUserHisNewSalary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/txtUserHisNewAllowance_Business"
+                    android:paddingTop="5dp"
+                    android:text="@string/userhisotherTitleSalary"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <Button
+                    android:id="@+id/btnUserHisNewSalaryNextYM"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/lblUserHisNewSalaryAll"
+                    android:layout_alignTop="@+id/txtUserHisNewSalaryNextYM"
+                    android:layout_toRightOf="@+id/txtUserHisNewSalaryNextYM"
+                    android:background="@drawable/calendar"
+                    android:maxHeight="32dip" />
+
+                <TextView
+                    android:id="@+id/lblUserHisNewSalaryAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/lblUserHisNewSalaryNextYM"
+                    android:layout_alignRight="@+id/lblUserHisNewSalaryNextYM"
+                    android:layout_below="@+id/txtUserHisNewSalaryNextYM"
+                    android:paddingTop="5dp"
+                    android:text="@string/userhisotherTitleSalaryAll"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/lblUserHisNewSalaryStandard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/chkUserHisNewSalary"
+                    android:layout_alignLeft="@+id/txtUserHisNewAllowance_Business"
+                    android:hint="@string/userhisotherTitleSalaryStandard"
+                    android:paddingTop="5dp"
+                    android:text="@string/userhisotherTitleSalaryStandard"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/txtUserHisNewSalaryStandard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lblUserHisNewSalaryStandard"
+                    android:layout_toLeftOf="@+id/btnUserHisNewAllowance_Business"
+                    android:background="@drawable/edittext_modified_states"
+                    android:ems="10"
+                    android:hint="@string/userhisotherTitleSalaryStandard"
+                    android:inputType="numberDecimal"
+                    android:maxLength="10"
+                    android:textColor="@color/grey" />
+
+                <TextView
+                    android:id="@+id/lblUserHisNewSalaryPercent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/txtUserHisNewSalaryPercent"
+                    android:layout_below="@+id/txtUserHisNewSalaryStandard"
+                    android:hint="@string/userhisotherTitleSalaryStandard"
+                    android:paddingTop="5dp"
+                    android:text="@string/userhisotherTitleSalaryPercent"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/txtUserHisNewSalaryPercent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lblUserHisNewSalaryPercent"
+                    android:layout_toLeftOf="@+id/btnUserHisNewAllowance_Business"
+                    android:background="@drawable/edittext_modified_states"
+                    android:ems="10"
+                    android:hint="@string/userhisotherTitleSalaryPercent"
+                    android:inputType="numberDecimal"
+                    android:maxLength="10"
+                    android:textColor="@color/grey" />
+
+                <TextView
+                    android:id="@+id/lblUserHisNewSalaryActualUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/txtUserHisNewSalaryActualUp"
+                    android:layout_below="@+id/txtUserHisNewSalaryPercent"
+                    android:hint="@string/userhisotherTitleSalaryStandard"
+                    android:paddingTop="5dp"
+                    android:text="@string/userhisotherTitleSalaryActualUp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/txtUserHisNewSalaryActualUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/txtUserHisNewSalaryPercent"
+                    android:layout_below="@+id/lblUserHisNewSalaryActualUp"
+                    android:background="@drawable/edittext_modified_states"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:hint="@string/userhisotherTitleSalaryActualUp"
+                    android:inputType="numberDecimal"
+                    android:maxLength="10"
+                    android:textColor="@color/grey" />
+
+                <EditText
+                    android:id="@+id/txtUserHisNewSalaryNextYM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtUserHisNewSalaryActualUp"
+                    android:layout_marginTop="27dp"
+                    android:layout_toLeftOf="@+id/btnUserHisNewAllowance_Business"
+                    android:background="@drawable/edittext_modified_states"
+                    android:ems="10"
+                    android:hint="@string/userhisotherTitleSalaryNextMY"
+                    android:inputType="date"
+                    android:singleLine="true"
+                    android:textColor="@color/grey" />
+
+                <TextView
+                    android:id="@+id/lblUserHisNewSalaryNextYM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtUserHisNewSalaryActualUp"
+                    android:layout_toRightOf="@+id/chkUserHisNewSalary"
+                    android:hint="@string/userhisotherTitleSalaryStandard"
+                    android:paddingTop="5dp"
+                    android:text="@string/userhisotherTitleSalaryNextMY"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/txtUserHisNewSalary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lblUserHisNewSalaryAll"
+                    android:layout_toLeftOf="@+id/btnUserHisNewAllowance_Business"
+                    android:background="@drawable/edittext_modified_states"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/userhisotherTitleSalaryAll"
+                    android:inputType="numberDecimal"
+                    android:maxLength="10"
+                    android:textColor="@color/grey" />
+
+                <TextView
+                    android:id="@+id/lblUserHisCurrentSalary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/txtUserHisNewSalary"
+                    android:layout_alignBottom="@+id/txtUserHisNewSalary"
+                    android:layout_alignLeft="@+id/btnUserHisNewSalaryNextYM"
+                    android:paddingTop="5dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+    <!-- footer -->
+
+    <RelativeLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/grey_light"
+        android:gravity="center" >
+
+        <Button
+            android:id="@+id/btnUserSave"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableStart="@drawable/save_back"
+            android:text="@string/titleSave"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btnUserCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/btnUserSave"
+            android:drawableStart="@drawable/back"
+            android:text="@string/titleBack"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</LinearLayout>

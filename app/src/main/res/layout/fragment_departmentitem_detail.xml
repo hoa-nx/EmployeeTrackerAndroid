@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+	<ScrollView
+	    android:id="@+id/ScrollView01"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+	    android:fillViewport="true"
+	    android:layout_marginBottom="50dip">
+		<LinearLayout
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical">
+
+	    	<TableLayout
+	    	    xmlns:android="http://schemas.android.com/apk/res/android"
+	    	    android:layout_width="match_parent"
+	    	    android:layout_height="match_parent"
+
+	    	    android:stretchColumns="1" >
+			 			
+			    <!-- Row 1 with 2 columns -->
+
+			    <TableRow
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:gravity="center_horizontal" >
+					
+			        <TextView
+			            android:id="@+id/lblDepartmentCode"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_weight="1"
+			            android:gravity="left"
+			            android:padding="10dip"
+			            android:text="@string/deptTitleCode"
+			            android:textAppearance="?android:attr/textAppearanceMedium"/>
+			        
+			        <TextView
+			            android:id="@+id/txtDepartmentCode"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_weight="1"
+			            android:gravity="left"
+			            android:padding="10dip"
+			            android:text="001"
+			            android:textAppearance="?android:attr/textAppearanceMedium"/>
+			        
+			    </TableRow>  
+				 <!-- Row 2 with 2 columns -->
+
+			    <TableRow
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:gravity="center_horizontal" >
+
+			        <TextView
+			            android:id="@+id/lblDepartmentName"
+			            android:layout_width="wrap_content"
+			            android:layout_height="match_parent"
+			            android:layout_gravity="center|left"
+			            android:layout_weight="1"
+			            android:gravity="left"
+			            android:padding="10dip"
+			            android:text="@string/deptTitleName"
+			            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+			        <TextView
+			            android:id="@+id/txtDepartmentName"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_gravity="left"
+			            android:layout_weight="1"
+			            android:gravity="center"
+			            android:padding="10dip"
+			            android:text="Ban 5"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+			    </TableRow>  
+			    <!-- Row 3 with 2 columns -->
+
+			    <TableRow
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:gravity="center_horizontal" >
+
+			        <TextView
+			            android:id="@+id/lblDepartmentManager"
+			            android:layout_width="wrap_content"
+			            android:layout_height="match_parent"
+			            android:layout_gravity="center|left"
+			            android:layout_weight="1"
+			            android:gravity="left"
+			            android:padding="10dip"
+			            android:text="@string/deptTitleManager"
+			            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+			        <TextView
+			            android:id="@+id/txtDepartmentManager"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_gravity="start"
+			            android:layout_weight="1"
+			            android:gravity="center"
+			            android:padding="10dip"
+			            android:text="Thân Minh"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+			    </TableRow>  
+			     <!-- Row 4 with 2 columns -->
+
+			    <TableRow
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:gravity="center_horizontal" >
+
+			        <TextView
+			            android:id="@+id/lblDepartmentVice"
+			            android:layout_width="wrap_content"
+			            android:layout_height="match_parent"
+			            android:layout_gravity="center|left"
+			            android:layout_weight="1"
+			            android:gravity="left"
+			            android:padding="10dip"
+			            android:text="@string/deptTitleVice"
+			            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+			        <TextView
+			            android:id="@+id/txtDepartmentVice"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_gravity="start"
+			            android:layout_weight="1"
+			            android:gravity="center"
+			            android:padding="10dip"
+			            android:text="Paul"
+			            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+			    </TableRow>  
+			     <!-- Row 4 with 2 columns -->
+				<TableRow
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:gravity="center_horizontal" >
+
+			        <TextView
+			            android:id="@+id/lblDepartmentCreateDate"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_gravity="start"
+			            android:layout_weight="1"
+			            android:gravity="left"
+			            android:padding="10dip"
+			            android:text="@string/deptTitleCreateDate"
+			            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+			        <TextView
+			            android:id="@+id/txtDepartmentCreateDate"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_gravity="start"
+			            android:layout_weight="1"
+			            android:gravity="left"
+			            android:padding="10dip"
+			            android:text=""
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+			    </TableRow>  
+			    <TableRow
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:gravity="center_horizontal" >
+
+			        <TextView
+			            android:id="@+id/lblDepartmentNote"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_gravity="start"
+			            android:layout_weight="1"
+			            android:gravity="left"
+			            android:padding="10dip"
+			            android:text="@string/deptTitleNote"
+			            android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+			        <TextView
+			            android:id="@+id/txtDepartmentNote"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_gravity="start"
+			            android:layout_weight="1"
+			            android:gravity="center"
+			            android:padding="10dip"
+			            android:text="Test note"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+			    </TableRow>  
+			</TableLayout>
+	    </LinearLayout>
+	    
+     </ScrollView>
+     
+     <LinearLayout android:id="@+id/bottom_control_bar"
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:visibility="gone"
+		>
+
+		<Button
+		    android:id="@+id/btnDeptUpdate"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:text="@string/deptBtnEdit" />
+
+	</LinearLayout>
+</RelativeLayout>

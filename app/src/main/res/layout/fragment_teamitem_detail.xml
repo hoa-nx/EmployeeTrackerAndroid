@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+	<ScrollView
+	    android:id="@+id/ScrollView01"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+	    android:fillViewport="true"
+	    android:layout_marginBottom="50dip">
+		<LinearLayout
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical">
+
+	    	<TableLayout
+	    	    xmlns:android="http://schemas.android.com/apk/res/android"
+	    	    android:layout_width="match_parent"
+	    	    android:layout_height="match_parent"
+
+	    	    android:stretchColumns="1" >
+			 			
+			    <!-- Row 1 with 2 columns -->
+
+			    <TableRow
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:gravity="center_horizontal" >
+					
+			        <TextView
+			            android:id="@+id/lblTeamCode"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_weight="1"
+			            android:gravity="left"
+			            android:padding="10dip"
+			            android:text="@string/teamTitleCode"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+			        
+			        <TextView
+			            android:id="@+id/txtTeamCode"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_weight="1"
+			            android:gravity="left"
+			            android:padding="10dip"
+			            android:text="@string/titleSearch"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+			        
+			    </TableRow>  
+				 <!-- Row 2 with 2 columns -->
+
+			    <TableRow
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:gravity="center_horizontal" >
+
+			        <TextView
+			            android:id="@+id/lblTeamName"
+			            android:layout_width="wrap_content"
+			            android:layout_height="match_parent"
+			            android:layout_gravity="center|left"
+			            android:layout_weight="1"
+			            android:gravity="left"
+			            android:padding="10dip"
+			            android:text="@string/teamTitleName"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+			        <TextView
+			            android:id="@+id/txtTeamName"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_gravity="left"
+			            android:layout_weight="1"
+			            android:gravity="center"
+			            android:padding="10dip"
+			            android:text="@string/titleSearch"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+			    </TableRow>  
+			    <!-- Row 3 with 2 columns -->
+
+			    <TableRow
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:gravity="center_horizontal" >
+
+			        <TextView
+			            android:id="@+id/lbTeamDept"
+			            android:layout_width="wrap_content"
+			            android:layout_height="match_parent"
+			            android:layout_gravity="center|left"
+			            android:layout_weight="1"
+			            android:gravity="left"
+			            android:padding="10dip"
+			            android:text="@string/teamTitleDept"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+			        <TextView
+			            android:id="@+id/txtTeamDept"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_gravity="start"
+			            android:layout_weight="1"
+			            android:gravity="center"
+			            android:padding="10dip"
+			            android:text="@string/titleSearch"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+			    </TableRow>  
+			     <!-- Row 4 with 2 columns -->
+
+			    <TableRow
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:gravity="center_horizontal" >
+
+			        <TextView
+			            android:id="@+id/lblTeamLeader"
+			            android:layout_width="wrap_content"
+			            android:layout_height="match_parent"
+			            android:layout_gravity="center|left"
+			            android:layout_weight="1"
+			            android:gravity="left"
+			            android:padding="10dip"
+			            android:text="@string/teamTitleManager"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+			        <TextView
+			            android:id="@+id/txtTeamLeader"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_gravity="start"
+			            android:layout_weight="1"
+			            android:gravity="center"
+			            android:padding="10dip"
+			            android:text="@string/titleSearch"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+			    </TableRow>  
+			     <!-- Row 4 with 2 columns -->
+
+			    <TableRow
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:gravity="center_horizontal" >
+
+			        <TextView
+			            android:id="@+id/lblTeamNote"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_gravity="start"
+			            android:layout_weight="1"
+			            android:gravity="left"
+			            android:padding="10dip"
+			            android:text="@string/teamTitleNote"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+			        <TextView
+			            android:id="@+id/txtTeamNote"
+			            android:layout_width="match_parent"
+			            android:layout_height="wrap_content"
+			            android:layout_gravity="start"
+			            android:layout_weight="1"
+			            android:gravity="center"
+			            android:padding="10dip"
+			            android:text="@string/titleSearch"
+			            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+			    </TableRow>  
+			</TableLayout>
+	    </LinearLayout>
+	    
+     </ScrollView>
+     
+     <LinearLayout android:id="@+id/bottom_control_bar"
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:visibility="gone"
+		>
+
+		<Button
+		    android:id="@+id/btnTeamUpdate"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:text="@string/titleEdit" />
+
+	</LinearLayout>
+</RelativeLayout>

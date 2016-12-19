@@ -1,0 +1,6 @@
+app/build/
+.idea/
+build/generated/mockable-android-23.jar
+gradle/
+build/
+.gradle/
