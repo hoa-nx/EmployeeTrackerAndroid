@@ -84,12 +84,13 @@
     <string name="menu_exp_group_salary">Nhóm theo lương</string>
     <string name="menu_exp_group_customer">Nhóm theo khách hàng</string>
     <string name="menu_exp_group_yasumi_yearmonth">Nhóm nghỉ việc theo năm tháng</string>
+    <string name="menu_exp_group_yasumi_year">Nhóm nghỉ việc theo các năm </string>
     <string name="menu_exp_group_contract_yearmonth">Nhóm nhận chính thức NV theo năm tháng</string>
     <string name="menu_exp_group_training_year">Nhóm NV nhận thử việc trong năm</string>
     <string name="menu_exp_group_contract_year">Nhóm NV nhận chính thức trong năm</string>
     <string name="menu_exp_group_notcontract_year">Nhóm NV không nhận sau thử việc</string>
     <string name="menu_exp_group_contract_less_month">Nhóm nhận chính thức trong năm có thâm niên nhỏ hơn {N} tháng</string>
-    <string name="menu_exp_group_staff_current_position_not_satified">Nhóm NV có chức vụ không phù hợp với thâm niên</string>
+    <string name="menu_exp_group_staff_current_position_not_satified">Nhóm NV có bậc không phù hợp với thâm niên</string>
 
     <!-- màn hình output PDF -->
     <string name="pdf_sort">Trình tự sắp xếp</string>
@@ -284,11 +285,15 @@
     <string name="title_activity_chart_yasumi_year_month">Biểu đồ so sánh nghỉ việc</string>
     <string name="title_activity_chart">Biểu đồ thông tin</string>
     <string name="title_activity_chart_staff_status_stacked_bar">Biểu đồ tình hình nhân sự</string>
+    <string name="title_activity_chart_bmp_to_exp_user_list">Mở danh sách chi tiết</string>
+    <string name="title_activity_chart_bmb_to_text_file">Xuất ra text file</string>
+    <string name="title_activity_chart_bmb_to_excel_file">Xuất excel</string>
+
     <string name="title_activity_alarm_job_service">Cấu hình công việc chạy nền</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Cấu hình</string>
     <!-- SwipeListView -->
-    <string name="appName">SwipeListView </string>
-    <string name="open">Open</string>
+    <string name="appName">SwipeListView</string>
+    <string name="open">Mở</string>
     <string name="googlePlay">Google Play</string>
     <string name="uninstall">Uninstall</string>
     <string name="cantOpen">Can\'t open this application</string>

@@ -32,6 +32,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.SeekBar;
@@ -54,7 +55,7 @@ public class ChartStaffStatusStackedBarActivity extends ChartBase implements OnS
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.chart_staff_status_stacked_bar_activity);
 
 		mDatabaseAdapter = new DatabaseAdapter(this);
@@ -119,7 +120,11 @@ public class ChartStaffStatusStackedBarActivity extends ChartBase implements OnS
 		// mChart.setDrawLegend(false);
 	}
 
-	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.bar, menu);
+		return true;
+	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -194,10 +199,10 @@ public class ChartStaffStatusStackedBarActivity extends ChartBase implements OnS
 			break;
 		}*/
 		case R.id.actionSave: {
-			if (mChart.saveToGallery("Lưu" + System.currentTimeMillis(), 50)) {
-				Toast.makeText(getApplicationContext(), "Saving SUCCESSFUL!", Toast.LENGTH_SHORT).show();
+			if (mChart.saveToGallery("Lưu" + System.currentTimeMillis(), 100)) {
+				Toast.makeText(getApplicationContext(), "Lưu thành công.", Toast.LENGTH_SHORT).show();
 			} else
-				Toast.makeText(getApplicationContext(), "Saving FAILED!", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), "Không thể lưu chart", Toast.LENGTH_SHORT).show();
 			break;
 		}
 		}

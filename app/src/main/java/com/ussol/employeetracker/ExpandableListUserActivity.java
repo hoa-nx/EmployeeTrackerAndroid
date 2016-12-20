@@ -91,7 +91,18 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
     	if(currentYear==0){
     		currentYear = Calendar.getInstance().get(Calendar.YEAR);
     	}
-    	
+    	//get param tu man hinh chart
+		/** get code user tu intent*/
+		Intent request = getIntent();
+		Bundle param = request.getExtras();
+		int expKey =0;
+		if(param!=null){
+			expKey = param.getInt(DatabaseAdapter.KEY_EXPANDABLE_GROUP);
+		}else{
+			expKey =IExpGroup.EXP_GROUP_DEPT;
+		}
+
+
         //lay kich thuoc
         metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -113,8 +124,13 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
         search.setOnCloseListener(this);
         
         grp = new ExpGroupHelper(getApplicationContext());
-        getParentChildInGroup(IExpGroup.EXP_GROUP_DEPT);
-        
+        //hien thi init group tu theo param
+		if(expKey>0){
+			getParentChildInGroup(expKey);
+		}else{
+			getParentChildInGroup(IExpGroup.EXP_GROUP_DEPT);
+		}
+
         mExpandableList.setOnChildClickListener(this);
         mExpandableList.setOnCreateContextMenuListener(this);
         
@@ -382,6 +398,10 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
 			getParentChildInGroup(IExpGroup.EXP_GROUP_STAFF_CURRENT_POSITION_NOT_SATIFIED);
 			currentGroup = IExpGroup.EXP_GROUP_STAFF_CURRENT_POSITION_NOT_SATIFIED;
 			return true;
+		case R.id.menu_exp_group_yasumi_year:
+			getParentChildInGroup(IExpGroup.EXP_GROUP_YASUMI_YEAR);
+			currentGroup = IExpGroup.EXP_GROUP_YASUMI_YEAR;
+			return true;
         case R.id.menu_exp_group_searchitem:
         	Intent intent = new Intent(this, SearchItemMainActivity.class);
 			startActivityForResult(intent,MasterConstants.CALL_SEARCH_ITEM_ACTIVITY_CODE);
@@ -563,6 +583,18 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
 			}
 		}
 
+		/** trường hợp là thong ke nghi viec theo tung nam */
+		if (group == IExpGroup.EXP_GROUP_YASUMI_YEAR) {
+			for (int i = 0; i < arrGroupTemp.length; i++) {
+				if (arrGroupTemp[i] == null || Integer.parseInt(arrGroupTemp[i]) == 0) {
+					arrGroupTemp[i] = "Nghỉ việc năm " + (currentYear - 2);
+				} else if (Integer.parseInt(arrGroupTemp[i]) == 1) {
+					arrGroupTemp[i] = "Nghỉ việc năm " + (currentYear - 1);
+				} else if (Integer.parseInt(arrGroupTemp[i]) == 2) {
+					arrGroupTemp[i] = "Nghỉ việc năm " + (currentYear);
+				}
+			}
+		}
 		ArrayList<ExpParent> arrayParents = new ArrayList<ExpParent>();
         
         /** here we set the parents and the children */

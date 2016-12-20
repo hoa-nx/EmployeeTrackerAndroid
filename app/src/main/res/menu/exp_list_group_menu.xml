@@ -81,7 +81,13 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:icon="@drawable/position" />
-        
+
+    <item android:id="@+id/menu_exp_group_yasumi_year"
+        android:title="@string/menu_exp_group_yasumi_year"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:icon="@drawable/position" />
+
     <item android:id="@+id/menu_exp_group_salary_basic"
         android:title="@string/menu_exp_group_salary"
         android:orderInCategory="100"

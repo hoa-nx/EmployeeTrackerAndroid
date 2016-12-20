@@ -127,14 +127,15 @@ OnChartValueSelectedListener {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        /*getMenuInflater().inflate(R.menu.line, menu);*/
+        getMenuInflater().inflate(R.menu.bar, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        /*switch (item.getItemId()) {
+        switch (item.getItemId()) {
+            /*
             case R.id.actionToggleValues: {
                 for (DataSet<?> set : mChart.getData().getDataSets())
                     set.setDrawValues(!set.isDrawValuesEnabled());
@@ -209,11 +210,17 @@ OnChartValueSelectedListener {
                 mChart.invalidate();
                 break;
             }
+            */
             case R.id.actionSave: {
                 // mChart.saveToGallery("title"+System.currentTimeMillis());
-                mChart.saveToPath("title" + System.currentTimeMillis(), "");
+                //mChart.saveToPath("title" + System.currentTimeMillis(), "");
+                if (mChart.saveToGallery("Lưu" + System.currentTimeMillis(), 100)) {
+                    Toast.makeText(getApplicationContext(), "Lưu thành công.", Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(getApplicationContext(), "Không thể lưu chart", Toast.LENGTH_SHORT).show();
                 break;
             }
+            /*
             case R.id.animateX: {
                 mChart.animateX(3000);
                 break;
@@ -228,6 +235,7 @@ OnChartValueSelectedListener {
                 break;
             }
         }*/
+        }
         return true;
     }
 

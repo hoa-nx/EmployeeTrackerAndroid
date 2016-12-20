@@ -41,22 +41,34 @@ import java.util.List;
 import java.util.Map;
 
 import com.github.mikephil.charting.utils.Utils;
+import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
+import com.nightonke.boommenu.BoomButtons.HamButton;
+import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
+import com.nightonke.boommenu.BoomButtons.SimpleCircleButton;
+import com.nightonke.boommenu.BoomMenuButton;
+import com.nightonke.boommenu.ButtonEnum;
+import com.nightonke.boommenu.Piece.PiecePlaceEnum;
+import com.nightonke.boommenu.Util;
 import com.ussol.employeetracker.helpers.ChartFragmentList;
 import com.ussol.employeetracker.helpers.ContactToUser;
+import com.ussol.employeetracker.helpers.DatabaseAdapter;
 import com.ussol.employeetracker.helpers.GetSearchItemSetting;
 import com.ussol.employeetracker.helpers.SelectUserAdapter;
+import com.ussol.employeetracker.models.IExpGroup;
 import com.ussol.employeetracker.models.MasterConstants;
 import com.ussol.employeetracker.models.SelectUser;
 import com.ussol.employeetracker.models.User;
 import com.ussol.employeetracker.utils.ShowAlertDialog;
+import com.nightonke.boommenu.BoomMenuButton;
 
 public class ChartActivity extends Activity implements OnItemClickListener ,OnClickListener{
+
+    private static int[] imageResources = new int[]{R.drawable.expandable_list,R.drawable.file , R.drawable.excel};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,               WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.chart_activity);
 
         // initialize the utilities
@@ -68,7 +80,7 @@ public class ChartActivity extends Activity implements OnItemClickListener ,OnCl
         
         objects.add(new ContentItem("Thống kê nhân viên", "Biểu đồ thống kê nhân sự làm việc,phiên dịch,thử việc"));
         
-        objects.add(new ContentItem("Các biểu đồ Thống kê nhân viên", "Biểu đồ thống kê nhân sự làm việc,phiên dịch,thử việc"));
+        objects.add(new ContentItem("Các biểu đồ thống kê nhân viên", "Biểu đồ thống kê nhân sự làm việc,phiên dịch,thử việc"));
         
         objects.add(new ContentItem("Thống kê nhân sự lập trình", "Biểu đồ so sánh tăng giảm LTV trong 3 năm gần nhất."));
         
@@ -77,9 +89,11 @@ public class ChartActivity extends Activity implements OnItemClickListener ,OnCl
         MyAdapter adapter = new MyAdapter(this, objects);
 
         ListView lv = (ListView) findViewById(R.id.listViewChart);
+        assert lv != null;
         lv.setAdapter(adapter);
 
         lv.setOnItemClickListener(this);
+
     }
 
     @Override
@@ -311,6 +325,7 @@ public class ChartActivity extends Activity implements OnItemClickListener ,OnCl
             super(context, 0, objects);
         }
 
+        /*
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
@@ -341,6 +356,141 @@ public class ChartActivity extends Activity implements OnItemClickListener ,OnCl
         private class ViewHolder {
 
             TextView tvName, tvDesc;
+        }
+    */
+        @Override
+        public View getView(final int position, View convertView, final ViewGroup parent) {
+
+            ContentItem c = getItem(position);
+
+            final ViewHolder viewHolder;
+            if (convertView == null) {
+                convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.chart_item, null);
+
+                viewHolder = new ViewHolder();
+                viewHolder.text = (TextView) convertView.findViewById(R.id.text);
+                //viewHolder.bmb1 = (BoomMenuButton) convertView.findViewById(R.id.bmb1);
+                viewHolder.bmb2 = (BoomMenuButton) convertView.findViewById(R.id.bmb2);
+                //viewHolder.bmb3 = (BoomMenuButton) convertView.findViewById(R.id.bmb3);
+
+                convertView.setTag(viewHolder);
+            } else {
+                viewHolder = (ViewHolder) convertView.getTag();
+            }
+
+            viewHolder.text.setText(c.name);
+
+            /*
+            viewHolder.bmb1.clearBuilders();
+            for (int i = 0; i < viewHolder.bmb1.getPiecePlaceEnum().pieceNumber(); i++)
+                viewHolder.bmb1.addBuilder(BuilderManager.getSimpleCircleButtonBuilder());
+            */
+            viewHolder.bmb2.clearBuilders();
+            for (int i = 0; i < viewHolder.bmb2.getPiecePlaceEnum().pieceNumber(); i++)
+                viewHolder.bmb2.addBuilder(new HamButton.Builder()
+                        .normalImageRes(getImageResource())
+                        .normalTextRes(getTextDisplay(i))
+                        .subNormalTextRes(getTextDisplay(i))
+                        .listener(new OnBMClickListener() {
+                            @Override
+                            public void onBoomButtonClick(int index) {
+                                    // When the boom-button corresponding this builder is clicked.
+                                    switch (index) {
+                                        case 0:
+                                            Intent intentExpandable = new Intent(getApplicationContext(), ExpandableListUserActivity.class);
+                                            Bundle bundleExpandable = new Bundle();
+                                            switch (position){
+                                                case  0 :
+                                                    /**code cua group nghi viec theo nam*/
+                                                    bundleExpandable.putInt(DatabaseAdapter.KEY_EXPANDABLE_GROUP, IExpGroup.EXP_GROUP_YASUMI_YEAR);
+                                                    /**gán vào bundle để gửi cùng với intent */
+                                                    intentExpandable.putExtras(bundleExpandable);
+                                                    break;
+
+                                                case 1:
+                                                    /**code cua group*/
+                                                    bundleExpandable.putInt(DatabaseAdapter.KEY_EXPANDABLE_GROUP, IExpGroup.EXP_GROUP_DEPT);
+                                                    /**gán vào bundle để gửi cùng với intent */
+                                                    intentExpandable.putExtras(bundleExpandable);
+                                                    break;
+
+                                                case 2:
+                                                    /**code cua group*/
+                                                    bundleExpandable.putInt(DatabaseAdapter.KEY_EXPANDABLE_GROUP, IExpGroup.EXP_GROUP_DEPT);
+                                                    /**gán vào bundle để gửi cùng với intent */
+                                                    intentExpandable.putExtras(bundleExpandable);
+                                                    break;
+                                                case 3:
+                                                    /**code cua group*/
+                                                    bundleExpandable.putInt(DatabaseAdapter.KEY_EXPANDABLE_GROUP, IExpGroup.EXP_GROUP_DEPT);
+                                                    /**gán vào bundle để gửi cùng với intent */
+                                                    intentExpandable.putExtras(bundleExpandable);
+                                                    break;
+                                                case 4:
+                                                    /**code cua group nhan chinh thuc-hu viec*/
+                                                    bundleExpandable.putInt(DatabaseAdapter.KEY_EXPANDABLE_GROUP, IExpGroup.EXP_GROUP_CONTRACT_YEAR);
+                                                    /**gán vào bundle để gửi cùng với intent */
+                                                    intentExpandable.putExtras(bundleExpandable);
+                                                    break;
+                                                default:
+                                                    /**code cua group*/
+                                                    bundleExpandable.putInt(DatabaseAdapter.KEY_EXPANDABLE_GROUP, IExpGroup.EXP_GROUP_DEPT);
+                                                    /**gán vào bundle để gửi cùng với intent */
+                                                    intentExpandable.putExtras(bundleExpandable);
+                                                    break;
+                                            }
+
+                                            startActivity(intentExpandable);
+                                            break;
+
+                                        case 1:
+                                            //Intent intSort = new Intent(getContext(), DragNDropListActivity.class);
+                                            //startActivityForResult(intSort, MasterConstants.CALL_SORT_ITEM_ACTIVITY_CODE);
+                                            break;
+                                        case 2:
+                                            //Intent intConfig = new Intent(getContext(), SystemConfigPreferencesActivity.class);
+                                            //startActivityForResult(intConfig , MasterConstants.CALL_CONFIG_ITEM_ACTIVITY_CODE);
+                                            break;
+                                    }
+                                }
+                        })
+                );
+
+            /*
+            viewHolder.bmb3.clearBuilders();
+            for (int i = 0; i < viewHolder.bmb3.getButtonPlaceEnum().buttonNumber(); i++)
+                viewHolder.bmb3.addBuilder(BuilderManager.getSimpleCircleButtonBuilder());
+            */
+            return convertView;
+        }
+
+        class ViewHolder {
+            TextView text;
+            BoomMenuButton bmb1;
+            BoomMenuButton bmb2;
+            BoomMenuButton bmb3;
+        }
+
+        private int imageResourceIndex = 0;
+        private int textDisplayResourceIndex = 0;
+        private int getImageResource() {
+            if (imageResourceIndex >= imageResources.length) imageResourceIndex = 0;
+            return imageResources[imageResourceIndex++];
+        }
+        private int getTextDisplay(int i){
+            int idx =0;
+            switch (i){
+                case 0 :
+                    idx= R.string.title_activity_chart_bmp_to_exp_user_list;
+                    break;
+                case 1 :
+                    idx= R.string.title_activity_chart_bmb_to_text_file;
+                break;
+                case 2 :
+                    idx= R.string.title_activity_chart_bmb_to_excel_file;
+                break;
+
+            }return idx;
         }
     }
 }

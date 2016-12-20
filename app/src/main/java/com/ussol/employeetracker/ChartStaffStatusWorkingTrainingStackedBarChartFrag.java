@@ -18,10 +18,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 
 public class ChartStaffStatusWorkingTrainingStackedBarChartFrag extends ChartFragmentData implements OnChartGestureListener {
@@ -127,5 +131,93 @@ public class ChartStaffStatusWorkingTrainingStackedBarChartFrag extends ChartFra
 	public void onChartTranslate(MotionEvent me, float dX, float dY) {
 		Log.i("Translate / Move", "dX: " + dX + ", dY: " + dY);
 	}
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // TODO Auto-generated method stub
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.bar, menu);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+		/*case R.id.actionToggleValues: {
+			for (DataSet<?> set : mChart.getData().getDataSets())
+				set.setDrawValues(!set.isDrawValuesEnabled());
+
+			mChart.invalidate();
+			break;
+		}
+		case R.id.actionToggleHighlight: {
+			if (mChart.isHighlightEnabled())
+				mChart.setHighlightEnabled(false);
+			else
+				mChart.setHighlightEnabled(true);
+			mChart.invalidate();
+			break;
+		}
+		case R.id.actionTogglePinch: {
+			if (mChart.isPinchZoomEnabled())
+				mChart.setPinchZoom(false);
+			else
+				mChart.setPinchZoom(true);
+
+			mChart.invalidate();
+			break;
+		}
+		case R.id.actionToggleAutoScaleMinMax: {
+			mChart.setAutoScaleMinMaxEnabled(!mChart.isAutoScaleMinMaxEnabled());
+			mChart.notifyDataSetChanged();
+			break;
+		}
+		case R.id.actionToggleHighlightArrow: {
+			if (mChart.isDrawHighlightArrowEnabled())
+				mChart.setDrawHighlightArrow(false);
+			else
+				mChart.setDrawHighlightArrow(true);
+			mChart.invalidate();
+			break;
+		}
+		case R.id.actionToggleStartzero: {
+			mChart.getAxisLeft().setStartAtZero(!mChart.getAxisLeft().isStartAtZeroEnabled());
+			mChart.getAxisRight().setStartAtZero(!mChart.getAxisRight().isStartAtZeroEnabled());
+			mChart.invalidate();
+			break;
+		}
+		case R.id.animateX: {
+			mChart.animateX(3000);
+			break;
+		}
+		case R.id.animateY: {
+			mChart.animateY(3000);
+			break;
+		}
+		case R.id.animateXY: {
+
+			mChart.animateXY(3000, 3000);
+			break;
+		}
+		case R.id.actionToggleFilter: {
+
+			Approximator a = new Approximator(ApproximatorType.DOUGLAS_PEUCKER, 25);
+
+			if (!mChart.isFilteringEnabled()) {
+				mChart.enableFiltering(a);
+			} else {
+				mChart.disableFiltering();
+			}
+			mChart.invalidate();
+			break;
+		}*/
+            case R.id.actionSave: {
+                if (mChart.saveToGallery("Lưu" + System.currentTimeMillis(), 100)) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Lưu thành công", Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(getActivity().getApplicationContext(), "Không thể lưu chart", Toast.LENGTH_SHORT).show();
+                break;
+            }
+        }
+        return true;
+    }
 }

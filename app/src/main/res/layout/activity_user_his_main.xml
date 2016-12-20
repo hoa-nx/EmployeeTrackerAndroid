@@ -237,16 +237,6 @@
                     android:layout_alignParentRight="true"
                     android:visibility="gone" />
 
-                <Button
-                    android:id="@+id/btnUserHisDeptNewDept"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/txtUserHisDeptNewDept"
-                    android:layout_toRightOf="@+id/txtUserHisDeptNewDept"
-                    android:drawableStart="@drawable/search"
-                    android:enabled="false"
-                    android:minWidth="48dip" />
-
                 <CheckBox
                     android:id="@+id/chkUserHisDeptNewDept"
                     android:layout_width="wrap_content"
@@ -304,26 +294,6 @@
                     android:focusableInTouchMode="false"
                     android:hint="@string/userhisdeptTitleNewTeam" />
 
-                <Button
-                    android:id="@+id/btnUserHisDeptNewTeam"
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/txtUserHisDeptNewTeam"
-                    android:layout_alignLeft="@+id/btnUserHisDeptNewDept"
-                    android:enabled="false"
-                    android:drawableStart="@drawable/search" />
-
-                <Button
-                    android:id="@+id/btnUserHisDeptNewPosition"
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/txtUserHisDeptNewPosition"
-                    android:layout_alignLeft="@+id/btnUserHisDeptNewTeam"
-                    android:enabled="false"
-                    android:drawableStart="@drawable/search" />
-
                 <TextView
                     android:id="@+id/txtUserHisDeptNewPositionCode"
                     android:layout_width="wrap_content"
@@ -331,6 +301,45 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/btnUserHisDeptNewDept"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/search"
+                    android:enabled="false"
+                    android:minWidth="48dip"
+                    android:background="@android:color/transparent"
+                    android:layout_alignBaseline="@+id/chkUserHisDeptNewDept"
+                    android:layout_alignBottom="@+id/chkUserHisDeptNewDept"
+                    android:layout_toRightOf="@+id/txtUserHisDeptNewDept"
+                    android:layout_toEndOf="@+id/txtUserHisDeptNewDept" />
+
+                <Button
+                    android:id="@+id/btnUserHisDeptNewTeam"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:drawableStart="@drawable/search"
+                    android:background="@android:color/transparent"
+                    android:layout_alignBaseline="@+id/chkUserHisDeptNewTeam"
+                    android:layout_alignBottom="@+id/chkUserHisDeptNewTeam"
+                    android:layout_toRightOf="@+id/txtUserHisDeptNewTeam"
+                    android:layout_toEndOf="@+id/txtUserHisDeptNewTeam" />
+
+                <Button
+                    android:id="@+id/btnUserHisDeptNewPosition"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:drawableStart="@drawable/search"
+                    android:background="@android:color/transparent"
+                    android:layout_alignBaseline="@+id/chkUserHisDeptNewPosition"
+                    android:layout_alignBottom="@+id/chkUserHisDeptNewPosition"
+                    android:layout_toRightOf="@+id/txtUserHisDeptNewPosition"
+                    android:layout_toEndOf="@+id/txtUserHisDeptNewPosition" />
 
             </RelativeLayout>
 

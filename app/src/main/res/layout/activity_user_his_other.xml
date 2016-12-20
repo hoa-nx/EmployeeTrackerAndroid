@@ -236,16 +236,6 @@
                     android:focusableInTouchMode="false"
                     android:hint="@string/userhisotherTitleJapanese" />
 
-                <Button
-                    android:id="@+id/btnUserHisNewJapanese"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/txtUserHisNewJapanese"
-                    android:layout_toRightOf="@+id/txtUserHisNewJapanese"
-                    android:drawableStart="@drawable/search"
-                    android:enabled="false"
-                    android:minWidth="48dip" />
-
                 <EditText
                     android:id="@+id/txtUserHisNewAllowance_Business"
                     android:layout_width="wrap_content"
@@ -258,16 +248,6 @@
                     android:focusable="false"
                     android:focusableInTouchMode="false"
                     android:hint="@string/userhisotherTitleAllowance_Business" />
-
-                <Button
-                    android:id="@+id/btnUserHisNewAllowance_Business"
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/txtUserHisNewAllowance_Business"
-                    android:layout_alignLeft="@+id/btnUserHisNewJapanese"
-                    android:drawableStart="@drawable/search"
-                    android:enabled="false" />
 
                 <CheckBox
                     android:id="@+id/chkUserHisNewSalary"
@@ -430,6 +410,32 @@
                     android:layout_alignLeft="@+id/btnUserHisNewSalaryNextYM"
                     android:paddingTop="5dp"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <Button
+                    android:id="@+id/btnUserHisNewJapanese"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/search"
+                    android:enabled="false"
+                    android:minWidth="48dip"
+                    android:background="@android:color/transparent"
+                    android:layout_alignBaseline="@+id/chkUserHisNewJapanese"
+                    android:layout_alignBottom="@+id/chkUserHisNewJapanese"
+                    android:layout_toRightOf="@+id/txtUserHisNewJapanese"
+                    android:layout_toEndOf="@+id/txtUserHisNewJapanese" />
+
+                <Button
+                    android:id="@+id/btnUserHisNewAllowance_Business"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/search"
+                    android:enabled="false"
+                    android:background="@android:color/transparent"
+                    android:layout_alignBaseline="@+id/chkUserHisNewAllowance_Business"
+                    android:layout_alignBottom="@+id/chkUserHisNewAllowance_Business"
+                    android:layout_toRightOf="@+id/txtUserHisNewAllowance_Business"
+                    android:layout_toEndOf="@+id/txtUserHisNewAllowance_Business" />
 
             </RelativeLayout>
 

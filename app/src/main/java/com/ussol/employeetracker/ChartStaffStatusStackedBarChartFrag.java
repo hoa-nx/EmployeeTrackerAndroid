@@ -209,7 +209,7 @@ public class ChartStaffStatusStackedBarChartFrag extends ChartFragmentData imple
 			break;
 		}*/
 		case R.id.actionSave: {
-			if (mChart.saveToGallery("Lưu" + System.currentTimeMillis(), 50)) {
+			if (mChart.saveToGallery("Lưu" + System.currentTimeMillis(), 100)) {
 				Toast.makeText(getActivity().getApplicationContext(), "Lưu thành công", Toast.LENGTH_SHORT).show();
 			} else
 				Toast.makeText(getActivity().getApplicationContext(), "Không thể lưu chart", Toast.LENGTH_SHORT).show();

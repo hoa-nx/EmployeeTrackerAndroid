@@ -217,6 +217,11 @@ public class ExpGroupHelper implements IExpGroup<User> {
 				returnArr = new String[1];
 				returnArr[0] ="0";	/** số nhân viên có thâm niên khong phu hop voi chuc vu*/
 				break;
+			case IExpGroup.EXP_GROUP_YASUMI_YEAR:
+				returnArr = new String[3];
+				returnArr[0] ="0";	/** Hai nam truoc*/
+				returnArr[1] ="1";	/** Mot nam truoc*/
+				returnArr[2] ="2";	/** Nam hien tai duoc setting trong he thong */
 		}
 		
 		mDatabaseAdapter.close();
@@ -248,14 +253,14 @@ public class ExpGroupHelper implements IExpGroup<User> {
 				//mTableUse= eTableUse.FROM_VIEW;s
 				list =mConvertCursorToArrayString.getUserGroupFromViewChartItem(DatabaseAdapter.KEY_USER_GROUP_YASUMI_YEARMONTH_SQL_YM, DatabaseAdapter.VIEW_M_USER_CUSTOMER_GROUP );
 				break;
-			case EXP_GROUP_STAFF_STATUS_YEARMONTH:
+			case IExpGroup.EXP_GROUP_STAFF_STATUS_YEARMONTH:
 				list =mConvertCursorToArrayString.getDevWorkingByTreeYearMonthChartItem(currentYear);
 				break;
-			case EXP_GROUP_STAFF_STATUS_TRAINING_YEAR:
+			case IExpGroup.EXP_GROUP_STAFF_STATUS_TRAINING_YEAR:
 				/* lay so LTV thu viec trong cac nam */
 				list = mConvertCursorToArrayString.getDevTrainingByThreeYearMonthChartItem(currentYear);
 				break;
-			case EXP_GROUP_STAFF_STATUS_CONTRACT_YEAR:
+			case IExpGroup.EXP_GROUP_STAFF_STATUS_CONTRACT_YEAR:
 				/* lay so LTV chinh thuc trong cac nam */
 				list = mConvertCursorToArrayString.getDevContractByThreeYearMonthChartItem(currentYear);
 				break;
@@ -508,6 +513,22 @@ public class ExpGroupHelper implements IExpGroup<User> {
 				break;
 			case IExpGroup.EXP_GROUP_STAFF_CURRENT_POSITION_NOT_SATIFIED:
 				mTableUse = eTableUse.FROM_VIEW;
+				break;
+			case IExpGroup.EXP_GROUP_YASUMI_YEAR:
+				switch(Integer.parseInt(groupValue)){
+					case 0:
+						//2 nam truoc
+						xWhere =" AND STRFTIME('%Y'," + DatabaseAdapter.KEY_OUT_DATE + ") = '" + (yearProcessing -2)   +"' ";
+						break;
+					case 1:
+						//1 nam truoc
+						xWhere =" AND STRFTIME('%Y'," + DatabaseAdapter.KEY_OUT_DATE + ") = '" + (yearProcessing -1)   +"' ";
+						break;
+					case 2:
+						//nam setting trong he thong
+						xWhere =" AND STRFTIME('%Y'," + DatabaseAdapter.KEY_OUT_DATE + ") = '" + (yearProcessing )   +"' ";
+						break;
+				}
 				break;
 		}
 		if(mTableUse==eTableUse.FROM_VIEW && group == IExpGroup.EXP_GROUP_CUSTOMER){

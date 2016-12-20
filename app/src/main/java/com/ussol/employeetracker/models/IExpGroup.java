@@ -41,6 +41,8 @@ public interface IExpGroup<E> {
 	public int EXP_GROUP_CONTRACT_LESS_MONTH =21;
 
 	public int EXP_GROUP_STAFF_CURRENT_POSITION_NOT_SATIFIED =22;/** thong ke so nhan vien co ngach khong phu hop so voi tham nien*/
+	/** theo nghi viec -  nam hien tai*/
+	public int EXP_GROUP_YASUMI_YEAR =23;
 
 	public String[] getGroup(int group);
 	public ArrayList<?> getGroupArrayList(int group);

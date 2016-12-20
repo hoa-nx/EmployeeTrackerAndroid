@@ -254,6 +254,8 @@ public class DatabaseAdapter {
 	public static final String KEY_UP_DATE="UP_DATE";
 	public static final String KEY_AD_DATE="AD_DATE";
 	public static final String KEY_OPID="OPID";
+	public static final String KEY_EXPANDABLE_GROUP="EXPANDABLE_GROUP";
+
 	/**
 	 * Chuỗi SQL dùng để get thống kê nghỉ việc theo từng tháng năm
 	 */
