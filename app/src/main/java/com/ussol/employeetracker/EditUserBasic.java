@@ -44,6 +44,7 @@ import com.ussol.employeetracker.utils.DateTimeUtil;
 import com.ussol.employeetracker.utils.RoundImage;
 import com.ussol.employeetracker.utils.Utils;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -95,6 +96,8 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import static android.app.Activity.RESULT_OK;
 
 public class EditUserBasic extends Fragment implements OnClickListener , OnTouchListener,OnCheckedChangeListener{
 	/** tag */
@@ -584,8 +587,10 @@ public class EditUserBasic extends Fragment implements OnClickListener , OnTouch
 				bundle.putInt("btn", R.id.btnUserSave);
 				bundle.putInt(MasterConstants.EXP_USER_GROUP_TAG, 0);
 				intent.putExtras(bundle);
+
 				getActivity().setResult(getActivity().RESULT_CANCELED, intent);
 				getActivity().finish();
+
 				break;
 			case R.id.imgUser:
 				showalert();
@@ -751,7 +756,8 @@ public class EditUserBasic extends Fragment implements OnClickListener , OnTouch
      * SelectDateFragment
      * 
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
-    public class SelectDateFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+    @SuppressLint("ValidFragment")
+	public class SelectDateFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
     	private int mControl ;
     	public SelectDateFragment(int control){
     		mControl = control;
@@ -1172,10 +1178,10 @@ public class EditUserBasic extends Fragment implements OnClickListener , OnTouch
 					bundle.putInt(MasterConstants.EXP_USER_GROUP_TAG, 0);
 					bundle.putString(MasterConstants.LISTVIEW_CURRENT_POSITION, listViewCurrentPosition);
 					intent.putExtras(bundle);
+					//intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 					getActivity().setResult(getActivity().RESULT_OK, intent);
 					getActivity().finish();
-	            	
-					
+
 	            }
 	            catch (Exception e)
 	            {

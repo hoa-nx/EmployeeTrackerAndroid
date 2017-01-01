@@ -17,11 +17,11 @@ public interface IExpGroup<E> {
 	public int EXP_GROUP_SALARY_BASIC = 10; /** luong co ban */
 	public int EXP_GROUP_KEIKEN_LABOR =11;/** theo kinh nghiem labor*/
 	public int EXP_GROUP_CUSTOMER =12;/** theo khách hàng*/
-	public int EXP_GROUP_YASUMI_YEARMONTH =13;/** theo nghi viec - tung thang nam*/
-	public int EXP_GROUP_STAFF_STATUS_YEARMONTH =14;/** thong ke theo tung nhan vien lam viec , pd ,training theo thang nam*/
-	public int EXP_GROUP_STAFF_CONTRACT_STATUS_YEARMONTH =15;/** thong ke nhan chinh thuc nhan vien theo thang nam*/
-	public int EXP_GROUP_STAFF_STATUS_TRAINING_YEAR =16;/** thong ke so nhan vien thu viec trong moi nam*/
-	public int EXP_GROUP_STAFF_STATUS_CONTRACT_YEAR =17;/** thong ke so nhan vien nhận chính thức trong moi nam*/
+	public int EXP_GROUP_YASUMI_YEARMONTH =13;/** chart theo nghi viec - tung thang nam*/
+	public int EXP_GROUP_STAFF_STATUS_YEARMONTH =14;/** chart thong ke theo tung nhan vien lam viec , pd ,training theo thang nam*/
+	public int EXP_GROUP_STAFF_CONTRACT_STATUS_YEARMONTH =15;/** chart thong ke nhan chinh thuc nhan vien theo thang nam*/
+	public int EXP_GROUP_STAFF_STATUS_TRAINING_YEAR =16;/** chart thong ke so nhan vien thu viec trong moi nam*/
+	public int EXP_GROUP_STAFF_STATUS_CONTRACT_YEAR =17;/** chart thong ke so nhan vien nhận chính thức trong moi nam*/
 
 	/** 
 	 * thong ke nhan thu viectheo nam

@@ -153,11 +153,20 @@ public class DetailPositionFragment  extends Fragment {
 		}
 		 /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 	     * setPositionAllowance
-	     * 
+	     *
 	     ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
 		public void setPositionAllowance(String value){
 			TextView textview = (TextView) getView().findViewById(R.id.txtPositionAllowance);
 			textview.setText(value);
+		}
+
+		/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+		* setPositionStandardMM
+		*
+		▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
+		public void setPositionStandardMM(String value){
+		TextView textview = (TextView) getView().findViewById(R.id.txtPositionStandardMM);
+		textview.setText(value);
 		}
 
 }

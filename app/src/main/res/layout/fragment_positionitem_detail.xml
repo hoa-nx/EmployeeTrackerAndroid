@@ -4,12 +4,29 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+	<LinearLayout android:id="@+id/bottom_control_bar"
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:visibility="gone"
+		>
+
+		<Button
+		    android:id="@+id/btnPositionUpdate"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:text="@string/titleEdit" />
+
+	</LinearLayout>
+
 	<ScrollView
 	    android:id="@+id/ScrollView01"
 	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content" 
+	    android:layout_height="wrap_content"
 	    android:fillViewport="true"
-	    android:layout_marginBottom="50dip">
+		android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentStart="true">
 		<LinearLayout
 		    android:layout_width="fill_parent"
 		    android:layout_height="wrap_content"
@@ -21,14 +38,14 @@
 	    	    android:layout_height="match_parent"
 
 	    	    android:stretchColumns="1" >
-			 			
+
 			    <!-- Row 1 with 2 columns -->
 
 			    <TableRow
 			        android:layout_width="fill_parent"
 			        android:layout_height="wrap_content"
 			        android:gravity="center_horizontal" >
-					
+
 			        <TextView
 			            android:id="@+id/lblPositionCode"
 			            android:layout_width="match_parent"
@@ -38,7 +55,7 @@
 			            android:padding="10dip"
 			            android:text="@string/positionTitleCode"
 			            android:textAppearance="?android:attr/textAppearanceMedium" />
-			        
+
 			        <TextView
 			            android:id="@+id/txtPositionCode"
 			            android:layout_width="match_parent"
@@ -48,8 +65,8 @@
 			            android:padding="10dip"
 			            android:text="@string/titleSearch"
 			            android:textAppearance="?android:attr/textAppearanceMedium" />
-			        
-			    </TableRow>  
+
+			    </TableRow>
 				 <!-- Row 2 with 2 columns -->
 
 			    <TableRow
@@ -79,7 +96,7 @@
 			            android:text="@string/titleSearch"
 			            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			    </TableRow>  
+			    </TableRow>
 			    <!-- Row 3 with 2 columns -->
 
 			    <TableRow
@@ -109,7 +126,7 @@
 			            android:text="@string/titleSearch"
 			            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			    </TableRow>  
+			    </TableRow>
 			     <!-- Row 4 with 2 columns -->
 
 			    <TableRow
@@ -140,8 +157,8 @@
 			            android:text="@string/titleSearch"
 			            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			    </TableRow>  
-			    
+			    </TableRow>
+
 			    <TableRow
 			        android:layout_width="fill_parent"
 			        android:layout_height="wrap_content"
@@ -201,7 +218,35 @@
 
 				</TableRow>
 				<!-- Row 4 with 2 columns -->
+				<TableRow
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:gravity="center_horizontal" >
 
+					<TextView
+						android:id="@+id/lblPositionStandardMM"
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:layout_gravity="center|left"
+						android:layout_weight="1"
+						android:gravity="left"
+						android:padding="10dip"
+						android:text="@string/positionTitleStandardMM"
+						android:textAppearance="?android:attr/textAppearanceMedium" />
+
+					<TextView
+						android:id="@+id/txtPositionStandardMM"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_gravity="start"
+						android:layout_weight="1"
+						android:gravity="center"
+						android:inputType="number"
+						android:padding="10dip"
+						android:text="@string/titleSearch"
+						android:textAppearance="?android:attr/textAppearanceMedium" />
+
+				</TableRow>
 			    <TableRow
 			        android:layout_width="fill_parent"
 			        android:layout_height="wrap_content"
@@ -229,24 +274,9 @@
 			            android:text="@string/titleSearch"
 			            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-			    </TableRow>  
+			    </TableRow>
 			</TableLayout>
 	    </LinearLayout>
-	    
+
      </ScrollView>
-     
-     <LinearLayout android:id="@+id/bottom_control_bar"
-		android:layout_width="fill_parent" 
-		android:layout_height="wrap_content"
-		android:layout_alignParentBottom="true"
-		android:visibility="gone"
-		>
-
-		<Button
-		    android:id="@+id/btnPositionUpdate"
-		    android:layout_width="match_parent"
-		    android:layout_height="match_parent"
-		    android:text="@string/titleEdit" />
-
-	</LinearLayout>
 </RelativeLayout>

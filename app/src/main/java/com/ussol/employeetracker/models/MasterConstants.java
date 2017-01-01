@@ -42,7 +42,9 @@ public class MasterConstants {
 	public static final int CALL_BACKUP_ITEM_ACTIVITY_CODE = 180;
 	/** dùng để gọi Activity*/
 	public static final int CALL_JOB_SETTING_ACTIVITY_CODE = 190;
-	
+	/** dùng để gọi Activity*/
+	public static final int CALL_HISTORY_USER_ACTIVITY_CODE = 200;
+
 	/** master phòng ban */
 	public static final int MASTER_MKBN_DEPT = 1;
 	/** master nhóm */ 

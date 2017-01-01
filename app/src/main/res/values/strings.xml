@@ -6,9 +6,9 @@
     <string name="title_activity_main">Quản lý nhân sự</string>
     <string name="indicator_height">3dip</string>
     <!-- menu chung -->
-    <string name="menu_search_item_settings">Điều kiện lọc dữ liệu</string>
+    <string name="menu_search_item_settings">Điều kiện tìm kiếm</string>
     <string name="menu_sort_item_settings">Trình tự sắp xếp</string>
-    <string name="menu_notification">Thông báo </string>
+    <string name="menu_notification">Thông báo</string>
     <!-- thông tin mail -->
     <string name="host">smtp.gmail.com</string>
     <string name="smtpPort">465</string>
@@ -134,6 +134,7 @@
     <string name="positionTitleMinMonth">Số tháng </string>
     <string name="positionTitleAllowance">Phụ cấp</string>
     <string name="positionTitleLevel">Level</string>
+    <string name="positionTitleStandardMM">Chuẩn MM</string>
     <string name="positionTitleNote">Ghi chú</string>
     <string name="positionBtnUpdate">Chỉnh sửa</string>
     <string name="positionTitleInfor">Thông tin chi tiết chức vụ</string>

@@ -88,6 +88,7 @@ import com.ussol.employeetracker.helpers.ConvertCursorToListString;
 import com.ussol.employeetracker.helpers.DatabaseAdapter;
 import com.ussol.employeetracker.helpers.ExpGroupHelper;
 import com.ussol.employeetracker.helpers.ExpParent;
+import com.ussol.employeetracker.helpers.ExpParentChildInGroup;
 import com.ussol.employeetracker.helpers.GroupDepartmentReport;
 import com.ussol.employeetracker.helpers.SalaryReport;
 import com.ussol.employeetracker.helpers.SendMail;
@@ -116,6 +117,8 @@ public class GenerateReport extends Activity implements OnClickListener {
     private TextView customStartDateTextView;
     private TextView customEndDateTextView;
     private Button btnReportByNone , btnOutputPDFCancel , btnReportBySalary, btnReportbyDept, btnReportByTeam;
+	private Button btnReportBySex , btnReportByBussinessKbn , btnReportByJapanese, btnReportByPosition;
+	private Button btnReportByTrainingInYear , btnReportByContractInYear , btnReportByNotContractInYear, btnReportByYasumiInYear, btnReportByPositionNotSatified;
     private RadioGroup rdgExportType;	
     private AsyncTask<String, Void, String> exportPDF;
     private AsyncTask<String, Void, String> exportCSV;
@@ -132,6 +135,7 @@ public class GenerateReport extends Activity implements OnClickListener {
 	public interface ExportType {
 	    String PDF = "pdf";
 	    String EXCEL = "xls";
+		String CSV ="csv";
 	}
 	private String selectedExport;
 	enum EXCEL_EXPORT_COLUMN {STT
@@ -231,7 +235,17 @@ public class GenerateReport extends Activity implements OnClickListener {
     private void getControl(){
     	btnReportbyDept = (Button)findViewById(R.id.btnReportByDept);
     	btnReportByTeam = (Button)findViewById(R.id.btnReportByTeam);
-    	btnReportByNone = (Button)findViewById(R.id.btnReportByNone);
+		btnReportByPosition = (Button)findViewById(R.id.btnReportByPosition);
+		btnReportByBussinessKbn = (Button)findViewById(R.id.btnReportByBusinessKbn);
+		btnReportBySex = (Button)findViewById(R.id.btnReportBySex);
+		btnReportByJapanese = (Button)findViewById(R.id.btnReportByJapaneseLevel);
+		btnReportByTrainingInYear = (Button)findViewById(R.id.btnReportByTrainingStaffInYear);
+		btnReportByContractInYear = (Button)findViewById(R.id.btnReportByContractStaffInYear);
+		btnReportByNotContractInYear = (Button)findViewById(R.id.btnReportByNotContractStaffInYear);
+		btnReportByYasumiInYear = (Button)findViewById(R.id.btnReportByYasumiInYear);
+		btnReportByPositionNotSatified = (Button)findViewById(R.id.btnReportByPositionNotSatified);
+		btnReportByNone = (Button)findViewById(R.id.btnReportByNone);
+
     	btnReportBySalary = (Button)findViewById(R.id.btnReportBySalary);
     	btnOutputPDFCancel= (Button)findViewById(R.id.btnOutputPDFCancel);
     	rdgExportType=(RadioGroup) findViewById(R.id.radExportType);
@@ -245,8 +259,18 @@ public class GenerateReport extends Activity implements OnClickListener {
     private void settingListener(){
     	btnReportbyDept.setOnClickListener(this);
     	btnReportByTeam.setOnClickListener(this);
+		btnReportByPosition.setOnClickListener(this);
+		btnReportByBussinessKbn.setOnClickListener(this);
+		btnReportByJapanese.setOnClickListener(this);
+		btnReportBySex.setOnClickListener(this);
     	btnReportByNone.setOnClickListener(this);
-    	btnReportBySalary.setOnClickListener(this);
+    	btnReportByTrainingInYear.setOnClickListener(this);
+		btnReportByContractInYear.setOnClickListener(this);
+		btnReportByNotContractInYear.setOnClickListener(this);
+		btnReportBySalary.setOnClickListener(this);
+		btnReportByPositionNotSatified.setOnClickListener(this);
+		btnReportByYasumiInYear.setOnClickListener(this);
+
     	btnOutputPDFCancel.setOnClickListener(this);
     	/* Attach CheckedChangeListener to radio group */
     	rdgExportType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -278,9 +302,9 @@ public class GenerateReport extends Activity implements OnClickListener {
 			if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 				if(mEntryList.size() <= 5000) {
 					if(radPDF.isChecked()){
-						exportToPDF();
+						exportToPDF(MasterConstants.REP_BY_USER_LIST);
 					}else{
-						exportToEXCEL();
+						exportToEXCEL(MasterConstants.REP_BY_USER_LIST);
 					}
 					
 				} else {
@@ -296,38 +320,7 @@ public class GenerateReport extends Activity implements OnClickListener {
 			}
 			break;
 		case R.id.btnReportBySalary:
-			/** get danh sach cac nhan vien de output report */
-			mEntryList = new ConvertCursorToListString(this).getUserList("");
-			/** output bang thong ke luong cua cac nhan vien */
-			if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-				if(mEntryList.size() <= 5000) {
-					if(radPDF.isChecked()){
-						SalaryReport salaryReport = new SalaryReport(this);
-						salaryReport.exportToPDF();
-					}else{
-						//Excel
-						new AlertDialog.Builder(this)
-						.setTitle("Xuất dữ liệu " + selectedExport)
-						.setMessage("Chưa xử lý")
-						.setIcon(android.R.drawable.ic_dialog_alert)
-						.setPositiveButton(getString(R.string.titleYes), (DialogInterface.OnClickListener)null)
-						.show();
-					}
-					
-				} else {
-					new AlertDialog.Builder(this)
-					.setTitle("Xuất dữ liệu " + selectedExport)
-					.setMessage("Quá nhiều dữ liệu, hãy chọn điều kiện để giới hạn dữ liệu.")
-					.setIcon(android.R.drawable.ic_dialog_alert)
-					.setPositiveButton(getString(R.string.titleYes), (DialogInterface.OnClickListener)null)
-					.show();
-				}
-			} else {
-				Toast.makeText(this, "SDcard không sẵn sàng", Toast.LENGTH_LONG).show();
-			}
-			break;	
-		case R.id.btnReportByDept:
-			groupParent = getDataOutput(MasterConstants.REP_BY_DEPT);
+			groupParent = getDataOutput(IExpGroup.EXP_GROUP_SALARY_BASIC);
 			/** output bang thong ke luong cua cac nhan vien */
 			if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 				if(groupParent.size() <= 5000) {
@@ -337,12 +330,33 @@ public class GenerateReport extends Activity implements OnClickListener {
 						report.exportToPDF();
 					}else{
 						//Excel
-						new AlertDialog.Builder(this)
-						.setTitle("Xuất dữ liệu " + selectedExport)
-						.setMessage("Chưa xử lý")
-						.setIcon(android.R.drawable.ic_dialog_alert)
-						.setPositiveButton(getString(R.string.titleYes), (DialogInterface.OnClickListener)null)
-						.show();
+						exportToEXCEL(IExpGroup.EXP_GROUP_SALARY_BASIC);
+					}
+
+				} else {
+					new AlertDialog.Builder(this)
+							.setTitle("Xuất dữ liệu " + selectedExport)
+							.setMessage("Quá nhiều dữ liệu, hãy chọn điều kiện để giới hạn dữ liệu.")
+							.setIcon(android.R.drawable.ic_dialog_alert)
+							.setPositiveButton(getString(R.string.titleYes), (DialogInterface.OnClickListener)null)
+							.show();
+				}
+			} else {
+				Toast.makeText(this, "SDcard không sẵn sàng", Toast.LENGTH_LONG).show();
+			}
+			break;	
+		case R.id.btnReportByDept:
+			groupParent = getDataOutput(IExpGroup.EXP_GROUP_DEPT);
+			/** output bang thong ke luong cua cac nhan vien */
+			if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+				if(groupParent.size() <= 5000) {
+
+					if(radPDF.isChecked()){
+						GroupDepartmentReport report = new GroupDepartmentReport(this);
+						report.exportToPDF();
+					}else{
+						//Excel
+						exportToEXCEL(IExpGroup.EXP_GROUP_DEPT);
 					}
 					
 				} else {
@@ -358,19 +372,266 @@ public class GenerateReport extends Activity implements OnClickListener {
 			}
 			break;
 		case R.id.btnReportByTeam:
-			
+			groupParent = getDataOutput(IExpGroup.EXP_GROUP_TEAM);
+			/** output bang thong ke luong cua cac nhan vien */
+			if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+				if(groupParent.size() <= 5000) {
+
+					if(radPDF.isChecked()){
+						GroupDepartmentReport report = new GroupDepartmentReport(this);
+						report.exportToPDF();
+					}else{
+						//Excel
+						exportToEXCEL(IExpGroup.EXP_GROUP_TEAM);
+					}
+
+				} else {
+					new AlertDialog.Builder(this)
+							.setTitle("Xuất dữ liệu " + selectedExport)
+							.setMessage("Quá nhiều dữ liệu, hãy chọn điều kiện để giới hạn dữ liệu.")
+							.setIcon(android.R.drawable.ic_dialog_alert)
+							.setPositiveButton(getString(R.string.titleYes), (DialogInterface.OnClickListener)null)
+							.show();
+				}
+			} else {
+				Toast.makeText(this, "SDcard không sẵn sàng", Toast.LENGTH_LONG).show();
+			}
 			break;
 		case R.id.btnReportByPosition:
-			
+			groupParent = getDataOutput(IExpGroup.EXP_GROUP_POSITION);
+			/** output bang thong ke luong cua cac nhan vien */
+			if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+				if(groupParent.size() <= 5000) {
+
+					if(radPDF.isChecked()){
+						GroupDepartmentReport report = new GroupDepartmentReport(this);
+						report.exportToPDF();
+					}else{
+						//Excel
+						exportToEXCEL(IExpGroup.EXP_GROUP_POSITION);
+					}
+
+				} else {
+					new AlertDialog.Builder(this)
+							.setTitle("Xuất dữ liệu " + selectedExport)
+							.setMessage("Quá nhiều dữ liệu, hãy chọn điều kiện để giới hạn dữ liệu.")
+							.setIcon(android.R.drawable.ic_dialog_alert)
+							.setPositiveButton(getString(R.string.titleYes), (DialogInterface.OnClickListener)null)
+							.show();
+				}
+			} else {
+				Toast.makeText(this, "SDcard không sẵn sàng", Toast.LENGTH_LONG).show();
+			}
 			break;
 		case R.id.btnReportByBusinessKbn:
-			
+			groupParent = getDataOutput(IExpGroup.EXP_GROUP_BUSINESS_KBN);
+			/** output bang thong ke luong cua cac nhan vien */
+			if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+				if(groupParent.size() <= 5000) {
+
+					if(radPDF.isChecked()){
+						GroupDepartmentReport report = new GroupDepartmentReport(this);
+						report.exportToPDF();
+					}else{
+						//Excel
+						exportToEXCEL(IExpGroup.EXP_GROUP_BUSINESS_KBN);
+					}
+
+				} else {
+					new AlertDialog.Builder(this)
+							.setTitle("Xuất dữ liệu " + selectedExport)
+							.setMessage("Quá nhiều dữ liệu, hãy chọn điều kiện để giới hạn dữ liệu.")
+							.setIcon(android.R.drawable.ic_dialog_alert)
+							.setPositiveButton(getString(R.string.titleYes), (DialogInterface.OnClickListener)null)
+							.show();
+				}
+			} else {
+				Toast.makeText(this, "SDcard không sẵn sàng", Toast.LENGTH_LONG).show();
+			}
 			break;
 		case R.id.btnReportByJapaneseLevel:
-			
+			groupParent = getDataOutput(IExpGroup.EXP_GROUP_JAPANESE);
+			/** output bang thong ke luong cua cac nhan vien */
+			if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+				if(groupParent.size() <= 5000) {
+
+					if(radPDF.isChecked()){
+						GroupDepartmentReport report = new GroupDepartmentReport(this);
+						report.exportToPDF();
+					}else{
+						//Excel
+						exportToEXCEL(IExpGroup.EXP_GROUP_JAPANESE);
+					}
+
+				} else {
+					new AlertDialog.Builder(this)
+							.setTitle("Xuất dữ liệu " + selectedExport)
+							.setMessage("Quá nhiều dữ liệu, hãy chọn điều kiện để giới hạn dữ liệu.")
+							.setIcon(android.R.drawable.ic_dialog_alert)
+							.setPositiveButton(getString(R.string.titleYes), (DialogInterface.OnClickListener)null)
+							.show();
+				}
+			} else {
+				Toast.makeText(this, "SDcard không sẵn sàng", Toast.LENGTH_LONG).show();
+			}
 			break;
 		case R.id.btnReportBySex:
-			
+			groupParent = getDataOutput(IExpGroup.EXP_GROUP_SEX);
+			/** output bang thong ke luong cua cac nhan vien */
+			if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+				if(groupParent.size() <= 5000) {
+
+					if(radPDF.isChecked()){
+						GroupDepartmentReport report = new GroupDepartmentReport(this);
+						report.exportToPDF();
+					}else{
+						//Excel
+						exportToEXCEL(IExpGroup.EXP_GROUP_SEX);
+					}
+
+				} else {
+					new AlertDialog.Builder(this)
+							.setTitle("Xuất dữ liệu " + selectedExport)
+							.setMessage("Quá nhiều dữ liệu, hãy chọn điều kiện để giới hạn dữ liệu.")
+							.setIcon(android.R.drawable.ic_dialog_alert)
+							.setPositiveButton(getString(R.string.titleYes), (DialogInterface.OnClickListener)null)
+							.show();
+				}
+			} else {
+				Toast.makeText(this, "SDcard không sẵn sàng", Toast.LENGTH_LONG).show();
+			}
+			break;
+		case R.id.btnReportByTrainingStaffInYear:
+			groupParent = getDataOutput(IExpGroup.EXP_GROUP_TRAINING_YEAR);
+			/** output bang thong ke luong cua cac nhan vien */
+			if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+				if(groupParent.size() <= 5000) {
+
+					if(radPDF.isChecked()){
+						GroupDepartmentReport report = new GroupDepartmentReport(this);
+						report.exportToPDF();
+					}else{
+						//Excel
+						exportToEXCEL(IExpGroup.EXP_GROUP_TRAINING_YEAR);
+					}
+
+				} else {
+					new AlertDialog.Builder(this)
+							.setTitle("Xuất dữ liệu " + selectedExport)
+							.setMessage("Quá nhiều dữ liệu, hãy chọn điều kiện để giới hạn dữ liệu.")
+							.setIcon(android.R.drawable.ic_dialog_alert)
+							.setPositiveButton(getString(R.string.titleYes), (DialogInterface.OnClickListener)null)
+							.show();
+				}
+			} else {
+				Toast.makeText(this, "SDcard không sẵn sàng", Toast.LENGTH_LONG).show();
+			}
+			break;
+
+		case R.id.btnReportByContractStaffInYear:
+			groupParent = getDataOutput(IExpGroup.EXP_GROUP_CONTRACT_YEAR);
+			/** output bang thong ke luong cua cac nhan vien */
+			if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+				if(groupParent.size() <= 5000) {
+
+					if(radPDF.isChecked()){
+						GroupDepartmentReport report = new GroupDepartmentReport(this);
+						report.exportToPDF();
+					}else{
+						//Excel
+						exportToEXCEL(IExpGroup.EXP_GROUP_CONTRACT_YEAR);
+					}
+
+				} else {
+					new AlertDialog.Builder(this)
+							.setTitle("Xuất dữ liệu " + selectedExport)
+							.setMessage("Quá nhiều dữ liệu, hãy chọn điều kiện để giới hạn dữ liệu.")
+							.setIcon(android.R.drawable.ic_dialog_alert)
+							.setPositiveButton(getString(R.string.titleYes), (DialogInterface.OnClickListener)null)
+							.show();
+				}
+			} else {
+				Toast.makeText(this, "SDcard không sẵn sàng", Toast.LENGTH_LONG).show();
+			}
+			break;
+		case R.id.btnReportByNotContractStaffInYear:
+			groupParent = getDataOutput(IExpGroup.EXP_GROUP_NOTCONTRACT_YEAR);
+			/** output bang thong ke luong cua cac nhan vien */
+			if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+				if(groupParent.size() <= 5000) {
+
+					if(radPDF.isChecked()){
+						GroupDepartmentReport report = new GroupDepartmentReport(this);
+						report.exportToPDF();
+					}else{
+						//Excel
+						exportToEXCEL(IExpGroup.EXP_GROUP_NOTCONTRACT_YEAR);
+					}
+
+				} else {
+					new AlertDialog.Builder(this)
+							.setTitle("Xuất dữ liệu " + selectedExport)
+							.setMessage("Quá nhiều dữ liệu, hãy chọn điều kiện để giới hạn dữ liệu.")
+							.setIcon(android.R.drawable.ic_dialog_alert)
+							.setPositiveButton(getString(R.string.titleYes), (DialogInterface.OnClickListener)null)
+							.show();
+				}
+			} else {
+				Toast.makeText(this, "SDcard không sẵn sàng", Toast.LENGTH_LONG).show();
+			}
+			break;
+		case R.id.btnReportByYasumiInYear:
+			groupParent = getDataOutput(IExpGroup.EXP_GROUP_YASUMI_YEAR);
+			/** output bang thong ke luong cua cac nhan vien */
+			if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+				if(groupParent.size() <= 5000) {
+
+					if(radPDF.isChecked()){
+						GroupDepartmentReport report = new GroupDepartmentReport(this);
+						report.exportToPDF();
+					}else{
+						//Excel
+						exportToEXCEL(IExpGroup.EXP_GROUP_YASUMI_YEAR);
+					}
+
+				} else {
+					new AlertDialog.Builder(this)
+							.setTitle("Xuất dữ liệu " + selectedExport)
+							.setMessage("Quá nhiều dữ liệu, hãy chọn điều kiện để giới hạn dữ liệu.")
+							.setIcon(android.R.drawable.ic_dialog_alert)
+							.setPositiveButton(getString(R.string.titleYes), (DialogInterface.OnClickListener)null)
+							.show();
+				}
+			} else {
+				Toast.makeText(this, "SDcard không sẵn sàng", Toast.LENGTH_LONG).show();
+			}
+			break;
+
+		case R.id.btnReportByPositionNotSatified:
+			groupParent = getDataOutput(IExpGroup.EXP_GROUP_STAFF_CURRENT_POSITION_NOT_SATIFIED);
+			/** output bang thong ke luong cua cac nhan vien */
+			if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+				if(groupParent.size() <= 5000) {
+
+					if(radPDF.isChecked()){
+						GroupDepartmentReport report = new GroupDepartmentReport(this);
+						report.exportToPDF();
+					}else{
+						//Excel
+						exportToEXCEL(IExpGroup.EXP_GROUP_STAFF_CURRENT_POSITION_NOT_SATIFIED);
+					}
+
+				} else {
+					new AlertDialog.Builder(this)
+							.setTitle("Xuất dữ liệu " + selectedExport)
+							.setMessage("Quá nhiều dữ liệu, hãy chọn điều kiện để giới hạn dữ liệu.")
+							.setIcon(android.R.drawable.ic_dialog_alert)
+							.setPositiveButton(getString(R.string.titleYes), (DialogInterface.OnClickListener)null)
+							.show();
+				}
+			} else {
+				Toast.makeText(this, "SDcard không sẵn sàng", Toast.LENGTH_LONG).show();
+			}
 			break;
 		case R.id.btnOutputPDFCancel:
 			finish();
@@ -398,50 +659,57 @@ public class GenerateReport extends Activity implements OnClickListener {
 		ArrayList<ExpParent> arrayParents=new ArrayList<ExpParent>() ;
 		ExpGroupHelper  grp =new ExpGroupHelper(getApplicationContext());
 		String[] arrGroup=null,arrGroupTemp=null;
-		
-		switch (reportType){
+
+		//get data theo tung group
+		arrayParents = ExpParentChildInGroup.getParentChildInGroup(reportType,getApplicationContext());
+		//lay ve cac gia tri
+		arrGroup = ExpParentChildInGroup.arrGroupTitle;
+		grp = ExpParentChildInGroup.grpExp;
+		list = ExpParentChildInGroup.listUser;
+
+		/*switch (reportType){
 			case MasterConstants.REP_BY_DEPT:
 				arrGroup =grp.getGroup(IExpGroup.EXP_GROUP_DEPT);
 				arrGroupTemp = copyArray(arrGroup);
-				
-				/** here we set the parents and the children */
-		        for (int i = 0; i < arrGroup.length; i++){
-		    		ArrayList<User> arrayChildren = new ArrayList<User>();
-		    		/** tạo Object để lưu trữ data tại node cha và con */
-		    		ExpParent parent = new ExpParent();
-		    		/** insert data cho node cha */
-		    		if (arrGroupTemp[i]==null){
-		    			parent.setTitle("");
-		    		}else{
-		    			parent.setTitle(arrGroupTemp[i].toString());
-		    		}
-		    		/** insert data cho node con */
-		    		if (arrGroupTemp[i]==null){
-		    			list = grp.getChildGroup(IExpGroup.EXP_GROUP_DEPT, "");
-		    		}else{
-		    			if( arrGroup[i]==null || arrGroup[i].equals("")){
-		    				list = grp.getChildGroup(IExpGroup.EXP_GROUP_DEPT, "");
-		    			}else{
-		    				list = grp.getChildGroup(IExpGroup.EXP_GROUP_DEPT, arrGroup[i].toString());
-		    			}
-		    			
-		    		}
-		            
-		            if (list !=null){
-		            	for(User usr : list){
-			            	arrayChildren.add(usr);
-			            }	            
-		        	parent.setArrayChildren(arrayChildren);
-		        	arrayParents.add(parent);
-		            }
-		        }		        
+
+				*//** here we set the parents and the children *//*
+				for (int i = 0; i < arrGroup.length; i++){
+					ArrayList<User> arrayChildren = new ArrayList<User>();
+					*//** tạo Object để lưu trữ data tại node cha và con *//*
+					ExpParent parent = new ExpParent();
+					*//** insert data cho node cha *//*
+					if (arrGroupTemp[i]==null){
+						parent.setTitle("");
+					}else{
+						parent.setTitle(arrGroupTemp[i].toString());
+					}
+					*//** insert data cho node con *//*
+					if (arrGroupTemp[i]==null){
+						list = grp.getChildGroup(IExpGroup.EXP_GROUP_DEPT, "");
+					}else{
+						if( arrGroup[i]==null || arrGroup[i].equals("")){
+							list = grp.getChildGroup(IExpGroup.EXP_GROUP_DEPT, "");
+						}else{
+							list = grp.getChildGroup(IExpGroup.EXP_GROUP_DEPT, arrGroup[i].toString());
+						}
+
+					}
+
+					if (list !=null){
+						for(User usr : list){
+							arrayChildren.add(usr);
+						}
+						parent.setArrayChildren(arrayChildren);
+						arrayParents.add(parent);
+					}
+				}
 				break;
-			
+
 			case MasterConstants.REP_BY_TEAM:
-				
+
 				break;
-				
-		}
+
+		}*/
 		return arrayParents;
 	}
 	
@@ -558,15 +826,15 @@ public class GenerateReport extends Activity implements OnClickListener {
     /**
     * Export ra PDF
     */
-	private void exportToPDF() {
-		exportPDF = new ExportPDF().execute("pdf");
+	private void exportToPDF(int outputReportType) {
+		exportPDF = new ExportPDF().execute("pdf" ,String.valueOf(outputReportType));
 	}
     
 	/**
     * Export ra PDF
     */
-	private void exportToEXCEL() {
-		exportEXCEL = new ExportEXCEL().execute("xlx");
+	private void exportToEXCEL(int outputReportType) {
+		exportEXCEL = new ExportEXCEL().execute("xlx",String.valueOf(outputReportType));
 	}
 		
     /**Xu ly activity END */
@@ -580,7 +848,12 @@ public class GenerateReport extends Activity implements OnClickListener {
 		protected boolean isRecordAdded = false;
 		protected int totalNumberOfRecordsAdded;
 		public final File fontFile = new File("assets/fonts/vuArial.ttf");
-		
+		/**
+		 * Loai output report : theo nhan vien , theo nhom chuc vu....
+		 * @return
+		 */
+		public int outputReportType;
+
 		@Override
 		protected void onPreExecute() {
 			progressDialog = new ProgressDialog(GenerateReport.this);
@@ -712,23 +985,23 @@ public class GenerateReport extends Activity implements OnClickListener {
 		protected String getFileName(int report_type) {
 			String filename ="Report_";
 			switch(report_type){
-				case MasterConstants.REP_BY_DEPT:
+				case IExpGroup.EXP_GROUP_DEPT:
 					filename =filename + "phong ban";
 					break;
 				
-				case MasterConstants.REP_BY_TEAM:
+				case IExpGroup.EXP_GROUP_TEAM:
 					filename =filename + "nhom";
 					break;
-				case MasterConstants.REP_BY_POSITION:
+				case IExpGroup.EXP_GROUP_POSITION:
 					filename =filename + "chu vu";
 					break;
-				case MasterConstants.REP_BY_SEX:
+				case IExpGroup.EXP_GROUP_SEX:
 					filename =filename + "gioi tinh";
 					break;
-				case MasterConstants.REP_BY_JAPANESE:
+				case IExpGroup.EXP_GROUP_JAPANESE:
 					filename =filename + "tieng nhat";
 					break;
-				case MasterConstants.REP_BY_BUSSINESS_KBN:
+				case IExpGroup.EXP_GROUP_BUSINESS_KBN:
 					filename =filename + "chuyen mon";
 					break;
 				case MasterConstants.REP_BY_USER_DETAIL:
@@ -737,9 +1010,25 @@ public class GenerateReport extends Activity implements OnClickListener {
 				case MasterConstants.REP_BY_USER_LIST:
 					filename =filename + "danh sach nhan vien";
 					break;
-				case MasterConstants.REP_BY_USER_SALARY:
-					filename =filename + "Thong ke luong";
-					break;	
+				case IExpGroup.EXP_GROUP_SALARY_BASIC:
+					filename =filename + "muc luong";
+					break;
+				case IExpGroup.EXP_GROUP_TRAINING_YEAR:
+					filename =filename + "thu viec trong nam";
+					break;
+				case IExpGroup.EXP_GROUP_CONTRACT_YEAR:
+					filename =filename + "hop dong trong nam";
+					break;
+				case IExpGroup.EXP_GROUP_NOTCONTRACT_YEAR:
+					filename =filename + "khong nhan sau thu viec";
+					break;
+				case IExpGroup.EXP_GROUP_YASUMI_YEAR:
+					filename =filename + "nghi viec theo nam";
+					break;
+				case IExpGroup.EXP_GROUP_STAFF_CURRENT_POSITION_NOT_SATIFIED:
+					filename =filename + "khong phu hop tham nien va ngach bac";
+					break;
+
 			}
 			return filename;
 		}
@@ -860,6 +1149,11 @@ public class GenerateReport extends Activity implements OnClickListener {
 		@Override
 		protected String doInBackground(String... params) {
 			try{
+				//Loai file output
+				String fileType = params[0];
+				//Loai report se output
+				int outputReportType = Integer.parseInt (params[1]);
+
 				outputPDF_UserDetail();
 			}catch(Exception e){
 			
@@ -916,6 +1210,7 @@ public class GenerateReport extends Activity implements OnClickListener {
 			}
 			
 		}
+
 	    private void addTable_UserDetail(Document document) throws DocumentException, IOException {
 	    	/** chia thành 5 phần */
 	 		PdfPTable table = new PdfPTable(5);
@@ -1158,7 +1453,17 @@ public class GenerateReport extends Activity implements OnClickListener {
 				addBlankCellNoBorder(table,3);
 				
 				addCellNoBorder(table,"Công việc");
-				addCellNoBorder(table, String.valueOf(entry.business_kbn).endsWith("0")?"Phien dich":"Lap trinh");
+				//addCellNoBorder(table, String.valueOf(entry.business_kbn).endsWith("0")?"Phien dich":"Lap trinh");
+				//1: LTV ; 2  PD ; 3 : khac nhu tong vu ...
+				String workType ="Chưa chỉ định";
+				if(String.valueOf(entry.business_kbn).equals("1")){
+					workType="LTV";
+				}else if(String.valueOf(entry.business_kbn).equals("2")){
+					workType="PD";
+				} else if(String.valueOf(entry.business_kbn).equals("3")){
+					workType="Khác";
+				}
+				addCellNoBorder(table, workType);
 				addBlankCellNoBorder(table,3);
 				
 				/*
@@ -1396,7 +1701,61 @@ public class GenerateReport extends Activity implements OnClickListener {
 		@Override
 		protected String doInBackground(String... params) {
 			try{
-				outputEXCEL_UserDetail();
+				//Loai file output
+				String fileType = params[0];
+				//Loai report se output
+				int outputReportType = Integer.parseInt (params[1]);
+
+				switch (outputReportType){
+					case IExpGroup.EXP_GROUP_DEPT:
+						outputEXCEL_UserByGroup(outputReportType);
+						break;
+					case IExpGroup.EXP_GROUP_TEAM:
+						outputEXCEL_UserByGroup(outputReportType);
+						break;
+					case IExpGroup.EXP_GROUP_POSITION:
+						outputEXCEL_UserByGroup(outputReportType);
+						break;
+					case IExpGroup.EXP_GROUP_SEX:
+						outputEXCEL_UserByGroup(outputReportType);
+						break;
+					case IExpGroup.EXP_GROUP_JAPANESE:
+						outputEXCEL_UserByGroup(outputReportType);
+						break;
+					case IExpGroup.EXP_GROUP_BUSINESS_KBN:
+						outputEXCEL_UserByGroup(outputReportType);
+						break;
+					case IExpGroup.EXP_GROUP_SALARY_BASIC:
+						outputEXCEL_UserByGroup(outputReportType);
+						break;
+
+					case IExpGroup.EXP_GROUP_TRAINING_YEAR:
+						outputEXCEL_UserByGroup(outputReportType);
+						break;
+
+					case IExpGroup.EXP_GROUP_CONTRACT_YEAR:
+						outputEXCEL_UserByGroup(outputReportType);
+						break;
+
+					case IExpGroup.EXP_GROUP_NOTCONTRACT_YEAR:
+						outputEXCEL_UserByGroup(outputReportType);
+						break;
+
+					case IExpGroup.EXP_GROUP_YASUMI_YEAR:
+						outputEXCEL_UserByGroup(outputReportType);
+						break;
+
+					case IExpGroup.EXP_GROUP_STAFF_CURRENT_POSITION_NOT_SATIFIED:
+						outputEXCEL_UserByGroup(outputReportType);
+						break;
+
+					case MasterConstants.REP_BY_USER_LIST:
+						outputEXCEL_UserDetail();
+						break;
+
+
+				}
+
 				
 			}catch(Exception e){
 			
@@ -1430,7 +1789,7 @@ public class GenerateReport extends Activity implements OnClickListener {
 				workbook = Workbook.createWorkbook(fileLocation, wbSettings);			
 				//Excel sheet name. 0 represents first sheet
 				WritableSheet sheet = workbook.createSheet("Staff List", 0);
-				
+
 				try {
 					sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.STT.ordinal(), 0, "STT")); // column and row
 					sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.EMP_CODE.ordinal(), 0, "Mã NV"));
@@ -1506,10 +1865,14 @@ public class GenerateReport extends Activity implements OnClickListener {
 						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.TEAM.ordinal(), i+1, String.valueOf(entry.team_name)));
 						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.POSITION.ordinal(), i+1, String.valueOf(entry.position_name)));
 						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.JP.ordinal(), i+1, String.valueOf(entry.japanese)));
-						if(entry.business_kbn=="0"){
-							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.WORK_KBN.ordinal(), i+1, "PD"));
-						}else{
+						if( entry.business_kbn.equals("1")){
 							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.WORK_KBN.ordinal(), i+1, "LTV"));
+						}else if (entry.business_kbn.equals("2")){
+							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.WORK_KBN.ordinal(), i+1, "PD"));
+						}else if (entry.business_kbn.equals("3")){
+							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.WORK_KBN.ordinal(), i+1, "Loại khác(tổng vụ,QA...)"));
+						}else{
+							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.WORK_KBN.ordinal(), i+1, "Chưa chỉ định"));
 						}
 						
 						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.NOTE.ordinal(), i+1, String.valueOf(entry.note)));
@@ -1520,7 +1883,8 @@ public class GenerateReport extends Activity implements OnClickListener {
 					e.printStackTrace();
 				} catch (WriteException e) {
 					e.printStackTrace();
-				}			
+				}
+
 				workbook.write();		
 				try {
 					workbook.close();
@@ -1531,7 +1895,144 @@ public class GenerateReport extends Activity implements OnClickListener {
 				e.printStackTrace();
 			}
 		}
-	    	 	
+
+		/**
+		 * Output EXCEL theo tung loai group chi dinh
+		 * @param outputReportType : Loai report
+         */
+		private void outputEXCEL_UserByGroup(int outputReportType){
+			//file path
+			setFile(outputReportType);
+			fileLocation = getFileLocation();
+
+			WorkbookSettings wbSettings = new WorkbookSettings();
+			wbSettings.setLocale(new Locale("en", "EN"));
+			WritableWorkbook workbook;
+			isRecordAdded = true;
+			setIsRecordAdded(true);
+			try {
+				workbook = Workbook.createWorkbook(fileLocation, wbSettings);
+				WritableSheet sheet =null;
+				String sheetTitle ="Chua chi dinh";
+				for(int dept=0 ; dept<groupParent.size();dept++){
+					//xu ly cho tung dept
+					//tao sheet cho tung dept
+					if(groupParent.get(dept).getTitle().length()>0 ) {
+						sheetTitle = groupParent.get(dept).getTitle();
+					}else{
+						sheetTitle ="Chua chi dinh" + dept; // de tranh trung nhau
+					}
+
+					sheet = workbook.createSheet(sheetTitle, dept);
+					//chuyen tu ArrayLst thanh List
+					mEntryList = groupParent.get(dept).getArrayChildren();
+
+					try {
+						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.STT.ordinal(), 0, "STT")); // column and row
+						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.EMP_CODE.ordinal(), 0, "Mã NV"));
+						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.FULL_NAME.ordinal(), 0, "Họ và tên"));
+						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.SEX.ordinal(), 0, "Giới tính"));
+						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.BIRTHDAY.ordinal(), 0, "Ngày sinh"));
+						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.TEL.ordinal(), 0, "Điện thoại"));
+						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.ADDRESS.ordinal(), 0, "Địa chỉ"));
+						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.EMAIL.ordinal(), 0, "Email"));
+						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.LEARNING_START.ordinal(), 0, "Ngày bắt đầu học việc"));
+						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.LEARNING_END.ordinal(), 0, "Ngày kết thúc học việc"));
+						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.TRAINING_START.ordinal(), 0, "Ngày bắt đầu thử việc"));
+						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.TRAINING_END.ordinal(), 0, "Ngày kết thúc thử việc"));
+						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.CONTRACT_DATE.ordinal(), 0, "Ngày ký HĐ"));
+						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.KEIKEN_MONTH.ordinal(), 0, "Thâm niên(Tháng)"));
+						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.ESTIMATE_POINT.ordinal(), 0, "Hệ số đánh giá"));
+						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.KEIKEN_CONVERT.ordinal(), 0, "Qui đổi KN(Tháng)"));
+						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.END_DATE.ordinal(), 0, "Ngày nghỉ việc"));
+						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.DEPT.ordinal(), 0, "Phòng ban"));
+						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.TEAM.ordinal(), 0, "Nhóm"));
+						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.POSITION.ordinal(), 0, "Ngạch/bậc"));
+						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.JP.ordinal(), 0, "Tiếng Nhật"));
+						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.WORK_KBN.ordinal(), 0, "Loại NV")); //LTV hay PD hoac tong vu
+						sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.NOTE.ordinal(), 0, "Ghi chú"));
+
+						for(int i=0 ; i < mEntryList.size() ; i++) {
+							User entry = mEntryList.get(i);
+
+							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.STT.ordinal(), i+1, String.valueOf(i+1) ));
+							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.EMP_CODE.ordinal(), i+1, String.valueOf(entry.code)));
+							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.FULL_NAME.ordinal(), i+1, String.valueOf(entry.full_name)));
+							if(entry.sex==0){
+								sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.SEX.ordinal(), i+1, "Nữ"));
+							}else{
+								sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.SEX.ordinal(), i+1, "Nam"));
+							}
+
+							//sheet.addCell(new DateTime(EXCEL_EXPORT_COLUMN.BIRTHDAY.ordinal(), i+1,DateTimeUtil.convertStringToDate(entry.birthday, MasterConstants.DATE_VN_FORMAT) ));
+							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.BIRTHDAY.ordinal(), i+1,(entry.birthday)));
+							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.TEL.ordinal(), i+1,(entry.mobile)));
+							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.ADDRESS.ordinal(), i+1,(entry.address)));
+							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.EMAIL.ordinal(), i+1,(entry.email)));
+							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.LEARNING_START.ordinal(), i+1, String.valueOf(entry.learn_training_date)));
+							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.LEARNING_END.ordinal(), i+1, String.valueOf(entry.learn_training_dateEnd)));
+							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.TRAINING_START.ordinal(), i+1, String.valueOf(entry.training_date)));
+							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.TRAINING_END.ordinal(), i+1, String.valueOf(entry.training_dateEnd)));
+							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.CONTRACT_DATE.ordinal(), i+1, String.valueOf(entry.in_date)));
+
+							/** lấy ngày vào công ty*/
+							Date datefrom=null;
+							if (entry.in_date!=null && entry.in_date!=""){
+								if (DateTimeUtil.isDate(entry.in_date ,MasterConstants.DATE_VN_FORMAT)){
+									datefrom = DateTimeUtil.convertStringToDate( entry.in_date ,MasterConstants.DATE_VN_FORMAT);
+								}
+							}
+							/** lấy ngày hiện tại */
+							Date dateto =DateTimeUtil.getCurrentDate(MasterConstants.DATE_VN_FORMAT);
+							int keikenMonth =0;
+
+							/** tính ra thâm niên từ lúc vào công ty chính thức */
+							if (datefrom==null){
+							}else{
+								keikenMonth =DateTimeUtil.getFullMonthDiff(datefrom, dateto);
+							}
+
+							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.KEIKEN_MONTH.ordinal(), i+1, String.valueOf(keikenMonth)));
+							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.ESTIMATE_POINT.ordinal(), i+1, String.valueOf(entry.estimate_point)));
+
+							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.KEIKEN_CONVERT.ordinal(), i+1, String.valueOf(entry.convert_keiken)));
+							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.END_DATE.ordinal(), i+1, String.valueOf(entry.out_date)));
+
+							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.DEPT.ordinal(), i+1, String.valueOf(entry.dept_name)));
+							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.TEAM.ordinal(), i+1, String.valueOf(entry.team_name)));
+							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.POSITION.ordinal(), i+1, String.valueOf(entry.position_name)));
+							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.JP.ordinal(), i+1, String.valueOf(entry.japanese)));
+							if( entry.business_kbn.equals("1")){
+								sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.WORK_KBN.ordinal(), i+1, "LTV"));
+							}else if (entry.business_kbn.equals("2")){
+								sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.WORK_KBN.ordinal(), i+1, "PD"));
+							}else if (entry.business_kbn.equals("3")){
+								sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.WORK_KBN.ordinal(), i+1, "Loại khác(tổng vụ,QA...)"));
+							}else{
+								sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.WORK_KBN.ordinal(), i+1, "Chưa chỉ định"));
+							}
+
+							sheet.addCell(new Label(EXCEL_EXPORT_COLUMN.NOTE.ordinal(), i+1, String.valueOf(entry.note)));
+
+						}
+
+					} catch (RowsExceededException e) {
+						e.printStackTrace();
+					} catch (WriteException e) {
+						e.printStackTrace();
+					}
+				}
+				workbook.write();
+				try {
+					workbook.close();
+				} catch (WriteException e) {
+					e.printStackTrace();
+				}
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	 	@Override
 		protected String getType() {
 			//return "PDF";

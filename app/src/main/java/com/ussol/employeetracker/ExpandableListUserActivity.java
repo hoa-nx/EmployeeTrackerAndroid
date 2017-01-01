@@ -25,6 +25,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -158,9 +161,9 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
 	            		
 	            		/**gán vào bundle để gửi cùng với intent */
 	            		intent.putExtras(bundle);
-	               		
+						//intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 	            		/**khởi tạo activity dùng để edit  */
-	            		startActivityForResult(intent , MasterConstants.CALL_USER_ACTIVITY_CODE);
+						startActivityForResult(intent , MasterConstants.CALL_USER_ACTIVITY_CODE);
 	    				break;
 	                case MENU_ITEM_HISTORY_ACTION:
 	                	/** xem thong tin lich su */
@@ -171,9 +174,9 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
 	    				bundleHis.putParcelable(MasterConstants.TAB_USER_TAG, info);
 	    				/**gán vào bundle để gửi cùng với intent */
 	    				intentHis.putExtras(bundleHis);
-	    				
+
 	    				/**khởi tạo activity dùng để edit  */
-	    				startActivity(intentHis );
+						startActivityForResult(intentHis , MasterConstants.CALL_HISTORY_USER_ACTIVITY_CODE);
 	               	
 	    				break;
 	    				
@@ -265,6 +268,7 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
+
 		switch(requestCode){
 			case MasterConstants.CALL_USER_ACTIVITY_CODE:
 				if (resultCode==RESULT_OK){
@@ -283,8 +287,20 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
 					getParentChildInGroup(currentGroup);
 				}
 				break;
-
+			case MasterConstants.CALL_HISTORY_USER_ACTIVITY_CODE:
+				if (resultCode==RESULT_OK){
+					Bundle bundle = data.getExtras();
+					if(bundle!=null){
+						currentGroup = bundle.getInt(MasterConstants.EXP_USER_GROUP_TAG);
+					}else{
+						//currentGroup = bundle.getInt(MasterConstants.EXP_USER_GROUP_TAG);
+					}
+					//get data & display
+					getParentChildInGroup(currentGroup);
+				}
+				break;
 		}
+
 	}
 	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * GetDipsFromPixel
@@ -428,152 +444,152 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
      * 
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
     public void getParentChildInGroup(int group){
-    	String[] arrGroupTemp=null;
-    	
-    	arrGroup =grp.getGroup(group);
-    	arrGroupTemp = copyArray(arrGroup);
-    	/** trường hợp là giới tính thì phải setting lại text hiển thị */
-    	if (group == IExpGroup.EXP_GROUP_SEX){
-    		for (int i=0 ; i<arrGroupTemp.length;i++){
-    			if(arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0 ){
-    				arrGroupTemp[i] ="Nữ";
-    			}else{
-    				arrGroupTemp[i] ="Nam";
-    			}
-    		}
-    	}
-    	
-    	/** trường hợp là nhom labour thì phải setting lại text hiển thị */
-    	if (group == IExpGroup.EXP_GROUP_LABOUR_USER){
-    		for (int i=0 ; i<arrGroupTemp.length;i++){
-    			if(arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0 ){
-    				arrGroupTemp[i] ="Không thuộc nhóm labor";
-    			}else{
-    				arrGroupTemp[i] ="Thành viên nhóm labor";
-    			}
-    		}
-    	}
-    	
-    	/** trường hợp là nghỉ việc -chưa nghỉ iệc thì phải setting lại text hiển thị */
-    	if (group == IExpGroup.EXP_GROUP_YASUMI){
-    		for (int i=0 ; i<arrGroupTemp.length;i++){
-    			if(arrGroupTemp[i]==null|| ( arrGroupTemp[i])=="" ){
-    				arrGroupTemp[i] ="Đang làm việc";
-    			}else{
-    				arrGroupTemp[i] ="Đã nghỉ việc";
-    			}
-    		}
-    	}
-    	
-    	/** trường hợp là thâm niên thì phải setting lại text hiển thị */
-    	if (group == IExpGroup.EXP_GROUP_KEIKEN){
-    		for (int i=0 ; i<arrGroupTemp.length;i++){
-    			if( arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0){
-    				arrGroupTemp[i] ="Nhỏ hơn 1 năm";
-    			}else if (Integer.parseInt(arrGroupTemp[i])==1){
-    				arrGroupTemp[i] ="1 ～ 2 năm";
-    			}else if (Integer.parseInt(arrGroupTemp[i])==2){
-    				arrGroupTemp[i] ="2 ～ 3 năm";
-    			}else if (Integer.parseInt(arrGroupTemp[i])==3){
-    				arrGroupTemp[i] ="3 ～4 năm";
-    			}else if (Integer.parseInt(arrGroupTemp[i])==4){
-    				arrGroupTemp[i] ="4 ～5 năm";
-    			}else if (Integer.parseInt(arrGroupTemp[i])==5){
-    				arrGroupTemp[i] ="Lớn hơn 5 năm";
-    			}
-    				
-    		}
-    	}
-    	/** trường hợp là thâm niên nhóm labor thì phải setting lại text hiển thị */
-    	if (group == IExpGroup.EXP_GROUP_KEIKEN_LABOR){
-    		for (int i=0 ; i<arrGroupTemp.length;i++){
-    			if( arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0){
-    				arrGroupTemp[i] ="Nhỏ hơn 1 năm";
-    			}else if (Integer.parseInt(arrGroupTemp[i])==1){
-    				arrGroupTemp[i] ="1 ～ 2 năm";
-    			}else if (Integer.parseInt(arrGroupTemp[i])==2){
-    				arrGroupTemp[i] ="2 ～ 3 năm";
-    			}else if (Integer.parseInt(arrGroupTemp[i])==3){
-    				arrGroupTemp[i] ="3 ～4 năm";
-    			}else if (Integer.parseInt(arrGroupTemp[i])==4){
-    				arrGroupTemp[i] ="4 ～5 năm";
-    			}else if (Integer.parseInt(arrGroupTemp[i])==5){
-    				arrGroupTemp[i] ="Lớn hơn 5 năm";
-    			}
-    				
-    		}
-    	}
-    	/** trường hợp là lương thì phải setting lại text hiển thị */
-    	if (group == IExpGroup.EXP_GROUP_SALARY_BASIC){
-    		for (int i=0 ; i<arrGroupTemp.length;i++){
-    			if( arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0){
-    				arrGroupTemp[i] ="Nhỏ hơn 300$";
-    			}else if (Integer.parseInt(arrGroupTemp[i])==1){
-    				arrGroupTemp[i] ="300 ～ 399.9$";
-    			}else if (Integer.parseInt(arrGroupTemp[i])==2){
-    				arrGroupTemp[i] ="400 ～ 499.9$";
-    			}else if (Integer.parseInt(arrGroupTemp[i])==3){
-    				arrGroupTemp[i] ="500 ～ 599.9$";
-    			}else if (Integer.parseInt(arrGroupTemp[i])==4){
-    				arrGroupTemp[i] ="600 ～ 699.9$";
-    			}else if (Integer.parseInt(arrGroupTemp[i])==5){
-    				arrGroupTemp[i] ="Lớn hơn 700$";
-    			}
-    				
-    		}
-    	}
-    	
-    	/** trường hợp là chuyên môn thì phải setting lại text hiển thị */
-    	if (group == IExpGroup.EXP_GROUP_BUSINESS_KBN){
-    		for (int i=0 ; i<arrGroupTemp.length;i++){
-    			if( arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0){
-    				arrGroupTemp[i] ="Chưa chỉ định";
-    			}else if (Integer.parseInt(arrGroupTemp[i])==1){
-    				arrGroupTemp[i] ="Lập trình viên";
-    			}else if (Integer.parseInt(arrGroupTemp[i])==2){
-    				arrGroupTemp[i] ="Phiên dịch";
-    			}else if (Integer.parseInt(arrGroupTemp[i])==3){
-    				arrGroupTemp[i] ="Lập trình viên-Phiên dịch";
-    			}
-    				
-    		}
-    	}
-    	/** trường hợp số nhân viên thử việc trong năm setting tại system */
-    	if (group == IExpGroup.EXP_GROUP_TRAINING_YEAR){
-    		for (int i=0 ; i<arrGroupTemp.length;i++){
-    			if( arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0){
-    				arrGroupTemp[i] ="Số LTV thử việc năm " + currentYear;
-    			}
-    		}
-    	}
-    	
-		/** trường hợp số nhân viên được nhận chính thức trong năm setting tại system */
-    	if (group == IExpGroup.EXP_GROUP_CONTRACT_YEAR){
-    		for (int i=0 ; i<arrGroupTemp.length;i++){
-    			if( arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0){
-    				arrGroupTemp[i] ="Số LTV nhận chính thức năm " + currentYear;
-    		}else if (Integer.parseInt(arrGroupTemp[i])==1){
-				arrGroupTemp[i] ="Số LTV nhận chính thức năm " + currentYear+"(thử việc năm trước)";
+		String[] arrGroupTemp=null;
+
+		arrGroup =grp.getGroup(group);
+		arrGroupTemp = copyArray(arrGroup);
+		/** trường hợp là giới tính thì phải setting lại text hiển thị */
+		if (group == IExpGroup.EXP_GROUP_SEX){
+			for (int i=0 ; i<arrGroupTemp.length;i++){
+				if(arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0 ){
+					arrGroupTemp[i] ="Nữ";
+				}else{
+					arrGroupTemp[i] ="Nam";
 				}
-    		}
-    	}
-    	/** trường hợp số nhân viên thử việc nhưng không được nhận*/
-    	if (group == IExpGroup.EXP_GROUP_NOTCONTRACT_YEAR){
-    		for (int i=0 ; i<arrGroupTemp.length;i++){
-    			if( arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0){
-    				arrGroupTemp[i] ="Số LTV không nhận sau thử việc năm " + currentYear;
-    			}
-    		}
-    	}	
-    	
-    	/** trường hợp số nhân viên chính thức có thâm niên nhỏ hơn hoặc bằng N tháng ( setting tại system)*/
-    	if (group == IExpGroup.EXP_GROUP_CONTRACT_LESS_MONTH){
-    		for (int i=0 ; i<arrGroupTemp.length;i++){
-    			if( arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0){
-    				arrGroupTemp[i] ="Số LTV có thâm niên <= " + keikenMonthSystem + " tháng";
-    			}
-    		}
-    	}
+			}
+		}
+
+		/** trường hợp là nhom labour thì phải setting lại text hiển thị */
+		if (group == IExpGroup.EXP_GROUP_LABOUR_USER){
+			for (int i=0 ; i<arrGroupTemp.length;i++){
+				if(arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0 ){
+					arrGroupTemp[i] ="Không thuộc nhóm labor";
+				}else{
+					arrGroupTemp[i] ="Thành viên nhóm labor";
+				}
+			}
+		}
+
+		/** trường hợp là nghỉ việc -chưa nghỉ iệc thì phải setting lại text hiển thị */
+		if (group == IExpGroup.EXP_GROUP_YASUMI){
+			for (int i=0 ; i<arrGroupTemp.length;i++){
+				if(arrGroupTemp[i]==null|| ( arrGroupTemp[i])=="" ){
+					arrGroupTemp[i] ="Đang làm việc";
+				}else{
+					arrGroupTemp[i] ="Đã nghỉ việc";
+				}
+			}
+		}
+
+		/** trường hợp là thâm niên thì phải setting lại text hiển thị */
+		if (group == IExpGroup.EXP_GROUP_KEIKEN){
+			for (int i=0 ; i<arrGroupTemp.length;i++){
+				if( arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0){
+					arrGroupTemp[i] ="Nhỏ hơn 1 năm";
+				}else if (Integer.parseInt(arrGroupTemp[i])==1){
+					arrGroupTemp[i] ="1 ～ 2 năm";
+				}else if (Integer.parseInt(arrGroupTemp[i])==2){
+					arrGroupTemp[i] ="2 ～ 3 năm";
+				}else if (Integer.parseInt(arrGroupTemp[i])==3){
+					arrGroupTemp[i] ="3 ～4 năm";
+				}else if (Integer.parseInt(arrGroupTemp[i])==4){
+					arrGroupTemp[i] ="4 ～5 năm";
+				}else if (Integer.parseInt(arrGroupTemp[i])==5){
+					arrGroupTemp[i] ="Lớn hơn 5 năm";
+				}
+
+			}
+		}
+		/** trường hợp là thâm niên nhóm labor thì phải setting lại text hiển thị */
+		if (group == IExpGroup.EXP_GROUP_KEIKEN_LABOR){
+			for (int i=0 ; i<arrGroupTemp.length;i++){
+				if( arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0){
+					arrGroupTemp[i] ="Nhỏ hơn 1 năm";
+				}else if (Integer.parseInt(arrGroupTemp[i])==1){
+					arrGroupTemp[i] ="1 ～ 2 năm";
+				}else if (Integer.parseInt(arrGroupTemp[i])==2){
+					arrGroupTemp[i] ="2 ～ 3 năm";
+				}else if (Integer.parseInt(arrGroupTemp[i])==3){
+					arrGroupTemp[i] ="3 ～4 năm";
+				}else if (Integer.parseInt(arrGroupTemp[i])==4){
+					arrGroupTemp[i] ="4 ～5 năm";
+				}else if (Integer.parseInt(arrGroupTemp[i])==5){
+					arrGroupTemp[i] ="Lớn hơn 5 năm";
+				}
+
+			}
+		}
+		/** trường hợp là lương thì phải setting lại text hiển thị */
+		if (group == IExpGroup.EXP_GROUP_SALARY_BASIC){
+			for (int i=0 ; i<arrGroupTemp.length;i++){
+				if( arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0){
+					arrGroupTemp[i] ="Nhỏ hơn 300$";
+				}else if (Integer.parseInt(arrGroupTemp[i])==1){
+					arrGroupTemp[i] ="300 ～ 399.9$";
+				}else if (Integer.parseInt(arrGroupTemp[i])==2){
+					arrGroupTemp[i] ="400 ～ 499.9$";
+				}else if (Integer.parseInt(arrGroupTemp[i])==3){
+					arrGroupTemp[i] ="500 ～ 599.9$";
+				}else if (Integer.parseInt(arrGroupTemp[i])==4){
+					arrGroupTemp[i] ="600 ～ 699.9$";
+				}else if (Integer.parseInt(arrGroupTemp[i])==5){
+					arrGroupTemp[i] ="Lớn hơn 700$";
+				}
+
+			}
+		}
+
+		/** trường hợp là chuyên môn thì phải setting lại text hiển thị */
+		if (group == IExpGroup.EXP_GROUP_BUSINESS_KBN){
+			for (int i=0 ; i<arrGroupTemp.length;i++){
+				if( arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0){
+					arrGroupTemp[i] ="Chưa chỉ định";
+				}else if (Integer.parseInt(arrGroupTemp[i])==1){
+					arrGroupTemp[i] ="Lập trình viên";
+				}else if (Integer.parseInt(arrGroupTemp[i])==2){
+					arrGroupTemp[i] ="Phiên dịch";
+				}else if (Integer.parseInt(arrGroupTemp[i])==3){
+					arrGroupTemp[i] ="Lập trình viên-Phiên dịch";
+				}
+
+			}
+		}
+		/** trường hợp số nhân viên thử việc trong năm setting tại system */
+		if (group == IExpGroup.EXP_GROUP_TRAINING_YEAR){
+			for (int i=0 ; i<arrGroupTemp.length;i++){
+				if( arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0){
+					arrGroupTemp[i] ="Số LTV thử việc năm " + currentYear;
+				}
+			}
+		}
+
+		/** trường hợp số nhân viên được nhận chính thức trong năm setting tại system */
+		if (group == IExpGroup.EXP_GROUP_CONTRACT_YEAR){
+			for (int i=0 ; i<arrGroupTemp.length;i++){
+				if( arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0){
+					arrGroupTemp[i] ="Số LTV nhận chính thức năm " + currentYear;
+				}else if (Integer.parseInt(arrGroupTemp[i])==1){
+					arrGroupTemp[i] ="Số LTV nhận chính thức năm " + currentYear+"(thử việc năm trước)";
+				}
+			}
+		}
+		/** trường hợp số nhân viên thử việc nhưng không được nhận*/
+		if (group == IExpGroup.EXP_GROUP_NOTCONTRACT_YEAR){
+			for (int i=0 ; i<arrGroupTemp.length;i++){
+				if( arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0){
+					arrGroupTemp[i] ="Số LTV không nhận sau thử việc năm " + currentYear;
+				}
+			}
+		}
+
+		/** trường hợp số nhân viên chính thức có thâm niên nhỏ hơn hoặc bằng N tháng ( setting tại system)*/
+		if (group == IExpGroup.EXP_GROUP_CONTRACT_LESS_MONTH){
+			for (int i=0 ; i<arrGroupTemp.length;i++){
+				if( arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0){
+					arrGroupTemp[i] ="Số LTV có thâm niên <= " + keikenMonthSystem + " tháng";
+				}
+			}
+		}
 		/** so nhan vien co chuc vu khong phu hop voi tham nien*/
 		if (group == IExpGroup.EXP_GROUP_STAFF_CURRENT_POSITION_NOT_SATIFIED){
 			for (int i=0 ; i<arrGroupTemp.length;i++){
@@ -596,48 +612,48 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
 			}
 		}
 		ArrayList<ExpParent> arrayParents = new ArrayList<ExpParent>();
-        
-        /** here we set the parents and the children */
-        for (int i = 0; i < arrGroup.length; i++){
-    		ArrayList<User> arrayChildren = new ArrayList<User>();
-    		/** tạo Object để lưu trữ data tại node cha và con */
-    		ExpParent parent = new ExpParent();
-    		/** insert data cho node cha */
-    		if (arrGroupTemp[i]==null){
-    			if(group == IExpGroup.EXP_GROUP_STAFF_CONTRACT_STATUS_YEARMONTH){
-    				parent.setTitle("Chưa nhận chính thức");
-    			}else{
-    				parent.setTitle("");
-    			}
-    			
-    		}else{
-    			parent.setTitle(arrGroupTemp[i].toString());
-    		}
-    		/** insert data cho node con */
-    		if (arrGroupTemp[i]==null){
-    			list = grp.getChildGroup(group, "");
-    		}else{
-    			if( arrGroup[i]==null || arrGroup[i].equals("")){
-    				list = grp.getChildGroup(group, "");
-    			}else{
-    				list = grp.getChildGroup(group, arrGroup[i].toString());
-    			}
-    			
-    		}
-            
-            if (list !=null){
-            	for(User usr : list){
-	            	arrayChildren.add(usr);
-	            }	            
-        	parent.setArrayChildren(arrayChildren);
-        	arrayParents.add(parent);
-            }
-        }
-        
-        /** gán data */
-        mExpAdapter = new ExpAdapter(this,arrayParents);
-        mExpandableList.setAdapter(mExpAdapter);
-    }
+
+		/** here we set the parents and the children */
+		for (int i = 0; i < arrGroup.length; i++){
+			ArrayList<User> arrayChildren = new ArrayList<User>();
+			/** tạo Object để lưu trữ data tại node cha và con */
+			ExpParent parent = new ExpParent();
+			/** insert data cho node cha */
+			if (arrGroupTemp[i]==null){
+				if(group == IExpGroup.EXP_GROUP_STAFF_CONTRACT_STATUS_YEARMONTH){
+					parent.setTitle("Chưa nhận chính thức");
+				}else{
+					parent.setTitle("");
+				}
+
+			}else{
+				parent.setTitle(arrGroupTemp[i].toString());
+			}
+			/** insert data cho node con */
+			if (arrGroupTemp[i]==null){
+				list = grp.getChildGroup(group, "");
+			}else{
+				if( arrGroup[i]==null || arrGroup[i].equals("")){
+					list = grp.getChildGroup(group, "");
+				}else{
+					list = grp.getChildGroup(group, arrGroup[i].toString());
+				}
+
+			}
+
+			if (list !=null){
+				for(User usr : list){
+					arrayChildren.add(usr);
+				}
+				parent.setArrayChildren(arrayChildren);
+				arrayParents.add(parent);
+			}
+		}
+
+		/** gán data */
+		mExpAdapter = new ExpAdapter(this,arrayParents);
+		mExpandableList.setAdapter(mExpAdapter);
+	}
 	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * copy Array
      * 

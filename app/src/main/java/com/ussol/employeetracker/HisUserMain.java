@@ -38,6 +38,7 @@ import com.ussol.employeetracker.utils.DateTimeUtil;
 import com.ussol.employeetracker.utils.ShowAlertDialog;
 import com.ussol.employeetracker.utils.Utils;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -356,7 +357,7 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
 					getActivity().setResult(getActivity().RESULT_OK, intent);
 					getActivity().finish();
 					*/
-					
+
 				}else{
 					ShowAlertDialog.showTitleAndMessageDialog(getActivity(), "Cập nhật dữ liệu", "Không có nhân viên nào được chọn.");
 					break;
@@ -450,7 +451,8 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
      * SelectDateFragment
      * 
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
-    public class SelectDateFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+    @SuppressLint("ValidFragment")
+	public class SelectDateFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
     	private int mControl ;
     	public SelectDateFragment(int control){
     		mControl = control;
@@ -1703,6 +1705,7 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
 					bundle.putInt(MasterConstants.TAB_USER_HIS_TAG, 0);
 					bundle.putInt(MasterConstants.EXP_USER_GROUP_TAG, HisUserMainActivity.currentGroup);
 					intent.putExtras(bundle);
+					intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 					getActivity().setResult(getActivity().RESULT_OK, intent);
 					getActivity().finish();
 					

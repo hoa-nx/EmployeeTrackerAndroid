@@ -35,7 +35,7 @@ public class EditPositionActivity extends Activity  implements OnClickListener ,
 	/** Lưu trữ control code nhóm*/
 	TextView txtCode ;
 	/** Lưu trữ control tên ...nhóm */
-	EditText txtName, txtPositionFJNCode, txtMinMonth , txtNote , txtPositionAllowance,txtLevel;
+	EditText txtName, txtPositionFJNCode, txtMinMonth , txtNote , txtPositionAllowance,txtLevel, txtStandardMM;
 	/** Trị code nhóm  */
 	private int nCode = 0;
 	/** Lưu các button trên màn hình  */
@@ -116,6 +116,7 @@ public class EditPositionActivity extends Activity  implements OnClickListener ,
 		imm.hideSoftInputFromWindow(txtPositionFJNCode.getWindowToken(), 0);
 		imm.hideSoftInputFromWindow(txtMinMonth.getWindowToken(), 0);
 		imm.hideSoftInputFromWindow(txtLevel.getWindowToken(), 0);
+		imm.hideSoftInputFromWindow(txtStandardMM.getWindowToken(), 0);
         imm.hideSoftInputFromWindow(txtNote.getWindowToken(), 0);
 	}
     
@@ -130,6 +131,7 @@ public class EditPositionActivity extends Activity  implements OnClickListener ,
 		txtPositionFJNCode= (EditText) findViewById(R.id.txtPositionFJNCode);
 		txtMinMonth= (EditText) findViewById(R.id.txtPositionMinMonth);
 		txtLevel= (EditText) findViewById(R.id.txtPositionLevel);
+		txtStandardMM= (EditText) findViewById(R.id.txtPositionStandardMM);
 		txtPositionAllowance= (EditText) findViewById(R.id.txtPositionAllowance);
 		txtNote= (EditText) findViewById(R.id.txtPositionNote);
 		/** button*/
@@ -160,6 +162,7 @@ public class EditPositionActivity extends Activity  implements OnClickListener ,
 			txtPositionFJNCode.setText("");
 			txtMinMonth.setText("");
 			txtLevel.setText("");
+			txtStandardMM.setText("1.0");
 			txtPositionAllowance.setText("0");
 			txtNote.setText("");
 		}catch(Exception e){
@@ -184,6 +187,7 @@ public class EditPositionActivity extends Activity  implements OnClickListener ,
 			txtMinMonth.setText(item.yobi_text2.toString());
 			txtLevel.setText(String.valueOf(item.yobi_code1)); // muc cua cap bac (cang nho thi chuc cang cao)
 			txtPositionAllowance.setText(String.valueOf(item.yobi_real1));
+			txtStandardMM.setText(String.valueOf(item.yobi_real2)); // chuan MM ung voi tung ngach -- tinh nang suat
 			txtNote.setText(item.note.toString());
 		}catch(Exception e){
 			Log.v(TAG,e.getMessage());
@@ -208,6 +212,7 @@ public class EditPositionActivity extends Activity  implements OnClickListener ,
 			txtMinMonth.setText(item.yobi_text2.toString());
 			txtLevel.setText(String.valueOf(item.yobi_code1)); // muc cua cap bac (cang nho thi chuc cang cao)
 			txtPositionAllowance.setText(String.valueOf(item.yobi_real1));
+			txtStandardMM.setText(String.valueOf(item.yobi_real2));// chuẩn MM để tính năng suất
 			txtNote.setText(item.note.toString());
 		}catch(Exception e){
 			Log.v(TAG,e.getMessage());
@@ -343,6 +348,13 @@ public class EditPositionActivity extends Activity  implements OnClickListener ,
 				position.yobi_real1= Float.parseFloat("0");	
 			}else{
 				position.yobi_real1= Float.parseFloat(txtPositionAllowance.getText().toString());
+			}
+			/**chuẩn MM*/
+			if(txtStandardMM.getText().toString().equals(""))
+			{
+				position.yobi_real2= Float.parseFloat("0");
+			}else{
+				position.yobi_real2= Float.parseFloat(txtStandardMM.getText().toString());
 			}
 			//level cang nho thi chuc vu cang cao
 			if(txtLevel.getText().toString().equals(""))

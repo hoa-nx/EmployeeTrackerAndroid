@@ -102,6 +102,7 @@ public class DetailPositionActivity extends Activity {
 		detailFragment.setPositionFJNCode("");
 		detailFragment.setPositionMinMonth("");
 		detailFragment.setPositionLevel("0");
+		detailFragment.setPositionStandardMM("0");
 		detailFragment.setPositionAllowance("0");
 		detailFragment.setPositionNote("");
 	}
@@ -119,6 +120,7 @@ public class DetailPositionActivity extends Activity {
 		detailFragment.setPositionMinMonth(item.yobi_text2);
 		detailFragment.setPositionLevel(String.valueOf(item.yobi_code1));
 		detailFragment.setPositionAllowance(String.valueOf(item.yobi_real1));
+		detailFragment.setPositionStandardMM(String.valueOf(item.yobi_real2));
 		detailFragment.setPositionNote(item.note);
 	}	
     /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
