@@ -2,7 +2,7 @@
     <item android:id="@+id/menu_search_item_settings"
         android:title="@string/menu_search_item_settings"
         android:orderInCategory="100"
-        android:icon="@drawable/searchitem"
+        android:icon="@drawable/preferences_contact_list"
         android:showAsAction="always" />
 	<item android:id="@+id/menu_sort_item_settings"
         android:title="@string/menu_report_sortlist"

@@ -5,16 +5,12 @@
 
 package com.ussol.employeetracker;
 
-import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
-import java.lang.ref.PhantomReference;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,7 +22,6 @@ import java.util.Map;
 
 import jxl.Workbook;
 import jxl.WorkbookSettings;
-import jxl.write.DateTime;
 import jxl.write.Label;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
@@ -36,13 +31,11 @@ import jxl.write.biff.RowsExceededException;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -54,20 +47,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.MimeTypeMap;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -85,12 +71,10 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfPageEventHelper;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.ussol.employeetracker.helpers.ConvertCursorToListString;
-import com.ussol.employeetracker.helpers.DatabaseAdapter;
 import com.ussol.employeetracker.helpers.ExpGroupHelper;
 import com.ussol.employeetracker.helpers.ExpParent;
 import com.ussol.employeetracker.helpers.ExpParentChildInGroup;
-import com.ussol.employeetracker.helpers.GroupDepartmentReport;
-import com.ussol.employeetracker.helpers.SalaryReport;
+import com.ussol.employeetracker.helpers.GroupPdfReport;
 import com.ussol.employeetracker.helpers.SendMail;
 import com.ussol.employeetracker.models.IExpGroup;
 import com.ussol.employeetracker.models.MasterConstants;
@@ -98,7 +82,6 @@ import com.ussol.employeetracker.models.User;
 import com.ussol.employeetracker.utils.DateTimeUtil;
 import com.ussol.employeetracker.utils.StringProcessing;
 import com.ussol.employeetracker.utils.Utils;
-import com.ussol.employeetracker.utils.VietnameseToNoSign;
 
 
 public class GenerateReport extends Activity implements OnClickListener {
@@ -326,7 +309,7 @@ public class GenerateReport extends Activity implements OnClickListener {
 				if(groupParent.size() <= 5000) {
 
 					if(radPDF.isChecked()){
-						GroupDepartmentReport report = new GroupDepartmentReport(this);
+						GroupPdfReport report = new GroupPdfReport(this);
 						report.exportToPDF();
 					}else{
 						//Excel
@@ -352,7 +335,7 @@ public class GenerateReport extends Activity implements OnClickListener {
 				if(groupParent.size() <= 5000) {
 
 					if(radPDF.isChecked()){
-						GroupDepartmentReport report = new GroupDepartmentReport(this);
+						GroupPdfReport report = new GroupPdfReport(this);
 						report.exportToPDF();
 					}else{
 						//Excel
@@ -378,7 +361,7 @@ public class GenerateReport extends Activity implements OnClickListener {
 				if(groupParent.size() <= 5000) {
 
 					if(radPDF.isChecked()){
-						GroupDepartmentReport report = new GroupDepartmentReport(this);
+						GroupPdfReport report = new GroupPdfReport(this);
 						report.exportToPDF();
 					}else{
 						//Excel
@@ -404,7 +387,7 @@ public class GenerateReport extends Activity implements OnClickListener {
 				if(groupParent.size() <= 5000) {
 
 					if(radPDF.isChecked()){
-						GroupDepartmentReport report = new GroupDepartmentReport(this);
+						GroupPdfReport report = new GroupPdfReport(this);
 						report.exportToPDF();
 					}else{
 						//Excel
@@ -430,7 +413,7 @@ public class GenerateReport extends Activity implements OnClickListener {
 				if(groupParent.size() <= 5000) {
 
 					if(radPDF.isChecked()){
-						GroupDepartmentReport report = new GroupDepartmentReport(this);
+						GroupPdfReport report = new GroupPdfReport(this);
 						report.exportToPDF();
 					}else{
 						//Excel
@@ -456,7 +439,7 @@ public class GenerateReport extends Activity implements OnClickListener {
 				if(groupParent.size() <= 5000) {
 
 					if(radPDF.isChecked()){
-						GroupDepartmentReport report = new GroupDepartmentReport(this);
+						GroupPdfReport report = new GroupPdfReport(this);
 						report.exportToPDF();
 					}else{
 						//Excel
@@ -482,7 +465,7 @@ public class GenerateReport extends Activity implements OnClickListener {
 				if(groupParent.size() <= 5000) {
 
 					if(radPDF.isChecked()){
-						GroupDepartmentReport report = new GroupDepartmentReport(this);
+						GroupPdfReport report = new GroupPdfReport(this);
 						report.exportToPDF();
 					}else{
 						//Excel
@@ -508,7 +491,7 @@ public class GenerateReport extends Activity implements OnClickListener {
 				if(groupParent.size() <= 5000) {
 
 					if(radPDF.isChecked()){
-						GroupDepartmentReport report = new GroupDepartmentReport(this);
+						GroupPdfReport report = new GroupPdfReport(this);
 						report.exportToPDF();
 					}else{
 						//Excel
@@ -535,7 +518,7 @@ public class GenerateReport extends Activity implements OnClickListener {
 				if(groupParent.size() <= 5000) {
 
 					if(radPDF.isChecked()){
-						GroupDepartmentReport report = new GroupDepartmentReport(this);
+						GroupPdfReport report = new GroupPdfReport(this);
 						report.exportToPDF();
 					}else{
 						//Excel
@@ -561,7 +544,7 @@ public class GenerateReport extends Activity implements OnClickListener {
 				if(groupParent.size() <= 5000) {
 
 					if(radPDF.isChecked()){
-						GroupDepartmentReport report = new GroupDepartmentReport(this);
+						GroupPdfReport report = new GroupPdfReport(this);
 						report.exportToPDF();
 					}else{
 						//Excel
@@ -587,7 +570,7 @@ public class GenerateReport extends Activity implements OnClickListener {
 				if(groupParent.size() <= 5000) {
 
 					if(radPDF.isChecked()){
-						GroupDepartmentReport report = new GroupDepartmentReport(this);
+						GroupPdfReport report = new GroupPdfReport(this);
 						report.exportToPDF();
 					}else{
 						//Excel
@@ -614,7 +597,7 @@ public class GenerateReport extends Activity implements OnClickListener {
 				if(groupParent.size() <= 5000) {
 
 					if(radPDF.isChecked()){
-						GroupDepartmentReport report = new GroupDepartmentReport(this);
+						GroupPdfReport report = new GroupPdfReport(this);
 						report.exportToPDF();
 					}else{
 						//Excel
@@ -1310,11 +1293,11 @@ public class GenerateReport extends Activity implements OnClickListener {
 		// add metadata to the PDF which can be viewed in your Adobe Reader
 	 	// under File -> Properties
 	 	private void addMetaData(Document document) {
-	 		/*document.addTitle("Detail Report using Employee Tracker (USSOL)");
-	 		document.addSubject("PDF created using android app \"Employee Tracker (USSOL)\"");
-	 		document.addKeywords("Android, PDF, Quan ly nhan su, Nhan su, Tracker, Employee Tracker");
-	 		document.addAuthor("Hoa-NX");
-	 		document.addCreator("Hoa-NX");*/
+	 		document.addTitle("Danh sach nhan vien");
+			document.addSubject("Quan Ly Nhan Su");
+			document.addKeywords("Android, PDF, Quan ly nhan su, Nhan su, Tracker, Employee Tracker");
+			document.addAuthor("Hoa-NX");
+			document.addCreator("Hoa-NX");
 	 	}
 
 		private void addDataToTable_UserDetail(PdfPTable table, Document document) throws DocumentException, IOException{
@@ -1382,7 +1365,7 @@ public class GenerateReport extends Activity implements OnClickListener {
 				addCellNoBorder(table, String.valueOf(entry.dept_name));
 				addBlankCellNoBorder(table,3);
 
-				addCellNoBorder(table,"Team");
+				addCellNoBorder(table,"Tổ");
 				addCellNoBorder(table, String.valueOf(entry.team_name));
 				addBlankCellNoBorder(table,3);
 				
@@ -1427,11 +1410,11 @@ public class GenerateReport extends Activity implements OnClickListener {
 				addCellNoBorder(table, keikenOutput + " tháng");
 				addBlankCellNoBorder(table,3);
 				
-				addCellNoBorder(table,"Ngày vào labor");
+				addCellNoBorder(table,"Ngày vào nhóm labor");
 				addCellNoBorder(table, String.valueOf(entry.join_date));
 				addBlankCellNoBorder(table,3);
 
-				addCellNoBorder(table,"Ngày KThúc labor");
+				addCellNoBorder(table,"Ngày kthúc labor");
 				addCellNoBorder(table, String.valueOf(entry.labour_out_date));
 				addBlankCellNoBorder(table,3);
 				
@@ -1461,7 +1444,7 @@ public class GenerateReport extends Activity implements OnClickListener {
 				}else if(String.valueOf(entry.business_kbn).equals("2")){
 					workType="PD";
 				} else if(String.valueOf(entry.business_kbn).equals("3")){
-					workType="Khác";
+					workType="Khác...";
 				}
 				addCellNoBorder(table, workType);
 				addBlankCellNoBorder(table,3);
@@ -1476,11 +1459,11 @@ public class GenerateReport extends Activity implements OnClickListener {
 				addBlankCellNoBorder(table,3);
 				*/
 				
-				addCellNoBorder(table,"Lương cơ bản(USD)");
+				addCellNoBorder(table,"Lương cơ bản($)");
 				addCellNoBorder(table, String.valueOf(entry.salary_notallowance));
 				addBlankCellNoBorder(table,3);
 				
-				addCellNoBorder(table,"Lương+phụ cấp cố định(USD)");
+				addCellNoBorder(table,"Lương+phụ cấp cố định($)");
 				addCellNoBorder(table, String.valueOf(entry.salary_allowance));
 				addBlankCellNoBorder(table,3);
 				
@@ -1669,7 +1652,7 @@ public class GenerateReport extends Activity implements OnClickListener {
 	 			footer.setTotalWidth(220);
 	 			footer.getDefaultCell().setBorderWidth(0);
 	 			footer.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
-	 			Chunk chunk = new Chunk("Report Generated Using - Employee Tracker");
+	 			Chunk chunk = new Chunk(MasterConstants.REPORT_FOOTER_COMPANY_TEXT);
 	 			chunk.setAction(new PdfAction(PdfAction.FIRSTPAGE));
 	 			chunk.setFont(small);
 	 			footer.addCell(new Phrase(chunk));

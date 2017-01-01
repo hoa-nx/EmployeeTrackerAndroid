@@ -72,6 +72,17 @@ public final class ExpParentChildInGroup {
             }
         }
 
+        /** trường hợp là phu cap nghiep vu thì phải setting lại text hiển thị */
+        if (group == IExpGroup.EXP_GROUP_BUSSINESS_ALLOWANCE){
+            for (int i=0 ; i<arrGroupTemp.length;i++){
+                if(arrGroupTemp[i]==null|| ( arrGroupTemp[i])=="" ){
+                    arrGroupTemp[i] ="Không có PC";
+                }else{
+                    //arrGroupTemp[i] ="";
+                }
+            }
+        }
+
         /** trường hợp là nghỉ việc -chưa nghỉ iệc thì phải setting lại text hiển thị */
         if (group == IExpGroup.EXP_GROUP_YASUMI){
             for (int i=0 ; i<arrGroupTemp.length;i++){
@@ -151,7 +162,9 @@ public final class ExpParentChildInGroup {
                 }else if (Integer.parseInt(arrGroupTemp[i])==2){
                     arrGroupTemp[i] ="Phiên dịch";
                 }else if (Integer.parseInt(arrGroupTemp[i])==3){
-                    arrGroupTemp[i] ="Lập trình viên-Phiên dịch";
+                    arrGroupTemp[i] ="Khác(tổng vụ, QA....)";
+                }else if (Integer.parseInt(arrGroupTemp[i])==9){
+                    arrGroupTemp[i] ="Lập trình viên-Phiên dịch...";
                 }
 
             }

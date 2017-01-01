@@ -188,5 +188,6 @@ public class MasterConstants {
 	public static enum MESSAGE_TYPE {BIRTHDAY,SALARY,YASUMI,TRAIL}
 	
 	public static enum MESSAGE_SMS_OR_EMAIL {SMS,EMAIL}
-	
+
+	public static  final String REPORT_FOOTER_COMPANY_TEXT ="FUJINET SYSTEMS JSC-DEPT 1";
 }

@@ -3,7 +3,7 @@
 	     android:title="@string/menu_report_searchitem"
 	     android:orderInCategory="100"
 	     android:showAsAction="always"
-	     android:icon="@drawable/searchitem"/>
+	     android:icon="@drawable/preferences_contact_list"/>
     <item android:id="@+id/menu_exp_group_sortlist"
         android:title="@string/menu_report_sortlist"
         android:orderInCategory="100"

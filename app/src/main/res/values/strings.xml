@@ -75,6 +75,7 @@
     <string name="menu_exp_group_sex">Nhóm theo giới tính</string>
     <string name="menu_exp_group_japanese">Nhóm theo trình độ Nhật ngữ</string>
     <string name="menu_exp_group_business_kbn">Nhóm theo chuyên môn</string>
+    <string name="menu_exp_group_business_allowance">Nhóm theo PC nghiệp vụ</string>
     <string name="menu_exp_group_keiken">Nhóm theo thâm niên công ty</string>
     <string name="menu_exp_group_keiken_labor">Nhóm theo thâm niên labor</string>
     <string name="menu_exp_group_none">Danh sách nhân viên</string>

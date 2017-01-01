@@ -104,7 +104,7 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
 	private LinearLayout layoutSearch, layoutMenu;
 	private PullToRefreshListView mListView;
 	private View viewLayout = null;
-	private static int[] imageResources = new int[]{R.drawable.searchitem_boommenu, R.drawable.sort_list,
+	private static int[] imageResources = new int[]{R.drawable.preferences_contact_list, R.drawable.sort_list,
 			R.drawable.gnome_system_config};
 	private BoomMenuButton bmb;
 

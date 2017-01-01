@@ -39,7 +39,11 @@
     </item> -->
     <item
         android:id="@+id/actionSave"
-        android:title="Lưu biểu đồ">
+        android:title="Lưu biểu đồ"
+        android:orderInCategory="100"
+        android:showAsAction="always"
+        android:icon="@drawable/save_back"
+        >
     </item>
     <!-- <item
         android:id="@+id/actionTogglePinch"

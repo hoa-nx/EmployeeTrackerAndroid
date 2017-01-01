@@ -62,7 +62,12 @@ public class ContactListActivity extends Activity  implements OnClickListener  {
         resolver = this.getContentResolver();
         listView = (ListView) findViewById(R.id.contacts_list);
 
-        phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " ASC");
+        phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI
+                , null
+                , null
+                , null
+                , ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " ASC");
+
         LoadContact loadContact = new LoadContact();
         loadContact.execute();
 

@@ -446,10 +446,28 @@ public class ChartActivity extends Activity implements OnItemClickListener ,OnCl
                                         case 1:
                                             //Intent intSort = new Intent(getContext(), DragNDropListActivity.class);
                                             //startActivityForResult(intSort, MasterConstants.CALL_SORT_ITEM_ACTIVITY_CODE);
+                                            Toast.makeText(getContext(),"Not implement",Toast.LENGTH_SHORT);
                                             break;
                                         case 2:
-                                            //Intent intConfig = new Intent(getContext(), SystemConfigPreferencesActivity.class);
-                                            //startActivityForResult(intConfig , MasterConstants.CALL_CONFIG_ITEM_ACTIVITY_CODE);
+                                            Intent intentExcelReport = new Intent(getApplicationContext(), GenerateReport.class);
+                                            Bundle bundleExcelReport = new Bundle();
+                                            switch (position){
+                                                case  0 :
+                                                    /**code cua group nghi viec theo nam*/
+                                                    bundleExcelReport.putInt(DatabaseAdapter.KEY_EXPANDABLE_GROUP, IExpGroup.EXP_GROUP_YASUMI_YEAR);
+                                                    /**gán vào bundle để gửi cùng với intent */
+                                                    intentExcelReport.putExtras(bundleExcelReport);
+                                                    break;
+
+                                                default:
+                                                    /**code cua group*/
+                                                    bundleExcelReport.putInt(DatabaseAdapter.KEY_EXPANDABLE_GROUP, IExpGroup.EXP_GROUP_DEPT);
+                                                    /**gán vào bundle để gửi cùng với intent */
+                                                    intentExcelReport.putExtras(bundleExcelReport);
+                                                    break;
+                                            }
+
+                                            startActivity(intentExcelReport);
                                             break;
                                     }
                                 }

@@ -32,16 +32,16 @@ import com.ussol.employeetracker.models.MasterConstants;
 import com.ussol.employeetracker.models.User;
 import com.ussol.employeetracker.utils.VietnameseToNoSign;
 
-public class GroupDepartmentReport {
+public class GroupPdfReport {
 	private File fileLocation;
 	private String dateRange;
 	private List<User> mEntryList;
 	private ArrayList<ExpParent> groupData;  
 	private AsyncTask<String, Void, String> exportPDF;
 	private GenerateReport report;
-	
+
 	/** phan output chi tiet nhan vien theo tung phong ban START */
-	public GroupDepartmentReport(GenerateReport rpx){
+	public GroupPdfReport(GenerateReport rpx){
 		report = rpx;
 	}
 	public void exportToPDF() {
@@ -50,7 +50,7 @@ public class GroupDepartmentReport {
 			
 	private class ExportPDF extends GenerateReport.Export {
 		
-		private Font catFont;
+		private Font catFont , headerFont;
 		private Font subFont;
 		private Font tableHeader;
 		private Font small;
@@ -90,14 +90,18 @@ public class GroupDepartmentReport {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+
+			headerFont = new Font(bf,30);
 	        catFont = new Font(bf,15);
 			subFont = new Font(bf,10);
 	        tableHeader = new Font();
 	        tableHeader.setStyle(Font.BOLD);
 	        small = new Font();
+			//A4 ngang
 	        Document document = new Document(PageSize.A4.rotate());
 	        
 	        setFile(MasterConstants.REP_BY_DEPT);
+
 	        fileLocation = getFileLocation();
 	        mEntryList = getDataList();
 	        
@@ -143,7 +147,10 @@ public class GroupDepartmentReport {
     				}else{
     					title = "DANH SÁCH NHÂN VIÊN THEO PHÒNG BAN-" + par.getTitle();
     				}
-    				
+					title =  par.getTitle();
+					if(title.equals("")){
+						title = "Không chỉ định";
+					}
     				/** setting title cua report */
         			addTitle_UserDetail(document, title);
         			/** output data to report */
@@ -156,6 +163,7 @@ public class GroupDepartmentReport {
 
 		private void addTitle_UserDetail(Document document, String reportTitle) throws DocumentException{
 	 		Paragraph preface = new Paragraph();
+			preface.add(new Paragraph("DANH SÁCH NHÂN VIÊN", headerFont));
 			// We add one empty line
 			addEmptyLine(preface, 1);
 			// Lets write a big header
@@ -163,6 +171,7 @@ public class GroupDepartmentReport {
 			preface.add(new Paragraph(reportTitle, catFont));
 			addEmptyLine(preface, 1);
 			document.add(preface);
+
 		}
 	    
 		private void addContent_UserDetail(Document document) throws DocumentException, IOException {
@@ -182,11 +191,11 @@ public class GroupDepartmentReport {
 		// add metadata to the PDF which can be viewed in your Adobe Reader
 	 	// under File -> Properties
 	 	private void addMetaData(Document document) {
-	 		/*document.addTitle("Detail Report using Employee Tracker (USSOL)");
-	 		document.addSubject("PDF created using android app \"Employee Tracker (USSOL)\"");
+	 		/*document.addTitle("Detail Report using Employee Tracker (USSOL)");*/
+	 		document.addSubject("Quan Ly Nhan Su");
 	 		document.addKeywords("Android, PDF, Quan ly nhan su, Nhan su, Tracker, Employee Tracker");
 	 		document.addAuthor("Hoa-NX");
-	 		document.addCreator("Hoa-NX");*/
+	 		document.addCreator("Hoa-NX");
 	 	}
 
 		private void addDataToTable_UserDetail(PdfPTable table, Document document) throws DocumentException, IOException{
@@ -200,8 +209,8 @@ public class GroupDepartmentReport {
 			addCellNoBorder(table,"No.",Element.ALIGN_CENTER);
 			// Ho va ten
 			addCellNoBorder(table,"Họ và tên",Element.ALIGN_CENTER);
-			// Ngay thang nam sinh
-			addCellNoBorder(table,"Ngày sinh",Element.ALIGN_CENTER);
+			// Ngay vao cong ty
+			addCellNoBorder(table,"Ngày HD",Element.ALIGN_CENTER);
 			// Gioi tinh
 			//addCellNoBorder(table,"Gioi tinh",Element.ALIGN_CENTER);
 			// Tham nien
@@ -225,8 +234,8 @@ public class GroupDepartmentReport {
 				addCellNoBorder(table,String.valueOf(i+1),Element.ALIGN_LEFT);
 				// Ten nhan vien
 				addCellNoBorder(table, entry.full_name,Element.ALIGN_LEFT);
-				//ngay thang nam sinh
-				addCellNoBorder(table,String.valueOf(entry.birthday),Element.ALIGN_CENTER);
+				//ngay vao cong ty
+				addCellNoBorder(table,String.valueOf(entry.in_date),Element.ALIGN_CENTER);
 				//Gioi tinh
 				//if (entry.sex==0){
 				//	addCellNoBorder(table,String.valueOf("Nu"),Element.ALIGN_CENTER);	
@@ -340,7 +349,7 @@ public class GroupDepartmentReport {
 	 			footer.setTotalWidth(220);
 	 			footer.getDefaultCell().setBorderWidth(0);
 	 			footer.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
-	 			Chunk chunk = new Chunk("Report Generated Using - Employee Tracker(FJN)");
+	 			Chunk chunk = new Chunk(MasterConstants.REPORT_FOOTER_COMPANY_TEXT);
 	 			chunk.setAction(new PdfAction(PdfAction.FIRSTPAGE));
 	 			chunk.setFont(small);
 	 			footer.addCell(new Phrase(chunk));

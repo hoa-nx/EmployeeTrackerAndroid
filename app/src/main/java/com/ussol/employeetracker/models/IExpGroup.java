@@ -44,6 +44,9 @@ public interface IExpGroup<E> {
 	/** theo nghi viec -  nam hien tai*/
 	public int EXP_GROUP_YASUMI_YEAR =23;
 
+	/** phu cap nghiep vu*/
+	public int EXP_GROUP_BUSSINESS_ALLOWANCE =24;
+
 	public String[] getGroup(int group);
 	public ArrayList<?> getGroupArrayList(int group);
 	public List<E> getChildGroup(int group);

@@ -8,6 +8,7 @@ import com.ussol.employeetracker.helpers.DatabaseAdapter;
 import com.ussol.employeetracker.helpers.ExpParent;
 import com.ussol.employeetracker.helpers.ExpAdapter;
 import com.ussol.employeetracker.helpers.ExpGroupHelper;
+import com.ussol.employeetracker.helpers.ExpParentChildInGroup;
 import com.ussol.employeetracker.helpers.IconContextMenu;
 import com.ussol.employeetracker.helpers.SystemConfigItemHelper;
 import com.ussol.employeetracker.models.IExpGroup;
@@ -355,6 +356,12 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
         	getParentChildInGroup(IExpGroup.EXP_GROUP_BUSINESS_KBN);
         	currentGroup = IExpGroup.EXP_GROUP_BUSINESS_KBN;
             return true;
+
+		case R.id.menu_exp_group_business_allowance:
+			getParentChildInGroup(IExpGroup.EXP_GROUP_BUSSINESS_ALLOWANCE);
+			currentGroup = IExpGroup.EXP_GROUP_BUSSINESS_ALLOWANCE;
+			return true;
+
             /** 2013.09.16 ADD START */
         case R.id.menu_exp_group_keiken:
         	getParentChildInGroup(IExpGroup.EXP_GROUP_KEIKEN);
@@ -444,11 +451,21 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
      * 
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
     public void getParentChildInGroup(int group){
+
+		ArrayList<ExpParent> arrayParents=new ArrayList<ExpParent>() ;
+		//get data theo tung group
+		arrayParents = ExpParentChildInGroup.getParentChildInGroup(group,getApplicationContext());
+		//lay ve cac gia tri
+		arrGroup = ExpParentChildInGroup.arrGroupTitle;
+		grp = ExpParentChildInGroup.grpExp;
+		list = ExpParentChildInGroup.listUser;
+
+		/*
 		String[] arrGroupTemp=null;
 
 		arrGroup =grp.getGroup(group);
 		arrGroupTemp = copyArray(arrGroup);
-		/** trường hợp là giới tính thì phải setting lại text hiển thị */
+		*//** trường hợp là giới tính thì phải setting lại text hiển thị *//*
 		if (group == IExpGroup.EXP_GROUP_SEX){
 			for (int i=0 ; i<arrGroupTemp.length;i++){
 				if(arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0 ){
@@ -459,7 +476,7 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
 			}
 		}
 
-		/** trường hợp là nhom labour thì phải setting lại text hiển thị */
+		*//** trường hợp là nhom labour thì phải setting lại text hiển thị *//*
 		if (group == IExpGroup.EXP_GROUP_LABOUR_USER){
 			for (int i=0 ; i<arrGroupTemp.length;i++){
 				if(arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0 ){
@@ -470,7 +487,7 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
 			}
 		}
 
-		/** trường hợp là nghỉ việc -chưa nghỉ iệc thì phải setting lại text hiển thị */
+		*//** trường hợp là nghỉ việc -chưa nghỉ iệc thì phải setting lại text hiển thị *//*
 		if (group == IExpGroup.EXP_GROUP_YASUMI){
 			for (int i=0 ; i<arrGroupTemp.length;i++){
 				if(arrGroupTemp[i]==null|| ( arrGroupTemp[i])=="" ){
@@ -481,7 +498,7 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
 			}
 		}
 
-		/** trường hợp là thâm niên thì phải setting lại text hiển thị */
+		*//** trường hợp là thâm niên thì phải setting lại text hiển thị *//*
 		if (group == IExpGroup.EXP_GROUP_KEIKEN){
 			for (int i=0 ; i<arrGroupTemp.length;i++){
 				if( arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0){
@@ -500,7 +517,7 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
 
 			}
 		}
-		/** trường hợp là thâm niên nhóm labor thì phải setting lại text hiển thị */
+		*//** trường hợp là thâm niên nhóm labor thì phải setting lại text hiển thị *//*
 		if (group == IExpGroup.EXP_GROUP_KEIKEN_LABOR){
 			for (int i=0 ; i<arrGroupTemp.length;i++){
 				if( arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0){
@@ -519,7 +536,7 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
 
 			}
 		}
-		/** trường hợp là lương thì phải setting lại text hiển thị */
+		*//** trường hợp là lương thì phải setting lại text hiển thị *//*
 		if (group == IExpGroup.EXP_GROUP_SALARY_BASIC){
 			for (int i=0 ; i<arrGroupTemp.length;i++){
 				if( arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0){
@@ -539,7 +556,7 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
 			}
 		}
 
-		/** trường hợp là chuyên môn thì phải setting lại text hiển thị */
+		*//** trường hợp là chuyên môn thì phải setting lại text hiển thị *//*
 		if (group == IExpGroup.EXP_GROUP_BUSINESS_KBN){
 			for (int i=0 ; i<arrGroupTemp.length;i++){
 				if( arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0){
@@ -554,7 +571,7 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
 
 			}
 		}
-		/** trường hợp số nhân viên thử việc trong năm setting tại system */
+		*//** trường hợp số nhân viên thử việc trong năm setting tại system *//*
 		if (group == IExpGroup.EXP_GROUP_TRAINING_YEAR){
 			for (int i=0 ; i<arrGroupTemp.length;i++){
 				if( arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0){
@@ -563,7 +580,7 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
 			}
 		}
 
-		/** trường hợp số nhân viên được nhận chính thức trong năm setting tại system */
+		*//** trường hợp số nhân viên được nhận chính thức trong năm setting tại system *//*
 		if (group == IExpGroup.EXP_GROUP_CONTRACT_YEAR){
 			for (int i=0 ; i<arrGroupTemp.length;i++){
 				if( arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0){
@@ -573,7 +590,7 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
 				}
 			}
 		}
-		/** trường hợp số nhân viên thử việc nhưng không được nhận*/
+		*//** trường hợp số nhân viên thử việc nhưng không được nhận*//*
 		if (group == IExpGroup.EXP_GROUP_NOTCONTRACT_YEAR){
 			for (int i=0 ; i<arrGroupTemp.length;i++){
 				if( arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0){
@@ -582,7 +599,7 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
 			}
 		}
 
-		/** trường hợp số nhân viên chính thức có thâm niên nhỏ hơn hoặc bằng N tháng ( setting tại system)*/
+		*//** trường hợp số nhân viên chính thức có thâm niên nhỏ hơn hoặc bằng N tháng ( setting tại system)*//*
 		if (group == IExpGroup.EXP_GROUP_CONTRACT_LESS_MONTH){
 			for (int i=0 ; i<arrGroupTemp.length;i++){
 				if( arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0){
@@ -590,7 +607,7 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
 				}
 			}
 		}
-		/** so nhan vien co chuc vu khong phu hop voi tham nien*/
+		*//** so nhan vien co chuc vu khong phu hop voi tham nien*//*
 		if (group == IExpGroup.EXP_GROUP_STAFF_CURRENT_POSITION_NOT_SATIFIED){
 			for (int i=0 ; i<arrGroupTemp.length;i++){
 				if( arrGroupTemp[i]==null|| Integer.parseInt( arrGroupTemp[i])==0){
@@ -599,7 +616,7 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
 			}
 		}
 
-		/** trường hợp là thong ke nghi viec theo tung nam */
+		*//** trường hợp là thong ke nghi viec theo tung nam *//*
 		if (group == IExpGroup.EXP_GROUP_YASUMI_YEAR) {
 			for (int i = 0; i < arrGroupTemp.length; i++) {
 				if (arrGroupTemp[i] == null || Integer.parseInt(arrGroupTemp[i]) == 0) {
@@ -613,12 +630,12 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
 		}
 		ArrayList<ExpParent> arrayParents = new ArrayList<ExpParent>();
 
-		/** here we set the parents and the children */
+		*//** here we set the parents and the children *//*
 		for (int i = 0; i < arrGroup.length; i++){
 			ArrayList<User> arrayChildren = new ArrayList<User>();
-			/** tạo Object để lưu trữ data tại node cha và con */
+			*//** tạo Object để lưu trữ data tại node cha và con *//*
 			ExpParent parent = new ExpParent();
-			/** insert data cho node cha */
+			*//** insert data cho node cha *//*
 			if (arrGroupTemp[i]==null){
 				if(group == IExpGroup.EXP_GROUP_STAFF_CONTRACT_STATUS_YEARMONTH){
 					parent.setTitle("Chưa nhận chính thức");
@@ -629,7 +646,7 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
 			}else{
 				parent.setTitle(arrGroupTemp[i].toString());
 			}
-			/** insert data cho node con */
+			*//** insert data cho node con *//*
 			if (arrGroupTemp[i]==null){
 				list = grp.getChildGroup(group, "");
 			}else{
@@ -648,7 +665,7 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
 				parent.setArrayChildren(arrayChildren);
 				arrayParents.add(parent);
 			}
-		}
+		}*/
 
 		/** gán data */
 		mExpAdapter = new ExpAdapter(this,arrayParents);

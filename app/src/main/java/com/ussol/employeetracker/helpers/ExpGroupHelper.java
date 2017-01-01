@@ -102,18 +102,26 @@ public class ExpGroupHelper implements IExpGroup<User> {
 				list =mConvertCursorToArrayString.getUserGroup(DatabaseAdapter.KEY_BUSINESS_KBN);
 				returnArr = new String[list.size()];
 				returnArr = list.toArray(returnArr);
-				
 				break;
+
 			case IExpGroup.EXP_GROUP_DEPT:
 				list =mConvertCursorToArrayString.getUserGroup(DatabaseAdapter.KEY_DEPT,DatabaseAdapter.KEY_DEPT_NAME);
 				returnArr = new String[list.size()];
 				returnArr = list.toArray(returnArr);
 				break;
+
 			case IExpGroup.EXP_GROUP_JAPANESE:
 				list =mConvertCursorToArrayString.getUserGroup(DatabaseAdapter.KEY_JAPANESE);
 				returnArr = new String[list.size()];
 				returnArr = list.toArray(returnArr);
 				break;
+
+			case IExpGroup.EXP_GROUP_BUSSINESS_ALLOWANCE:
+				list =mConvertCursorToArrayString.getUserGroup(DatabaseAdapter.KEY_ALLOWANCE_BUSINESS);
+				returnArr = new String[list.size()];
+				returnArr = list.toArray(returnArr);
+				break;
+
 			case IExpGroup.EXP_GROUP_KEIKEN:
 				/** 2013.09.16 ADD START */
 				returnArr = new String[6];
@@ -125,6 +133,7 @@ public class ExpGroupHelper implements IExpGroup<User> {
 				returnArr[5] ="5";/** Lớn hơn 5 năm */
 				/** 2013.09.16 ADD END */
 				break;
+
 			case IExpGroup.EXP_GROUP_KEIKEN_LABOR:
 				/** 2013.09.16 ADD START */
 				returnArr = new String[6];
@@ -136,6 +145,7 @@ public class ExpGroupHelper implements IExpGroup<User> {
 				returnArr[5] ="5";/** Lớn hơn 5 năm */
 				/** 2013.09.16 ADD END */
 				break;
+
 			case IExpGroup.EXP_GROUP_POSITION:
 				list =mConvertCursorToArrayString.getUserGroup(DatabaseAdapter.KEY_POSITION,DatabaseAdapter.KEY_POSITION_NAME);
 				returnArr = new String[list.size()];
@@ -317,6 +327,14 @@ public class ExpGroupHelper implements IExpGroup<User> {
 					xWhere =" AND " + DatabaseAdapter.KEY_JAPANESE + " = '" + groupValue  + "'";
 				}
 				
+				break;
+			case IExpGroup.EXP_GROUP_BUSSINESS_ALLOWANCE:
+				if (groupValue.equals("") || groupValue==null){
+					xWhere =" AND (" + DatabaseAdapter.KEY_ALLOWANCE_BUSINESS+ " IS NULL OR "+DatabaseAdapter.KEY_ALLOWANCE_BUSINESS + " ='')";
+				}else{
+					xWhere =" AND " + DatabaseAdapter.KEY_ALLOWANCE_BUSINESS + " = '" + groupValue  + "'";
+				}
+
 				break;
 			case IExpGroup.EXP_GROUP_KEIKEN:
 				if (groupValue.equals("") || groupValue==null || groupValue.equals("0")){
