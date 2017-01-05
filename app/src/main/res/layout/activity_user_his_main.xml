@@ -140,6 +140,26 @@
             android:textStyle="bold"
             android:visibility="visible" />
 
+        <TextView
+            android:text="2016/1/2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/lblUserHisCode"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            android:id="@+id/txtUserHisOldFromDate" />
+
+        <TextView
+            android:text="01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtUserHisOldFromDate"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/txtUserHisId" />
+
     </RelativeLayout>
 	<include layout="@layout/sep_indicator" android:layout_width="fill_parent" android:layout_height="wrap_content"  />
     <!-- body -->
@@ -218,7 +238,7 @@
                     android:ems="10"
                     android:hint="@string/userTitleNote"
                     android:inputType="textAutoComplete|textMultiLine"
-                    android:lines="3"
+                    android:lines="4"
                     android:textColor="@color/grey" />
 
                 <TextView

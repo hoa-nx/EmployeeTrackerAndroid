@@ -93,7 +93,8 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
     //private TextView lblUserCode , lblUserDeptCode , lblUserTeamCode , lblUserPositionCode ;
     private TextView txtUserCode, imgUserFullPath,txtUserHisDeptNewDeptCode , txtUserHisDeptNewTeamCode,txtUserHisDeptNewPositionCode ,txtUserHisDept_count ;
     private EditText txtUserHisDeptStartDate ,txtUserHisDeptNote,txtUserHisDeptNewDept , txtUserHisDeptNewTeam,txtUserHisDeptNewPosition;
-    private EditText txtUserFullName;
+    private EditText txtUserFullName ;
+	private TextView txtUserHisOldStartDate,txtUserHisId;
     private Button btnUserSave , btnUserCancel , btnUserHisDeptNewDept , btnUserHisDeptNewTeam, btnUserHisDeptNewPosition;
     private  CheckBox chkUserHisDeptNewDept,chkUserHisDeptNewTeam,chkUserHisDeptNewPosition;
 	private Bitmap bitmap;
@@ -190,7 +191,12 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
 		setHisDeptCheck(false);
 		setHisTeamCheck(false);
 		setHisPositionCheck(false);
-				
+
+		/** set init ngay start cu */
+		setHisOldStartDate("");
+		/* init id lich su */
+		setHisId("");
+
 		if (savedInstanceState!=null){
 			
 		}else{
@@ -206,6 +212,10 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
 				setUserCode(1);
 				/** setting so user duoc chon */
 				setUserCount(1);
+				/** set ngay start cu */
+				setHisOldStartDate(userHisInfo.date_from);
+				/* set id lich su */
+				setHisId(String.valueOf(userHisInfo.id));
 			}
 		}
 		isFirstRun = false;
@@ -503,6 +513,7 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
     	}
     	txtUserFullName= (EditText)getView().findViewById(R.id.txtUserHisName);
     	txtUserHisDeptStartDate = (EditText) getView().findViewById(R.id.txtUserHisDeptStartDate);
+		txtUserHisOldStartDate = (TextView) getView().findViewById(R.id.txtUserHisOldFromDate);
     	txtUserHisDeptNewDept= (EditText)getView().findViewById(R.id.txtUserHisDeptNewDept);
     	txtUserHisDeptNewTeam= (EditText)getView().findViewById(R.id.txtUserHisDeptNewTeam);
     	txtUserHisDeptNewPosition= (EditText)getView().findViewById(R.id.txtUserHisDeptNewPosition);
@@ -520,7 +531,9 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
     	chkUserHisDeptNewDept =(CheckBox)getView().findViewById(R.id.chkUserHisDeptNewDept);
     	chkUserHisDeptNewTeam =(CheckBox)getView().findViewById(R.id.chkUserHisDeptNewTeam);
     	chkUserHisDeptNewPosition =(CheckBox)getView().findViewById(R.id.chkUserHisDeptNewPosition);
-    	
+
+		txtUserHisId= (TextView)getView().findViewById(R.id.txtUserHisId);
+
     	txtUserHisDept_count = ( TextView)getView().findViewById(R.id.txtUserHisDept_count);
     	imgUserHisDeptList = (ImageButton)getView().findViewById(R.id.imgUserHisDeptList);
 		btnUserSave = (Button)getView().findViewById(R.id.btnUserSave);
@@ -591,8 +604,13 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
 				for(User usr: _listUserChecked){
 					/** kiem tra xem tri co thay doi so voi master User khong ? Neu khong thi khong update */
 					currentStringValue = String.valueOf(usr.dept) ;
-					if(!currentStringValue.equals(getHisDeptNewDept())){
+					/* khac dept hoac chon ngay start khac thi se update */
+					if(!currentStringValue.equals(getHisDeptNewDept()) || !getHisOldStartDate().equals(getHisDeptStartDate()) ){
 						if(userHisInfo!=null){
+							/* truong hop la edit thi se xoa neu du lieu cua ngay cu */
+							if(!getHisOldStartDate().equals("")){
+								deleteUserHisByDate(getHisOldStartDate(),usr.code,MasterConstants.MASTER_MKBN_DEPT_HIS);
+							}
 							/** nếu như có thay đổi ngày tháng năm thì sẽ xóa data cũ */
 							if(!getHisDeptStartDate().equals(userHisInfo.date_from)){
 								deleteUserHisByDate(userHisInfo.date_from,usr.code,MasterConstants.MASTER_MKBN_DEPT_HIS);
@@ -620,8 +638,12 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
 				for(User usr: _listUserChecked){
 					/** kiem tra xem tri co thay doi so voi master User khong ? Neu khong thi khong update */
 					currentStringValue = String.valueOf(usr.team) ;
-					if(!currentStringValue.equals(getHisDeptNewTeam())){
+					if(!currentStringValue.equals(getHisDeptNewTeam()) || !getHisOldStartDate().equals(getHisDeptStartDate()) ){
 						if(userHisInfo!=null){
+							/* truong hop la edit thi se xoa neu du lieu cua ngay cu */
+							if(!getHisOldStartDate().equals("")){
+								deleteUserHisByDate(getHisOldStartDate(),usr.code,MasterConstants.MASTER_MKBN_TEAM_HIS);
+							}
 							/** nếu như có thay đổi ngày tháng năm thì sẽ xóa data cũ */
 							if(!getHisDeptStartDate().equals(userHisInfo.date_from)){
 								deleteUserHisByDate(userHisInfo.date_from,usr.code,MasterConstants.MASTER_MKBN_TEAM_HIS);
@@ -650,8 +672,12 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
 				for(User usr: _listUserChecked){
 					/** kiem tra xem tri co thay doi so voi master User khong ? Neu khong thi khong update */
 					currentStringValue = String.valueOf(usr.position) ;
-					if(!currentStringValue.equals(getHisDeptNewPositionCode())){
+					if(!currentStringValue.equals(getHisDeptNewPositionCode()) || !getHisOldStartDate().equals(getHisDeptStartDate()) ){
 						if(userHisInfo!=null){
+							/* truong hop la edit thi se xoa neu du lieu cua ngay cu */
+							if(!getHisOldStartDate().equals("")){
+								deleteUserHisByDate(getHisOldStartDate(),usr.code,MasterConstants.MASTER_MKBN_POSITION_HIS);
+							}
 							/** nếu như có thay đổi ngày tháng năm thì sẽ xóa data cũ */
 							if(!getHisDeptStartDate().equals(userHisInfo.date_from)){
 								deleteUserHisByDate(userHisInfo.date_from,usr.code,MasterConstants.MASTER_MKBN_POSITION_HIS);
@@ -683,11 +709,15 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
 				boolean japaneseCheck =fgHisUserOther.getHisJapaneseCheck();
 				/** phu cap nghiep vu */
 				boolean allowanceCheck =fgHisUserOther.getHisAllowance_BusinessCheck();
+				/** phu cap BSE*/
+				boolean allowanceBSECheck =fgHisUserOther.getHisAllowance_BSECheck();
+				/** salary*/
 				/** salary*/
 				boolean salaryCheck =fgHisUserOther.getHisSalaryCheck() ;
 				
 				String japaneseNew = fgHisUserOther.getHisNewJapanese();
 				String allowanceNew = fgHisUserOther.getHisNewAllowance_Business();
+				String allowanceBSENew = fgHisUserOther.getHisNewAllowance_BSE();
 				float salaryNew = fgHisUserOther.getHisNewSalary();
 				
 				/** cap nhat lich su cho truong hop la chung chi tieng Nhat thay doi */
@@ -696,8 +726,12 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
 					for(User usr: _listUserChecked){
 						/** kiem tra xem tri co thay doi so voi master User khong ? Neu khong thi khong update */
 						currentStringValue = String.valueOf(usr.japanese) ;
-						if(!currentStringValue.equals(japaneseNew)){
+						if(!currentStringValue.equals(japaneseNew)|| !getHisOldStartDate().equals(getHisDeptStartDate()) ){
 							if(userHisInfo!=null){
+								/* truong hop la edit thi se xoa neu du lieu cua ngay cu */
+								if(!getHisOldStartDate().equals("")){
+									deleteUserHisByDate(getHisOldStartDate(),usr.code,MasterConstants.MASTER_MKBN_JAPANESE_HIS);
+								}
 								/** nếu như có thay đổi ngày tháng năm thì sẽ xóa data cũ */
 								if(!getHisDeptStartDate().equals(userHisInfo.date_from)){
 									deleteUserHisByDate(userHisInfo.date_from,usr.code,MasterConstants.MASTER_MKBN_JAPANESE_HIS);
@@ -717,7 +751,7 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
 						
 					}
 				}
-				/*---------------------------------------------*/	
+				/*---------------------------------------------*/
 				currentStringValue ="";
 				/** cap nhat lich su cho truong hop la tro cap nghiep vu thay doi */
 				if(allowanceCheck && !getHisDeptStartDate().equals("")){
@@ -728,9 +762,13 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
 						/**Neu nhu co su thay doi */
 						Collator compare = Collator.getInstance(new Locale("vi", "vn"));
 						int comparison = compare.compare(currentStringValue, allowanceNew);
-						
-						if(comparison!=0){
+
+						if(comparison!=0 || !getHisOldStartDate().equals(getHisDeptStartDate()) ){
 							if(userHisInfo!=null){
+								/* truong hop la edit thi se xoa neu du lieu cua ngay cu */
+								if(!getHisOldStartDate().equals("")){
+									deleteUserHisByDate(getHisOldStartDate(),usr.code,MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS);
+								}
 								/** nếu như có thay đổi ngày tháng năm thì sẽ xóa data cũ */
 								if(!getHisDeptStartDate().equals(userHisInfo.date_from)){
 									deleteUserHisByDate(userHisInfo.date_from,usr.code,MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS);
@@ -747,7 +785,44 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
 							/** chỉnh sửa lại ngày tháng năm start -end cho đúng */
 							correctHisData(MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS,userInsert.user_code);
 						}
-						
+
+					}
+				}
+				/*---------------------------------------------*/
+				currentStringValue ="";
+				/** cap nhat lich su cho truong hop la tro cap BSE thay doi */
+				if(allowanceBSECheck && !getHisDeptStartDate().equals("")){
+					/** xử lý cho từng user được chọn */
+					for(User usr: _listUserChecked){
+						/** kiem tra xem tri co thay doi so voi master User khong ? Neu khong thi khong update */
+						currentStringValue = String.valueOf(usr.allowance_bse) ;
+						/**Neu nhu co su thay doi */
+						Collator compare = Collator.getInstance(new Locale("vi", "vn"));
+						int comparison = compare.compare(currentStringValue, allowanceBSENew);
+
+						if(comparison!=0 || !getHisOldStartDate().equals(getHisDeptStartDate()) ){
+							if(userHisInfo!=null){
+								/* truong hop la edit thi se xoa neu du lieu cua ngay cu */
+								if(!getHisOldStartDate().equals("")){
+									deleteUserHisByDate(getHisOldStartDate(),usr.code,MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS);
+								}
+								/** nếu như có thay đổi ngày tháng năm thì sẽ xóa data cũ */
+								if(!getHisDeptStartDate().equals(userHisInfo.date_from)){
+									deleteUserHisByDate(userHisInfo.date_from,usr.code,MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS);
+								}
+							}
+							/** xoa neu nhu da co data tuong ung voi ngay thang nam tren man hinh*/
+							deleteUserHisByDate(getHisDeptStartDate(),usr.code,MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS);
+							/** tạo đối tượng dùng để update*/
+							userInsert = fgHisUserOther.getUserHistory(MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS,usr.code);
+							/** thực thi update */
+							mDatabaseAdapter.open();
+							mDatabaseAdapter.insertToUserHisTable(userInsert);
+							mDatabaseAdapter.close();
+							/** chỉnh sửa lại ngày tháng năm start -end cho đúng */
+							correctHisData(MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS,userInsert.user_code);
+						}
+
 					}
 				}
 				/*---------------------------------------------*/	
@@ -758,8 +833,12 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
 					for(User usr: _listUserChecked){
 						/** kiem tra xem tri co thay doi so voi master User khong ? Neu khong thi khong update */
 						currentFloatValue = usr.salary_notallowance;
-						if(currentFloatValue!=salaryNew){
+						if(currentFloatValue!=salaryNew || !getHisOldStartDate().equals(getHisDeptStartDate()) ){
 							if(userHisInfo!=null){
+								/* truong hop la edit thi se xoa neu du lieu cua ngay cu */
+								if(!getHisOldStartDate().equals("")){
+									deleteUserHisByDate(getHisOldStartDate(),usr.code,MasterConstants.MASTER_MKBN_SALARY_HIS);
+								}
 								/** nếu như có thay đổi ngày tháng năm thì sẽ xóa data cũ */
 								if(!getHisDeptStartDate().equals(userHisInfo.date_from)){
 									deleteUserHisByDate(userHisInfo.date_from,usr.code,MasterConstants.MASTER_MKBN_SALARY_HIS);
@@ -837,6 +916,18 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
 					break;
 				case MasterConstants.MASTER_MKBN_POSITION_HIS:
 					mDatabaseAdapter.deleteUserHisPositionByCode(xWhere);
+					break;
+				case MasterConstants.MASTER_MKBN_JAPANESE_HIS:
+					mDatabaseAdapter.deleteUserHisJapaneseByCode(xWhere);
+					break;
+				case MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS:
+					mDatabaseAdapter.deleteUserHisAllowance_BusinessByCode(xWhere);
+					break;
+				case MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS:
+					mDatabaseAdapter.deleteUserHisAllowance_BSEByCode(xWhere);
+					break;
+				case MasterConstants.MASTER_MKBN_SALARY_HIS:
+					mDatabaseAdapter.deleteUserHisAllowance_SalaryByCode(xWhere);
 					break;
 			}
 			
@@ -937,11 +1028,14 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
     				boolean japaneseCheck =fgHisUserOther.getHisJapaneseCheck();
     				/** phu cap nghiep vu */
     				boolean allowanceCheck =fgHisUserOther.getHisAllowance_BusinessCheck();
+					/** phu cap nghiep vu */
+					boolean allowanceBSECheck =fgHisUserOther.getHisAllowance_BSECheck();
     				/** salary*/
     				boolean salaryCheck =fgHisUserOther.getHisSalaryCheck() ;
     				
     				String japaneseNew = fgHisUserOther.getHisNewJapanese();
     				String allowanceNew = fgHisUserOther.getHisNewAllowance_Business();
+					String allowanceBSENew = fgHisUserOther.getHisNewAllowance_BSE();
     				float salaryNew = fgHisUserOther.getHisNewSalary();
     				
     				/*kiem tra xem co check chung chi tieng Nhat khong ?*/
@@ -952,6 +1046,10 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
             		if(allowanceCheck){
             			usr.allowance_business = allowanceNew;
             		}
+					/*kiem tra xem co check  phu cap BSE khong ?*/
+					if(allowanceBSECheck){
+						usr.allowance_bse = allowanceBSENew;
+					}
             		/*kiem tra xem co check  salary khong ?*/
             		if(salaryCheck){
             			usr.salary_notallowance = salaryNew;
@@ -1181,9 +1279,19 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
 	    	case MasterConstants.BTN_DIALOG_USER_LIST:
 	    		/** lấy data phòng ban từ bundle */
 	    		User[] userArr = (User[])bundle.getParcelableArray(MasterConstants.TAB_DIALOG_BUNDLE);
+				/** get Tag cua tab Other ( tieng nhat - phu cap nghiep vu)*/
+				String TabOfFragmentOther =((HisUserMainActivity)getActivity()).getTabFragmentHisOther();
+				/** get TAB tieng nhat - nghiep vu */
+				HisUserOther fgHisUserOther= (HisUserOther)getActivity().getSupportFragmentManager().findFragmentByTag(TabOfFragmentOther);
 	    		//tbtSearchItemDept.setChecked(false);
+				/** Neu co ton tai */
+				if (fgHisUserOther!=null){
+					fgHisUserOther.setHisSalaryCheckStatus(false);
+					fgHisUserOther.setHisCurrentSalary(0);//setting muc luong hien tai
+				}
 	    		if (userArr.length==0){
 	    			_listUser.clear();
+
 	    		}else{
 	    			_listUser.clear();
 	    			/** xác định các code phòng ban được check */
@@ -1197,17 +1305,15 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
 	    			/** Kiem tra xem neu chon chi 1 nguoi thi co the cho edit thong tin luong
 	    			 * nguoc lai thi khong the edit luong
 	    			 */
-	    			/** get Tag cua tab Other ( tieng nhat - phu cap nghiep vu)*/
-	    			String TabOfFragmentOther =((HisUserMainActivity)getActivity()).getTabFragmentHisOther();
-	    			/** get TAB tieng nhat - nghiep vu */
-	    			HisUserOther fgHisUserOther= (HisUserOther)getActivity().getSupportFragmentManager().findFragmentByTag(TabOfFragmentOther);
 	    			/** Neu co ton tai */
 	    			if (fgHisUserOther!=null){
     					if(_listUser.size()==1){
     						fgHisUserOther.setHisSalaryCheckStatus(true);
     						/** get cac thong tin lien quan */
+							fgHisUserOther.setHisCurrentSalary(_listUser.get(0).salary_notallowance);//setting muc luong hien tai
 		    			}else{
 		    				fgHisUserOther.setHisSalaryCheckStatus(false);
+							fgHisUserOther.setHisCurrentSalary(0);//setting muc luong hien tai
 		    			}
 	    			}
 	    			
@@ -1401,7 +1507,43 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
     	return txtUserHisDeptStartDate.getText().toString();
     }
 
-    /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	 *
+	 * setHisOldStartDate
+	 *
+	 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
+	public void  setHisOldStartDate(String value){
+		txtUserHisOldStartDate.setText(value );
+	}
+
+	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	 *
+	 * getHisOldStartDate
+	 *
+	 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
+	public String   getHisOldStartDate(){
+		return txtUserHisOldStartDate.getText().toString();
+	}
+
+	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	 *
+	 * setHisId
+	 *
+	 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
+	public void  setHisId(String value){
+		txtUserHisId.setText(value );
+	}
+
+	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	 *
+	 * getHisId
+	 *
+	 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
+	public String   getHisId(){
+		return txtUserHisId.getText().toString();
+	}
+
+	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * 
      * setHisDeptNewDept
      * 

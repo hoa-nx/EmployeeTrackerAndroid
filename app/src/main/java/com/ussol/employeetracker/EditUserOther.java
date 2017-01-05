@@ -58,17 +58,18 @@ public class EditUserOther extends Fragment implements OnClickListener , OnSeekB
     private int mMonth;
     private int mDay;
     static final int DATE_DIALOG_ID = 0;
-    private EditText  txtUserJananese , txtUserAllowance_Business,txtUserAllowance_Room ,txtUserPositionGroup, txtUserNote;
+    private EditText  txtUserJananese , txtUserAllowance_Business,txtUserAllowance_BSE,txtUserAllowance_Room ,txtUserPositionGroup, txtUserNote;
     private TextView lblUserProgram,lblUserDetailDesign;
     //private Switch txtUserBusinessKbn ;
     private SeekBar sbaUserProgram,sbaUserDetailDesign;
-    private Button btnUserSave , btnUserCancel, btnUserJapaneseLevel , btnUserAllowance_Business,btnUserAllowance_Room, btnUserPositionGroup;
+    private Button btnUserSave , btnUserCancel, btnUserJapaneseLevel , btnUserAllowance_Business,btnUserAllowance_BSE,btnUserAllowance_Room, btnUserPositionGroup;
     private ToggleButton tbtUserPositionGroup,tbtUserCustomerGroup;
     private CheckBox chkUserDeveloper, chkUserHonyaku , chkUserKbnOther;
     /** Lưu lại vị trí mà đã chọn từ list radio */
 	int positionJananeseLevel = 0;
 	int positionAllowance_Business = 0;
 	int positionAllowance_Room = 0;
+	int positionAllowance_BSE = 0;
 	int positionGroup = 0;
 	int positionCustomerGroup = 0;
 	/** thông tin các nhóm chức danh hiển thị tại màn hình dialog  */
@@ -89,7 +90,8 @@ public class EditUserOther extends Fragment implements OnClickListener , OnSeekB
 	String[] dataAllowance_Business=MasterConstants.ALLOWANCE_BUSINESS_LEVEL ;
 	/** thông tin phụ cấp phòng chuyên biệt*/
 	String[] dataAllowance_Room=MasterConstants.ALLOWANCE_ROOM_LEVEL ;
-
+	/** thông tin phụ cấp BSE*/
+	String[] dataAllowance_BSE=MasterConstants.ALLOWANCE_BSE_LEVEL ;
 	/** Button nào được click */
 	private static  int btnClicked ;
 	/** kết nối Database */
@@ -281,7 +283,28 @@ public class EditUserOther extends Fragment implements OnClickListener , OnSeekB
 			/** Creating the dialog fragment object, which will in turn open the alert dialog window */
 			alertAllowance_Room.show(managerAllowance_Room, MasterConstants.TAB_DIALOG_TAG);	
 			break;
-			
+
+		case R.id.btnUserAllowance_BSE:
+			/**hiển thị màn hình để chọn nhóm*/
+			/** Getting the fragment manager */
+			FragmentManager managerBSE =getActivity().getFragmentManager();
+
+			/** Instantiating the DialogFragment class */
+			AlertDialogRadio alertBSE = new AlertDialogRadio("",dataAllowance_BSE,R.id.btnUserAllowance_BSE);
+
+			/** Creating a bundle object to store the selected item's index */
+			Bundle bBSE  = new Bundle();
+
+			/** Storing the selected item's index in the bundle object */
+			bBSE.putInt("position", positionAllowance_BSE);
+
+			/** Setting the bundle object to the dialog fragment object */
+			alertBSE.setArguments(bBSE);
+
+			/** Creating the dialog fragment object, which will in turn open the alert dialog window */
+			alertBSE.show(managerBSE, MasterConstants.TAB_DIALOG_TAG);
+			break;
+
 		case R.id.tbtUserPositionGroup:
 			/**hiển thị màn hình để chọn nhóm*/
 			/** Getting the fragment manager */
@@ -372,6 +395,12 @@ public class EditUserOther extends Fragment implements OnClickListener , OnSeekB
 	    		/** gán tên người đã chọn tại màn hình poup */
 	    		txtUserAllowance_Room.setText(dataAllowance_Room[this.positionAllowance_Room]);    
 	    		break;
+			case R.id.btnUserAllowance_BSE:
+				/** gán lại vị trí của item mà đã chọn */
+				this.positionAllowance_BSE = position;
+				/** gán tên người đã chọn tại màn hình poup */
+				txtUserAllowance_BSE.setText(dataAllowance_BSE[this.positionAllowance_BSE]);
+				break;
 	    	case R.id.tbtUserPositionGroup:
 	    		UserPositionGroup userPositionGroup;
 	    		/** lấy data chức danh từ bundle */
@@ -470,6 +499,7 @@ public class EditUserOther extends Fragment implements OnClickListener , OnSeekB
     private void getControl(){
     	txtUserJananese = (EditText)getView().findViewById(R.id.txtUserJapanese);
     	txtUserAllowance_Business= (EditText)getView().findViewById(R.id.txtUserAllowance_business);
+		txtUserAllowance_BSE= (EditText)getView().findViewById(R.id.txtUserAllowance_BSE);
     	txtUserAllowance_Room= (EditText)getView().findViewById(R.id.txtUserAllowance_Room);
     	//txtUserBusinessKbn = (Switch)getView().findViewById(R.id.txtUserBusinessKbn);
     	chkUserDeveloper=(CheckBox)getView().findViewById(R.id.chkUserDeveloper);
@@ -478,8 +508,9 @@ public class EditUserOther extends Fragment implements OnClickListener , OnSeekB
 
     	btnUserJapaneseLevel=(Button)getView().findViewById(R.id.btnUserJapanese);
     	btnUserAllowance_Business=(Button)getView().findViewById(R.id.btnUserAllowance_business);
-    	btnUserAllowance_Room=(Button)getView().findViewById(R.id.btnUserAllowance_Room);
-    	tbtUserPositionGroup=(ToggleButton)getView().findViewById(R.id.tbtUserPositionGroup);
+		btnUserAllowance_Room=(Button)getView().findViewById(R.id.btnUserAllowance_Room);
+		btnUserAllowance_BSE=(Button)getView().findViewById(R.id.btnUserAllowance_BSE);
+		tbtUserPositionGroup=(ToggleButton)getView().findViewById(R.id.tbtUserPositionGroup);
     	tbtUserCustomerGroup=(ToggleButton)getView().findViewById(R.id.tbtUserCustomerGroup);
     	
     	sbaUserProgram =(SeekBar)getView().findViewById(R.id.sbaUserProgram);
@@ -499,6 +530,7 @@ public class EditUserOther extends Fragment implements OnClickListener , OnSeekB
 		
 		btnUserJapaneseLevel.setOnClickListener(this);
 		btnUserAllowance_Business.setOnClickListener(this);
+		btnUserAllowance_BSE.setOnClickListener(this);
 		btnUserAllowance_Room.setOnClickListener(this);
 		tbtUserPositionGroup.setOnClickListener(this);
 		tbtUserCustomerGroup.setOnClickListener(this);
@@ -537,7 +569,14 @@ public class EditUserOther extends Fragment implements OnClickListener , OnSeekB
 	            return true;
 	        }
 	    });
-	    
+
+		final GestureDetector gestureDetectorAllowance_BSE = new GestureDetector(new GestureDetector.SimpleOnGestureListener() {
+			public boolean onDoubleTap(MotionEvent e) {
+				txtUserAllowance_BSE.setText("");
+				return true;
+			}
+		});
+
 	    txtUserAllowance_Business.setOnTouchListener(new OnTouchListener() {
 			public boolean onTouch(View v, MotionEvent event) {
 				// TODO Auto-generated method stub
@@ -551,7 +590,13 @@ public class EditUserOther extends Fragment implements OnClickListener , OnSeekB
 				return gestureDetectorAllowance_Room.onTouchEvent(event);
 			}
 		});
-	    
+
+		txtUserAllowance_BSE.setOnTouchListener(new OnTouchListener() {
+			public boolean onTouch(View v, MotionEvent event) {
+				// TODO Auto-generated method stub
+				return gestureDetectorAllowance_BSE.onTouchEvent(event);
+			}
+		});
     }
     /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * setting input cho control(không hiển thị bàn phím khi nhận focus)
@@ -561,6 +606,7 @@ public class EditUserOther extends Fragment implements OnClickListener , OnSeekB
     	txtUserJananese.setInputType(InputType.TYPE_NULL);
     	txtUserAllowance_Business.setInputType(InputType.TYPE_NULL);
     	txtUserAllowance_Room.setInputType(InputType.TYPE_NULL);
+		txtUserAllowance_BSE.setInputType(InputType.TYPE_NULL);
     }
     /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * setValueTabOther
@@ -570,6 +616,7 @@ public class EditUserOther extends Fragment implements OnClickListener , OnSeekB
 		/**thông tin của tab Other*/
 		setJapaneseLevel(item.japanese);
 		setAllowance_Business(item.allowance_business);
+		setAllowance_BSE(item.allowance_bse);
 		setAllowance_Room(item.allowance_room);
 		setBusinessKbn(String.valueOf(item.business_kbn ));
 		setProgram((float)item.program);
@@ -671,8 +718,27 @@ public class EditUserOther extends Fragment implements OnClickListener , OnSeekB
     public void setAllowance_Room(String value){
     	txtUserAllowance_Room.setText(value);
     }
-    
-    /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+
+	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	 * lấy thông tin phụ cấp BSE
+	 *
+	 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
+
+	public String getAllowance_BSE(){
+		return  txtUserAllowance_BSE.getText().toString();
+	}
+
+	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	 * set thông tin phụ cấp BSE
+	 *
+	 *
+	 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
+
+	public void setAllowance_BSE(String value){
+		txtUserAllowance_BSE.setText(value);
+	}
+
+	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * 
      * get thông tin về nghề nghiệp chính
      * 

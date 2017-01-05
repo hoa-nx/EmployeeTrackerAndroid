@@ -88,6 +88,7 @@ public class ChartStaffStatusPDWorkingPDTrainingPDYasumiStackedBarChartFrag exte
 
  		XAxis xLabels = mChart.getXAxis();
  		xLabels.setPosition(XAxisPosition.TOP);
+        xLabels.setLabelsToSkip(0);
 
  		Legend l = mChart.getLegend();
  		l.setPosition(LegendPosition.BELOW_CHART_RIGHT);

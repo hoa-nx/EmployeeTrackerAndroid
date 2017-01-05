@@ -72,7 +72,7 @@ public final class ExpParentChildInGroup {
             }
         }
 
-        /** trường hợp là phu cap nghiep vu thì phải setting lại text hiển thị */
+        /** trường hợp là phụ cấp nghiệp vụ thì phải setting lại text hiển thị */
         if (group == IExpGroup.EXP_GROUP_BUSSINESS_ALLOWANCE){
             for (int i=0 ; i<arrGroupTemp.length;i++){
                 if(arrGroupTemp[i]==null|| ( arrGroupTemp[i])=="" ){
@@ -163,7 +163,7 @@ public final class ExpParentChildInGroup {
                     arrGroupTemp[i] ="Phiên dịch";
                 }else if (Integer.parseInt(arrGroupTemp[i])==3){
                     arrGroupTemp[i] ="Khác(tổng vụ, QA....)";
-                }else if (Integer.parseInt(arrGroupTemp[i])==9){
+                }else {
                     arrGroupTemp[i] ="Lập trình viên-Phiên dịch...";
                 }
 

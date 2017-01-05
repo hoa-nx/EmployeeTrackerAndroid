@@ -7,9 +7,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.ussol.employeetracker.MainActivity;
+import com.ussol.employeetracker.R;
+import com.ussol.employeetracker.SwipeListViewActivity;
 import com.ussol.employeetracker.helpers.ConvertCursorToListString;
 import com.ussol.employeetracker.helpers.DatabaseAdapter;
 import com.ussol.employeetracker.helpers.DatabaseAdapter.MESSAGE_STATUS;
+import com.ussol.employeetracker.helpers.NotificationHelper;
 import com.ussol.employeetracker.helpers.SystemConfigItemHelper;
 import com.ussol.employeetracker.models.MasterConstants.MESSAGE_SMS_OR_EMAIL;
 import com.ussol.employeetracker.models.MasterConstants.MESSAGE_TYPE;
@@ -23,6 +26,8 @@ import com.ussol.employeetracker.utils.Utils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.job.JobInfo;
 import android.app.job.JobParameters;
@@ -32,14 +37,18 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
 import android.os.RemoteException;
 import android.os.SystemClock;
+import android.support.v4.app.NotificationCompat;
 import android.telephony.SmsManager;
 import android.util.Log;
+import android.widget.RemoteViews;
 import android.widget.Toast;
 
 /**
@@ -56,7 +65,9 @@ public class AlarmJobService  extends JobService{
 	//DB adapter
 	private static DatabaseAdapter mDatabaseAdapter;
 	private static SystemConfigItemHelper systemConfig ;
-	
+	private static  Context _context;
+
+
 	@Override
 	public boolean onStartJob(JobParameters params) {
 		// We don't do any real 'work' in this sample app. All we'll	
@@ -76,6 +87,7 @@ public class AlarmJobService  extends JobService{
 	}
 
 	public static void excuteTask(final Context ctx){
+		_context= ctx;
 		//danh sach nhan vien co ngay sinh nhat
 		List<User>  userBirthdayList =getUserBirthdayList(ctx) ;
 		//danh sach toi ngay nghi viec
@@ -102,8 +114,12 @@ public class AlarmJobService  extends JobService{
 			msgTemplateId = Integer.parseInt(systemConfig.getBirthdayMsgCode());
 			String msg = getMessageContent(ctx,msgTemplateId);
 			sendSmsManager(ctx, userBirthdayList, msg,sim);
+
 		}
-		
+		for ( User usr : userBirthdayList) {
+			NotificationHelper.makeBirthdayNotification(_context,SwipeListViewActivity.class,usr,"","",0,true,true);
+		}
+
 		//danh sach nhan vien co sinh nhat
 		if(userYasumiList.size()>0)
 		{
@@ -164,6 +180,7 @@ public class AlarmJobService  extends JobService{
 	 * @return
 	 */
 	public static List<User> getUserBirthdayList(Context ctx){
+		boolean isSuccess = false;
 		List<User>  allUserList ;
 		List<User> userBirthdayList = new ArrayList<User>();
 		/** chuyển đổi từ Cursor thành List */
@@ -171,9 +188,12 @@ public class AlarmJobService  extends JobService{
 		allUserList= mConvertCursorToListString.getUserList("");
 		for(User usr : allUserList){
 			if(Utils.isCurrentDateBirthday(usr.birthday)){
-				userBirthdayList.add(usr);
 				//tao data cho bang message status
-				insertMessageStatusTable(ctx, usr, MESSAGE_TYPE.BIRTHDAY, MESSAGE_SMS_OR_EMAIL.SMS);
+				isSuccess = insertMessageStatusTable(ctx, usr, MESSAGE_TYPE.BIRTHDAY, MESSAGE_SMS_OR_EMAIL.SMS);
+				if(isSuccess){
+					//neu la tao moi thi moi add vao list
+					userBirthdayList.add(usr);
+				}
 			}
 		}
 		
@@ -185,6 +205,7 @@ public class AlarmJobService  extends JobService{
 	 * @return
 	 */
 	public static List<User> getUserYasumiList(Context ctx){
+		boolean isSuccess = false;
 		List<User>  allUserList ;
 		List<User> userMatchList = new ArrayList<User>();
 		/** chuyển đổi từ Cursor thành List */
@@ -192,9 +213,11 @@ public class AlarmJobService  extends JobService{
 		allUserList= mConvertCursorToListString.getUserList("");
 		for(User usr : allUserList){
 			if(Utils.isDateMatch(usr.out_date)){
-				userMatchList.add(usr);
 				//tao data cho bang message status
 				insertMessageStatusTable(ctx, usr, MESSAGE_TYPE.YASUMI, MESSAGE_SMS_OR_EMAIL.SMS);
+				if(isSuccess ){
+					userMatchList.add(usr);
+				}
 			}
 		}
 		
@@ -207,6 +230,7 @@ public class AlarmJobService  extends JobService{
 	 * @return
 	 */
 	public static List<User> getUserTrainingList(Context ctx){
+		boolean isSuccess = false;
 		List<User>  allUserList ;
 		List<User> userMatchList = new ArrayList<User>();
 		/** chuyển đổi từ Cursor thành List */
@@ -214,9 +238,11 @@ public class AlarmJobService  extends JobService{
 		allUserList= mConvertCursorToListString.getUserList("");
 		for(User usr : allUserList){
 			if(Utils.isDateMatch(usr.training_dateEnd)){
-				userMatchList.add(usr);
 				//tao data cho bang message status
 				insertMessageStatusTable(ctx, usr, MESSAGE_TYPE.TRAIL, MESSAGE_SMS_OR_EMAIL.SMS);
+				if(isSuccess){
+					userMatchList.add(usr);
+				}
 			}
 		}
 		
@@ -228,7 +254,9 @@ public class AlarmJobService  extends JobService{
 	 * @param usr
 	 * @param type
 	 */
-	public static void insertMessageStatusTable(Context ctx , User usr , MESSAGE_TYPE type, MESSAGE_SMS_OR_EMAIL smsOrEmail){
+	public static boolean insertMessageStatusTable(Context ctx , User usr , MESSAGE_TYPE type, MESSAGE_SMS_OR_EMAIL smsOrEmail){
+		boolean isSuccess = false;
+
 		UserMessageStatus msg = new UserMessageStatus();
 		//get current date
 		Calendar c = Calendar.getInstance();
@@ -287,18 +315,21 @@ public class AlarmJobService  extends JobService{
         mDatabaseAdapter.open();
 
         if(!mDatabaseAdapter.isSonzaiUserMessageStatus(msg.message_emp_code, formattedDate, type.ordinal())){
-        	mDatabaseAdapter.insertToMessageStatusTable(msg);	
+        	mDatabaseAdapter.insertToMessageStatusTable(msg);
+			isSuccess = true;
+
         }
         
         mDatabaseAdapter.close();
-        
+        return isSuccess;
 	}
 
 	/**
-	 * update message status
-	 * @param usr
-	 * @param type
-	 */
+	 * cập nhật trạng thái của message
+	 * @param ctx : context
+	 * @param msg_code : meesage code
+	 * @param status : trạng thái
+     */
 	public static void updateMessageStatus(Context ctx , int  msg_code, MESSAGE_STATUS status){
 		UserMessageStatus msg = new UserMessageStatus();
 		/** chuyển đổi từ Cursor thành List */
@@ -573,5 +604,6 @@ public class AlarmJobService  extends JobService{
             jobService.jobFinished(jobParameters, false);
         }
     }
-	
+
+
 } 

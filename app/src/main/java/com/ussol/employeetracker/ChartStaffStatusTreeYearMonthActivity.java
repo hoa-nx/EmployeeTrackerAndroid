@@ -121,6 +121,10 @@ OnChartValueSelectedListener {
         mSeekBarX.setProgress(20);
         mSeekBarY.setProgress(12);
 
+        XAxis xLabels = mChart.getXAxis();
+        xLabels.setPosition(XAxis.XAxisPosition.TOP);
+        xLabels.setLabelsToSkip(0);
+
         Legend l = mChart.getLegend();
         l.setPosition(LegendPosition.BELOW_CHART_CENTER);
     }

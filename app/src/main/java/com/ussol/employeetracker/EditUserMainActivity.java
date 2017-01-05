@@ -186,6 +186,7 @@ public class EditUserMainActivity extends FragmentActivity implements AlertPosit
 			fgUserBasic.setFullName(item.full_name);
 			fgUserBasic.setAddress(item.address);
 			fgUserBasic.setBirthday(item.birthday);
+			fgUserBasic.setMarriedday(item.married_date);
 			fgUserBasic.setEmail(item.email);
 			fgUserBasic.setImgFullPath(item.img_fullpath);
 			fgUserBasic.setMobile(item.mobile);
@@ -234,6 +235,7 @@ public class EditUserMainActivity extends FragmentActivity implements AlertPosit
 			/**thông tin của tab Other*/
 			fgUserOther.setJapaneseLevel(item.japanese);
 			fgUserOther.setAllowance_Business(item.allowance_business);
+			fgUserOther.setAllowance_BSE(item.allowance_bse);
 			fgUserOther.setAllowance_Room(item.allowance_room);
 			fgUserOther.setBusinessKbn(String.valueOf(item.business_kbn ));
 			fgUserOther.setProgram((float)item.program);

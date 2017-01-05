@@ -46,7 +46,7 @@ import com.ussol.employeetracker.R;
 public class DatabaseAdapter {
 
 	// database and table name
-	private static int DB_VERSION = 14;//olversion is 1
+	private static int DB_VERSION = 15;//olversion is 1
 	
 	public static final String DATABASE_NAME = "EmployeeTrackerData";
 	private final String TABLE_M_USER = "m_user";
@@ -57,7 +57,7 @@ public class DatabaseAdapter {
 	private final String TABLE_M_USER_HIS = "m_user_his";
 	private final String TABLE_M_MESSAGE_TEMPLATE = "m_message_template";
 	private final String TABLE_M_USER_MESSAGE_STATUS= "m_user_message_status";
-	private final String TABLE_M_USER_SALARY = "m_useTABLE_M_MESSAGE_TEMPLATEr_salary";
+	private final String TABLE_M_USER_SALARY = "m_user_salary";
 	private final String TABLE_M_USER_SALARY_SUMMARY = "m_user_salary_summary";
 	private final String TABLE_M_MEI = "m_mei";
 	private final String TABLE_M_COMPANY = "m_company";
@@ -72,7 +72,54 @@ public class DatabaseAdapter {
 	public static final String VIEW_PD_YASUMI_COUNT_BY_YEARMONTH = "view_pd_yasumi_count_by_yearmonth";
 	
 	private Context context;
-	
+
+	//column m_user_salary
+
+	/**
+	 * luong co ban
+	 */
+	public static final String KEY_SALARY_BASIC = "SALARY_BASIC";
+	/**
+	 * luong hop dong
+	 */
+	public static final String KEY_SALARY_CONTRACT = "SALARY_CONTRACT";
+	/**
+	 * thuong du an
+	 */
+	public static final String KEY_SALARY_BONUS = "SALARY_BONUS";
+	/**
+	 * phu cap chuc vu
+	 */
+	public static final String KEY_SALARY_ALLOWANCE_POSITION = "SALARY_ALLOWANCE_POSITION";
+	/**
+	 * phu cap nghiep vu
+	 */
+	public static final String KEY_SALARY_ALLOWANCE_BUSINESS = "SALARY_ALLOWANCE_BUSINESS"; //
+	/**
+	 * phu cap cong viec
+	 */
+	public static final String KEY_SALARY_ALLOWANCE_WORK = "SALARY_ALLOWANCE_WORK";//
+	/**
+	 * phi support
+	 */
+	public static final String KEY_SALARY_ALLOWANCE_SUPPORT_FREE = "SALARY_ALLOWANCE_SUPPORT_FREE";//
+	public static final String KEY_SALARY_ALLOWANCE_BSE = "SALARY_ALLOWANCE_BSE"; //phu cap ngach BSE
+	public static final String KEY_SALARY_ALLOWANCE_ROOM = "SALARY_ALLOWANCE_ROOM"; //phong chuyen biet
+	public static final String KEY_SALARY_ALLOWANCE_JAPANESE = "SALARY_ALLOWANCE_JAPANESE"; //tieng Nhat
+	public static final String KEY_SALARY_ALLOWANCE_OT = "SALARY_ALLOWANCE_OT"; // tien lam ngoai gio
+	public static final String KEY_SALARY_ALLOWANCE_MANAGEMENT = "SALARY_ALLOWANCE_MANAGEMENT"; // phu cap quan ly
+	public static final String KEY_SALARY_ALLOWANCE_OTHER_1 = "SALARY_ALLOWANCE_OTHER_1"; // phu cap khac
+	public static final String KEY_SALARY_ALLOWANCE_OTHER_2 = "SALARY_ALLOWANCE_OTHER_2"; // phu cap khac
+	public static final String KEY_SALARY_ALLOWANCE_OTHER_3 = "SALARY_ALLOWANCE_OTHER_3"; // phu cap khac
+	public static final String KEY_SALARY_ALLOWANCE_FIX = "SALARY_ALLOWANCE_FIX"; // phu cap co dinh hang thang
+	public static final String KEY_SALARY_SUMMARY = "SALARY_SUMMARY"; // Tong luong
+	public static final String KEY_SALARY_ESTIMATE = "SALARY_ESTIMATE"; // Diem danh gia
+	public static final String KEY_SALARY_EFFORT = "SALARY_EFFORT"; // So MM
+	public static final String KEY_SALARY_MINUS_1 = "SALARY_MINUS_1"; // Khoan tru
+	public static final String KEY_SALARY_MINUS_2 = "SALARY_MINUS_2"; // Khoan tru
+	public static final String KEY_SALARY_MINUS_3 = "SALARY_MINUS_3"; // Khoan tru
+	public static final String KEY_SALARY_INCOM_TAX = "SALARY_INCOM_TAX"; // Thue thu nhap ca nha
+	public static final String KEY_SALARY_DEPENDENCY_MINUS = "SALARY_DEPENDENCY_MINUS"; // Tong so giam tru gia canh
 	// column m_user
 	public static final String KEY_ID = "_id";
 	public static final String KEY_TAG = "TAG";
@@ -125,6 +172,10 @@ public class DatabaseAdapter {
 	 */
 	public static final String KEY_OUT_DATE="OUT_DATE";
 	/**
+	 * Ngày kết hôn
+	 */
+	public static final String KEY_MARRIED_DATE="MARRIED_DATE";
+	/**
 	 * Số năm kinh nghiệm tại công ty khác
 	 */
 	public static final String KEY_INIT_KEIKEN="INIT_KEIKEN";
@@ -136,8 +187,69 @@ public class DatabaseAdapter {
 	public static final String KEY_NOTE="NOTE";
 	public static final String KEY_IMG="IMG";
 	public static final String KEY_EMAIL="EMAIL";
+	/**
+	 * Năng lực Nhật ngữ (N1,2...)
+	 */
 	public static final String KEY_JAPANESE="JAPANESE";
+	/**
+	 * Phụ cấp nghiệp vụ (bậc 1,2,3,4,5...)
+	 */
 	public static final String KEY_ALLOWANCE_BUSINESS="ALLOWANCE_BUSINESS";
+	/**
+	 * Phu cap ngach BSE
+	 */
+	public static final String KEY_ALLOWANCE_BSE="ALLOWANCE_BSE";
+
+	/**
+	 * Loai nhan vien nhan tu training center hay la pv truc tiep
+	 */
+	public static final String KEY_STAFF_KBN="STAFF_KBN";
+
+	/**
+	 * GPA : Diem tot nghiep
+	 */
+	public static final String KEY_GPA="GPA";
+
+	/**
+	 * GPA : Diem tot nghiep bang chữ
+	 */
+	public static final String KEY_GPA_TEXT="GPA_TEXT";
+	/**
+	 * Hoc trường nào
+	 */
+	public static final String KEY_COLLECT_NAME="COLLECT_NAME";
+	/**
+	 * Người support
+	 */
+	public static final String KEY_SUPPORTER1="SUPPORTER1";
+	/**
+	 * Người support
+	 */
+	public static final String KEY_SUPPORTER2="SUPPORTER2";
+	/**
+	 * Người support
+	 */
+	public static final String KEY_SUPPORTER3="SUPPORTER3";
+	/**
+	 * Người phỏng vấn
+	 */
+	public static final String KEY_INTERVIEWER1="INTERVIEWER1";
+	/**
+	 * Người phỏng vấn
+	 */
+	public static final String KEY_INTERVIEWER2="INTERVIEWER2";
+
+	/**
+	 * Người phỏng vấn
+	 */
+	public static final String KEY_INTERVIEWER3="INTERVIEWER3";
+
+	/**
+	 * Ket qua PV
+	 */
+	public static final String KEY_INTERVIEW_KEKKA="INTERVIEW_KEKKA";
+
+
 	/**
 	 * Phụ cấp phòng chuyên biệt
 	 */
@@ -177,6 +289,8 @@ public class DatabaseAdapter {
 	public static final String KEY_TAX_CODE="TAX_CODE";//Ma so thue
 	public static final String KEY_VOUCHER_ADDRESS="VOUCHER_ADDRESS";//Dia chi ghi hoa don do
 	public static final String KEY_SHIHON="SHIHON";//Von chu so huu
+	public static final String KEY_DIRECTOR="DIRECTOR";//Giam doc
+	public static final String KEY_DEPUTY_DIRECTOR="DEPUTY_DIRECTOR";//Pho Giam doc
 	public static final String KEY_WEBSITE="WEBSITE";
 	
 	/** lich su phong ban-nhom-chuc vu*/
@@ -187,6 +301,7 @@ public class DatabaseAdapter {
 	public static final String KEY_NEW_POSITION_CODE="NEW_POSITION_CODE";
 	public static final String KEY_NEW_JAPANESE="NEW_JAPANESE";
 	public static final String KEY_NEW_ALLOWANCE_BUSINESS="NEW_ALLOWANCE_BUSINESS";
+	public static final String KEY_NEW_ALLOWANCE_BSE="NEW_ALLOWANCE_BSE";
 	public static final String KEY_NEW_SALARY="NEW_SALARY";
 	/**
 	 * Lan xet luong tiep theo
@@ -333,6 +448,7 @@ public class DatabaseAdapter {
 			+ KEY_IN_DATE 		+ " TEXT DEFAULT ''		,"
 			+ KEY_JOIN_DATE 	+ " TEXT DEFAULT ''		,"
 			+ KEY_OUT_DATE 		+ " TEXT DEFAULT ''		,"
+			+ KEY_MARRIED_DATE	+ " TEXT DEFAULT ''		,"
 			+ KEY_INIT_KEIKEN	+ " TEXT DEFAULT ''		,"
 			+ KEY_CONVERT_KEIKEN	+ " TEXT DEFAULT ''		,"
 			+ KEY_USER_KBN	 	+ " INTEGER DEFAULT 0	,"
@@ -343,6 +459,7 @@ public class DatabaseAdapter {
 			+ KEY_EMAIL 		+ " TEXT DEFAULT ''		,"
 			+ KEY_JAPANESE 		+ " TEXT DEFAULT ''		,"
 			+ KEY_ALLOWANCE_BUSINESS 						+ " TEXT DEFAULT ''		,"
+			+ KEY_ALLOWANCE_BSE		 						+ " TEXT DEFAULT ''		,"
 			+ KEY_ALLOWANCE_ROOM	 						+ " TEXT DEFAULT ''		,"
 			+ KEY_MARRIED 									+ " INTEGER DEFAULT 0	,"
 			+ KEY_SALARY_NOTALOWANCE 						+ " REAL DEFAULT 0		,"
@@ -359,7 +476,20 @@ public class DatabaseAdapter {
 			+ KEY_DETAIL_DESIGN 	+ " REAL DEFAULT 0.0  ,"
 			+ KEY_PROGRAM 			+ " REAL DEFAULT 0.0  ,"
 
-			
+			+ KEY_GPA 				+ " REAL DEFAULT 0.0  ,"
+			+ KEY_GPA_TEXT 			+ " TEXT DEFAULT ''	,"
+			+ KEY_COLLECT_NAME		+ " TEXT DEFAULT ''	,"
+			+ KEY_STAFF_KBN			+ " TEXT DEFAULT ''	,"
+
+			+ KEY_SUPPORTER1		+ " TEXT DEFAULT ''	,"
+			+ KEY_SUPPORTER2		+ " TEXT DEFAULT ''	,"
+			+ KEY_SUPPORTER3		+ " TEXT DEFAULT ''	,"
+
+			+ KEY_INTERVIEWER1		+ " TEXT DEFAULT ''	,"
+			+ KEY_INTERVIEWER2		+ " TEXT DEFAULT ''	,"
+			+ KEY_INTERVIEWER3		+ " TEXT DEFAULT ''	,"
+			+ KEY_INTERVIEW_KEKKA	+ " TEXT DEFAULT ''	,"
+
 			+ KEY_YOBI_CODE1 	+ " INTEGER DEFAULT 0 	,"
 			+ KEY_YOBI_CODE2 	+ " INTEGER DEFAULT 0	,"
 			+ KEY_YOBI_CODE3 	+ " INTEGER DEFAULT 0	,"
@@ -384,6 +514,7 @@ public class DatabaseAdapter {
 			+ KEY_AD_DATE 		+ " TEXT   				,"
 			+ KEY_OPID 			+ " TEXT DEFAULT '' "
 			+ ")";
+
 	/** câu lệnh tạo table nhóm chức danh*/
 	private final String M_USER_GROUP_POSITION_TABLE_CREATE = "create table if not exists "
 			+ TABLE_M_USER_POSITION_GROUP + "(" 
@@ -469,6 +600,7 @@ public class DatabaseAdapter {
 			+ KEY_NEW_POSITION_CODE		+ " INTEGER DEFAULT 0  	,"
 			+ KEY_NEW_JAPANESE	+ " TEXT DEFAULT ''  	,"
 			+ KEY_NEW_ALLOWANCE_BUSINESS+ " TEXT DEFAULT ''  	,"
+			+ KEY_NEW_ALLOWANCE_BSE+ " TEXT DEFAULT ''  	,"
 			+ KEY_REASON		+ " TEXT DEFAULT ''  	,"
 			
 			+ KEY_NEW_SALARY 		+ "  REAL DEFAULT 0 ,"		
@@ -740,7 +872,68 @@ public class DatabaseAdapter {
 			+ KEY_AD_DATE 		+ " TEXT 				,"
 			+ KEY_OPID 			+ " TEXT DEFAULT '' "
 			+ ")";
-	
+
+
+	/** câu lệnh tạo table lưu trữ các trạng thái của message */
+	private final String M_USER_SALARY_TABLE_CREATE = "create table if not exists "
+			+ TABLE_M_USER_SALARY 				+ "("
+			+ KEY_CODE 							+ " INTEGER PRIMARY KEY AUTOINCREMENT ,"
+			+ KEY_USER_CODE 					+ " INTEGER NOT NULL 	,"
+			+ KEY_NAME		 					+ " TEXT DEFAULT ''  	,"
+			+ KEY_RYAKU		 					+ " TEXT DEFAULT ''  	,"
+
+			+KEY_SALARY_BASIC 					+ " REAL DEFAULT 0  	,"
+			+KEY_SALARY_CONTRACT				+ " REAL DEFAULT 0  	,"
+			+KEY_SALARY_BONUS 					+ " REAL DEFAULT 0  	,"
+			+KEY_SALARY_ALLOWANCE_POSITION 		+ " REAL DEFAULT 0  	,"
+			+KEY_SALARY_ALLOWANCE_BUSINESS 		+ " REAL DEFAULT 0  	,"
+			+KEY_SALARY_ALLOWANCE_WORK 			+ " REAL DEFAULT 0  	,"
+			+KEY_SALARY_ALLOWANCE_SUPPORT_FREE 	+ " REAL DEFAULT 0  	,"
+			+KEY_SALARY_ALLOWANCE_BSE			+ " REAL DEFAULT 0  	,"
+			+KEY_SALARY_ALLOWANCE_ROOM 			+ " REAL DEFAULT 0  	,"
+			+KEY_SALARY_ALLOWANCE_JAPANESE 		+ " REAL DEFAULT 0  	,"
+			+KEY_SALARY_ALLOWANCE_OT 			+ " REAL DEFAULT 0  	,"
+			+KEY_SALARY_ALLOWANCE_MANAGEMENT 	+ " REAL DEFAULT 0  	,"
+			+KEY_SALARY_ALLOWANCE_OTHER_1 		+ " REAL DEFAULT 0  	,"
+			+KEY_SALARY_ALLOWANCE_OTHER_2 		+ " REAL DEFAULT 0  	,"
+			+KEY_SALARY_ALLOWANCE_OTHER_3 		+ " REAL DEFAULT 0  	,"
+			+KEY_SALARY_ALLOWANCE_FIX			+ " REAL DEFAULT 0  	,"
+			+KEY_SALARY_SUMMARY					+ " REAL DEFAULT 0  	,"
+			+KEY_SALARY_ESTIMATE				+ " REAL DEFAULT 0  	,"
+			+KEY_SALARY_EFFORT					+ " REAL DEFAULT 0  	,"
+			+KEY_SALARY_MINUS_1					+ " REAL DEFAULT 0  	,"
+			+KEY_SALARY_MINUS_2					+ " REAL DEFAULT 0  	,"
+			+KEY_SALARY_MINUS_3					+ " REAL DEFAULT 0  	,"
+			+KEY_SALARY_INCOM_TAX				+ " REAL DEFAULT 0  	,"
+			+KEY_SALARY_DEPENDENCY_MINUS		+ " REAL DEFAULT 0  	,"
+
+			+ KEY_ISDELETED 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_NOTE 			+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_CODE1 	+ " INTEGER DEFAULT 0 	,"
+			+ KEY_YOBI_CODE2 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_YOBI_CODE3 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_YOBI_CODE4 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_YOBI_CODE5 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_YOBI_TEXT1 	+ " TEXT DEFAULT ''		,"
+			+ KEY_YOBI_TEXT2 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_TEXT3 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_TEXT4 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_TEXT5 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_DATE1 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_DATE2 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_DATE3 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_DATE4 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_DATE5 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_REAL1 	+ " REAL DEFAULT 0  	,"
+			+ KEY_YOBI_REAL2 	+ " REAL DEFAULT 0  	,"
+			+ KEY_YOBI_REAL3 	+ " REAL DEFAULT 0  	,"
+			+ KEY_YOBI_REAL4 	+ " REAL DEFAULT 0  	,"
+			+ KEY_YOBI_REAL5 	+ " REAL DEFAULT 0  	,"
+			+ KEY_UP_DATE 		+ " TEXT 				,"
+			+ KEY_AD_DATE 		+ " TEXT 				,"
+			+ KEY_OPID 			+ " TEXT DEFAULT '' "
+			+ ")";
+
 	/** câu lệnh tạo view  user customer group */
 	private final String VIEW_M_USER_CUSTOMER_GROUP_VIEW_CREATE = "create view if not exists "
 			+ VIEW_M_USER_CUSTOMER_GROUP + " AS "
@@ -1646,7 +1839,8 @@ public class DatabaseAdapter {
 			
 			contentValues.put(KEY_JOIN_DATE, DateTimeUtil.formatDate2String(list.join_date , MasterConstants.DATE_VN_FORMAT, MasterConstants.DATE_JP_FORMAT));
 			contentValues.put(KEY_OUT_DATE, DateTimeUtil.formatDate2String(list.out_date , MasterConstants.DATE_VN_FORMAT, MasterConstants.DATE_JP_FORMAT));
-			
+			contentValues.put(KEY_MARRIED_DATE, DateTimeUtil.formatDate2String(list.married_date , MasterConstants.DATE_VN_FORMAT, MasterConstants.DATE_JP_FORMAT));
+
 			contentValues.put(KEY_INIT_KEIKEN, list.init_keiken);
 			contentValues.put(KEY_CONVERT_KEIKEN, list.convert_keiken);
 			contentValues.put(KEY_USER_KBN, list.user_kbn);
@@ -1659,6 +1853,7 @@ public class DatabaseAdapter {
 			contentValues.put(KEY_EMAIL, list.email);
 			contentValues.put(KEY_JAPANESE, list.japanese);
 			contentValues.put(KEY_ALLOWANCE_BUSINESS, list.allowance_business);
+			contentValues.put(KEY_ALLOWANCE_BSE, list.allowance_bse);
 			contentValues.put(KEY_ALLOWANCE_ROOM, list.allowance_room);
 			contentValues.put(KEY_MARRIED, list.married);
 			contentValues.put(KEY_SALARY_NOTALOWANCE, list.salary_notallowance);
@@ -1675,7 +1870,21 @@ public class DatabaseAdapter {
 			contentValues.put(KEY_BASIC_DESIGN, list.basicdesign);
 			contentValues.put(KEY_DETAIL_DESIGN, list.detaildesign);
 			contentValues.put(KEY_PROGRAM, list.program);
-			
+
+			contentValues.put(KEY_SUPPORTER1, list.supporter1);
+			contentValues.put(KEY_SUPPORTER2, list.supporter2);
+			contentValues.put(KEY_SUPPORTER3, list.supporter3);
+
+			contentValues.put(KEY_INTERVIEWER1, list.interviewer1);
+			contentValues.put(KEY_INTERVIEWER2, list.interviewer2);
+			contentValues.put(KEY_INTERVIEWER3, list.interviewer3);
+
+			contentValues.put(KEY_STAFF_KBN, list.staff_kbn);
+			contentValues.put(KEY_GPA, list.gpa);
+			contentValues.put(KEY_GPA_TEXT, list.gpa_text);
+			contentValues.put(KEY_COLLECT_NAME, list.collect_name);
+			contentValues.put(KEY_INTERVIEW_KEKKA, list.interview_kekka);
+
 			contentValues.put(KEY_YOBI_CODE1, list.yobi_code1);
 			contentValues.put(KEY_YOBI_CODE2, list.yobi_code2);
 			contentValues.put(KEY_YOBI_CODE3, list.yobi_code3);
@@ -1817,6 +2026,10 @@ public class DatabaseAdapter {
 				contentValues.put(KEY_OUT_DATE, DateTimeUtil.formatDate2String(list.out_date , MasterConstants.DATE_VN_FORMAT, MasterConstants.DATE_JP_FORMAT));
 			}
 
+			if (list.married_date!= null){
+				contentValues.put(KEY_MARRIED_DATE, DateTimeUtil.formatDate2String(list.married_date , MasterConstants.DATE_VN_FORMAT, MasterConstants.DATE_JP_FORMAT));
+			}
+
 			if (list.init_keiken != null){
 				contentValues.put(KEY_INIT_KEIKEN, list.init_keiken);
 			}
@@ -1849,6 +2062,11 @@ public class DatabaseAdapter {
 			if (list.allowance_business != null){
 				contentValues.put(KEY_ALLOWANCE_BUSINESS, list.allowance_business);
 			}
+
+			if (list.allowance_bse!= null){
+				contentValues.put(KEY_ALLOWANCE_BSE, list.allowance_bse);
+			}
+
 			if (list.allowance_room != null){
 				contentValues.put(KEY_ALLOWANCE_ROOM, list.allowance_room);
 			}
@@ -1863,9 +2081,11 @@ public class DatabaseAdapter {
 			if (String.valueOf(list.salary_allowance )!= null){
 				contentValues.put(KEY_SALARY_ALOWANCE, list.salary_allowance);
 			}
+
 			if (String.valueOf(list.estimate_point)!= null){
 				contentValues.put(KEY_ESTIMATE_POINT, list.estimate_point);
 			}
+
 			if (list.tag1 != null){
 				contentValues.put(KEY_TAG1, list.tag1);
 			}
@@ -1905,6 +2125,51 @@ public class DatabaseAdapter {
 			if (String.valueOf(list.program) != null){
 				contentValues.put(KEY_PROGRAM, list.program);
 			}
+
+			if (list.staff_kbn!= null){
+				contentValues.put(KEY_STAFF_KBN, list.staff_kbn);
+			}
+
+			if (list.supporter1!= null){
+				contentValues.put(KEY_SUPPORTER1, list.supporter1);
+			}
+
+			if (list.supporter2!= null){
+				contentValues.put(KEY_SUPPORTER2, list.supporter2);
+			}
+
+			if (list.supporter3!= null){
+				contentValues.put(KEY_SUPPORTER3, list.supporter3);
+			}
+
+			if (list.interviewer1!= null){
+				contentValues.put(KEY_INTERVIEWER1, list.interviewer1);
+			}
+
+			if (list.interviewer2!= null){
+				contentValues.put(KEY_INTERVIEWER2, list.interviewer2);
+			}
+
+			if (list.interviewer3!= null){
+				contentValues.put(KEY_INTERVIEWER3, list.interviewer3);
+			}
+
+			if (String.valueOf(list.gpa) != null){
+				contentValues.put(KEY_GPA, list.gpa);
+			}
+
+			if (list.gpa_text!= null){
+				contentValues.put(KEY_GPA_TEXT, list.gpa_text);
+			}
+
+			if (list.collect_name!= null){
+				contentValues.put(KEY_COLLECT_NAME, list.collect_name);
+			}
+
+			if (list.interview_kekka!= null){
+				contentValues.put(KEY_INTERVIEW_KEKKA, list.interview_kekka);
+			}
+
 			if (String.valueOf(list.yobi_code1) != null){
 				contentValues.put(KEY_YOBI_CODE1, list.yobi_code1);
 			}
@@ -2026,7 +2291,7 @@ public class DatabaseAdapter {
 			
 			contentValues.put(KEY_NEW_JAPANESE, list.new_japanese);
 			contentValues.put(KEY_NEW_ALLOWANCE_BUSINESS, list.new_allowance_business);
-			
+			contentValues.put(KEY_NEW_ALLOWANCE_BSE, list.new_allowance_bse);
 			contentValues.put(KEY_SALARY_STANDARD, list.new_salary_standard);
 			contentValues.put(KEY_SALARY_PERCENT, list.new_salary_percent);
 			contentValues.put(KEY_SALARY_ACTUAL_UP, list.new_salary_actual_up);
@@ -2114,7 +2379,9 @@ public class DatabaseAdapter {
 			if (list.new_allowance_business != null){
 				contentValues.put(KEY_NEW_ALLOWANCE_BUSINESS, list.new_allowance_business);
 			}
-			
+			if (list.new_allowance_bse != null){
+				contentValues.put(KEY_NEW_ALLOWANCE_BSE, list.new_allowance_bse);
+			}
 			if (String.valueOf(list.new_salary_standard) != null){
 				contentValues.put(KEY_SALARY_STANDARD, list.new_salary_standard);
 			}
@@ -2466,7 +2733,7 @@ public class DatabaseAdapter {
 	}
 	/**
 	 * 
-	 * @param xóa tất cả message
+	 * Xóa tất cả message
 	 * @return
 	 */
 	public boolean deleteMessageTemplate() {
@@ -2519,7 +2786,7 @@ public class DatabaseAdapter {
 
 	/**
 	 * 
-	 * @param xóa tất cả phòng ban
+	 * Xóa tất cả phòng ban
 	 * @return
 	 */
 	public boolean deleteDept() {
@@ -2567,12 +2834,11 @@ public class DatabaseAdapter {
 		}
 		return true;
 	}
-	
+
 	/**
-	 * 
-	 * @param xóa tất cả nhóm
+	 * Xóa team
 	 * @return
-	 */
+     */
 	public boolean deleteTeam() {
 		String xWhere ="";
 		xWhere = KEY_MKBN + "=" + MasterConstants.MASTER_MKBN_TEAM;
@@ -2663,7 +2929,7 @@ public class DatabaseAdapter {
 
 	/**
 	 * 
-	 * @param code
+	 * @param xWhereAdd
 	 * @return
 	 */
 	public boolean deleteUserHisDeptByCode(String xWhereAdd) {
@@ -2682,7 +2948,7 @@ public class DatabaseAdapter {
 	
 	/**
 	 * 
-	 * @param code
+	 * @param xWhereAdd
 	 * @return
 	 */
 	public boolean deleteUserHisTeamByCode(String xWhereAdd) {
@@ -2701,7 +2967,7 @@ public class DatabaseAdapter {
 	
 	/**
 	 * 
-	 * @param code
+	 * @param xWhereAdd
 	 * @return
 	 */
 	public boolean deleteUserHisPositionByCode(String xWhereAdd) {
@@ -2720,7 +2986,7 @@ public class DatabaseAdapter {
 	
 	/**
 	 * 
-	 * @param code
+	 * @param xWhereAdd
 	 * @return
 	 */
 	public boolean deleteUserHisJapaneseByCode(String xWhereAdd) {
@@ -2739,7 +3005,7 @@ public class DatabaseAdapter {
 	
 	/**
 	 * 
-	 * @param code
+	 * @param xWhereAdd
 	 * @return
 	 */
 	public boolean deleteUserHisAllowance_BusinessByCode(String xWhereAdd) {
@@ -2755,10 +3021,46 @@ public class DatabaseAdapter {
 		}
 		return true;
 	}
-	
+
+	/**
+	 *
+	 * @param xWhereAdd
+	 * @return
+	 */
+	public boolean deleteUserHisAllowance_BSEByCode(String xWhereAdd) {
+		String xWhere ="";
+		xWhere = KEY_MKBN + "=" + MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS;
+		xWhere = xWhere + " " + xWhereAdd;
+		try {
+			Log.d("Deleting");
+			db.delete(TABLE_M_USER_HIS, xWhere, null);
+			Log.d("Deleted");
+		} catch (SQLiteException e) {
+			return false;
+		}
+		return true;
+	}
+	/**
+	 * Xoa lich su xet luong
+	 * @param xWhereAdd
+	 * @return
+	 */
+	public boolean deleteUserHisAllowance_SalaryByCode(String xWhereAdd) {
+		String xWhere ="";
+		xWhere = KEY_MKBN + "=" + MasterConstants.MASTER_MKBN_SALARY_HIS;
+		xWhere = xWhere + " " + xWhereAdd;
+		try {
+			Log.d("Deleting");
+			db.delete(TABLE_M_USER_HIS, xWhere, null);
+			Log.d("Deleted");
+		} catch (SQLiteException e) {
+			return false;
+		}
+		return true;
+	}
 	/**
 	 * 
-	 * @param code
+	 * @param xWhereAdd
 	 * @return
 	 */
 	public boolean deleteUserHisSalaryByCode(String xWhereAdd) {
@@ -2778,7 +3080,7 @@ public class DatabaseAdapter {
 	
 	/**
 	 * 
-	 * @param code
+	 * @param codeRecord
 	 * @return
 	 */
 	public boolean deleteUserHisByCodeRecord(int codeRecord) {
@@ -2943,7 +3245,7 @@ public class DatabaseAdapter {
 	
 	/**
 	 * 
-	 * @param code : mã nhân viên cần delete
+	 * @param listCode : mã nhân viên cần delete
 	 * @return
 	 */
 	public boolean deleteUserByCode(String  listCode ) {
@@ -2967,7 +3269,7 @@ public class DatabaseAdapter {
 
 	/**
 	 * 
-	 * @param code : mã nhân viên cần delete
+	 * @param listCode : mã nhân viên cần delete
 	 * @return
 	 */
 	public boolean deletePernamentUserByCode(String  listCode ) {
@@ -2987,7 +3289,7 @@ public class DatabaseAdapter {
 	
 	/**
 	 * 
-	 * @param code : mã nhân viên cần phục hồi undelete
+	 * @param listCode : mã nhân viên cần phục hồi undelete
 	 * @return
 	 */
 	public boolean unDeleteUserByCode(String  listCode ) {
@@ -3734,7 +4036,52 @@ public class DatabaseAdapter {
 		
 		
 	}
-	
+
+	/**
+	 *
+	 * @return Cursor (danh sách lich su)
+	 */
+	public Cursor getUserHisAllowance_BSEList(String xWhereAdd, String xOrderBy) {
+		String xSelect ="";
+		String xWhere ="";
+
+		xSelect = xSelect + " SELECT ";
+		xSelect = xSelect + " 		HIS.*";
+		xSelect = xSelect + ", 		USR." + KEY_FULL_NAME;
+		xSelect = xSelect + ", 		USR." + KEY_IMG_FULLPATH;
+		xSelect = xSelect + ", 		MEI." + KEY_NAME 	+ " AS " + KEY_DEPT_NAME;
+		xSelect = xSelect + ", 		MET." + KEY_NAME	+ " AS " + KEY_TEAM_NAME;
+		xSelect = xSelect + ", 		MEP." + KEY_YOBI_TEXT1	+ " AS " + KEY_POSITION_NAME;
+		xSelect = xSelect + " FROM ";
+		xSelect = xSelect + " 		" + TABLE_M_USER_HIS + " AS  HIS ";
+		xSelect = xSelect + " LEFT OUTER JOIN  " + TABLE_M_USER + " AS USR";
+		xSelect = xSelect + " ON HIS." + KEY_USER_CODE + " = USR." + KEY_CODE;
+
+		xSelect = xSelect + " LEFT OUTER JOIN  " + TABLE_M_MEI + " AS MEI";
+		xSelect = xSelect + " ON HIS." + KEY_NEW_DEPT_CODE + " = MEI." + KEY_CODE;
+		xSelect = xSelect + " AND MEI." + KEY_MKBN + " = " + MasterConstants.MASTER_MKBN_DEPT;
+		xSelect = xSelect + " LEFT OUTER JOIN  " + TABLE_M_MEI + " AS MET";
+		xSelect = xSelect + " ON HIS." + KEY_NEW_TEAM_CODE + " = MET." + KEY_CODE;
+		xSelect = xSelect + " AND MET." + KEY_MKBN + " = " + MasterConstants.MASTER_MKBN_TEAM;
+		xSelect = xSelect + " LEFT OUTER JOIN  " + TABLE_M_MEI + " AS MEP";
+		xSelect = xSelect + " ON HIS." + KEY_NEW_POSITION_CODE + " = MEP." + KEY_CODE;
+		xSelect = xSelect + " AND MEP." + KEY_MKBN + " = " + MasterConstants.MASTER_MKBN_POSITION;
+
+		xSelect = xSelect + " WHERE ";
+		xSelect = xSelect + " 1=1 ";
+		xSelect = xSelect + " AND HIS." + KEY_USER_CODE + " IS NOT NULL";
+		xSelect = xSelect + " AND HIS." + KEY_MKBN + " = " + MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS;
+		xWhere =xWhere + xWhereAdd;
+		if (xOrderBy.equals("")|| xOrderBy==null){
+			xSelect = xSelect + xWhere;
+		}else{
+			xSelect = xSelect + xWhere + " ORDER BY " + xOrderBy;
+		}
+		return db.rawQuery(xSelect , null);
+
+
+	}
+
 	/**
 	 * 
 	 * @return Cursor (danh sách lich su)
@@ -4420,6 +4767,8 @@ public class DatabaseAdapter {
 			
 			database.execSQL(M_USER_GROUP_CUSTOMER_TABLE_CREATE);
 			database.execSQL(VIEW_M_USER_CUSTOMER_GROUP_VIEW_CREATE);
+
+			database.execSQL(M_USER_SALARY_TABLE_CREATE);
 			
 		}
 		/**
@@ -4589,13 +4938,47 @@ public class DatabaseAdapter {
 							db.execSQL(xSQLAlter);
 	                	}
 	                	break;
-	                case 14:
+
+	                case 15://2017.01.05 add
 	                	if(newVersion > oldVersion)
 	                	{
-	                		xSQLAlter="ALTER TABLE " + TABLE_M_USER + " ADD COLUMN " + KEY_ESTIMATE_POINT+ "  REAL DEFAULT 0 ";
+							//table lich su nhan vien
+	                		xSQLAlter="ALTER TABLE " + TABLE_M_USER_HIS + " ADD COLUMN " + KEY_ALLOWANCE_BSE + " TEXT DEFAULT '' ";
 	                		db.execSQL(xSQLAlter);
 	                	}
-	            }
+						if(newVersion>oldVersion){
+							//table nhan vien
+							xSQLAlter="ALTER TABLE " + TABLE_M_USER + " ADD COLUMN " + KEY_GPA + "  REAL DEFAULT 0 ";
+							db.execSQL(xSQLAlter);
+							xSQLAlter="ALTER TABLE " + TABLE_M_USER + " ADD COLUMN " + KEY_GPA_TEXT + "  TEXT DEFAULT ''  ";
+							db.execSQL(xSQLAlter);
+							xSQLAlter="ALTER TABLE " + TABLE_M_USER + " ADD COLUMN " + KEY_COLLECT_NAME + "  TEXT DEFAULT '' ";
+							db.execSQL(xSQLAlter);
+							xSQLAlter="ALTER TABLE " + TABLE_M_USER + " ADD COLUMN " + KEY_ALLOWANCE_BSE + "  TEXT DEFAULT '' ";
+							db.execSQL(xSQLAlter);
+							xSQLAlter="ALTER TABLE " + TABLE_M_USER + " ADD COLUMN " + KEY_STAFF_KBN + "  TEXT DEFAULT '' ";
+							db.execSQL(xSQLAlter);
+							xSQLAlter="ALTER TABLE " + TABLE_M_USER + " ADD COLUMN " + KEY_MARRIED_DATE + "  TEXT DEFAULT '' ";
+							db.execSQL(xSQLAlter);
+							xSQLAlter="ALTER TABLE " + TABLE_M_USER + " ADD COLUMN " + KEY_SUPPORTER1 + "  TEXT DEFAULT '' ";
+							db.execSQL(xSQLAlter);
+							xSQLAlter="ALTER TABLE " + TABLE_M_USER + " ADD COLUMN " + KEY_SUPPORTER2 + "  TEXT DEFAULT '' ";
+							db.execSQL(xSQLAlter);
+							xSQLAlter="ALTER TABLE " + TABLE_M_USER + " ADD COLUMN " + KEY_SUPPORTER3 + "  TEXT DEFAULT '' ";
+							db.execSQL(xSQLAlter);
+							xSQLAlter="ALTER TABLE " + TABLE_M_USER + " ADD COLUMN " + KEY_INTERVIEWER1 + "  TEXT DEFAULT '' ";
+							db.execSQL(xSQLAlter);
+							xSQLAlter="ALTER TABLE " + TABLE_M_USER + " ADD COLUMN " + KEY_INTERVIEWER2 + "  TEXT DEFAULT '' ";
+							db.execSQL(xSQLAlter);
+							xSQLAlter="ALTER TABLE " + TABLE_M_USER + " ADD COLUMN " + KEY_INTERVIEWER3 + "  TEXT DEFAULT '' ";
+							db.execSQL(xSQLAlter);
+							xSQLAlter="ALTER TABLE " + TABLE_M_USER + " ADD COLUMN " + KEY_INTERVIEW_KEKKA + "  TEXT DEFAULT '' ";
+							db.execSQL(xSQLAlter);
+							//tao table quan ly thong tin luong nhan vien
+							db.execSQL(M_USER_SALARY_TABLE_CREATE);
+						}
+						break;
+				}
 	        } catch( Exception exception ) {
 	            throw new RuntimeException("Database upgrade failed", exception );
 	        }

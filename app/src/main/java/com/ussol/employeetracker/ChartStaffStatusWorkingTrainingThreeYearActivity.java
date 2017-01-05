@@ -114,6 +114,7 @@ public class ChartStaffStatusWorkingTrainingThreeYearActivity  extends ChartBase
 
         XAxis xAxis = mChart.getXAxis();
         xAxis.setPosition(XAxisPosition.BOTH_SIDED);
+        xAxis.setLabelsToSkip(0);
 
         CombinedData data = new CombinedData(mMonths);
 

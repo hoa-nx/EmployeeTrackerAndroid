@@ -33,7 +33,9 @@ public class UserHistory implements Parcelable {
 	public String new_japanese_name;
 	public String new_allowance_business;
 	public String new_allowance_business_name;
-	
+	public String new_allowance_bse;
+	public String new_allowance_bse_name;
+
 	public float new_salary=0;
 	public float new_salary_standard=0;
 	public float new_salary_percent=0;
@@ -108,7 +110,9 @@ public class UserHistory implements Parcelable {
     	new_japanese_name = in.readString();
     	new_allowance_business = in.readString();
     	new_allowance_business_name = in.readString();
-    	
+		new_allowance_bse = in.readString();
+		new_allowance_bse_name = in.readString();
+
     	new_salary= in.readFloat();
     	new_salary_standard= in.readFloat();
     	new_salary_percent= in.readFloat();
@@ -168,7 +172,10 @@ public class UserHistory implements Parcelable {
 		dest.writeString(new_japanese_name);
 		dest.writeString(new_allowance_business);
 		dest.writeString(new_allowance_business_name);
-		
+
+		dest.writeString(new_allowance_bse);
+		dest.writeString(new_allowance_bse_name);
+
 		dest.writeFloat(new_salary);
 		dest.writeFloat(new_salary_standard);
 		dest.writeFloat(new_salary_percent);

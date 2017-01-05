@@ -86,11 +86,11 @@
     <string name="menu_exp_group_customer">Nhóm theo khách hàng</string>
     <string name="menu_exp_group_yasumi_yearmonth">Nhóm nghỉ việc theo năm tháng</string>
     <string name="menu_exp_group_yasumi_year">Nhóm nghỉ việc theo các năm </string>
-    <string name="menu_exp_group_contract_yearmonth">Nhóm nhận chính thức NV theo năm tháng</string>
-    <string name="menu_exp_group_training_year">Nhóm NV nhận thử việc trong năm</string>
-    <string name="menu_exp_group_contract_year">Nhóm NV nhận chính thức trong năm</string>
-    <string name="menu_exp_group_notcontract_year">Nhóm NV không nhận sau thử việc</string>
-    <string name="menu_exp_group_contract_less_month">Nhóm nhận chính thức trong năm có thâm niên nhỏ hơn {N} tháng</string>
+    <string name="menu_exp_group_contract_yearmonth">Nhóm nhận chính thức theo năm tháng</string>
+    <string name="menu_exp_group_training_year">Nhóm nhận thử việc trong năm</string>
+    <string name="menu_exp_group_contract_year">Nhóm nhận chính thức trong năm</string>
+    <string name="menu_exp_group_notcontract_year">Nhóm không nhận sau thử việc</string>
+    <string name="menu_exp_group_contract_less_month">Nhóm nhận NV có thâm niên nhỏ hơn {N} tháng</string>
     <string name="menu_exp_group_staff_current_position_not_satified">Nhóm NV có bậc không phù hợp với thâm niên</string>
 
     <!-- màn hình output PDF -->
@@ -151,6 +151,7 @@
     <string name="userTitleSex">Giới tính</string>
     <string name="userTitleMarried">Đã kết hôn</string>
     <string name="userTitleBirthday">Sinh ngày</string>
+    <string name="userTitleMarriedDate">Ngày kết hôn</string>
     <string name="userTitleAddress">Địa chỉ</string>
     <string name="userTitleHome_tel">Điện thoại nhà</string>
     <string name="userTitleMobile">Di động</string>
@@ -192,6 +193,7 @@
     <string name="userTitleUserKbnEmp">Nhân viên</string>
     <string name="userTitleUserKbnCustomer">Khách hàng</string>
     <string name="userTitleUserAllowanceRoom">Phụ cấp phòng chuyên biệt</string>
+    <string name="userTitleUserAllowanceBSE">Phụ cấp BSE</string>
     <string name="userTitleUserKeikenConvertToFJN">Qui đổi KN(tháng)</string>
 	<string name="userTitleEstimatePoint">Hệ số đánh giá</string>
 
@@ -219,6 +221,7 @@
     <string name="userhisposTitleNote">Ghi chú</string>
     <string name="userhisotherTitleJapanese">C/c tiếng nhật mới</string>
     <string name="userhisotherTitleAllowance_Business">Phụ cấp nghiệp vụ mới</string>
+    <string name="userhisotherTitleAllowance_BSE">Phụ cấp BSE mới</string>
     <string name="userhisotherTitleSalary">Thông tin lương mức lương</string>
     <string name="userhisotherTitleSalaryAll">Lương mới</string>
     <string name="userhisotherTitleSalaryNextMY">XL tiếp theo</string>

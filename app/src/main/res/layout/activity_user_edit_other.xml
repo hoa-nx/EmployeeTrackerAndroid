@@ -189,7 +189,7 @@
                     android:ems="10"
                     android:hint="@string/userTitleNote"
                     android:inputType="textAutoComplete|textMultiLine"
-                    android:lines="2"
+                    android:lines="4"
                     android:textColor="@color/grey" />
 
                 <ToggleButton
@@ -290,6 +290,15 @@
                     android:textOff=""
                     android:textOn="" />
 
+                <TextView
+                    android:id="@+id/lblUserAllowance_Room"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/btnUserAllowance_business"
+                    android:text="@string/userTitleUserAllowanceRoom"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
                 <EditText
                     android:id="@+id/txtUserAllowance_Room"
                     android:layout_width="wrap_content"
@@ -313,21 +322,46 @@
                     android:background="@android:color/transparent"
                     android:drawableStart="@drawable/search" />
 
+
                 <TextView
-                    android:id="@+id/lblUserAllowance_Room"
+                    android:id="@+id/lblUserAllowance_BSE"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/btnUserAllowance_business"
-                    android:text="@string/userTitleUserAllowanceRoom"
+                    android:layout_below="@+id/btnUserAllowance_Room"
+                    android:text="@string/userTitleUserAllowanceBSE"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/txtUserAllowance_BSE"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/lblUserAllowance_BSE"
+                    android:layout_toLeftOf="@+id/btnUserAllowance_Room"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/userTitleUserAllowanceBSE" />
+
+                <Button
+                    android:id="@+id/btnUserAllowance_BSE"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/txtUserAllowance_BSE"
+                    android:layout_alignBottom="@+id/txtUserAllowance_BSE"
+                    android:layout_alignParentRight="true"
+                    android:background="@android:color/transparent"
+                    android:drawableStart="@drawable/search" />
+
 
                 <TextView
                     android:id="@+id/lblUserBusinessKbn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/btnUserAllowance_Room"
+                    android:layout_below="@+id/btnUserAllowance_BSE"
                     android:text="@string/userTitleBusinessKbn"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 

@@ -11,7 +11,6 @@
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.WRITE_SMS" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.GET_TASKS" />
@@ -35,10 +34,10 @@
 
     <application
         android:name=".EmployeeTrackerApplication"
-        android:debuggable="true"
         android:icon="@drawable/ic_app"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.DeviceDefault.Light" >
+        <service android:name=".helpers.NotificationHelper$NotificationActionService"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main" >
@@ -53,12 +52,19 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main" >
-        </activity>
+        </activity>
+
+
+
+
+
+
+
         -->
 
         <activity
             android:name=".MasterActivity"
-            uiOptions="splitActionBarWhenNarrow"
+            android:uiOptions="splitActionBarWhenNarrow"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/title_activity_main"
             android:windowSoftInputMode="stateHidden" >
@@ -125,7 +131,16 @@
              android:theme="@style/styleActivityDialog"
              android:name=".ListUserMainActivity"
              android:label="@string/userTitleList">
-         </activity>
+         </activity>
+
+
+
+
+
+
+
+
+
         -->
         <activity
             android:name=".ExpandableListUserActivity"
@@ -170,10 +185,6 @@
             android:label="@string/send_sms_titleInfo" >
         </activity>
         <activity
-            android:name=".SendMailActivity"
-            android:label="@string/send_sms_titleInfo" >
-        </activity>
-        <activity
             android:name=".filedialog.FileDialog"
             android:label="@string/filedialog_titleInfo" >
         </activity>
@@ -192,16 +203,20 @@
 			<intent-filter>                
                  <action android:name="android.content.action.DOCUMENTS_PROVIDER" />            
         	</intent-filter>        
-		</provider>
+		</provider>
+
+
+
+
+
+
+
+
         -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity
-            android:name=".ContactListActivity"
-            android:label="@string/titleContactList" >
-        </activity>
         <!--
              <service android:name=".BackgroundService" />
     	<receiver android:name="AlarmReceiver">
@@ -210,7 +225,14 @@
 			<data android:path="com.ussol.employeetracker" android:scheme="package"/>
 			</intent-filter>
     	    
-    	</receiver>
+    	</receiver>
+
+
+
+
+
+
+
         -->
 
         <activity
@@ -237,26 +259,7 @@
             android:name=".helpers.ChartFragmentList"
             android:label="@string/title_activity_chart_staff_status_stacked_bar" >
         </activity>
-        <activity
-            android:name=".ChartStaffStatusPDWorkingPDTrainingPDYasumiStackedBarChartFrag"
-            android:label="@string/title_activity_chart_staff_status_stacked_bar" >
-        </activity>
-        <activity
-            android:name=".ChartStaffStatusStackedBarChartFrag"
-            android:label="@string/title_activity_chart_staff_status_stacked_bar" >
-        </activity>
-        <activity
-            android:name=".ChartStaffStatusWorkingStackedBarChartFrag"
-            android:label="@string/title_activity_chart_staff_status_stacked_bar" >
-        </activity>
-        <activity
-            android:name=".ChartStaffStatusWorkingTrainingStackedBarChartFrag"
-            android:label="@string/title_activity_chart_staff_status_stacked_bar" >
-        </activity>
-        <activity
-            android:name=".ChartStaffStatusWorkingTrainingYasumiStackedBarChartFrag"
-            android:label="@string/title_activity_chart_staff_status_stacked_bar" >
-        </activity>
+
         <activity
             android:name=".ChartStaffStatusTreeYearMonthActivity"
             android:label="@string/title_activity_chart_staff_status_stacked_bar" >

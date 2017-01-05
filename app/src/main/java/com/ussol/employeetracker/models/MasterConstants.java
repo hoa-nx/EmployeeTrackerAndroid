@@ -81,6 +81,8 @@ public class MasterConstants {
 	public static final int MASTER_MKBN_CUSTOMER_HIS = 160;
 	/** lich su doi ung cong viec */
 	public static final int MASTER_MKBN_SHIGOTO_HIS = 170;
+	/** lich su tro cap BSE*/
+	public static final int MASTER_MKBN_ALLOWANCE_BSE_HIS = 180;
 	/** List expandable*/
 	public static final String EXP_USER_TAG = "ExpUser";
 	public static final String EXP_USER_GROUP_TAG = "ExpUserGroup";
@@ -115,7 +117,10 @@ public class MasterConstants {
 	
 	/** thông tin phụ cấp nghiệp vụ */
 	public static final String[] ALLOWANCE_BUSINESS_LEVEL = new String[]{"Bậc 1","Bậc 2","Bậc 3","Bậc 4","Bậc 5"};
-	
+
+	/** thông tin phụ cấp ngạch BSE*/
+	public static final String[] ALLOWANCE_BSE_LEVEL = new String[]{"Bậc 1","Bậc 2","Bậc 3","Bậc 4","Bậc 5"};
+
 	/** thông tin phụ cấp phòng chuyên biệt*/
 	public static final String[] ALLOWANCE_ROOM_LEVEL = new String[]{"Mức 1","Mức 2","Mức 3","Mức 4","Mức 5"};
 	

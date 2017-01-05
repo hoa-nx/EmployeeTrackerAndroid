@@ -77,7 +77,7 @@ public class ChartStaffStatusStackedBarChartFrag extends ChartFragmentData imple
  		mChart.setDrawBarShadow(false);
 
  		mChart.setDrawValueAboveBar(false);
- 		
+
  		// change the position of the y-labels
  		YAxis yLabels = mChart.getAxisLeft();
  		//yLabels.setValueFormatter(new MyYAxisValueFormatter());
@@ -85,6 +85,7 @@ public class ChartStaffStatusStackedBarChartFrag extends ChartFragmentData imple
 
  		XAxis xLabels = mChart.getXAxis();
  		xLabels.setPosition(XAxisPosition.TOP);
+        xLabels.setLabelsToSkip(0);
 
  		Legend l = mChart.getLegend();
  		l.setPosition(LegendPosition.BELOW_CHART_RIGHT);

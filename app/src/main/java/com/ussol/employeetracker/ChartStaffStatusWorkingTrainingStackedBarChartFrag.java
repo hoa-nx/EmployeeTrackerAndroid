@@ -88,6 +88,7 @@ public class ChartStaffStatusWorkingTrainingStackedBarChartFrag extends ChartFra
 
  		XAxis xLabels = mChart.getXAxis();
  		xLabels.setPosition(XAxisPosition.TOP);
+        xLabels.setLabelsToSkip(0); // hiển thị tất cả các cột
 
  		Legend l = mChart.getLegend();
  		l.setPosition(LegendPosition.BELOW_CHART_RIGHT);

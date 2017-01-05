@@ -902,6 +902,7 @@ public class ConvertCursorToListString {
 				listUser.full_name= cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_FULL_NAME));
 				listUser.sex = Integer.parseInt(cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_SEX)));
 				listUser.birthday = DateTimeUtil.formatDate2String( cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_BIRTHDAY)),MasterConstants.DATE_JP_FORMAT,MasterConstants.DATE_VN_FORMAT);
+				listUser.married_date = DateTimeUtil.formatDate2String( cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_MARRIED_DATE)),MasterConstants.DATE_JP_FORMAT,MasterConstants.DATE_VN_FORMAT);
 				listUser.address = cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_ADDRESS));
 				listUser.home_tel = cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_HOME_TEL));
 				listUser.mobile = cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_MOBILE));
@@ -930,6 +931,7 @@ public class ConvertCursorToListString {
 				listUser.email = cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_EMAIL));
 				listUser.japanese = cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_JAPANESE));
 				listUser.allowance_business = cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_ALLOWANCE_BUSINESS));
+				listUser.allowance_bse = cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_ALLOWANCE_BSE));
 				listUser.allowance_room = cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_ALLOWANCE_ROOM));
 				listUser.married =Integer.parseInt( cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_MARRIED)));
 				listUser.salary_notallowance =Float.parseFloat( cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_SALARY_NOTALOWANCE)));
@@ -942,11 +944,23 @@ public class ConvertCursorToListString {
 				listUser.labour_join_date = DateTimeUtil.formatDate2String( cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_LABOUR_JOIN_DATE)),MasterConstants.DATE_JP_FORMAT,MasterConstants.DATE_VN_FORMAT);
 				listUser.labour_out_date = DateTimeUtil.formatDate2String( cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_LABOUR_OUT_DATE)),MasterConstants.DATE_JP_FORMAT,MasterConstants.DATE_VN_FORMAT);
 				listUser.business_kbn = cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_BUSINESS_KBN));
-				
+				listUser.staff_kbn= cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_STAFF_KBN));
+
 				listUser.program =Float.parseFloat( cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_PROGRAM)));
 				listUser.basicdesign =Float.parseFloat( cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_BASIC_DESIGN)));
 				listUser.detaildesign =Float.parseFloat( cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_DETAIL_DESIGN)));
-				
+
+				listUser.gpa=Float.parseFloat( cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_GPA)));
+				listUser.gpa_text= cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_GPA_TEXT));
+				listUser.collect_name= cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_COLLECT_NAME));
+				listUser.interviewer1= cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_INTERVIEWER1));
+				listUser.interviewer2= cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_INTERVIEWER2));
+				listUser.interviewer3= cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_INTERVIEWER3));
+				listUser.interview_kekka= cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_INTERVIEW_KEKKA));
+				listUser.supporter1= cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_SUPPORTER1));
+				listUser.supporter2= cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_SUPPORTER2));
+				listUser.supporter3= cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_SUPPORTER3));
+
 				listUser.yobi_code1 = Integer.parseInt(cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_YOBI_CODE1)));
 				listUser.yobi_code2 = Integer.parseInt(cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_YOBI_CODE2)));
 				listUser.yobi_code3 = Integer.parseInt(cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_YOBI_CODE3)));
@@ -1099,6 +1113,9 @@ public class ConvertCursorToListString {
 			case MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS:
 				list =getUserHisList(adapter.getUserHisAllowance_BusinessList( xWhere ,xOrderBy));
 				break;
+			case MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS:
+				list =getUserHisList(adapter.getUserHisAllowance_BSEList( xWhere ,xOrderBy));
+				break;
 			case MasterConstants.MASTER_MKBN_SALARY_HIS:
 				list =getUserHisList(adapter.getUserHisSalaryList( xWhere ,xOrderBy));
 				break;	
@@ -1134,6 +1151,7 @@ public class ConvertCursorToListString {
 				listUser.new_japanese=cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_NEW_JAPANESE));
 				
 				listUser.new_allowance_business=cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_NEW_ALLOWANCE_BUSINESS));
+				listUser.new_allowance_bse=cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_NEW_ALLOWANCE_BSE));
 				listUser.new_salary_standard= Float.parseFloat(cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_SALARY_STANDARD)));
 				listUser.new_salary_percent= Float.parseFloat(cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_SALARY_PERCENT)));
 				listUser.new_salary_actual_up= Float.parseFloat(cursor.getString(cursor.getColumnIndex(DatabaseAdapter.KEY_SALARY_ACTUAL_UP)));

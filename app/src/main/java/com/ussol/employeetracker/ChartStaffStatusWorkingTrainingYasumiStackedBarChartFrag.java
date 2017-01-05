@@ -80,10 +80,10 @@ public class ChartStaffStatusWorkingTrainingYasumiStackedBarChartFrag extends Ch
         leftAxis.setTypeface(tf);
 
         mChart.getAxisRight().setEnabled(false);
-        
         XAxis xAxis = mChart.getXAxis();
-        xAxis.setEnabled(false);*/
-        
+        xAxis.setEnabled(false);
+        */
+
         // scaling can now only be done on x- and y-axis separately
  		mChart.setPinchZoom(false);
 
@@ -99,6 +99,7 @@ public class ChartStaffStatusWorkingTrainingYasumiStackedBarChartFrag extends Ch
 
  		XAxis xLabels = mChart.getXAxis();
  		xLabels.setPosition(XAxisPosition.TOP);
+        xLabels.setLabelsToSkip(0);
 
  		Legend l = mChart.getLegend();
  		l.setPosition(LegendPosition.BELOW_CHART_RIGHT);

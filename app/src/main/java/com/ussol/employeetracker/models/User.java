@@ -112,6 +112,7 @@ public class User implements Parcelable, Cloneable {
 	public String in_date;/* ngay vao cong ty chinh thuc-nhan vao lam nhan vien chinh thuc*/
 	public String join_date;/* ngay tham gia vao nhom labour */
 	public String out_date; /*ngay nghi viec*/
+	public String married_date;/*ngay ket hon*/
 	public String init_keiken;/*so thang kinh nghiem truoc khi vao cong ty */
 	public String convert_keiken;/*so thang kinh nghiem duoc qui doi khi vao FJN*/
 	public int user_kbn;
@@ -124,7 +125,56 @@ public class User implements Parcelable, Cloneable {
 	public String email;
 	public String japanese;
 	public String allowance_business;/* phu cap nghiep vu */
+	public String allowance_bse;/* phu cap BSE */
 	public String allowance_room;/* phu cap phòng chuyên biệt */
+	/**
+	 * Nguoi support
+	 */
+	public String supporter1;/* nguoi support*/
+	/**
+	 * Nguoi support
+	 */
+	public String supporter2;/* nguoi support*/
+	/**
+	 * Nguoi support
+	 */
+	public String supporter3;/* nguoi support*/
+	/**
+	 * Nguoi phong van
+	 */
+	public String interviewer1;/* nguoi pv*/
+	/**
+	 * Nguoi phong van
+	 */
+	public String interviewer2;/* nguoi pv*/
+	/**
+	 * Nguoi phong van
+	 */
+	public String interviewer3;/* nguoi pv*/
+	/**
+	 * Loai nhan vien tu thu viec truc tiep/gioi thieu /training center /truong co lien ket
+	 */
+	public String staff_kbn;
+
+	/**
+	 * Loai tot nghiep (GPA)
+	 */
+	public float gpa=0;
+	/**
+	 * Loai tot nghiep (GPA) bang chu
+	 */
+	public String gpa_text;
+
+	/**
+	 * Truong DH tot nghiep
+	 */
+	public String collect_name;
+
+	/**
+	 * Ket qua PV
+	 */
+	public String interview_kekka;
+
 	public int married=0;
 	public float salary_notallowance=0;
 	public float salary_allowance=0;
@@ -142,7 +192,7 @@ public class User implements Parcelable, Cloneable {
 	public float program=0;/*kha nang tao PG*/
 	/** các item dự bị */
 	
-	public int yobi_code1=0;
+	public int  yobi_code1=0;
 	public int  yobi_code2=0;
 	public int  yobi_code3=0;
 	public int  yobi_code4=0;
@@ -188,7 +238,18 @@ public class User implements Parcelable, Cloneable {
     };
     
     public User() {}
-    
+
+	/**
+	 * Tinh ra luong cua nhan vien
+	 * @param avgCostPerStaff : chi phi binh quan phan bo tung nhan vien ( chi phi gian tiep, khau hao thiet bi
+	 * @return
+     */
+	public float TotalSalaryCal(float avgCostPerStaff){
+		float totalSal =0;
+
+		return totalSal;
+	}
+
     public User(Parcel in) {
     	code = in.readInt();
     	google_id =in.readString();
@@ -219,6 +280,7 @@ public class User implements Parcelable, Cloneable {
     	in_date =in.readString();
     	join_date =in.readString();
     	out_date =in.readString();
+		married_date = in.readString();
     	init_keiken=in.readString();
     	convert_keiken=in.readString();
     	user_kbn= in.readInt();
@@ -235,6 +297,7 @@ public class User implements Parcelable, Cloneable {
     	email=in.readString();
     	japanese=in.readString();
     	allowance_business=in.readString();
+		allowance_bse=in.readString();
     	allowance_room=in.readString();
     	married=in.readInt();
     	salary_notallowance=in.readFloat();
@@ -251,6 +314,20 @@ public class User implements Parcelable, Cloneable {
     	basicdesign =in.readFloat();
     	detaildesign=in.readFloat();
     	program = in.readFloat();
+
+		supporter1 =in.readString();
+		supporter2 =in.readString();
+		supporter3 =in.readString();
+		interviewer1 = in.readString();
+		interviewer2 = in.readString();
+		interviewer3 = in.readString();
+		staff_kbn= in.readString();
+
+		gpa= in.readFloat();
+		gpa_text= in.readString();
+		collect_name= in.readString();
+		interview_kekka= in.readString();
+
     	yobi_code1= in.readInt();
     	yobi_code2= in.readInt();
     	yobi_code3= in.readInt();
@@ -306,12 +383,12 @@ public class User implements Parcelable, Cloneable {
     	dest.writeString(in_date);
     	dest.writeString(join_date);
     	dest.writeString(out_date);
+		dest.writeString(married_date);
     	dest.writeString(init_keiken);
     	dest.writeString(convert_keiken);
     	dest.writeInt(user_kbn);
     	dest.writeString(note);
-    	
-    	
+
 		// Convert Drawable to Bitmap first:
     	//  Bitmap bitmap = (Bitmap)((BitmapDrawable) mMyDrawable).getBitmap();
     	//dest.writeString(img);
@@ -321,6 +398,7 @@ public class User implements Parcelable, Cloneable {
 		dest.writeString(email);
 		dest.writeString(japanese);
 		dest.writeString(allowance_business);
+		dest.writeString(allowance_bse);
 		dest.writeString(allowance_room);
 		dest.writeInt(married);
 		dest.writeFloat(salary_notallowance);
@@ -337,7 +415,21 @@ public class User implements Parcelable, Cloneable {
     	dest.writeFloat(basicdesign);
     	dest.writeFloat(detaildesign);
     	dest.writeFloat(program);
-    	
+
+		dest.writeString(supporter1);
+		dest.writeString(supporter2);
+		dest.writeString(supporter3);
+
+		dest.writeString(interviewer1);
+		dest.writeString(interviewer2);
+		dest.writeString(interviewer3);
+
+		dest.writeString(staff_kbn);
+		dest.writeFloat(gpa);
+		dest.writeString(gpa_text);
+		dest.writeString(collect_name);
+		dest.writeString(interview_kekka);
+
 		dest.writeInt(yobi_code1);
 		dest.writeInt(yobi_code2);
 		dest.writeInt(yobi_code3);

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="3dip" >
+
+    <!-- ListRow Left sied Thumbnail image -->
+
+    <!-- Address Of Message -->
+
+
+    <TextView
+        android:id="@+id/txtListUserInfor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/thumbnail"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:text="Dept X"
+        android:textColor="@color/Blue"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:typeface="sans" />
+
+    <!-- Date of receive -->
+
+    <TextView
+        android:id="@+id/txtListUserCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/txtUserImgFullPath"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/txtListUserFullName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/txtListUserInfor"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:text="Nguyen Van A"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:typeface="normal"
+        android:textColor="@color/DimGray" />
+
+    <LinearLayout
+        android:id="@+id/thumbnail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dip"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/txtListUserCode"
+        android:layout_toEndOf="@+id/txtListUserCode">
+
+        <ImageView
+            android:id="@+id/imgListUser"
+            android:layout_width="80dip"
+            android:layout_height="100dip"
+            android:layout_marginTop="2dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/user_info" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgListUserBirthday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/cookie"
+        android:layout_below="@+id/txtListUserFullName"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:layout_above="@+id/imgListUserYasumi" />
+
+    <ImageView
+        android:id="@+id/imgListUserYasumi"
+        android:layout_width="16dip"
+        android:layout_height="20dip"
+        android:adjustViewBounds="true"
+        android:scaleType="fitStart"
+        android:src="@drawable/employee_yasumi"
+        android:layout_marginBottom="13dp"
+        android:layout_alignBottom="@+id/thumbnail"
+        android:layout_alignRight="@+id/imgListUserBirthday"
+        android:layout_alignEnd="@+id/imgListUserBirthday" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="2000/01/01"
+        android:id="@+id/txtListUserYasumiDate"
+        android:singleLine="true"
+        android:textColor="@color/Red"
+        android:textSize="12dp"
+        android:layout_alignBottom="@+id/imgListUserYasumi"
+        android:layout_toRightOf="@+id/imgListUserYasumi"
+        android:layout_toEndOf="@+id/imgListUserYasumi"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSendSMS"
+        android:background="@drawable/send_mail_x"
+        android:layout_above="@+id/imgListUserYasumi"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>

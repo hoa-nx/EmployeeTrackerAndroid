@@ -105,10 +105,10 @@ public class EditUserBasic extends Fragment implements OnClickListener , OnTouch
     static final int DATE_DIALOG_ID = 0;
     //private TextView lblUserCode , lblUserDeptCode , lblUserTeamCode , lblUserPositionCode ;
     private TextView txtUserCode, imgUserFullPath,txtUserTitle  ;
-    private EditText txtUserBirthday , txtUserSalary_NotAllowance, txtUserSalary_Allowance, txtUserSalaryTotal;
+    private EditText txtUserBirthday,txtUserMarriedday , txtUserSalary_NotAllowance, txtUserSalary_Allowance, txtUserSalaryTotal;
     private EditText txtUserFullName, txtUserAddress , txtUserMobile, txtUserEmail,txtGoogleId;
     private EditText txtUserEstimatePoint;
-    private Button btnUserSave , btnUserCancel , btnUserBirthday ;
+    private Button btnUserSave , btnUserCancel , btnUserBirthday,btnUserMarriedday;
     private CheckBox chkGetMarried;
     private Switch txtUserSex;
     static final int CAMERA_REQUEST= 101;
@@ -601,7 +601,10 @@ public class EditUserBasic extends Fragment implements OnClickListener , OnTouch
 			case R.id.btnCreateDate:
 				txtUserBirthday.setText("");
 				break;
-				
+
+			case R.id.btnMarriedDate:
+				txtUserMarriedday.setText("");
+				break;
 			case R.id.btnGoogleId:
 				ArrayList<SelectUser> listResult = new ArrayList<SelectUser>();
 				ContactHelper helper = new ContactHelper(getActivity());
@@ -749,6 +752,9 @@ public class EditUserBasic extends Fragment implements OnClickListener , OnTouch
     		case R.id.txtBirthday:
     			txtUserBirthday.setText(day + MasterConstants.DATE_SEPERATE_CHAR + month+ MasterConstants.DATE_SEPERATE_CHAR +year);
     			break;
+			case R.id.txtMarriedDate:
+				txtUserMarriedday.setText(day + MasterConstants.DATE_SEPERATE_CHAR + month+ MasterConstants.DATE_SEPERATE_CHAR +year);
+				break;
     	}
     	
     }
@@ -774,6 +780,9 @@ public class EditUserBasic extends Fragment implements OnClickListener , OnTouch
 	    		case R.id.txtBirthday:
 	    			date = txtUserBirthday.getText().toString();
 	    			break;
+				case R.id.txtMarriedDate:
+					date = txtUserMarriedday.getText().toString();
+					break;
     		}
     		int yy;
     		int mm;
@@ -815,12 +824,14 @@ public class EditUserBasic extends Fragment implements OnClickListener , OnTouch
     	txtUserFullName= (EditText)getView().findViewById(R.id.txtUserName);
     	txtUserSex = (Switch)getView().findViewById(R.id.txtSex);
     	txtUserBirthday = (EditText)getView().findViewById(R.id.txtBirthday);
+		txtUserMarriedday = (EditText)getView().findViewById(R.id.txtMarriedDate);
     	txtUserAddress= (EditText)getView().findViewById(R.id.txtUserAddress);
     	txtUserMobile= (EditText)getView().findViewById(R.id.txtUserMobile);
     	txtUserEmail= (EditText)getView().findViewById(R.id.txtUserEmail);
     	txtGoogleId= (EditText)getView().findViewById(R.id.txtGoogleContactId);
     	
     	btnUserBirthday = (Button)getView().findViewById(R.id.btnCreateDate);
+		btnUserMarriedday= (Button)getView().findViewById(R.id.btnMarriedDate);
     	btnGoogleId = (ImageButton)getView().findViewById(R.id.btnGoogleId);
     	txtUserTitle = (TextView) getView().findViewById(R.id.txtUserTitle);
     	imgPrev = (ImageView)getView().findViewById(R.id.btnPrev);
@@ -844,7 +855,10 @@ public class EditUserBasic extends Fragment implements OnClickListener , OnTouch
     private void settingListener(){
     	txtUserBirthday.setOnClickListener(this);
     	txtUserBirthday.setOnTouchListener(this);
+		txtUserMarriedday.setOnClickListener(this);
+		txtUserMarriedday.setOnTouchListener(this);
     	btnUserBirthday.setOnClickListener(this);
+		btnUserMarriedday.setOnClickListener(this);
     	btnGoogleId.setOnClickListener(this);
 		btnUserSave.setOnClickListener(this);
 		btnUserCancel.setOnClickListener(this);
@@ -960,7 +974,7 @@ public class EditUserBasic extends Fragment implements OnClickListener , OnTouch
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
     private void settingInputType(){
 		txtUserBirthday.setInputType(InputType.TYPE_NULL);
-
+		txtUserMarriedday.setInputType(InputType.TYPE_NULL);
     }
     /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * hiển thị dialog date khi chạm vào màn hình
@@ -976,10 +990,33 @@ public class EditUserBasic extends Fragment implements OnClickListener , OnTouch
 				}
 				
 			break;
+			case R.id.txtMarriedDate:
+				if(event.getAction()==MotionEvent.ACTION_UP){
+					selectDate(v);
+				}
+
+				break;
 		}
     	return true; 
     }
-    
+
+	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	 * xử lý thay đổi item màn hình theo check box kết hôn
+	 *
+	 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
+	@Override
+	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		switch(buttonView.getId()){
+			case R.id.chkGetMarried:
+				/*txtUserMarriedday.setEnabled(isChecked);
+				if(!isChecked){
+					*//** xoa tri neu nhu chuyen tu kết hôn sang chua kết hôn*//*
+					setMarriedday("");
+				}*/
+				break;
+		}
+	}
+
     /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * hiển thị dialog để chọn chụp hình hay là hiển thị hình từ media library
      * 
@@ -1254,6 +1291,8 @@ public class EditUserBasic extends Fragment implements OnClickListener , OnTouch
 			user.married = getGetMarried(); 
 			/** ngày sinh */
 			user.birthday=txtUserBirthday.getText().toString();
+			/** ngày ket hon */
+			user.married_date=txtUserMarriedday.getText().toString();
 			/**address */
 			user.address =txtUserAddress.getText().toString();
 			/**tel */
@@ -1303,7 +1342,8 @@ public class EditUserBasic extends Fragment implements OnClickListener , OnTouch
 				user.allowance_business=fgUserOther.getAllowance_Business();
 				/** phụ cấp phòng chuyên biệt  */
 				user.allowance_room=fgUserOther.getAllowance_Room();
-				
+				/** phụ cấp BSE  */
+				user.allowance_bse=fgUserOther.getAllowance_BSE();
 				/** nghề nghiệp : LTV hay phiên dịch  */
 				user.business_kbn =String.valueOf(fgUserOther.getBusinessKbn());
 				/** năng suất lập trình */
@@ -1444,11 +1484,13 @@ public class EditUserBasic extends Fragment implements OnClickListener , OnTouch
 		setFullName(item.full_name);
 		setAddress(item.address);
 		setBirthday(item.birthday);
+		setMarriedday(item.married_date);
 		setEmail(item.email);
 		setImgFullPath(item.img_fullpath);
 		setMobile(item.mobile);
 		setSex(String.valueOf(item.sex ));
 		setGetMarried(String.valueOf(item.married));
+		setChkMarried_date(item.married_date);
 		//viewUserImg();
 		setSalaryBasic(item.salary_notallowance);
 		setSalaryWithAllowance(item.salary_allowance);
@@ -1519,6 +1561,7 @@ public class EditUserBasic extends Fragment implements OnClickListener , OnTouch
 			fgUserOther.setJapaneseLevel(item.japanese);
 			fgUserOther.setAllowance_Business(item.allowance_business);
 			fgUserOther.setAllowance_Room(item.allowance_room);
+			fgUserOther.setAllowance_BSE(String.valueOf(item.allowance_bse ));
 			fgUserOther.setBusinessKbn(String.valueOf(item.business_kbn ));
 			fgUserOther.setProgram((float)item.program);
 			fgUserOther.setDetailDesign((float)item.detaildesign);
@@ -1688,7 +1731,39 @@ public class EditUserBasic extends Fragment implements OnClickListener , OnTouch
     	return txtUserBirthday.getText().toString();
     }
 
-    /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	 *
+	 * setMarriedday
+	 *
+	 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
+	public void  setMarriedday(String value){
+		txtUserMarriedday.setText(value );
+	}
+
+	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	 *
+	 * getMarriedday
+	 *
+	 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
+	public String   getMarriedday(){
+		return txtUserMarriedday.getText().toString();
+	}
+
+	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	 * set checkbox ngày kết hôn
+	 *
+	 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
+
+	public void setChkMarried_date(String value){
+		if(value==null || value.equals("")){
+			//chkGetMarried.setChecked(false);
+			//txtUserMarriedday.setEnabled(false);
+		}else{
+			//chkGetMarried.setChecked(true);
+			//txtUserMarriedday.setEnabled(true);
+		}
+	}
+	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * 
      * setAddress
      * 
@@ -1981,6 +2056,28 @@ public class EditUserBasic extends Fragment implements OnClickListener , OnTouch
 				correctHisData(MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS,userInsert.user_code);	
 			}
 			
+		}
+		/** cap nhat cho truong hop la trợ cấp BSR thay doi */
+		if(isAllowance_BSEInput(user) ){
+			/**get thong tin tro cap nghiep vu hien tai trong lich su ) */
+			String allowanceBSEHis = getCurrentAllowanceBSEHis(user.code);
+			/**Neu nhu co su thay doi */
+			Collator compare = Collator.getInstance(new Locale("vi", "vn"));
+			int comparison = compare.compare(allowanceBSEHis, user.allowance_bse);
+			//if(allowanceHis !=user.allowance_business ){
+			if(comparison!=0 ){
+				/** xoa neu nhu da co data tuong ung voi ngay thang nam tren man hinh*/
+				deleteUserHisByDate(date_from,user.code,MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS);
+				/** tạo đối tượng dùng để update*/
+				userInsert = getUserHistory(MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS,user);
+				/** thực thi update */
+				mDatabaseAdapter.open();
+				mDatabaseAdapter.insertToUserHisTable(userInsert);
+				mDatabaseAdapter.close();
+				/** chỉnh sửa lại ngày tháng năm start -end cho đúng */
+				correctHisData(MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS,userInsert.user_code);
+			}
+
 		}
 		/** cap nhat cho truong hop la salary thay doi */
 
@@ -2283,6 +2380,30 @@ public class EditUserBasic extends Fragment implements OnClickListener , OnTouch
 		return allowance_business;
 	
 	}
+
+	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	 *
+	 * get thông tin về trợ cấp BSE mới nhất của nhân viên
+	 *
+	 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
+	public String getNewestUserHisAllowance_BSEInfo(int user_code ){
+		String xWhere ="";
+		String xOrderBy ="";
+		String allowance_bse ="";
+
+		xWhere = " AND " + DatabaseAdapter.KEY_USER_CODE + " = " + user_code;
+		xOrderBy = "date(" + DatabaseAdapter.KEY_DATE_FROM + ") DESC ";
+		/** get danh sách các data lịch sử của user */
+		List<UserHistory> userhis = mConvertCursorToListString.getUserHisList(MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS, xWhere,xOrderBy);
+		if(userhis.size()==0){
+		}else{
+			allowance_bse= userhis.get(0).new_allowance_bse;
+
+		}
+		return allowance_bse;
+
+	}
+
 	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 	* 
 	* get thông tin về luong mới nhất của nhân viên
@@ -2371,7 +2492,33 @@ public class EditUserBasic extends Fragment implements OnClickListener , OnTouch
 			return false;
 		}*/
 	}
-	
+	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	 *
+	 * kiểm tra xem item PC BSE có input chưa ?
+	 *
+	 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
+	public boolean isAllowance_BSEInput(User item){
+		return true;
+		/*if(item.allowance_bse!="" && item.allowance_bse!=null){
+			return true;
+		}else{
+			return false;
+		}*/
+	}
+	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	 *
+	 * kiểm tra xem item PC phòng chuyên biệt có input chưa ?
+	 *
+	 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
+	public boolean isAllowance_RoomInput(User item){
+		return true;
+		/*if(item.allowance_room!="" && item.allowance_room!=null){
+			return true;
+		}else{
+			return false;
+		}*/
+	}
+
     /**▽▽▽▽▽▽▽▽▽▽▽▽▽Phần update lịch sử end ▽▽▽▽▽▽▽▽▽▽▽▽▽▽*/
 	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 	* 
@@ -2424,7 +2571,18 @@ public class EditUserBasic extends Fragment implements OnClickListener , OnTouch
     	kekka= getNewestUserHisAllowance_BusinessInfo(user_code);
     	return kekka;
     }
-    
+
+	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	 *
+	 * get thong tin phu cap BSE moi nhat tai lich su phong ban
+	 *
+	 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
+	public String getCurrentAllowanceBSEHis(int user_code ){
+		String kekka="";
+		kekka= getNewestUserHisAllowance_BSEInfo(user_code);
+		return kekka;
+	}
+
     /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 	* 
 	* get thong tin phu cap nghiep vu moi nhat tai lich su phong ban
@@ -2436,16 +2594,6 @@ public class EditUserBasic extends Fragment implements OnClickListener , OnTouch
     	return kekka;
     }
 
-	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-     * xử lý thay đổi item màn hình theo check box nghỉ việc
-     * 
-     ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
-	@Override
-	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-		switch(buttonView.getId()){
-			case R.id.chkGetMarried:
-				break;
-		}
-	}
+
 	
 }

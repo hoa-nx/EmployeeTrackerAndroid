@@ -98,12 +98,13 @@ public class ChartStaffStatusStackedBarActivity extends ChartBase implements OnS
 		
 		// change the position of the y-labels
 		YAxis yLabels = mChart.getAxisLeft();
+
 		//yLabels.setValueFormatter(new MyYAxisValueFormatter());
 		mChart.getAxisRight().setEnabled(false);
 
 		XAxis xLabels = mChart.getXAxis();
 		xLabels.setPosition(XAxisPosition.TOP);
-
+		xLabels.setLabelsToSkip(0);
 		// mChart.setDrawXLabels(false);
 		// mChart.setDrawYLabels(false);
 

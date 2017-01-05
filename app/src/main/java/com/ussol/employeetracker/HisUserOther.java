@@ -2,11 +2,13 @@
 package com.ussol.employeetracker;
 
 import java.math.RoundingMode;
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.TooManyListenersException;
 
 import com.ussol.employeetracker.EditUserBasic.SelectDateFragment;
@@ -29,6 +31,7 @@ import com.ussol.employeetracker.utils.DateTimeUtil;
 import com.ussol.employeetracker.utils.ShowAlertDialog;
 import com.ussol.employeetracker.utils.Utils;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -78,10 +81,10 @@ public class HisUserOther extends Fragment implements OnClickListener , OnTouchL
 	static final int DATE_DIALOG_ID = 0;
     //private TextView lblUserCode , lblUserDeptCode , lblUserTeamCode , lblUserPositionCode ;
     private TextView txtUserCode, imgUserFullPath,lblUserHisCurrentSalary;
-    private EditText txtUserHisDeptStartDate ,txtUserHisDeptNote,txtUserHisNewJapanese , txtUserHisNewAllowance_Business,txtUserHisNewSalary;
+    private EditText txtUserHisDeptStartDate ,txtUserHisDeptNote,txtUserHisNewJapanese , txtUserHisNewAllowance_Business,txtUserHisNewAllowance_BSE,txtUserHisNewSalary;
     private EditText txtUserFullName,txtUserHisNewSalaryStandard,txtUserHisNewSalaryPercent,txtUserHisNewSalaryActualUp,txtUserHisNewSalaryNextYM;
-    private Button btnUserSave , btnUserCancel , btnUserHisNewJapanese , btnUserHisNewAllowance_Business,btnUserHisNewSalaryNextYM,btnUserHisDeptStartDate;
-    private CheckBox chkUserHisNewJapanese,chkUserHisNewAllowance_Business,chkUserHisNewSalary;
+    private Button btnUserSave , btnUserCancel , btnUserHisNewJapanese , btnUserHisNewAllowance_Business,btnUserHisNewAllowance_BSE,btnUserHisNewSalaryNextYM,btnUserHisDeptStartDate;
+    private CheckBox chkUserHisNewJapanese,chkUserHisNewAllowance_Business,chkUserHisNewSalary,chkUserHisNewAllowance_BSE;
 	private Bitmap bitmap;
 	private ImageView imageView , pic , imgPrev, imgNext;
 	private ImageButton imgUserHisDeptList;
@@ -109,11 +112,15 @@ public class HisUserOther extends Fragment implements OnClickListener , OnTouchL
 	String[] dataJapaneseLevel = MasterConstants.JAPANESE_LEVEL ;
 	/** thông tin phụ cấp nghiệp vụ : các bậc*/
 	String[] dataAllowance_Business=MasterConstants.ALLOWANCE_BUSINESS_LEVEL ;
+	/** thông tin phụ cấp BSE : các bậc*/
+	String[] dataAllowance_BSE=MasterConstants.ALLOWANCE_BSE_LEVEL;
     /** Lưu lại vị trí mà đã chọn từ list radio */
 	int positionJananeseLevel = 0;
 	int positionAllowance_Business = 0;
+	int positionAllowance_BSE = 0;
 	String date_start="";
-	
+	String old_date_start="";
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -154,6 +161,7 @@ public class HisUserOther extends Fragment implements OnClickListener , OnTouchL
 			/**thông tin của tab main*/
 			_listUserChecked = fgUserMain.getCheckedUserList();
 			date_start = fgUserMain.getDateFrom();
+			old_date_start = fgUserMain.getHisOldStartDate();
 			setHisDeptStartDate(date_start);
 		}
 
@@ -178,7 +186,11 @@ public class HisUserOther extends Fragment implements OnClickListener , OnTouchL
 		setHisAllowance_BusinessCheck(false);
 		/** setting init cho cac item check box */
 		setHisSalaryCheck(false);
-		
+		txtUserHisNewSalaryStandard.setEnabled(false);
+		txtUserHisNewSalaryPercent.setEnabled(false);
+		txtUserHisNewSalaryActualUp.setEnabled(false);
+		txtUserHisNewSalaryNextYM.setEnabled(false);
+
 		if (savedInstanceState!=null){
 			
 		}else{
@@ -215,46 +227,67 @@ public class HisUserOther extends Fragment implements OnClickListener , OnTouchL
 			case R.id.btnUserHisNewJapanese:
 				/**hiển thị màn hình để chọn phong ban */
 				/** Getting the fragment manager */
-				FragmentManager manager =getActivity().getFragmentManager();
+				FragmentManager managerJapanese =getActivity().getFragmentManager();
 				
 				/** Instantiating the DialogFragment class */
-				AlertDialogRadio alert = new AlertDialogRadio("",dataJapaneseLevel,R.id.btnUserHisNewJapanese);
+				AlertDialogRadio alertJapanese = new AlertDialogRadio("",dataJapaneseLevel,R.id.btnUserHisNewJapanese);
 				
 				/** Creating a bundle object to store the selected item's index */
-				Bundle b  = new Bundle();
+				Bundle bJapanese  = new Bundle();
 				
 				/** Storing the selected item's index in the bundle object */
-				b.putInt("position", positionJananeseLevel);
+				bJapanese.putInt("position", positionJananeseLevel);
 				
 				/** Setting the bundle object to the dialog fragment object */
-				alert.setArguments(b);
+				alertJapanese.setArguments(bJapanese);
 				
 				/** Creating the dialog fragment object, which will in turn open the alert dialog window */
-				alert.show(manager, MasterConstants.TAB_DIALOG_TAG);	
+				alertJapanese.show(managerJapanese, MasterConstants.TAB_DIALOG_TAG);
 				break;
 				
 				
 			case R.id.btnUserHisNewAllowance_Business:
 				/**hiển thị màn hình để chọn nhóm*/
 				/** Getting the fragment manager */
-				FragmentManager managerTeam =getActivity().getFragmentManager();
+				FragmentManager managerBusiness =getActivity().getFragmentManager();
 				
 				/** Instantiating the DialogFragment class */
-				AlertDialogRadio alertTeam = new AlertDialogRadio("",dataAllowance_Business,R.id.btnUserHisNewAllowance_Business);
+				AlertDialogRadio alertBusiness = new AlertDialogRadio("",dataAllowance_Business,R.id.btnUserHisNewAllowance_Business);
 				
 				/** Creating a bundle object to store the selected item's index */
-				Bundle bTeam  = new Bundle();
+				Bundle bBusiness  = new Bundle();
 				
 				/** Storing the selected item's index in the bundle object */
-				bTeam.putInt("position", positionAllowance_Business);
+				bBusiness.putInt("position", positionAllowance_Business);
 				
 				/** Setting the bundle object to the dialog fragment object */
-				alertTeam.setArguments(bTeam);
+				alertBusiness.setArguments(bBusiness);
 				
 				/** Creating the dialog fragment object, which will in turn open the alert dialog window */
-				alertTeam.show(managerTeam, MasterConstants.TAB_DIALOG_TAG);	
+				alertBusiness.show(managerBusiness, MasterConstants.TAB_DIALOG_TAG);
 				break;
-				
+
+			case R.id.btnUserHisNewAllowance_BSE:
+				/**hiển thị màn hình để chọn loai BSE*/
+				/** Getting the fragment manager */
+				FragmentManager managerBSELevel =getActivity().getFragmentManager();
+
+				/** Instantiating the DialogFragment class */
+				AlertDialogRadio alertBSELevel = new AlertDialogRadio("",dataAllowance_BSE,R.id.btnUserHisNewAllowance_BSE);
+
+				/** Creating a bundle object to store the selected item's index */
+				Bundle bBSE  = new Bundle();
+
+				/** Storing the selected item's index in the bundle object */
+				bBSE.putInt("position", positionAllowance_BSE);
+
+				/** Setting the bundle object to the dialog fragment object */
+				alertBSELevel.setArguments(bBSE);
+
+				/** Creating the dialog fragment object, which will in turn open the alert dialog window */
+				alertBSELevel.show(managerBSELevel, MasterConstants.TAB_DIALOG_TAG);
+				break;
+
 			case R.id.btnUserHisDeptStartDate:
 				txtUserHisDeptStartDate.setText("");
 				break;
@@ -401,7 +434,8 @@ public class HisUserOther extends Fragment implements OnClickListener , OnTouchL
      * SelectDateFragment
      * 
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
-    public class SelectDateFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+    @SuppressLint("ValidFragment")
+	public class SelectDateFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
     	private int mControl ;
     	public SelectDateFragment(int control){
     		mControl = control;
@@ -458,6 +492,7 @@ public class HisUserOther extends Fragment implements OnClickListener , OnTouchL
     	txtUserHisDeptStartDate = (EditText) getView().findViewById(R.id.txtUserHisDeptStartDate);
     	txtUserHisNewJapanese= (EditText)getView().findViewById(R.id.txtUserHisNewJapanese);
     	txtUserHisNewAllowance_Business= (EditText)getView().findViewById(R.id.txtUserHisNewAllowance_Business);
+		txtUserHisNewAllowance_BSE= (EditText)getView().findViewById(R.id.txtUserHisNewAllowance_BSE);
     	txtUserHisNewSalary= (EditText)getView().findViewById(R.id.txtUserHisNewSalary);
     	txtUserHisNewSalaryStandard= (EditText)getView().findViewById(R.id.txtUserHisNewSalaryStandard);
     	txtUserHisNewSalaryPercent= (EditText)getView().findViewById(R.id.txtUserHisNewSalaryPercent);
@@ -468,11 +503,13 @@ public class HisUserOther extends Fragment implements OnClickListener , OnTouchL
     	
     	btnUserHisNewJapanese = (Button)getView().findViewById(R.id.btnUserHisNewJapanese);
     	btnUserHisNewAllowance_Business = (Button)getView().findViewById(R.id.btnUserHisNewAllowance_Business);
+		btnUserHisNewAllowance_BSE = (Button)getView().findViewById(R.id.btnUserHisNewAllowance_BSE);
     	btnUserHisNewSalaryNextYM = (Button)getView().findViewById(R.id.btnUserHisNewSalaryNextYM);
     	btnUserHisDeptStartDate= (Button)getView().findViewById(R.id.btnUserHisDeptStartDate);
     	
     	chkUserHisNewJapanese =(CheckBox)getView().findViewById(R.id.chkUserHisNewJapanese);
     	chkUserHisNewAllowance_Business=(CheckBox)getView().findViewById(R.id.chkUserHisNewAllowance_Business);
+		chkUserHisNewAllowance_BSE=(CheckBox)getView().findViewById(R.id.chkUserHisNewAllowance_BSE);
     	chkUserHisNewSalary =(CheckBox)getView().findViewById(R.id.chkUserHisNewSalary);
     	
     	imgUserHisDeptList = (ImageButton)getView().findViewById(R.id.imgUserHisDeptList);
@@ -490,11 +527,13 @@ public class HisUserOther extends Fragment implements OnClickListener , OnTouchL
     	
     	btnUserHisNewJapanese.setOnClickListener(this);
     	btnUserHisNewAllowance_Business.setOnClickListener(this);
+		btnUserHisNewAllowance_BSE.setOnClickListener(this);
     	btnUserHisNewSalaryNextYM.setOnClickListener(this);
     	btnUserHisDeptStartDate.setOnClickListener(this);
     	
     	chkUserHisNewJapanese.setOnCheckedChangeListener(this);
     	chkUserHisNewAllowance_Business.setOnCheckedChangeListener(this);
+		chkUserHisNewAllowance_BSE.setOnCheckedChangeListener(this);
     	chkUserHisNewSalary.setOnCheckedChangeListener(this);
     	
     	btnUserSave.setOnClickListener(this);
@@ -509,7 +548,7 @@ public class HisUserOther extends Fragment implements OnClickListener , OnTouchL
     	txtUserHisDeptStartDate.setInputType(InputType.TYPE_NULL);
     	txtUserHisNewSalaryNextYM.setInputType(InputType.TYPE_NULL);
     	txtUserHisNewSalaryActualUp.setInputType(InputType.TYPE_NULL);
-    	txtUserHisNewSalary.setInputType(InputType.TYPE_NULL);
+    	//txtUserHisNewSalary.setInputType(InputType.TYPE_NULL);
     }
     /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * hiển thị dialog date khi chạm vào màn hình
@@ -545,76 +584,235 @@ public class HisUserOther extends Fragment implements OnClickListener , OnTouchL
 			setHisDeptStartDate(date_from);
 			/** get danh sách các user được chọn */
 			_listUserChecked = userList;
-			
-			/** cap nhat cho truong hop la phong ban thay doi */
+
+			String  currentStringValue="";
+			float currentFloatValue=0;
+			/*
+			*//** cap nhat cho truong hop la tieng nhat thay doi *//*
 			if(getHisJapaneseCheck()){
-				/** xử lý cho từng user được chọn */
+				*//** xử lý cho từng user được chọn *//*
 				for(User usr: _listUserChecked){
 					if(userHisInfo!=null){
-						/** nếu như có thay đổi ngày tháng năm thì sẽ xóa data cũ */
+						*//** nếu như có thay đổi ngày tháng năm thì sẽ xóa data cũ *//*
 						if(!date_from.equals(userHisInfo.date_from)){
 							deleteUserHisByDate(userHisInfo.date_from,usr.code,MasterConstants.MASTER_MKBN_JAPANESE_HIS);
 						}
 					}
-					/** xoa neu nhu da co data tuong ung voi ngay thang nam tren man hinh*/
+					*//** xoa neu nhu da co data tuong ung voi ngay thang nam tren man hinh*//*
 					deleteUserHisByDate(date_from,usr.code,MasterConstants.MASTER_MKBN_JAPANESE_HIS);
-					/** tạo đối tượng dùng để update*/
+					*//** tạo đối tượng dùng để update*//*
 					userInsert = getUserHistory(MasterConstants.MASTER_MKBN_JAPANESE_HIS,usr.code);
-					/** thực thi update */
+					*//** thực thi update *//*
 					mDatabaseAdapter.open();
 					mDatabaseAdapter.insertToUserHisTable(userInsert);
 					mDatabaseAdapter.close();
-					/** chỉnh sửa lại ngày tháng năm start -end cho đúng */
+					*//** chỉnh sửa lại ngày tháng năm start -end cho đúng *//*
 					correctHisData(MasterConstants.MASTER_MKBN_JAPANESE_HIS,userInsert.user_code);
 				}
 			}
 			
-			/** cap nhat cho truong hop la trợ cấp nghiệp vụ thay doi */
+			*//** cap nhat cho truong hop la trợ cấp nghiệp vụ thay doi *//*
 			if(getHisAllowance_BusinessCheck()){
-				/** xử lý cho từng user được chọn */
+				*//** xử lý cho từng user được chọn *//*
 				for(User usr: _listUserChecked){
 					if(userHisInfo!=null){
-						/** nếu như có thay đổi ngày tháng năm thì sẽ xóa data cũ */
+						*//** nếu như có thay đổi ngày tháng năm thì sẽ xóa data cũ *//*
 						if(!date_from.equals(userHisInfo.date_from)){
 							deleteUserHisByDate(userHisInfo.date_from,usr.code,MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS);
 						}
 					}
-					/** xoa neu nhu da co data tuong ung voi ngay thang nam tren man hinh*/
+					*//** xoa neu nhu da co data tuong ung voi ngay thang nam tren man hinh*//*
 					deleteUserHisByDate(date_from,usr.code,MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS);
-					/** tạo đối tượng dùng để update*/
+					*//** tạo đối tượng dùng để update*//*
 					userInsert = getUserHistory(MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS,usr.code);
 					
-					/** thực thi update */
+					*//** thực thi update *//*
 					mDatabaseAdapter.open();
 					mDatabaseAdapter.insertToUserHisTable(userInsert);
 					mDatabaseAdapter.close();
-					/** chỉnh sửa lại ngày tháng năm start -end cho đúng */
+					*//** chỉnh sửa lại ngày tháng năm start -end cho đúng *//*
 					correctHisData(MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS,userInsert.user_code);
 				}
 			}
-			/** cap nhat cho truong hop la salary thay doi */
+			*//** cap nhat cho truong hop la salary thay doi *//*
 			if(getHisSalaryCheck()){
-				/** xử lý cho từng user được chọn */
+				*//** xử lý cho từng user được chọn *//*
 				for(User usr: _listUserChecked){
 					if(userHisInfo!=null){
-						/** nếu như có thay đổi ngày tháng năm thì sẽ xóa data cũ */
+						*//** nếu như có thay đổi ngày tháng năm thì sẽ xóa data cũ *//*
 						if(!date_from.equals(userHisInfo.date_from)){
 							deleteUserHisByDate(userHisInfo.date_from,usr.code,MasterConstants.MASTER_MKBN_SALARY_HIS);
 						}
 					}
-					/** xoa neu nhu da co data tuong ung voi ngay thang nam tren man hinh*/
+					*//** xoa neu nhu da co data tuong ung voi ngay thang nam tren man hinh*//*
 					deleteUserHisByDate(date_from,usr.code,MasterConstants.MASTER_MKBN_SALARY_HIS);
-					/** tạo đối tượng dùng để update*/
+					*//** tạo đối tượng dùng để update*//*
 					userInsert = getUserHistory(MasterConstants.MASTER_MKBN_SALARY_HIS,usr.code);
 					
-					/** thực thi update */
+					*//** thực thi update *//*
 					mDatabaseAdapter.open();
 					mDatabaseAdapter.insertToUserHisTable(userInsert);
 					mDatabaseAdapter.close();
-					/** chỉnh sửa lại ngày tháng năm start -end cho đúng */
+					*//** chỉnh sửa lại ngày tháng năm start -end cho đúng *//*
 					correctHisData(MasterConstants.MASTER_MKBN_SALARY_HIS,userInsert.user_code);
 				}
+			}*/
+
+			currentStringValue="";
+			/** trình độ nhật ngữ*/
+			boolean japaneseCheck =getHisJapaneseCheck();
+			/** phu cap nghiep vu */
+			boolean allowanceCheck =getHisAllowance_BusinessCheck();
+			/** phu cap BSE*/
+			boolean allowanceBSECheck =getHisAllowance_BSECheck();
+			/** salary*/
+			/** salary*/
+			boolean salaryCheck =getHisSalaryCheck() ;
+
+			String japaneseNew = getHisNewJapanese();
+			String allowanceNew = getHisNewAllowance_Business();
+			String allowanceBSENew = getHisNewAllowance_BSE();
+			float salaryNew = getHisNewSalary();
+
+			/** cap nhat lich su cho truong hop la chung chi tieng Nhat thay doi */
+			if(japaneseCheck && !getHisDeptStartDate().equals("")){
+				/** xử lý cho từng user được chọn */
+				for(User usr: _listUserChecked){
+					/** kiem tra xem tri co thay doi so voi master User khong ? Neu khong thi khong update */
+					currentStringValue = String.valueOf(usr.japanese) ;
+					if(!currentStringValue.equals(japaneseNew)|| !old_date_start.equals(getHisDeptStartDate()) ){
+						if(userHisInfo!=null){
+								/* truong hop la edit thi se xoa neu du lieu cua ngay cu */
+							if(!old_date_start.equals("")){
+								deleteUserHisByDate(old_date_start,usr.code,MasterConstants.MASTER_MKBN_JAPANESE_HIS);
+							}
+							/** nếu như có thay đổi ngày tháng năm thì sẽ xóa data cũ */
+							if(!getHisDeptStartDate().equals(userHisInfo.date_from)){
+								deleteUserHisByDate(userHisInfo.date_from,usr.code,MasterConstants.MASTER_MKBN_JAPANESE_HIS);
+							}
+						}
+						/** xoa neu nhu da co data tuong ung voi ngay thang nam tren man hinh*/
+						deleteUserHisByDate(getHisDeptStartDate(),usr.code,MasterConstants.MASTER_MKBN_JAPANESE_HIS);
+						/** tạo đối tượng dùng để update*/
+						userInsert = getUserHistory(MasterConstants.MASTER_MKBN_JAPANESE_HIS,usr.code);
+						/** thực thi update */
+						mDatabaseAdapter.open();
+						mDatabaseAdapter.insertToUserHisTable(userInsert);
+						mDatabaseAdapter.close();
+						/** chỉnh sửa lại ngày tháng năm start -end cho đúng */
+						correctHisData(MasterConstants.MASTER_MKBN_JAPANESE_HIS,userInsert.user_code);
+					}
+
+				}
 			}
+				/*---------------------------------------------*/
+			currentStringValue ="";
+			/** cap nhat lich su cho truong hop la tro cap nghiep vu thay doi */
+			if(allowanceCheck && !getHisDeptStartDate().equals("")){
+				/** xử lý cho từng user được chọn */
+				for(User usr: _listUserChecked){
+					/** kiem tra xem tri co thay doi so voi master User khong ? Neu khong thi khong update */
+					currentStringValue = String.valueOf(usr.allowance_business) ;
+					/**Neu nhu co su thay doi */
+					Collator compare = Collator.getInstance(new Locale("vi", "vn"));
+					int comparison = compare.compare(currentStringValue, allowanceNew);
+
+					if(comparison!=0 || !old_date_start.equals(getHisDeptStartDate()) ){
+						if(userHisInfo!=null){
+								/* truong hop la edit thi se xoa neu du lieu cua ngay cu */
+							if(!old_date_start.equals("")){
+								deleteUserHisByDate(old_date_start,usr.code,MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS);
+							}
+							/** nếu như có thay đổi ngày tháng năm thì sẽ xóa data cũ */
+							if(!getHisDeptStartDate().equals(userHisInfo.date_from)){
+								deleteUserHisByDate(userHisInfo.date_from,usr.code,MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS);
+							}
+						}
+						/** xoa neu nhu da co data tuong ung voi ngay thang nam tren man hinh*/
+						deleteUserHisByDate(getHisDeptStartDate(),usr.code,MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS);
+						/** tạo đối tượng dùng để update*/
+						userInsert = getUserHistory(MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS,usr.code);
+						/** thực thi update */
+						mDatabaseAdapter.open();
+						mDatabaseAdapter.insertToUserHisTable(userInsert);
+						mDatabaseAdapter.close();
+						/** chỉnh sửa lại ngày tháng năm start -end cho đúng */
+						correctHisData(MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS,userInsert.user_code);
+					}
+
+				}
+			}
+				/*---------------------------------------------*/
+			currentStringValue ="";
+			/** cap nhat lich su cho truong hop la tro cap BSE thay doi */
+			if(allowanceBSECheck && !getHisDeptStartDate().equals("")){
+				/** xử lý cho từng user được chọn */
+				for(User usr: _listUserChecked){
+					/** kiem tra xem tri co thay doi so voi master User khong ? Neu khong thi khong update */
+					currentStringValue = String.valueOf(usr.allowance_bse) ;
+					/**Neu nhu co su thay doi */
+					Collator compare = Collator.getInstance(new Locale("vi", "vn"));
+					int comparison = compare.compare(currentStringValue, allowanceBSENew);
+
+					if(comparison!=0 || !old_date_start.equals(getHisDeptStartDate()) ){
+						if(userHisInfo!=null){
+								/* truong hop la edit thi se xoa neu du lieu cua ngay cu */
+							if(!old_date_start.equals("")){
+								deleteUserHisByDate(old_date_start,usr.code,MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS);
+							}
+							/** nếu như có thay đổi ngày tháng năm thì sẽ xóa data cũ */
+							if(!getHisDeptStartDate().equals(userHisInfo.date_from)){
+								deleteUserHisByDate(userHisInfo.date_from,usr.code,MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS);
+							}
+						}
+						/** xoa neu nhu da co data tuong ung voi ngay thang nam tren man hinh*/
+						deleteUserHisByDate(getHisDeptStartDate(),usr.code,MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS);
+						/** tạo đối tượng dùng để update*/
+						userInsert = getUserHistory(MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS,usr.code);
+						/** thực thi update */
+						mDatabaseAdapter.open();
+						mDatabaseAdapter.insertToUserHisTable(userInsert);
+						mDatabaseAdapter.close();
+						/** chỉnh sửa lại ngày tháng năm start -end cho đúng */
+						correctHisData(MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS,userInsert.user_code);
+					}
+
+				}
+			}
+				/*---------------------------------------------*/
+			currentFloatValue =0;
+			/** cap nhat lich su cho truong hop la salary thay doi */
+			if(salaryCheck && !getHisDeptStartDate().equals("")){
+				/** xử lý cho từng user được chọn */
+				for(User usr: _listUserChecked){
+					/** kiem tra xem tri co thay doi so voi master User khong ? Neu khong thi khong update */
+					currentFloatValue = usr.salary_notallowance;
+					if(currentFloatValue!=salaryNew || !old_date_start.equals(getHisDeptStartDate()) ){
+						if(userHisInfo!=null){
+								/* truong hop la edit thi se xoa neu du lieu cua ngay cu */
+							if(!old_date_start.equals("")){
+								deleteUserHisByDate(old_date_start,usr.code,MasterConstants.MASTER_MKBN_SALARY_HIS);
+							}
+							/** nếu như có thay đổi ngày tháng năm thì sẽ xóa data cũ */
+							if(!getHisDeptStartDate().equals(userHisInfo.date_from)){
+								deleteUserHisByDate(userHisInfo.date_from,usr.code,MasterConstants.MASTER_MKBN_SALARY_HIS);
+							}
+						}
+						/** xoa neu nhu da co data tuong ung voi ngay thang nam tren man hinh*/
+						deleteUserHisByDate(getHisDeptStartDate(),usr.code,MasterConstants.MASTER_MKBN_SALARY_HIS);
+						/** tạo đối tượng dùng để update*/
+						userInsert = getUserHistory(MasterConstants.MASTER_MKBN_SALARY_HIS,usr.code);
+						/** thực thi update */
+						mDatabaseAdapter.open();
+						mDatabaseAdapter.insertToUserHisTable(userInsert);
+						mDatabaseAdapter.close();
+						/** chỉnh sửa lại ngày tháng năm start -end cho đúng */
+						correctHisData(MasterConstants.MASTER_MKBN_SALARY_HIS,userInsert.user_code);
+					}
+
+				}
+			}
+
 			/** cap nhat lai tri moi nhat cua phong ban ---cho nhan vien */
 			for(User usr: _listUserChecked){
 				updateUserMaster(usr.code);
@@ -641,8 +839,11 @@ public class HisUserOther extends Fragment implements OnClickListener , OnTouchL
 		userInsert.date_from = getHisDeptStartDate();
 		userInsert.new_japanese = getHisNewJapanese();
 		userInsert.new_allowance_business = getHisNewAllowance_Business();
+		userInsert.new_allowance_bse = getHisNewAllowance_BSE();
+
 		userInsert.yobi_real1 = getHisNewSalary();//muc luong moi
 		userInsert.new_salary = getHisNewSalary();//muc luong moi
+
 		userInsert.new_salary_standard = getHisNewSalaryStandard();
 		userInsert.new_salary_percent = getHisNewSalaryPercent();
 		userInsert.new_salary_actual_up = getHisNewSalaryActualUp();
@@ -671,6 +872,9 @@ public class HisUserOther extends Fragment implements OnClickListener , OnTouchL
 					break;
 				case MasterConstants.MASTER_MKBN_SALARY_HIS:
 					mDatabaseAdapter.deleteUserHisSalaryByCode(xWhere);
+					break;
+				case MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS:
+					mDatabaseAdapter.deleteUserHisAllowance_BSEByCode(xWhere);
 					break;
 			}
 			
@@ -960,6 +1164,12 @@ public class HisUserOther extends Fragment implements OnClickListener , OnTouchL
 	    		/** gán tên người đã chọn tại màn hình poup */
 	    		txtUserHisNewAllowance_Business.setText(dataAllowance_Business[this.positionAllowance_Business]);    
 	    		break;
+			case R.id.btnUserHisNewAllowance_BSE:
+				/** gán lại vị trí của item mà đã chọn */
+				this.positionAllowance_BSE = position;
+				/** gán tên người đã chọn tại màn hình poup */
+				txtUserHisNewAllowance_BSE.setText(dataAllowance_BSE[this.positionAllowance_BSE]);
+				break;
     	}
     }
     
@@ -984,6 +1194,17 @@ public class HisUserOther extends Fragment implements OnClickListener , OnTouchL
 				btnUserHisNewAllowance_Business.setEnabled(false);
 			}
 			break;
+
+		case R.id.chkUserHisNewAllowance_BSE:
+			if(isChecked){
+				txtUserHisNewAllowance_BSE.setEnabled(true);
+				btnUserHisNewAllowance_BSE.setEnabled(true);
+			}else{
+				txtUserHisNewAllowance_BSE.setEnabled(false);
+				btnUserHisNewAllowance_BSE.setEnabled(false);
+			}
+			break;
+
 		case R.id.chkUserHisNewSalary:
 			if(isChecked){
 				txtUserHisNewSalary.setEnabled(true);
@@ -1175,6 +1396,26 @@ public class HisUserOther extends Fragment implements OnClickListener , OnTouchL
     	}
     	return txtUserHisNewAllowance_Business.getText().toString();
     }
+	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	 *
+	 * setHisNewAllowance_BSE
+	 *
+	 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
+	public void  setHisNewAllowance_BSE(String value){
+		txtUserHisNewAllowance_BSE.setText(value );
+	}
+
+	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	 *
+	 * getHisNewAllowance_BSE
+	 *
+	 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
+	public String   getHisNewAllowance_BSE(){
+		if(!getHisAllowance_BSECheck()){
+			return "";
+		}
+		return txtUserHisNewAllowance_BSE.getText().toString();
+	}
     /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * 
      * setHisNewSalary
@@ -1386,6 +1627,24 @@ public class HisUserOther extends Fragment implements OnClickListener , OnTouchL
     public void  setHisAllowance_BusinessCheck(boolean value){
     	chkUserHisNewAllowance_Business.setChecked(value );
     }
+
+	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	 *
+	 * getHisAllowance_BSECheck
+	 *
+	 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
+	public boolean getHisAllowance_BSECheck(){
+		return chkUserHisNewAllowance_BSE.isChecked();
+	}
+	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	 *
+	 * setHisAllowance_BSECheck
+	 *
+	 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
+	public void  setHisAllowance_BSECheck(boolean value){
+		chkUserHisNewAllowance_BSE.setChecked(value );
+	}
+
     /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * 
      * getHisSalaryCheck
@@ -1409,7 +1668,7 @@ public class HisUserOther extends Fragment implements OnClickListener , OnTouchL
      * 
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
     public void  setHisSalaryCheckStatus(boolean enable){
-    	setHisSalaryCheck(false);
+		setHisSalaryCheck(false); //luon setting init la false
     	chkUserHisNewSalary.setEnabled(enable);
     	setHisNewSalaryStandard(0);
     	setHisNewSalaryActualUp(0);
