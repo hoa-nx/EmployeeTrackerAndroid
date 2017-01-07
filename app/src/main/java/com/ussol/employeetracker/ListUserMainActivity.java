@@ -402,9 +402,9 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 		getMenuInflater().inflate(R.menu.list_user_menu, menu);
 
 		MenuItem itemFilterSetting = menu.findItem(R.id.menu_list_user_item_settings);
-		//iconBadgeSearchSetting = (LayerDrawable) itemFilterSetting.getIcon(); //truong hop icon la dang drawable
-		BitmapDrawable iconBitmap = (BitmapDrawable) itemFilterSetting.getIcon(); //truong hop khong phai nhu tren
-		iconBadgeSearchSetting = new LayerDrawable(new Drawable [] { iconBitmap });
+		iconBadgeSearchSetting = (LayerDrawable) itemFilterSetting.getIcon(); //truong hop icon la dang drawable
+		//BitmapDrawable iconBitmap = (BitmapDrawable) itemFilterSetting.getIcon(); //truong hop khong phai nhu tren
+		//iconBadgeSearchSetting = new LayerDrawable(new Drawable [] { iconBitmap });
 
 		setBadgeCount(this, iconBadgeSearchSetting, String.valueOf(adapter.getCount()));
 		/*
@@ -1418,10 +1418,11 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 		if(icon==null) return;
 		// Reuse drawable if possible
 		Drawable reuse = icon.findDrawableByLayerId(R.id.ic_badge);
+		/*
 		if(reuse==null) {
 			reuse = geSingleDrawable(iconBadgeSearchSetting);
 		}
-
+		*/
 		if (reuse != null && reuse instanceof BadgeDrawableHelper) {
 			badge = (BadgeDrawableHelper) reuse;
 		} else {
