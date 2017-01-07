@@ -77,12 +77,13 @@ public class MasterConstants {
 	public static final int MASTER_MKBN_ALLOWANCE_BUSINESS_HIS = 140;
 	/** lich su xet luong */
 	public static final int MASTER_MKBN_SALARY_HIS = 150;
-	/** lich su doi ung khach hang */
-	public static final int MASTER_MKBN_CUSTOMER_HIS = 160;
-	/** lich su doi ung cong viec */
-	public static final int MASTER_MKBN_SHIGOTO_HIS = 170;
 	/** lich su tro cap BSE*/
-	public static final int MASTER_MKBN_ALLOWANCE_BSE_HIS = 180;
+	public static final int MASTER_MKBN_ALLOWANCE_BSE_HIS = 160;
+	/** lich su doi ung khach hang */
+	public static final int MASTER_MKBN_CUSTOMER_HIS = 170;
+	/** lich su doi ung cong viec */
+	public static final int MASTER_MKBN_SHIGOTO_HIS = 180;
+
 	/** List expandable*/
 	public static final String EXP_USER_TAG = "ExpUser";
 	public static final String EXP_USER_GROUP_TAG = "ExpUserGroup";
@@ -153,6 +154,8 @@ public class MasterConstants {
 	public static final String HIS_JAPANESE_NAME="LS tiếng Nhật";
 	/**tên hiển thị tại group lịch sử phụ cấp nghiệp vụ */
 	public static final String HIS_ALLOWANCE_BUSINESS_NAME="LS phụ cấp nghiệp vụ";
+	/**tên hiển thị tại group lịch sử phụ cấp nghiệp vụ */
+	public static final String HIS_ALLOWANCE_BSE_NAME="LS phụ cấp BSE";
 	/**tên hiển thị tại group lịch sử salary */
 	public static final String HIS_SALARY_NAME="LS Salary";
 	/**tên hiển thị tại group lịch sử salary */

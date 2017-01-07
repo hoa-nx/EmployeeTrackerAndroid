@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -7,7 +8,7 @@
 
     <!-- ListRow Left sied Thumbnail image -->
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/thumbnail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,7 +23,18 @@
             android:layout_marginTop="2dp"
             android:adjustViewBounds="true"
             android:src="@drawable/user_info" />
-    </LinearLayout>
+        <TextView
+            android:id="@+id/txtOtherInfomation"
+            android:layout_width="80dip"
+            android:layout_height="100dip"
+            android:layout_marginTop="2dp"
+            android:text="↑TS1"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/DarkSlateGray"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            tools:layout_alignParentTop="true" />
+    </RelativeLayout>
 
     <!-- Address Of Message -->
 
@@ -109,7 +121,7 @@
 
 
     <TextView
-        android:id="@+id/txtJoin_date_count"
+        android:id="@+id/txtSalary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/txtIn_date_count"
@@ -119,6 +131,7 @@
         android:background="@drawable/join_date_number_icon"
         android:gravity="fill"
         android:text="00"
+
         android:textColor="@color/white"
         android:textStyle="bold"
         android:visibility="visible" />

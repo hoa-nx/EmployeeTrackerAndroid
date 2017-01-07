@@ -12,7 +12,7 @@
 		android:layout_width="fill_parent"
 		android:layout_height="35dip"
 		android:background="@color/grey_light"
-		android:visibility="visible" >
+		android:visibility="gone" >
 		<LinearLayout
 			android:id="@+id/fdLinearLayoutMenu"
 			android:layout_width="fill_parent"
@@ -20,7 +20,7 @@
 			android:gravity="center_vertical"
 			android:orientation="horizontal"
 			android:paddingLeft="0dip"
-			android:visibility="visible" >
+			android:visibility="gone" >
 
 			<LinearLayout
 				android:layout_width="0dp"
@@ -84,7 +84,7 @@
 			android:layout_width="fill_parent"
 			android:layout_height="wrap_content"
 			android:orientation="vertical"
-			android:visibility="gone" >
+			android:visibility="visible" >
 			<RelativeLayout
 				android:layout_width="fill_parent"
 				android:layout_height="fill_parent"
@@ -108,17 +108,33 @@
 					android:layout_height="wrap_content"
 					android:layout_alignParentRight="true"
 					android:layout_alignParentTop="true"
-					android:src="@drawable/delete_black" />
+					android:src="@drawable/delete_black"
+					android:visibility="gone"
+					/>
 
 			</RelativeLayout>
 		</LinearLayout>
 	</RelativeLayout>
+	<EditText
+		android:id="@+id/txtFilterText"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="20dp"
+		android:layout_marginRight="20dp"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentStart="true"
+		android:hint="nhập để lọc dữ liệu"
+		android:cursorVisible="false"
+		android:inputType="text"
+		android:maxLines="1"
+		/>
 	<ListView
 		android:id="@+id/list"
 		android:layout_width="fill_parent"
 		android:layout_height="fill_parent"
 		android:layout_above="@+id/bottom_control_bar"
-		android:layout_below="@+id/top_control_bar"
+		android:layout_below="@+id/txtFilterText"
 		android:layout_weight="1"
 		android:divider="#b5b5b5"
 		android:dividerHeight="2dp"
@@ -131,6 +147,7 @@
 		android:layout_weight="1"
 		android:background="#455A64"
 		android:gravity="center"
+		android:visibility="gone"
 		>
 
 		<TableLayout
@@ -197,7 +214,7 @@
 			</TableRow>
 		</TableLayout>
 	</RelativeLayout>
-	<com.nightonke.boommenu.BoomMenuButton
+	<!--<com.nightonke.boommenu.BoomMenuButton
 		android:id="@+id/bmb"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
@@ -205,5 +222,90 @@
 		android:layout_alignParentRight="true"
 		android:layout_alignParentEnd="true"
 		app:bmb_normalColor="@color/colorAccent"
-		/>
+		/>-->
+	<com.github.clans.fab.FloatingActionMenu
+		android:id="@+id/material_design_android_floating_action_menu"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentRight="true"
+		android:layout_marginBottom="11dp"
+		android:layout_marginLeft="11dp"
+		android:layout_marginRight="11dp"
+		app:menu_animationDelayPerItem="55"
+		app:menu_backgroundColor="@android:color/transparent"
+		app:menu_buttonSpacing="0dp"
+		app:menu_colorNormal="#da3c2f"
+		app:menu_colorPressed="#dc4b3f"
+		app:menu_colorRipple="#99d4d4d4"
+		app:menu_fab_label=""
+		app:menu_fab_size="normal"
+		app:menu_icon="@drawable/fab_add"
+		app:menu_labels_colorNormal="#333"
+		app:menu_labels_colorPressed="#444"
+		app:menu_labels_colorRipple="#66efecec"
+		app:menu_labels_cornerRadius="3dp"
+		app:menu_labels_ellipsize="none"
+		app:menu_labels_hideAnimation="@anim/fab_slide_out_to_right"
+		app:menu_labels_margin="0dp"
+		app:menu_labels_maxLines="-1"
+		app:menu_labels_padding="8dp"
+		app:menu_labels_position="left"
+		app:menu_labels_showAnimation="@anim/fab_slide_in_from_right"
+		app:menu_labels_showShadow="true"
+		app:menu_labels_singleLine="false"
+		app:menu_labels_textColor="#f2f1f1"
+		app:menu_labels_textSize="15sp"
+		app:menu_openDirection="up"
+		app:menu_shadowColor="#66aff198"
+		app:menu_shadowRadius="4dp"
+		app:menu_shadowXOffset="1dp"
+		app:menu_shadowYOffset="4dp"
+		app:menu_showShadow="true">
+
+		<com.github.clans.fab.FloatingActionButton
+			android:id="@+id/fab_menu_list_user_check_all"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/ic_check_box_white_24dp"
+			app:fab_label=""
+			app:fab_size="mini" />
+
+		<com.github.clans.fab.FloatingActionButton
+			android:id="@+id/fab_menu_list_user_uncheck_all"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/ic_check_box_outline_blank_white_24dp"
+			app:fab_label=""
+			app:fab_size="mini" />
+
+		<com.github.clans.fab.FloatingActionButton
+			android:id="@+id/fab_menu_list_user_delete"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/account_minus"
+			app:fab_label=""
+			app:fab_size="mini" />
+		<com.github.clans.fab.FloatingActionButton
+			android:id="@+id/fab_menu_list_user_undelete"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/account_switch"
+			app:fab_label=""
+			app:fab_size="mini" />
+		<com.github.clans.fab.FloatingActionButton
+			android:id="@+id/fab_menu_list_user_send_email"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/ic_mail_outline_white_24dp"
+			app:fab_label=""
+			app:fab_size="mini" />
+		<com.github.clans.fab.FloatingActionButton
+			android:id="@+id/fab_menu_list_user_send_sms"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/ic_message_white_24dp"
+			app:fab_label=""
+			app:fab_size="mini" />
+	</com.github.clans.fab.FloatingActionMenu>
 </RelativeLayout>

@@ -2129,7 +2129,7 @@ public class EditUserBasic extends Fragment implements OnClickListener , OnTouch
 	userInsert.new_position_name = user.position_name;
 	userInsert.new_japanese= user.japanese;
 	userInsert.new_allowance_business= user.allowance_business;
-	
+	userInsert.new_allowance_bse= user.allowance_bse;
 	userInsert.yobi_real1 = user.salary_notallowance;//salary
 	userInsert.new_salary = user.salary_notallowance;//salary
 	

@@ -35,4 +35,5 @@ dependencies {
     compile files('libs/mpandroidchartlibrary-2-1-4.jar')
     compile files('libs/nineoldandroids-2.4.0.jar')
     compile 'com.nightonke:boommenu:2.0.1'
+    compile 'com.github.clans:fab:1.6.2'
 }

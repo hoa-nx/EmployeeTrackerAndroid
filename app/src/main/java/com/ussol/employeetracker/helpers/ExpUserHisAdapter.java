@@ -129,6 +129,7 @@ public class ExpUserHisAdapter extends BaseExpandableListAdapter {
     					|| usr.new_position_name.toLowerCase().contains(query)
     					|| usr.new_japanese.toLowerCase().contains(query)
     					|| usr.new_allowance_business.toLowerCase().contains(query)
+						|| usr.new_allowance_bse.toLowerCase().contains(query)
     					|| String.valueOf(usr.yobi_real1).toLowerCase().contains(query)
     				  ){
     					/** nếu thỏa mãn điều kiện thì sẽ add vào list */
@@ -221,6 +222,10 @@ public class ExpUserHisAdapter extends BaseExpandableListAdapter {
 	    		holder.nameTxVw.setText( cat.new_allowance_business);
 	    		txtUserInfo =  cat.date_from + " ～ " + cat.date_to ;
 	        	break;
+			case MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS:
+				holder.nameTxVw.setText( cat.new_allowance_bse);
+				txtUserInfo =  cat.date_from + " ～ " + cat.date_to ;
+				break;
 	    	case MasterConstants.MASTER_MKBN_SALARY_HIS:
 	    		holder.nameTxVw.setText(String.valueOf( cat.yobi_real1));
 	    		txtUserInfo =  cat.date_from + " ～ " + cat.date_to ;

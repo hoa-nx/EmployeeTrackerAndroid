@@ -1,0 +1,30 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	>
+    <item android:id="@+id/menu_list_user_item_settings"
+        android:title="@string/menu_search_item_settings"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_account_card_details_black_24dp"
+        app:showAsAction="always" />
+	<item android:id="@+id/menu_list_user_item_setting_sort"
+        android:title="@string/menu_report_sortlist"
+        android:orderInCategory="100"
+		app:showAsAction="always"
+        android:icon="@drawable/ic_sort_black_24dp" />
+	<item android:id="@+id/menu_list_user_item_sort_asc"
+		android:title="@string/titleSortAsc"
+		android:orderInCategory="100"
+		app:showAsAction="always"
+		android:icon="@drawable/ic_sort_ascending_black_24dp" />
+	<item android:id="@+id/menu_list_user_item_sort_des"
+		android:title="@string/titleSortDesc"
+		android:orderInCategory="100"
+		app:showAsAction="always"
+		android:icon="@drawable/ic_sort_descending_black_24dp" />
+	<item android:id="@+id/menu_list_user_item_config"
+		android:title="@string/menu_settings"
+		android:orderInCategory="100"
+		app:showAsAction="always"
+		android:icon="@drawable/ic_settings_black_24dp" />
+
+</menu>

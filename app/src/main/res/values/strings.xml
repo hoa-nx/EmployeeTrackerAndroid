@@ -6,6 +6,7 @@
     <string name="title_activity_main">Quản lý nhân sự</string>
     <string name="indicator_height">3dip</string>
     <!-- menu chung -->
+    <string name="menu_search_item_filter">Tìm kiếm</string>
     <string name="menu_search_item_settings">Điều kiện tìm kiếm</string>
     <string name="menu_sort_item_settings">Trình tự sắp xếp</string>
     <string name="menu_notification">Thông báo</string>
@@ -296,6 +297,16 @@
 
     <string name="title_activity_alarm_job_service">Cấu hình công việc chạy nền</string>
     <string name="action_settings">Cấu hình</string>
+
+    <!-- List User Main menu-->
+    <string name="fab_menu_list_user_check_all">Chọn tất cả</string>
+    <string name="fab_menu_list_user_uncheck_all">Bỏ chọn tất cả</string>
+    <string name="fab_menu_list_user_delete">Xóa nhân viên</string>
+    <string name="fab_menu_list_user_undelete">Phục hồi nhân viên đã xóa</string>
+    <string name="fab_menu_list_user_send_email">Gửi email</string>
+    <string name="fab_menu_list_user_send_sms">Gửi sms</string>
+    <string name="fab_menu_list_user_change_filter">Thay đổi điều kiện trích xuất</string>
+    <string name="fab_menu_list_user_change_sort">Thay đổi sắp xếp</string>
     <!-- SwipeListView -->
     <string name="appName">SwipeListView</string>
     <string name="open">Mở</string>

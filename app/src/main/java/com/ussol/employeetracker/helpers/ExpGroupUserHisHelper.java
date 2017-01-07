@@ -42,6 +42,7 @@ public class ExpGroupUserHisHelper implements IExpGroup<UserHistory> {
 					list.add(MasterConstants.HIS_JAPANESE_NAME);
 					list.add(MasterConstants.HIS_ALLOWANCE_BUSINESS_NAME);
 					list.add(MasterConstants.HIS_SALARY_NAME);
+					list.add(MasterConstants.HIS_ALLOWANCE_BSE_NAME);
 					returnArr = new String[list.size()];
 					returnArr = list.toArray(returnArr);
 					break;
@@ -77,6 +78,9 @@ public class ExpGroupUserHisHelper implements IExpGroup<UserHistory> {
 					break;
 				case  MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS:
 					list = mConvertCursorToListString.getUserHisList(MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS, xWhere,xOrderBy);
+					break;
+				case  MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS:
+					list = mConvertCursorToListString.getUserHisList(MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS, xWhere,xOrderBy);
 					break;
 				case  MasterConstants.MASTER_MKBN_SALARY_HIS:
 					list = mConvertCursorToListString.getUserHisList(MasterConstants.MASTER_MKBN_SALARY_HIS, xWhere,xOrderBy);

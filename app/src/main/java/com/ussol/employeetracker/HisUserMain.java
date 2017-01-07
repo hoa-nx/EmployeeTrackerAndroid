@@ -597,7 +597,7 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
 			UserHistory userInsert ;
 			/** get danh sách các user được chọn */
 			_listUserChecked = getUserListChecked(_listUser);
-			
+
 			/** cap nhat cho truong hop la phong ban thay doi */
 			if(getHisDeptCheck() && !getHisDeptStartDate().equals("")){
 				/** xử lý cho từng user được chọn */
@@ -740,7 +740,7 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
 							/** xoa neu nhu da co data tuong ung voi ngay thang nam tren man hinh*/
 							deleteUserHisByDate(getHisDeptStartDate(),usr.code,MasterConstants.MASTER_MKBN_JAPANESE_HIS);
 							/** tạo đối tượng dùng để update*/
-							userInsert = fgHisUserOther.getUserHistory(MasterConstants.MASTER_MKBN_JAPANESE_HIS,usr.code);
+							userInsert = fgHisUserOther.getUserHistory(MasterConstants.MASTER_MKBN_JAPANESE_HIS,usr.code,getHisDeptStartDate());
 							/** thực thi update */
 							mDatabaseAdapter.open();
 							mDatabaseAdapter.insertToUserHisTable(userInsert);
@@ -777,7 +777,7 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
 							/** xoa neu nhu da co data tuong ung voi ngay thang nam tren man hinh*/
 							deleteUserHisByDate(getHisDeptStartDate(),usr.code,MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS);
 							/** tạo đối tượng dùng để update*/
-							userInsert = fgHisUserOther.getUserHistory(MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS,usr.code);
+							userInsert = fgHisUserOther.getUserHistory(MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS,usr.code,getHisDeptStartDate());
 							/** thực thi update */
 							mDatabaseAdapter.open();
 							mDatabaseAdapter.insertToUserHisTable(userInsert);
@@ -814,7 +814,7 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
 							/** xoa neu nhu da co data tuong ung voi ngay thang nam tren man hinh*/
 							deleteUserHisByDate(getHisDeptStartDate(),usr.code,MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS);
 							/** tạo đối tượng dùng để update*/
-							userInsert = fgHisUserOther.getUserHistory(MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS,usr.code);
+							userInsert = fgHisUserOther.getUserHistory(MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS,usr.code,getHisDeptStartDate());
 							/** thực thi update */
 							mDatabaseAdapter.open();
 							mDatabaseAdapter.insertToUserHisTable(userInsert);
@@ -847,7 +847,7 @@ public class HisUserMain extends Fragment  implements  OnClickListener , OnTouch
 							/** xoa neu nhu da co data tuong ung voi ngay thang nam tren man hinh*/
 							deleteUserHisByDate(getHisDeptStartDate(),usr.code,MasterConstants.MASTER_MKBN_SALARY_HIS);
 							/** tạo đối tượng dùng để update*/
-							userInsert = fgHisUserOther.getUserHistory(MasterConstants.MASTER_MKBN_SALARY_HIS,usr.code);
+							userInsert = fgHisUserOther.getUserHistory(MasterConstants.MASTER_MKBN_SALARY_HIS,usr.code,getHisDeptStartDate());
 							/** thực thi update */
 							mDatabaseAdapter.open();
 							mDatabaseAdapter.insertToUserHisTable(userInsert);

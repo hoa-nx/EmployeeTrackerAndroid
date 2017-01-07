@@ -118,7 +118,6 @@ public class HisUserOther extends Fragment implements OnClickListener , OnTouchL
 	int positionJananeseLevel = 0;
 	int positionAllowance_Business = 0;
 	int positionAllowance_BSE = 0;
-	String date_start="";
 	String old_date_start="";
 
 	@Override
@@ -160,9 +159,9 @@ public class HisUserOther extends Fragment implements OnClickListener , OnTouchL
 		if (fgUserMain!=null){
 			/**thông tin của tab main*/
 			_listUserChecked = fgUserMain.getCheckedUserList();
-			date_start = fgUserMain.getDateFrom();
+			//date_start = fgUserMain.getDateFrom(); //chi lay duoc thong tin ban dau --truong hop co thay doi thi phai setting lai
 			old_date_start = fgUserMain.getHisOldStartDate();
-			setHisDeptStartDate(date_start);
+			//setHisDeptStartDate(date_start);
 		}
 
 		nCode=HisUserMainActivity.nCode;
@@ -571,272 +570,19 @@ public class HisUserOther extends Fragment implements OnClickListener , OnTouchL
 		}
     	return true; 
     }
-            
-    /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-     * 
-     * lưu thông tin vào DB
-     * 
-     ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
-    public void saveUserToDb(List<User> userList , String date_from){
-    	try{
 
-			UserHistory userInsert ;
-			setHisDeptStartDate(date_from);
-			/** get danh sách các user được chọn */
-			_listUserChecked = userList;
-
-			String  currentStringValue="";
-			float currentFloatValue=0;
-			/*
-			*//** cap nhat cho truong hop la tieng nhat thay doi *//*
-			if(getHisJapaneseCheck()){
-				*//** xử lý cho từng user được chọn *//*
-				for(User usr: _listUserChecked){
-					if(userHisInfo!=null){
-						*//** nếu như có thay đổi ngày tháng năm thì sẽ xóa data cũ *//*
-						if(!date_from.equals(userHisInfo.date_from)){
-							deleteUserHisByDate(userHisInfo.date_from,usr.code,MasterConstants.MASTER_MKBN_JAPANESE_HIS);
-						}
-					}
-					*//** xoa neu nhu da co data tuong ung voi ngay thang nam tren man hinh*//*
-					deleteUserHisByDate(date_from,usr.code,MasterConstants.MASTER_MKBN_JAPANESE_HIS);
-					*//** tạo đối tượng dùng để update*//*
-					userInsert = getUserHistory(MasterConstants.MASTER_MKBN_JAPANESE_HIS,usr.code);
-					*//** thực thi update *//*
-					mDatabaseAdapter.open();
-					mDatabaseAdapter.insertToUserHisTable(userInsert);
-					mDatabaseAdapter.close();
-					*//** chỉnh sửa lại ngày tháng năm start -end cho đúng *//*
-					correctHisData(MasterConstants.MASTER_MKBN_JAPANESE_HIS,userInsert.user_code);
-				}
-			}
-			
-			*//** cap nhat cho truong hop la trợ cấp nghiệp vụ thay doi *//*
-			if(getHisAllowance_BusinessCheck()){
-				*//** xử lý cho từng user được chọn *//*
-				for(User usr: _listUserChecked){
-					if(userHisInfo!=null){
-						*//** nếu như có thay đổi ngày tháng năm thì sẽ xóa data cũ *//*
-						if(!date_from.equals(userHisInfo.date_from)){
-							deleteUserHisByDate(userHisInfo.date_from,usr.code,MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS);
-						}
-					}
-					*//** xoa neu nhu da co data tuong ung voi ngay thang nam tren man hinh*//*
-					deleteUserHisByDate(date_from,usr.code,MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS);
-					*//** tạo đối tượng dùng để update*//*
-					userInsert = getUserHistory(MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS,usr.code);
-					
-					*//** thực thi update *//*
-					mDatabaseAdapter.open();
-					mDatabaseAdapter.insertToUserHisTable(userInsert);
-					mDatabaseAdapter.close();
-					*//** chỉnh sửa lại ngày tháng năm start -end cho đúng *//*
-					correctHisData(MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS,userInsert.user_code);
-				}
-			}
-			*//** cap nhat cho truong hop la salary thay doi *//*
-			if(getHisSalaryCheck()){
-				*//** xử lý cho từng user được chọn *//*
-				for(User usr: _listUserChecked){
-					if(userHisInfo!=null){
-						*//** nếu như có thay đổi ngày tháng năm thì sẽ xóa data cũ *//*
-						if(!date_from.equals(userHisInfo.date_from)){
-							deleteUserHisByDate(userHisInfo.date_from,usr.code,MasterConstants.MASTER_MKBN_SALARY_HIS);
-						}
-					}
-					*//** xoa neu nhu da co data tuong ung voi ngay thang nam tren man hinh*//*
-					deleteUserHisByDate(date_from,usr.code,MasterConstants.MASTER_MKBN_SALARY_HIS);
-					*//** tạo đối tượng dùng để update*//*
-					userInsert = getUserHistory(MasterConstants.MASTER_MKBN_SALARY_HIS,usr.code);
-					
-					*//** thực thi update *//*
-					mDatabaseAdapter.open();
-					mDatabaseAdapter.insertToUserHisTable(userInsert);
-					mDatabaseAdapter.close();
-					*//** chỉnh sửa lại ngày tháng năm start -end cho đúng *//*
-					correctHisData(MasterConstants.MASTER_MKBN_SALARY_HIS,userInsert.user_code);
-				}
-			}*/
-
-			currentStringValue="";
-			/** trình độ nhật ngữ*/
-			boolean japaneseCheck =getHisJapaneseCheck();
-			/** phu cap nghiep vu */
-			boolean allowanceCheck =getHisAllowance_BusinessCheck();
-			/** phu cap BSE*/
-			boolean allowanceBSECheck =getHisAllowance_BSECheck();
-			/** salary*/
-			/** salary*/
-			boolean salaryCheck =getHisSalaryCheck() ;
-
-			String japaneseNew = getHisNewJapanese();
-			String allowanceNew = getHisNewAllowance_Business();
-			String allowanceBSENew = getHisNewAllowance_BSE();
-			float salaryNew = getHisNewSalary();
-
-			/** cap nhat lich su cho truong hop la chung chi tieng Nhat thay doi */
-			if(japaneseCheck && !getHisDeptStartDate().equals("")){
-				/** xử lý cho từng user được chọn */
-				for(User usr: _listUserChecked){
-					/** kiem tra xem tri co thay doi so voi master User khong ? Neu khong thi khong update */
-					currentStringValue = String.valueOf(usr.japanese) ;
-					if(!currentStringValue.equals(japaneseNew)|| !old_date_start.equals(getHisDeptStartDate()) ){
-						if(userHisInfo!=null){
-								/* truong hop la edit thi se xoa neu du lieu cua ngay cu */
-							if(!old_date_start.equals("")){
-								deleteUserHisByDate(old_date_start,usr.code,MasterConstants.MASTER_MKBN_JAPANESE_HIS);
-							}
-							/** nếu như có thay đổi ngày tháng năm thì sẽ xóa data cũ */
-							if(!getHisDeptStartDate().equals(userHisInfo.date_from)){
-								deleteUserHisByDate(userHisInfo.date_from,usr.code,MasterConstants.MASTER_MKBN_JAPANESE_HIS);
-							}
-						}
-						/** xoa neu nhu da co data tuong ung voi ngay thang nam tren man hinh*/
-						deleteUserHisByDate(getHisDeptStartDate(),usr.code,MasterConstants.MASTER_MKBN_JAPANESE_HIS);
-						/** tạo đối tượng dùng để update*/
-						userInsert = getUserHistory(MasterConstants.MASTER_MKBN_JAPANESE_HIS,usr.code);
-						/** thực thi update */
-						mDatabaseAdapter.open();
-						mDatabaseAdapter.insertToUserHisTable(userInsert);
-						mDatabaseAdapter.close();
-						/** chỉnh sửa lại ngày tháng năm start -end cho đúng */
-						correctHisData(MasterConstants.MASTER_MKBN_JAPANESE_HIS,userInsert.user_code);
-					}
-
-				}
-			}
-				/*---------------------------------------------*/
-			currentStringValue ="";
-			/** cap nhat lich su cho truong hop la tro cap nghiep vu thay doi */
-			if(allowanceCheck && !getHisDeptStartDate().equals("")){
-				/** xử lý cho từng user được chọn */
-				for(User usr: _listUserChecked){
-					/** kiem tra xem tri co thay doi so voi master User khong ? Neu khong thi khong update */
-					currentStringValue = String.valueOf(usr.allowance_business) ;
-					/**Neu nhu co su thay doi */
-					Collator compare = Collator.getInstance(new Locale("vi", "vn"));
-					int comparison = compare.compare(currentStringValue, allowanceNew);
-
-					if(comparison!=0 || !old_date_start.equals(getHisDeptStartDate()) ){
-						if(userHisInfo!=null){
-								/* truong hop la edit thi se xoa neu du lieu cua ngay cu */
-							if(!old_date_start.equals("")){
-								deleteUserHisByDate(old_date_start,usr.code,MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS);
-							}
-							/** nếu như có thay đổi ngày tháng năm thì sẽ xóa data cũ */
-							if(!getHisDeptStartDate().equals(userHisInfo.date_from)){
-								deleteUserHisByDate(userHisInfo.date_from,usr.code,MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS);
-							}
-						}
-						/** xoa neu nhu da co data tuong ung voi ngay thang nam tren man hinh*/
-						deleteUserHisByDate(getHisDeptStartDate(),usr.code,MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS);
-						/** tạo đối tượng dùng để update*/
-						userInsert = getUserHistory(MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS,usr.code);
-						/** thực thi update */
-						mDatabaseAdapter.open();
-						mDatabaseAdapter.insertToUserHisTable(userInsert);
-						mDatabaseAdapter.close();
-						/** chỉnh sửa lại ngày tháng năm start -end cho đúng */
-						correctHisData(MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS,userInsert.user_code);
-					}
-
-				}
-			}
-				/*---------------------------------------------*/
-			currentStringValue ="";
-			/** cap nhat lich su cho truong hop la tro cap BSE thay doi */
-			if(allowanceBSECheck && !getHisDeptStartDate().equals("")){
-				/** xử lý cho từng user được chọn */
-				for(User usr: _listUserChecked){
-					/** kiem tra xem tri co thay doi so voi master User khong ? Neu khong thi khong update */
-					currentStringValue = String.valueOf(usr.allowance_bse) ;
-					/**Neu nhu co su thay doi */
-					Collator compare = Collator.getInstance(new Locale("vi", "vn"));
-					int comparison = compare.compare(currentStringValue, allowanceBSENew);
-
-					if(comparison!=0 || !old_date_start.equals(getHisDeptStartDate()) ){
-						if(userHisInfo!=null){
-								/* truong hop la edit thi se xoa neu du lieu cua ngay cu */
-							if(!old_date_start.equals("")){
-								deleteUserHisByDate(old_date_start,usr.code,MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS);
-							}
-							/** nếu như có thay đổi ngày tháng năm thì sẽ xóa data cũ */
-							if(!getHisDeptStartDate().equals(userHisInfo.date_from)){
-								deleteUserHisByDate(userHisInfo.date_from,usr.code,MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS);
-							}
-						}
-						/** xoa neu nhu da co data tuong ung voi ngay thang nam tren man hinh*/
-						deleteUserHisByDate(getHisDeptStartDate(),usr.code,MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS);
-						/** tạo đối tượng dùng để update*/
-						userInsert = getUserHistory(MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS,usr.code);
-						/** thực thi update */
-						mDatabaseAdapter.open();
-						mDatabaseAdapter.insertToUserHisTable(userInsert);
-						mDatabaseAdapter.close();
-						/** chỉnh sửa lại ngày tháng năm start -end cho đúng */
-						correctHisData(MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS,userInsert.user_code);
-					}
-
-				}
-			}
-				/*---------------------------------------------*/
-			currentFloatValue =0;
-			/** cap nhat lich su cho truong hop la salary thay doi */
-			if(salaryCheck && !getHisDeptStartDate().equals("")){
-				/** xử lý cho từng user được chọn */
-				for(User usr: _listUserChecked){
-					/** kiem tra xem tri co thay doi so voi master User khong ? Neu khong thi khong update */
-					currentFloatValue = usr.salary_notallowance;
-					if(currentFloatValue!=salaryNew || !old_date_start.equals(getHisDeptStartDate()) ){
-						if(userHisInfo!=null){
-								/* truong hop la edit thi se xoa neu du lieu cua ngay cu */
-							if(!old_date_start.equals("")){
-								deleteUserHisByDate(old_date_start,usr.code,MasterConstants.MASTER_MKBN_SALARY_HIS);
-							}
-							/** nếu như có thay đổi ngày tháng năm thì sẽ xóa data cũ */
-							if(!getHisDeptStartDate().equals(userHisInfo.date_from)){
-								deleteUserHisByDate(userHisInfo.date_from,usr.code,MasterConstants.MASTER_MKBN_SALARY_HIS);
-							}
-						}
-						/** xoa neu nhu da co data tuong ung voi ngay thang nam tren man hinh*/
-						deleteUserHisByDate(getHisDeptStartDate(),usr.code,MasterConstants.MASTER_MKBN_SALARY_HIS);
-						/** tạo đối tượng dùng để update*/
-						userInsert = getUserHistory(MasterConstants.MASTER_MKBN_SALARY_HIS,usr.code);
-						/** thực thi update */
-						mDatabaseAdapter.open();
-						mDatabaseAdapter.insertToUserHisTable(userInsert);
-						mDatabaseAdapter.close();
-						/** chỉnh sửa lại ngày tháng năm start -end cho đúng */
-						correctHisData(MasterConstants.MASTER_MKBN_SALARY_HIS,userInsert.user_code);
-					}
-
-				}
-			}
-
-			/** cap nhat lai tri moi nhat cua phong ban ---cho nhan vien */
-			for(User usr: _listUserChecked){
-				updateUserMaster(usr.code);
-			}
-    		
-    	}catch ( Exception e){
-    		Log.v(TAG,e.getMessage());
-    		/** đóng connection */
-    		mDatabaseAdapter.close();
-    	}
-    }
-    
     /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * 
      * get thông tin lịch sử dựa vào code nhân viên và ngày tháng năm hữu hiệu.
      * 
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
-    public UserHistory getUserHistory(int mkbn, int user_code){
+    public UserHistory getUserHistory(int mkbn, int user_code, String dateFrom){
 		UserHistory userInsert; 
 		userInsert = new UserHistory();
 		
 		userInsert.mkbn = mkbn;
 		userInsert.user_code = user_code;
-		userInsert.date_from = getHisDeptStartDate();
+		userInsert.date_from = dateFrom;
 		userInsert.new_japanese = getHisNewJapanese();
 		userInsert.new_allowance_business = getHisNewAllowance_Business();
 		userInsert.new_allowance_bse = getHisNewAllowance_BSE();
@@ -1342,7 +1088,7 @@ public class HisUserOther extends Fragment implements OnClickListener , OnTouchL
      * 
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
     public void  setHisDeptStartDate(String value){
-    	date_start = value;
+    	//date_start = value;
     }
     
     /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
@@ -1351,7 +1097,8 @@ public class HisUserOther extends Fragment implements OnClickListener , OnTouchL
      * 
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
     public String   getHisDeptStartDate(){
-    	return date_start;
+    	//return date_start;
+		return "";
     	//return txtUserHisDeptStartDate.getText().toString();
     }
 

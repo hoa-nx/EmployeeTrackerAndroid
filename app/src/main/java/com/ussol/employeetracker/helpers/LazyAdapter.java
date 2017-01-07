@@ -66,8 +66,8 @@ public class LazyAdapter extends BaseAdapter {
     	  CheckBox chkListUser;
     	  /** ngày vào công ty */
     	  TextView txtIn_date_count;
-    	  /** ngày vào Ussol */
-    	  TextView txtJoin_date_count;
+    	  /** muc luong hien tai */
+    	  TextView txtSalary;
     	  /** nang suat lap trinh */
     	  TextView txtProgram_count;
     	  /** nang suat thiet ke chi tiet */
@@ -84,6 +84,8 @@ public class LazyAdapter extends BaseAdapter {
 		  TextView txtYasumiDate;
     	  /** image sinh nhật */
     	  ImageView imgUserBirthday;
+		  /** các thông tin khác */
+		  TextView txtUserOtherInformation;
     	 }
     private String  txtUserInfo="";
     
@@ -166,7 +168,7 @@ public class LazyAdapter extends BaseAdapter {
             holder.rtbKeiken = (RatingBar)vi.findViewById(R.id.txtUserKeikenRate);
             holder.chkListUser =(CheckBox)vi.findViewById(R.id.chkListUserSelect);
             holder.txtIn_date_count =(TextView)vi.findViewById(R.id.txtIn_date_count);
-            holder.txtJoin_date_count =(TextView)vi.findViewById(R.id.txtJoin_date_count);
+            holder.txtSalary =(TextView)vi.findViewById(R.id.txtSalary);
             holder.txtProgram_count =(TextView)vi.findViewById(R.id.txtProgram_count);
             holder.txtDetailDesign_count =(TextView)vi.findViewById(R.id.txtDetailDesign_count);
             holder.txtMobile =(TextView)vi.findViewById(R.id.txtMobile);
@@ -176,6 +178,7 @@ public class LazyAdapter extends BaseAdapter {
 			
 			holder.imgUserImageYasumi=(ImageView)vi.findViewById(R.id.imgListUserYasumi);
 			holder.imgUserBirthday = (ImageView) vi.findViewById(R.id.imgListUserBirthday);
+			holder.txtUserOtherInformation=(TextView)vi.findViewById(R.id.txtOtherInfomation);
 
             iv = (ImageView) vi.findViewById(R.id.imgListUser);
             vi.setTag(holder);
@@ -317,20 +320,25 @@ public class LazyAdapter extends BaseAdapter {
         	
         	keikenMonthInUssol =DateTimeUtil.getFullMonthDiff(datefromUssol, dateto);
         }
-        if (keikenMonthInUssol>24){
-        	/** hien thi so nam kinh nghiem USSOL*/
-        	/*
+
+        /*if (keikenMonthInUssol>24){
+        	*//** hien thi so nam kinh nghiem USSOL*//*
+        	*//*
         	MathContext NDecimals = new MathContext(2 , RoundingMode.FLOOR);
         	BigDecimal bdNumber = new BigDecimal(keikenMonthInUssol/12.0, NDecimals);
         	double keikenYearInUssol = bdNumber.doubleValue();
-        	*/
+        	*//*
             holder.txtJoin_date_count.setText( String.valueOf(Utils.Round((keikenMonthInUssol/12.0), 1, RoundingMode.HALF_UP) + "N"));
         }else{
-        	/** hien thi so nam kinh nghiem USSOL*/
+        	*//** hien thi so nam kinh nghiem USSOL*//*
             holder.txtJoin_date_count.setText( String.valueOf(keikenMonthInUssol)+"Th");	
-        }
-                
-        /** hien thi len man hinh thong tin nang suat lap trinh*/
+        }*/
+
+		/** Hien thi muc luong*/
+		/** hien thi / khong hien thi muc luong thi do setting */
+		holder.txtSalary.setText( String.valueOf(data.get(position).salary_allowance));
+
+		/** hien thi len man hinh thong tin nang suat lap trinh*/
         //holder.txtProgram_count.setText( String.valueOf(data.get(position).program));
         holder.txtProgram_count.setText( String.valueOf(data.get(position).estimate_point));
                 
@@ -401,7 +409,16 @@ public class LazyAdapter extends BaseAdapter {
 		}else{
 			holder.imgUserBirthday.setVisibility(View.INVISIBLE);
 		}
-		
+
+		/** hien thi them thong tin ngach bac se duoc xem xet tuong ung voi tham nien*/
+		holder.txtUserOtherInformation.setText("");
+		if (data.get(position).in_date!=null && !data.get(position).in_date.isEmpty()){
+			holder.txtUserOtherInformation.setText(data.get(position).in_date);
+			iv.setAlpha(0.6f);
+		}else{
+			iv.setAlpha(1.0f);
+		}
+
         /** xử lý liên quan đến check box */
     	/** hủy không gán sự kiện tại timing này để tránh trường hợp 
     	 * 	setting check ban đầu sẽ bị sai do gọi thêm event addClickHandlerToCheckBox*/

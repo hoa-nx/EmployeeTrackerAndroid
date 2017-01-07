@@ -8,6 +8,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
 import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomButtons.SimpleCircleButton;
@@ -15,6 +17,7 @@ import com.nightonke.boommenu.BoomMenuButton;
 import com.nightonke.boommenu.ButtonEnum;
 import com.nightonke.boommenu.Piece.PiecePlaceEnum;
 import com.nightonke.boommenu.Util;
+import com.ussol.employeetracker.helpers.BadgeDrawableHelper;
 import com.ussol.employeetracker.helpers.ConvertCursorToListString;
 import com.ussol.employeetracker.helpers.DatabaseAdapter;
 import com.ussol.employeetracker.helpers.GetSearchItemSetting;
@@ -29,7 +32,12 @@ import com.ussol.employeetracker.widget.PullToRefreshListView.OnRefreshDoneListe
 
 import android.R.integer;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
@@ -46,12 +54,20 @@ import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -73,7 +89,7 @@ import android.widget.ToggleButton;
  * @author hoa-nx
  *
  */
-public class ListUserMainActivity extends Activity implements OnClickListener, SearchView.OnQueryTextListener, SearchView.OnCloseListener {
+public class ListUserMainActivity extends AppCompatActivity  implements OnClickListener, SearchView.OnQueryTextListener, SearchView.OnCloseListener {
 	//tag
 	private final static String TAG = ListUserMainActivity.class.getName();
 	private static final int MENU_ITEM_ADDCOPY_ACTION = 1;
@@ -89,7 +105,7 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
 	ConvertCursorToListString mConvertCursorToListString;
 	/** List  data  */
 	private List<User> list;
-	private ListView litsview;
+	private ListView listview;
 	private LazyAdapter adapter = null;
 	private IconContextMenu iconContextMenu = null;
 	private User info = null;
@@ -98,16 +114,22 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
 	private ImageButton btnSelectAll, btnDeselectAll, btnDelete, btnUnDelete, btnSendMail, btnSendSms;
 	private ImageButton btnSearchItem, btnSortList, btnSortAsc, btnSortDesc, btnSearch, btnSearchCancel;
 	private TextView txtUserTitle;
+	private EditText txtFilterText ;
 	//private ImageView btnSortAsc , btnSortDesc;
 	private SharedPreferences settings;
 	private SearchView search;
 	private LinearLayout layoutSearch, layoutMenu;
 	private PullToRefreshListView mListView;
 	private View viewLayout = null;
-	private static int[] imageResources = new int[]{R.drawable.preferences_contact_list, R.drawable.sort_list,
-			R.drawable.gnome_system_config};
+	private static int[] imageResources = new int[]{R.drawable.ic_account_card_details_black_24dp, R.drawable.ic_sort_black_24dp,
+			R.drawable.ic_settings_black_24dp};
 	private BoomMenuButton bmb;
 
+	private FloatingActionMenu materialDesignFAM;
+	private FloatingActionButton fab_menu_list_user_send_sms, fab_menu_list_user_send_email, fab_menu_list_user_checkall;
+	private FloatingActionButton fab_menu_list_user_uncheckall, fab_menu_list_user_delete, fab_menu_list_user_undelete;
+
+	private  LayerDrawable iconBadgeSearchSetting;
 	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 	 * onCreate
 	 *
@@ -121,16 +143,18 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
 			setContentView(R.layout.activity_user_list);
 
 			//boom menu
-			bmbMainMenuConfig();
-    	        /*if (customTitleSupported) {
-    	            getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.user_cus_title);
-    	        }*/
+			//bmbMainMenuConfig();
+			//FAM
+			materialFAM();
+			/*if (customTitleSupported) {
+				getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.user_cus_title);
+			}*/
 			//create DB
 			mDatabaseAdapter = new DatabaseAdapter(this);
 
 			SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 			search = (SearchView) findViewById(R.id.search);
-			layoutMenu = (LinearLayout) findViewById(R.id.fdLinearLayoutMenu);
+			//layoutMenu = (LinearLayout) findViewById(R.id.fdLinearLayoutMenu);
 			layoutSearch = (LinearLayout) findViewById(R.id.fdLinearLayoutSearch);
 			search.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 			search.setIconifiedByDefault(false);
@@ -244,6 +268,7 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
 							/** xóa*/
 							deleteUser(info.code);
 							setUserTitleBar(String.valueOf(adapter.getCount()));
+							setBadgeCount(getApplicationContext(), iconBadgeSearchSetting, String.valueOf(adapter.getCount()));
 							//Toast.makeText(getApplicationContext(), "You've clicked on menu item 4", 1000).show();
 							break;
 						case MENU_ITEM_CALL_ACTION:
@@ -269,8 +294,25 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
     	                }
     	            }
     	        });
-    			
-    	}catch (Exception e){
+
+			/** XU LY CHO TEXT SEARCH */
+			txtFilterText.addTextChangedListener(filterTextWatcher);
+			/** xu ly kbi click vao list thi se an keyboarc*/
+			txtFilterText.setOnClickListener(filterTextClickListener);
+
+			listview.setOnTouchListener(new View.OnTouchListener() {
+				@Override
+				public boolean onTouch(View v, MotionEvent event) {
+					setHideKeyboard();
+					txtFilterText.setCursorVisible(false);
+					return false;
+				}
+			});
+			txtFilterText.setCursorVisible(false);
+			setHideKeyboard();
+
+
+		}catch (Exception e){
     		Log.v(TAG,e.getMessage());
     	}
 
@@ -289,7 +331,7 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		
+		setBadgeCount(this, iconBadgeSearchSetting, String.valueOf(adapter.getCount()));
 	}
 
 	@Override
@@ -300,11 +342,17 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
 		//setResult(MasterConstants.RESULT_CLOSE_ALL);
 		//this.finish();
 	}
-	
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		txtFilterText.setText("");
+	}
     @Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
+
 		/*if(!EmployeeTrackerApplicationLifecycleCallbacks.isApplicationInForeground())
 		{
 			Intent passCodeInt = new Intent(getBaseContext(), PasscodeManagePasswordActivity.class);
@@ -314,6 +362,135 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
 			
 			startActivity(passCodeInt);
 		}*/
+	}
+	/** xu ly chuc nang search */
+	private TextWatcher filterTextWatcher = new TextWatcher() {
+
+		public void afterTextChanged(Editable s) {
+
+		}
+
+		public void beforeTextChanged(CharSequence s, int start, int count,
+									  int after) {
+
+		}
+
+		public void onTextChanged(CharSequence s, int start, int before,
+								  int count) {
+			adapter.getFilter().filter(s);
+		}
+
+	};
+
+	private OnClickListener filterTextClickListener = new OnClickListener()
+	{
+		public void onClick(View v)
+		{
+			if (v.getId() == txtFilterText.getId())
+			{
+				txtFilterText.setCursorVisible(true);
+			}
+		}
+	};
+
+	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	 * onCreateOptionsMenu
+	 *
+	 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.list_user_menu, menu);
+
+		MenuItem itemFilterSetting = menu.findItem(R.id.menu_list_user_item_settings);
+		//iconBadgeSearchSetting = (LayerDrawable) itemFilterSetting.getIcon(); //truong hop icon la dang drawable
+		BitmapDrawable iconBitmap = (BitmapDrawable) itemFilterSetting.getIcon(); //truong hop khong phai nhu tren
+		iconBadgeSearchSetting = new LayerDrawable(new Drawable [] { iconBitmap });
+
+		setBadgeCount(this, iconBadgeSearchSetting, String.valueOf(adapter.getCount()));
+		/*
+		MenuItem searchItem = menu.findItem(R.id.menu_list_user_item_filter);
+		SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+		//*** setOnQueryTextFocusChangeListener ***
+		searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+
+			}
+		});
+
+		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+
+				return false;
+			}
+
+			@Override
+			public boolean onQueryTextChange(String searchQuery) {
+				adapter.getFilter().filter(searchQuery);
+				//listview.invalidate();
+				return true;
+			}
+		});
+
+		MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
+			@Override
+			public boolean onMenuItemActionCollapse(MenuItem item) {
+				// Do something when collapsed
+				return true;  // Return true to collapse action view
+			}
+
+			@Override
+			public boolean onMenuItemActionExpand(MenuItem item) {
+				// Do something when expanded
+				return true;  // Return true to expand action view
+			}
+		});
+		*/
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection
+		switch (item.getItemId()) {
+			case R.id.menu_list_user_item_settings:
+				Intent intent = new Intent(this, SearchItemMainActivity.class);
+				startActivityForResult(intent,MasterConstants.CALL_SEARCH_ITEM_ACTIVITY_CODE);
+				return true;
+			case R.id.menu_list_user_item_setting_sort:
+				Intent intSort = new Intent(this, DragNDropListActivity.class);
+				startActivityForResult(intSort , MasterConstants.CALL_SORT_ITEM_ACTIVITY_CODE);
+				return true;
+			case R.id.menu_list_user_item_config:
+				Intent intConfig = new Intent(this, SystemConfigPreferencesActivity.class);
+				startActivityForResult(intConfig , MasterConstants.CALL_CONFIG_ITEM_ACTIVITY_CODE);
+				return true;
+
+			case R.id.menu_list_user_item_sort_asc:
+				/** đọc thông tin lưu trữ tại xml */
+				settings = getSharedPreferences(MasterConstants.PRE_SORT_FILE, Context.MODE_PRIVATE);
+				storeCurrentSortByInSharedPreferences(settings, " ASC ");
+				/** get list user */
+				list = getListUser("");
+				/** hiển thị data*/
+				bindData();
+				return true;
+			case R.id.menu_list_user_item_sort_des:
+				/** đọc thông tin lưu trữ tại xml */
+				settings = getSharedPreferences(MasterConstants.PRE_SORT_FILE, Context.MODE_PRIVATE);
+				storeCurrentSortByInSharedPreferences(settings, " DESC ");
+				/** get list user */
+				list = getListUser("");
+				/** hiển thị data*/
+				bindData();
+				return true;
+
+			default:
+				return super.onOptionsItemSelected(item);
+		}
 	}
 
 	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
@@ -326,19 +503,20 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
 		switch(requestCode){
 			case MasterConstants.CALL_USER_ACTIVITY_CODE:
 				if (resultCode==RESULT_OK){
+					txtFilterText.setText("");
 	    	        /** get list user */
 	    			list = getListUser("");
 	    			/** hiển thị data*/
 	    			bindData();
 	    			/** di chuyen toi vi tri cu **/
-	    			//litsview.smoothScrollToPosition(Integer.valueOf(positionClicked));
+	    			//listview.smoothScrollToPosition(Integer.valueOf(positionClicked));
 	 	    			
 	    			/*
 	    			String currentPosition = data.getStringExtra(MasterConstants.LISTVIEW_CURRENT_POSITION);
 	    			if(currentPosition.equals("")){
 	    				
 	    			}else{
-	    				litsview.smoothScrollToPosition(Integer.valueOf(positionClicked));
+	    				listview.smoothScrollToPosition(Integer.valueOf(positionClicked));
 	    			}
 	    			*/
 	    			/** di chuyen toi item cu**/
@@ -347,10 +525,16 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
 	    			//int h2 = viewLayout.getHeight();
 	    			
 	    			//listview.smoothScrollToPositionFromTop(positionClicked, h1/2 - h2/2, 100);
-	    			litsview.setSelection(positionClicked);
+					if(positionClicked>list.size()){
+						listview.setSelection(list.size());
+					}else{
+						listview.setSelection(positionClicked);
+					}
+
 				}
 			case MasterConstants.CALL_SEARCH_ITEM_ACTIVITY_CODE:
 				if (resultCode==RESULT_OK){
+
 	    	        /** get list user */
 	    			list = getListUser("");
 	    			/** hiển thị data*/
@@ -361,7 +545,11 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
 	    			//int h2 = viewLayout.getHeight();
 	    			
 	    			//listview.smoothScrollToPositionFromTop(positionClicked, h1/2 - h2/2, 100);
-	    			litsview.setSelection(positionClicked);
+					if(positionClicked>list.size()){
+						listview.setSelection(list.size());
+					}else{
+						listview.setSelection(positionClicked);
+					}
 				}
 				break;
 			case MasterConstants.CALL_SORT_ITEM_ACTIVITY_CODE:
@@ -376,7 +564,11 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
 	    			//int h2 = viewLayout.getHeight();
 	    			
 	    			//listview.smoothScrollToPositionFromTop(positionClicked, h1/2 - h2/2, 100);
-	    			litsview.setSelection(positionClicked);
+					if(positionClicked>list.size()){
+						listview.setSelection(list.size());
+					}else{
+						listview.setSelection(positionClicked);
+					}
 				}
 				break;
 			case MasterConstants.CALL_CONFIG_ITEM_ACTIVITY_CODE:
@@ -391,7 +583,11 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
 					//int h2 = viewLayout.getHeight();
 
 					//listview.smoothScrollToPositionFromTop(positionClicked, h1/2 - h2/2, 100);
-					litsview.setSelection(positionClicked);
+					if(positionClicked>list.size()){
+						listview.setSelection(list.size());
+					}else{
+						listview.setSelection(positionClicked);
+					}
 				}
 				break;
 		}
@@ -449,7 +645,8 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
         listview.setOnItemLongClickListener(itemLongClickHandler);
         /** hiển thị số nhân viên trong lis */
         setUserTitleBar(String.valueOf(adapter.getCount()));
-        //litsview = listview;
+		setBadgeCount(this, iconBadgeSearchSetting, String.valueOf(adapter.getCount()));
+        //listview = listview;
         
         /** di chuyen toi item cu**/
         /*int h1 = listview.getHeight();
@@ -501,6 +698,7 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
             	adapter.notifyDataSetChanged();
             	 /** hiển thị số nhân viên trong lis */
                 setUserTitleBar(String.valueOf(adapter.getCount()));
+				setBadgeCount(getApplicationContext(), iconBadgeSearchSetting, String.valueOf(adapter.getCount()));
             }
         });
  
@@ -586,6 +784,7 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
             	adapter.notifyDataSetChanged();
             	 /** hiển thị số nhân viên trong lis */
                 setUserTitleBar(String.valueOf(adapter.getCount()));
+				setBadgeCount(getApplicationContext(), iconBadgeSearchSetting, String.valueOf(adapter.getCount()));
             }
         });
  
@@ -676,6 +875,7 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
 				deleteUser(listCode);
 				/** setting so nhan vien */
 				setUserTitleBar(String.valueOf(adapter.getCount()));
+				setBadgeCount(this, iconBadgeSearchSetting, String.valueOf(adapter.getCount()));
 				break;
 			case R.id.btnUnDeleteAll:
             	/** kiểm tra xem trạng thái của delete user setting tại màn hình setting điều kiện*/
@@ -710,6 +910,7 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
 				unDeleteUser(listCodeUndelete);
 				/** setting so nhan vien */
 				setUserTitleBar(String.valueOf(adapter.getCount()));
+				setBadgeCount(this, iconBadgeSearchSetting, String.valueOf(adapter.getCount()));
 				break;
 			case R.id.btnBack:
 				/** get các item được gán check */
@@ -772,6 +973,7 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
 		btnSendSms= (ImageButton)findViewById(R.id.btnBack);
 		
 		txtUserTitle = (TextView) findViewById(R.id.txtUserTitle);
+		txtFilterText = (EditText) findViewById(R.id.txtFilterText);
 		btnSortAsc =(ImageButton)findViewById(R.id.btnSortAsc);
 		btnSortDesc=(ImageButton)findViewById(R.id.btnSortDesc);
 		
@@ -779,7 +981,7 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
 		btnSortList = (ImageButton) findViewById(R.id.btnSortList);
 		btnSearch= (ImageButton) findViewById(R.id.btnSearch);
 		btnSearchCancel= (ImageButton) findViewById(R.id.btnSearchCancel);
-		litsview = (ListView) findViewById(R.id.list);
+		listview = (ListView) findViewById(R.id.list);
 		
     }
 
@@ -826,7 +1028,13 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
     	}else{
     		txtUserTitle.setText(getResources().getString(R.string.userTitleList) + "(" + value + ")");
     	}
-    	
+		//title for activity
+		if(value.equals("") || value==null){
+			setTitle(getResources().getString(R.string.userTitleList) + "(0)");
+		}else{
+			setTitle(getResources().getString(R.string.userTitleList) + "(" + value + ")");
+		}
+
     }
     
     /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
@@ -836,8 +1044,8 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
 	private void setCheckAll(){
 
-		for(int i=0; i < litsview.getChildCount(); i++){
-		    RelativeLayout itemLayout = (RelativeLayout)litsview.getChildAt(i);
+		for(int i=0; i < listview.getChildCount(); i++){
+		    RelativeLayout itemLayout = (RelativeLayout)listview.getChildAt(i);
 		    CheckBox cb = (CheckBox)itemLayout.findViewById(R.id.chkListUserSelect);
 		    cb.setChecked(true);
 		}
@@ -852,8 +1060,8 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
 	private void setUnCheckAll(){
 
-		for(int i=0; i < litsview.getChildCount(); i++){
-		    RelativeLayout itemLayout = (RelativeLayout)litsview.getChildAt(i);
+		for(int i=0; i < listview.getChildCount(); i++){
+		    RelativeLayout itemLayout = (RelativeLayout)listview.getChildAt(i);
 		    CheckBox cb = (CheckBox)itemLayout.findViewById(R.id.chkListUserSelect);
 		    cb.setChecked(false);
 		}
@@ -880,13 +1088,8 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
      * 
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
 	private void setHideKeyboard(){
-		/*View target = findFocus();
-        if (target != null) 
-        {
-            InputMethodManager mgr = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-            mgr.hideSoftInputFromWindow(target.getWindowToken(), 0);
-        }*/
-		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(txtFilterText.getWindowToken(), 0);
 	}
 	
 	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
@@ -921,7 +1124,7 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
 		return false;
 	}
 
-	protected void bmbMainMenuConfig(){
+	/*protected void bmbMainMenuConfig(){
 		bmb = (BoomMenuButton) findViewById(R.id.bmb);
 		assert bmb != null;
 		bmb.setButtonEnum(ButtonEnum.SimpleCircle);
@@ -1022,11 +1225,260 @@ public class ListUserMainActivity extends Activity implements OnClickListener, S
 			bmb.addBuilder(builder);
 		}
 	}
-
+*/
 	private static int imageResourceIndex = 0;
 
 	static int getImageResource() {
 		if (imageResourceIndex >= imageResources.length) imageResourceIndex = 0;
 		return imageResources[imageResourceIndex++];
 	}
+
+	/**
+	 * An / Hien FAM
+	 * @param isVisible
+     */
+	private void setFAMVisible(boolean isVisible){
+		if(isVisible){
+			materialDesignFAM.setVisibility(View.VISIBLE);
+		}else{
+			materialDesignFAM.setVisibility(View.INVISIBLE);
+		}
+	}
+	/**
+	 * Material design floatin action button menu
+	 */
+	protected void materialFAM(){
+		materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
+		fab_menu_list_user_checkall = (FloatingActionButton) findViewById(R.id.fab_menu_list_user_check_all);
+		fab_menu_list_user_uncheckall = (FloatingActionButton) findViewById(R.id.fab_menu_list_user_uncheck_all);
+		fab_menu_list_user_delete = (FloatingActionButton) findViewById(R.id.fab_menu_list_user_delete);
+		fab_menu_list_user_undelete= (FloatingActionButton) findViewById(R.id.fab_menu_list_user_undelete);
+		fab_menu_list_user_send_email = (FloatingActionButton) findViewById(R.id.fab_menu_list_user_send_email);
+		fab_menu_list_user_send_sms = (FloatingActionButton) findViewById(R.id.fab_menu_list_user_send_sms);
+
+		fab_menu_list_user_checkall.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				//check all
+				setCheckAll();
+			}
+		});
+		fab_menu_list_user_uncheckall.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				//uncheck all
+				setUnCheckAll();
+			}
+		});
+		fab_menu_list_user_delete.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				//delete user
+				deleteUser();
+			}
+		});
+		fab_menu_list_user_undelete.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				//phuc hoi user da xoa
+				unDeleteUser();
+
+			}
+		});
+		fab_menu_list_user_send_email.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				//TODO something when floating action menu third item clicked
+
+			}
+		});
+		fab_menu_list_user_send_sms.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				//send sms
+				sendSMS();
+			}
+		});
+	}
+
+	/**
+	 * Xoa cac user duoc chon
+	 */
+	private void deleteUser(){
+		/** get các item được gán check */
+		List<User> listUser =adapter.getListViewData();
+		int index=0;
+		String listCode="";
+		for(User usr : listUser){
+			if(usr.isselected){
+				if(index==0){
+					listCode= String.valueOf(usr.code);
+				}else{
+					listCode= listCode + "," + String.valueOf(usr.code);
+				}
+				index++;
+			}
+		}
+		if(listCode.trim().isEmpty()){
+			/** không có dòng nào được chọn*/
+			ShowAlertDialog.showTitleAndMessageDialog(this, "Xóa nhân viên", getResources().getString(R.string.titleNoItemSelected));
+			return;
+		}
+		/** Xóa các nhân viên đã chọn */
+		deleteUser(listCode);
+		/** setting so nhan vien */
+		setUserTitleBar(String.valueOf(adapter.getCount()));
+		setBadgeCount(this, iconBadgeSearchSetting, String.valueOf(adapter.getCount()));
+	}
+
+	/**
+	 * Phuc hoi cac user da xoa
+	 */
+	private void unDeleteUser(){
+		/** kiểm tra xem trạng thái của delete user setting tại màn hình setting điều kiện*/
+		if (GetSearchItemSetting.getIsDeleted()){
+		}else{
+			ShowAlertDialog.showTitleAndMessageDialog(this
+					, getResources().getString(R.string.titleUnDelete)
+					,"Vì các nhân viên đang hiển thị là chưa bị xóa nên không thể phục hồi.");
+			return;
+
+		}
+		/** get các item được gán check */
+		List<User> listUserUndelete =adapter.getListViewData();
+		int indexUndelete=0;
+		String listCodeUndelete="";
+		for(User usr : listUserUndelete){
+			if(usr.isselected){
+				if(indexUndelete==0){
+					listCodeUndelete= String.valueOf(usr.code);
+				}else{
+					listCodeUndelete= listCodeUndelete + "," + String.valueOf(usr.code);
+				}
+				indexUndelete++;
+			}
+		}
+		if(listCodeUndelete.trim().isEmpty()){
+			/** không có dòng nào được chọn*/
+			ShowAlertDialog.showTitleAndMessageDialog(this, getResources().getString(R.string.titleUnDelete), getResources().getString(R.string.titleNoItemSelected));
+			return;
+		}
+		/** Xóa các nhân viên đã chọn */
+		unDeleteUser(listCodeUndelete);
+		/** setting so nhan vien */
+		setUserTitleBar(String.valueOf(adapter.getCount()));
+		setBadgeCount(this, iconBadgeSearchSetting, String.valueOf(adapter.getCount()));
+	}
+
+	/**
+	 * Gui SMS toi cac user duoc chon(se ton phi)
+	 */
+	private  void sendSMS(){
+		//TODO something when floating action menu third item clicked
+		/** get các item được gán check */
+		List<User> listUserSendSms =adapter.getListViewData();
+		ArrayList<User> listUserChecked=new ArrayList<User>();
+		User[] arrUserChecked;
+		int indexSendSms=0;
+		String listCodeSendSms="";
+		for(User usr : listUserSendSms){
+			if(usr.isselected){
+				listUserChecked.add(usr);
+				if(indexSendSms==0){
+					listCodeSendSms= String.valueOf(usr.code);
+				}else{
+					listCodeSendSms= listCodeSendSms + "," + String.valueOf(usr.code);
+				}
+				indexSendSms++;
+			}
+		}
+		if(listCodeSendSms.trim().isEmpty()){
+			/** không có dòng nào được chọn*/
+			ShowAlertDialog.showTitleAndMessageDialog(this, getResources().getString(R.string.send_sms_titleInfo), getResources().getString(R.string.titleNoItemSelected));
+			return;
+		}
+		arrUserChecked=new User[listUserChecked.size()];
+
+		for(int i=0;i<listUserChecked.size();i++){
+			arrUserChecked[i]= listUserChecked.get(i);
+		}
+		//listUserChecked.toArray(arrUserChecked);
+		/**  chỉnh sửa */
+		Intent intentSendSms = new Intent(getApplicationContext(), SendSmsActivity.class);
+		Bundle bundle = new Bundle();
+		/**lấy code của user*/
+		//bundle.putParcelableArray(MasterConstants.SEND_SMS_TAG, arrUserChecked);
+		bundle.putParcelableArrayList(MasterConstants.SEND_SMS_TAG, listUserChecked);
+		/**gán vào bundle để gửi cùng với intent */
+		intentSendSms.putExtras(bundle);
+
+		/**khởi tạo activity dùng để edit  */
+		startActivity(intentSendSms);
+
+	}
+
+	public void setBadgeCount(Context context, LayerDrawable icon, String count) {
+
+		BadgeDrawableHelper badge;
+
+		if(icon==null) return;
+		// Reuse drawable if possible
+		Drawable reuse = icon.findDrawableByLayerId(R.id.ic_badge);
+		if(reuse==null) {
+			reuse = geSingleDrawable(iconBadgeSearchSetting);
+		}
+
+		if (reuse != null && reuse instanceof BadgeDrawableHelper) {
+			badge = (BadgeDrawableHelper) reuse;
+		} else {
+			badge = new BadgeDrawableHelper(context);
+		}
+
+		badge.setCount(count);
+		icon.mutate();
+		icon.setDrawableByLayerId(R.id.ic_badge, badge);
+	}
+	/**
+	 * Hides the soft keyboard
+	 */
+	public void hideSoftKeyboard() {
+		if(getCurrentFocus()!=null) {
+			InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+			inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+		}
+	}
+
+	/**
+	 * Shows the soft keyboard
+	 */
+	public void showSoftKeyboard(View view) {
+		InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+		view.requestFocus();
+		inputMethodManager.showSoftInput(view, 0);
+	}
+
+	/***
+	 * Get Drawable from LayerDrawable
+	 * @param layerDrawable
+     * @return
+     */
+	public Drawable geSingleDrawable(LayerDrawable layerDrawable){
+
+		int resourceBitmapHeight = 136, resourceBitmapWidth = 153;
+
+		float widthInInches = 0.9f;
+
+		int widthInPixels = (int)(widthInInches * getResources().getDisplayMetrics().densityDpi);
+		int heightInPixels = (int)(widthInPixels * resourceBitmapHeight / resourceBitmapWidth);
+
+		int insetLeft = 10, insetTop = 10, insetRight = 10, insetBottom = 10;
+
+		layerDrawable.setLayerInset(1, insetLeft, insetTop, insetRight, insetBottom);
+
+		Bitmap bitmap = Bitmap.createBitmap(widthInPixels, heightInPixels, Bitmap.Config.ARGB_8888);
+
+		Canvas canvas = new Canvas(bitmap);
+		layerDrawable.setBounds(0, 0, widthInPixels, heightInPixels);
+		layerDrawable.draw(canvas);
+
+		BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), bitmap);
+		bitmapDrawable.setBounds(0, 0, widthInPixels, heightInPixels);
+
+		return bitmapDrawable;
+	}
+
 }

@@ -4,17 +4,17 @@
 	     android:title="@string/menu_report_search"
 	     android:orderInCategory="100"
 	     android:showAsAction="always"
-	     android:icon="@drawable/search"/>
+	     android:icon="@drawable/ic_magnify_black_24dp"/>
     <item android:id="@+id/menu_exp_group_searchitem"
 	     android:title="@string/menu_report_searchitem"
 	     android:orderInCategory="100"
 	     android:showAsAction="always"
-	     android:icon="@drawable/preferences_contact_list"/>
+	     android:icon="@drawable/ic_account_card_details_black_24dp"/>
     <item android:id="@+id/menu_exp_group_sortlist"
         android:title="@string/menu_report_sortlist"
         android:orderInCategory="100"
         android:showAsAction="always"
-        android:icon="@drawable/sort_list_small" />
+        android:icon="@drawable/ic_sort_black_24dp" />
     
     <item android:id="@+id/menu_exp_group_dept"
         android:title="@string/menu_exp_group_dept"

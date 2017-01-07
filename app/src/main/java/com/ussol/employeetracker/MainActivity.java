@@ -573,7 +573,7 @@ public class MainActivity extends Activity {
                 ASK_MULTIPLE_PERMISSION_REQUEST_CODE);
     }
 
-	protected void bmbMainMenuConfig(){
+	/*protected void bmbMainMenuConfig(){
 		bmb = (BoomMenuButton) findViewById(R.id.bmb);
 		assert bmb != null;
 		bmb.setButtonEnum(ButtonEnum.SimpleCircle);
@@ -659,7 +659,7 @@ public class MainActivity extends Activity {
 
 			bmb.addBuilder(builder);
 		}
-	}
+	}*/
 
 	private static int imageResourceIndex = 0;
 

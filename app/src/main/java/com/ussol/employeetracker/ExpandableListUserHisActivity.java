@@ -324,7 +324,9 @@ public class ExpandableListUserHisActivity extends Activity implements OnChildCl
     			tmpGroup= MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS;
     		}else if(arrGroup[i]==MasterConstants.HIS_SALARY_NAME){
     			tmpGroup= MasterConstants.MASTER_MKBN_SALARY_HIS;
-    		}
+    		}else if(arrGroup[i]==MasterConstants.HIS_ALLOWANCE_BSE_NAME){
+				tmpGroup= MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS;
+			}
     		
     		list = grp.getChildUserHisGroup(tmpGroup, String.valueOf( user_code));
 			if (list !=null){
@@ -398,10 +400,15 @@ public class ExpandableListUserHisActivity extends Activity implements OnChildCl
         			/** chinh sua lai data lich su tro cap nghiep vu*/
             		correctHisData(MasterConstants.MASTER_MKBN_ALLOWANCE_BUSINESS_HIS, code);
         			break;
+
         		case 5:/** lich su salary */
         			/** chinh sua lai data lich su salary*/
             		correctHisData(MasterConstants.MASTER_MKBN_SALARY_HIS, code);
         			break;
+				case 6:/** lich su tro cap BSE */
+					/** chinh sua lai data lich su tro cap nghiep vu*/
+					correctHisData(MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS, code);
+					break;
         		}
         		
         		/** update lai data cua master nhan vien m_user de cap nhat cac thay doi moi nhat tu table lich su */
@@ -473,8 +480,13 @@ public class ExpandableListUserHisActivity extends Activity implements OnChildCl
         			/**update salary */
             		float salaryNew = getNewestUserHisSalaryInfo(user_code);
             		usr.salary_notallowance = salaryNew;
-            		break;	
-        			}
+            		break;
+				case 6:/** lich su tro cap BSE*/
+					/**update phu cap nghiep vu */
+					String allowanceBSENew = getNewestUserHisAllowanceBSEInfo(user_code);
+					usr.allowance_bse = allowanceBSENew;
+					break;
+				}
         		/** update xuong DB */
         		mDatabaseAdapter.open();
         		mDatabaseAdapter.editToUserTable(usr);
@@ -601,6 +613,29 @@ public class ExpandableListUserHisActivity extends Activity implements OnChildCl
     	
     	return kekka;
     }
+
+	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	 *
+	 * get thông tin về phu cap BSE mới nhất của nhân viên
+	 *
+	 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
+	public String getNewestUserHisAllowanceBSEInfo(int user_code ){
+		String xWhere ="";
+		String xOrderBy ="";
+		String kekka ="";
+
+		xWhere = " AND " + DatabaseAdapter.KEY_USER_CODE + " = " + user_code;
+		xOrderBy = DatabaseAdapter.KEY_DATE_FROM + " DESC ";
+		/** get danh sách các data lịch sử của user */
+		List<UserHistory> userhis = mConvertCursorToListString.getUserHisList(MasterConstants.MASTER_MKBN_ALLOWANCE_BSE_HIS, xWhere,xOrderBy);
+		if(userhis.size()==0){
+		}else{
+			kekka = userhis.get(0).new_allowance_bse;
+		}
+
+		return kekka;
+	}
+
     /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * 
      * get thông tin về salary mới nhất của nhân viên

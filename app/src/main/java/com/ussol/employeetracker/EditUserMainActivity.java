@@ -12,12 +12,14 @@ import com.ussol.employeetracker.models.MasterConstants;
 import com.ussol.employeetracker.models.User;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -94,6 +96,7 @@ public class EditUserMainActivity extends FragmentActivity implements AlertPosit
         } */            
        
         final ActionBar bar = getActionBar();
+		//final ActionBar bar = ((AppCompatActivity) ((Activity) this)).getSupportActionBar();
         bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
         bar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE, ActionBar.DISPLAY_SHOW_TITLE);
         bar.setDisplayShowHomeEnabled(false);
