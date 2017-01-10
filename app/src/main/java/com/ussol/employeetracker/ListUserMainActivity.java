@@ -11,6 +11,7 @@ import java.util.List;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
+import com.nightonke.boommenu.BoomButtons.HamButton;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomButtons.SimpleCircleButton;
 import com.nightonke.boommenu.BoomMenuButton;
@@ -56,10 +57,12 @@ import android.content.res.Resources;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ActionMode;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -121,15 +124,16 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 	private LinearLayout layoutSearch, layoutMenu;
 	private PullToRefreshListView mListView;
 	private View viewLayout = null;
-	private static int[] imageResources = new int[]{R.drawable.ic_account_card_details_black_24dp, R.drawable.ic_sort_black_24dp,
-			R.drawable.ic_settings_black_24dp};
+	//private static int[] imageResources = new int[]{R.drawable.ic_account_card_details_black_24dp, R.drawable.ic_sort_black_24dp,			R.drawable.ic_settings_black_24dp};
 	private BoomMenuButton bmb;
 
 	private FloatingActionMenu materialDesignFAM;
-	private FloatingActionButton fab_menu_list_user_send_sms, fab_menu_list_user_send_email, fab_menu_list_user_checkall;
-	private FloatingActionButton fab_menu_list_user_uncheckall, fab_menu_list_user_delete, fab_menu_list_user_undelete;
+	private FloatingActionButton fab_menu_list_user_add;
 
 	private  LayerDrawable iconBadgeSearchSetting;
+	private static int[] imageResources = new int[]{R.drawable.ic_account_switch_black_24dp,R.drawable.ic_account_settings_variant_black_24dp , R.drawable.ic_calendar_clock_black_24dp, R.drawable.ic_phone_outgoing_black_24dp};
+	private  boolean isOneItemSelected=false;
+
 	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 	 * onCreate
 	 *
@@ -164,6 +168,8 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 			info = new User();
 			/** get cac control tren man hinh */
 			getControl();
+			//cache enable
+			listview.setScrollingCacheEnabled(true);
 			/** gán các sự kiện cho các control */
 			settingListener();
 			/** get list user */
@@ -289,7 +295,7 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 									startActivity(dialIntent);
 								}
     	                	}
-    	                	 
+
     	                	break;
     	                }
     	            }
@@ -310,14 +316,15 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 			});
 			txtFilterText.setCursorVisible(false);
 			setHideKeyboard();
-
+			//setting closed when outside
+			materialDesignFAM.close(true);
 
 		}catch (Exception e){
     		Log.v(TAG,e.getMessage());
     	}
 
     }
-    
+
     @Override
 	protected void onRestart() {
 		// TODO Auto-generated method stub
@@ -378,6 +385,7 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 		public void onTextChanged(CharSequence s, int start, int before,
 								  int count) {
 			adapter.getFilter().filter(s);
+			//setBadgeCount(getApplicationContext(), iconBadgeSearchSetting, String.valueOf(adapter.getCount()));
 		}
 
 	};
@@ -495,7 +503,7 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 
 	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * onActivityResult
-     * 
+     *
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -523,7 +531,7 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 	    			//final ListView listview = (ListView) findViewById(R.id.list);
 	    	        //int h1 = listview.getHeight();
 	    			//int h2 = viewLayout.getHeight();
-	    			
+
 	    			//listview.smoothScrollToPositionFromTop(positionClicked, h1/2 - h2/2, 100);
 					if(positionClicked>list.size()){
 						listview.setSelection(list.size());
@@ -543,7 +551,7 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 	    			//final ListView listview = (ListView) findViewById(R.id.list);
 	    	        //int h1 = listview.getHeight();
 	    			//int h2 = viewLayout.getHeight();
-	    			
+
 	    			//listview.smoothScrollToPositionFromTop(positionClicked, h1/2 - h2/2, 100);
 					if(positionClicked>list.size()){
 						listview.setSelection(list.size());
@@ -562,7 +570,7 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 	    			//final ListView listview = (ListView) findViewById(R.id.list);
 	    	        //int h1 = listview.getHeight();
 	    			//int h2 = viewLayout.getHeight();
-	    			
+
 	    			//listview.smoothScrollToPositionFromTop(positionClicked, h1/2 - h2/2, 100);
 					if(positionClicked>list.size()){
 						listview.setSelection(list.size());
@@ -591,7 +599,7 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 				}
 				break;
 		}
-	}	
+	}
     /**
      * create context menu
      */
@@ -620,45 +628,39 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
         	LazyAdapter adt =(LazyAdapter)parent.getAdapter();
         	/** lưu đối tượng user */
         	User tmpUser = (User) adt.getItem(position);
-        	
+
         	info= tmpUser.clone();
-        
-            showDialog(CONTEXT_MENU_ID);
+			//Contextual-Action-Bar START
+			listview.setItemChecked(position, !adt.isPositionChecked(position));
+			//Contextual-Action-Bar END
+
+            //showDialog(CONTEXT_MENU_ID);// DO ADD THEM CONTEXTUAL ACTION BAR NEN TAM THOI COMMENT OUT XU LY HIEN THI MENU
+
             return true;
         }
     };
-    
+
     /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * binding data cho list
-     * 
+     *
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
 	public void bindData(){
-		final ListView listview = (ListView) findViewById(R.id.list);
-        listview.setScrollingCacheEnabled(true);
-        
+
+
         adapter = new LazyAdapter(this, list);
-        
+
         listview.setAdapter(adapter);
         //ADD 2015.08.29
         //listview.setFastScrollEnabled(true);
-        
-        listview.setOnItemLongClickListener(itemLongClickHandler);
         /** hiển thị số nhân viên trong lis */
         setUserTitleBar(String.valueOf(adapter.getCount()));
 		setBadgeCount(this, iconBadgeSearchSetting, String.valueOf(adapter.getCount()));
-        //listview = listview;
-        
-        /** di chuyen toi item cu**/
-        /*int h1 = listview.getHeight();
-		int h2 = viewLayout.getHeight();
-		
-		listview.smoothScrollToPositionFromTop(positionClicked, h1/2 - h2/2, 0);*/
-		
+
 	}
-	
+
     /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * get data cho list
-     * 
+     *
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
 	public List<User> getListUser(String xWhere){
 		/** chuyển đổi từ Cursor thành List */
@@ -668,7 +670,7 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 	}
     /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * xóa user dựa vào code user
-     * 
+     *
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
 	public void deleteUser(final int code){
 		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
@@ -677,7 +679,7 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 
         /** Setting Dialog Message */
         alertDialog.setMessage("Bạn có muốn xóa nhân viên này không?");
-        
+
         /** Setting Icon to Dialog*/
         alertDialog.setIcon(R.drawable.ic_button_delete);
         /** Setting Positive "Yes" Button */
@@ -701,21 +703,21 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 				setBadgeCount(getApplicationContext(), iconBadgeSearchSetting, String.valueOf(adapter.getCount()));
             }
         });
- 
+
         /** Setting Negative "NO" Button */
         alertDialog.setNegativeButton(getResources().getText(R.string.titleNo), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
             dialog.cancel();
             }
         });
- 
+
         /** Showing Alert Message */
         alertDialog.show();
-        
+
 	}
 	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * xóa user dựa vào code user
-     * 
+     *
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
 	public void deleteUser(final String listCode){
 		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
@@ -724,7 +726,7 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 
         /** Setting Dialog Message */
         alertDialog.setMessage("Bạn có muốn xóa các nhân viên này không?");
-        
+
         /** Setting Icon to Dialog*/
         alertDialog.setIcon(R.drawable.ic_button_delete);
         /** Setting Positive "Yes" Button */
@@ -745,22 +747,22 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
             	adapter.notifyDataSetChanged();
             }
         });
- 
+
         /** Setting Negative "NO" Button */
         alertDialog.setNegativeButton(getResources().getText(R.string.titleNo), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
             dialog.cancel();
             }
         });
- 
+
         /** Showing Alert Message */
         alertDialog.show();
-        
+
 	}
-	
+
 	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * xóa user dựa vào code user
-     * 
+     *
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
 	public void unDeleteUser(final String listCode){
 		AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
@@ -769,7 +771,7 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 
         /** Setting Dialog Message */
         alertDialog.setMessage("Bạn có muốn phục hồi (xóa→chưa xóa)nhân viên này không?");
-        
+
         /** Setting Icon to Dialog*/
         alertDialog.setIcon(R.drawable.undelete);
         /** Setting Positive "Yes" Button */
@@ -787,21 +789,21 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 				setBadgeCount(getApplicationContext(), iconBadgeSearchSetting, String.valueOf(adapter.getCount()));
             }
         });
- 
+
         /** Setting Negative "NO" Button */
         alertDialog.setNegativeButton(getResources().getText(R.string.titleNo), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
             dialog.cancel();
             }
         });
- 
+
         /** Showing Alert Message */
         alertDialog.show();
-        
+
 	}
 	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 	 * onClick
-	 * 
+	 *
 	 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
 	@Override
 	public void onClick(View v) {
@@ -811,7 +813,7 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 				Intent intent = new Intent(this, SearchItemMainActivity.class);
 				startActivityForResult(intent,MasterConstants.CALL_SEARCH_ITEM_ACTIVITY_CODE);
 				break;
-			
+
 			case R.id.btnSortList:
 				Intent intSort = new Intent(this, DragNDropListActivity.class);
 				startActivityForResult(intSort , MasterConstants.CALL_SORT_ITEM_ACTIVITY_CODE);
@@ -825,7 +827,7 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
     			/** hiển thị data*/
     			bindData();
 				break;
-				
+
 			case R.id.btnSortDesc:
 				/** đọc thông tin lưu trữ tại xml */
 				settings = getSharedPreferences(MasterConstants.PRE_SORT_FILE, Context.MODE_PRIVATE);
@@ -936,7 +938,7 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 					break;
 				}
 				arrUserChecked=new User[listUserChecked.size()];
-				
+
 				for(int i=0;i<listUserChecked.size();i++){
 					arrUserChecked[i]= listUserChecked.get(i);
 				}
@@ -949,20 +951,20 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 				bundle.putParcelableArrayList(MasterConstants.SEND_SMS_TAG, listUserChecked);
 				/**gán vào bundle để gửi cùng với intent */
 				intentSendSms.putExtras(bundle);
-				
+
 				/**khởi tạo activity dùng để edit  */
 				startActivity(intentSendSms);
-				
+
 				break;
 			case R.id.btnSendMail:
-				
+
 				break;
 		}
 	}
-	
+
 	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * get các control trên màn hình
-     * 
+     *
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
     private void getControl(){
 		btnSelectAll= (ImageButton)findViewById(R.id.btnSelectAll);
@@ -971,23 +973,22 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 		btnUnDelete= (ImageButton)findViewById(R.id.btnUnDeleteAll);
 		btnSendMail= (ImageButton)findViewById(R.id.btnSendMail);
 		btnSendSms= (ImageButton)findViewById(R.id.btnBack);
-		
+
 		txtUserTitle = (TextView) findViewById(R.id.txtUserTitle);
 		txtFilterText = (EditText) findViewById(R.id.txtFilterText);
 		btnSortAsc =(ImageButton)findViewById(R.id.btnSortAsc);
 		btnSortDesc=(ImageButton)findViewById(R.id.btnSortDesc);
-		
+
 		btnSearchItem = (ImageButton) findViewById(R.id.btnSearchItem);
 		btnSortList = (ImageButton) findViewById(R.id.btnSortList);
 		btnSearch= (ImageButton) findViewById(R.id.btnSearch);
 		btnSearchCancel= (ImageButton) findViewById(R.id.btnSearchCancel);
 		listview = (ListView) findViewById(R.id.list);
-		
     }
 
     /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * gán sự kiện cho các control
-     * 
+     *
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
     private void settingListener(){
 
@@ -997,30 +998,235 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
     	btnUnDelete.setOnClickListener(this);
     	btnSendMail.setOnClickListener(this);
     	btnSendSms.setOnClickListener(this);
-    	
+
     	btnSearchItem.setOnClickListener(this);
     	btnSortList.setOnClickListener(this);
-    	
+
     	btnSortAsc.setOnClickListener(this);
     	btnSortDesc.setOnClickListener(this);
     	btnSearch.setOnClickListener(this);
     	btnSearchCancel.setOnClickListener(this);
+		/** list view event */
+		listview.setOnItemLongClickListener(itemLongClickHandler);
+		listview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+		listview.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+			private int nr = 0;
+			@Override
+			public void onItemCheckedStateChanged(android.view.ActionMode actionMode, int position, long l, boolean checked) {
+				positionClicked = position;
+				if (checked) {
+					nr++;
+					adapter.setNewSelection(position, checked);
+				} else {
+					nr--;
+					adapter.removeSelection(position);
+				}
+				actionMode.setTitle(String.valueOf(nr)); // hien thi so item duoc chon
+				if(nr==0){
+					isOneItemSelected = true;
+				}
+				else{
+					isOneItemSelected = false;
+				}
+			}
+
+			@Override
+			public boolean onCreateActionMode(android.view.ActionMode actionMode, Menu menu) {
+				nr = 0;
+				MenuInflater inflater = getMenuInflater();
+				inflater.inflate(R.menu.list_user_contextual_menu, menu);
+				return true;
+			}
+
+			@Override
+			public boolean onPrepareActionMode(android.view.ActionMode actionMode, Menu menu) {
+				return false;
+			}
+
+			@Override
+			public boolean onActionItemClicked(android.view.ActionMode actionMode, MenuItem menuItem) {
+				switch (menuItem.getItemId()) {
+					case R.id.contextual_menu_list_user_item_checked_all:
+						setCheckAll();
+						for ( int i=0; i < listview.getAdapter().getCount(); i++) {
+							listview.setItemChecked(i, true);
+						}
+						nr = listview.getAdapter().getCount();
+						actionMode.setTitle(String.valueOf(nr)); // hien thi so item duoc chon
+						break;
+					case R.id.contextual_menu_list_user_item_unchecked_all:
+						setUnCheckAll();
+						for ( int i=0; i < listview.getAdapter().getCount(); i++) {
+							listview.setItemChecked(i, false);
+						}
+						nr = 0;
+						adapter.clearSelection();
+						actionMode.finish();
+						break;
+
+					case R.id.contextual_menu_list_user_item_delete:
+						nr = 0;
+						if(deleteUser()){
+							for ( int i=0; i < listview.getAdapter().getCount(); i++) {
+								listview.setItemChecked(i, false);
+							}
+							adapter.clearSelection();
+							actionMode.finish();
+						}
+
+						break;
+
+					case R.id.contextual_menu_list_user_item_undelete:
+						nr = 0;
+						if(unDeleteUser()){
+							for ( int i=0; i < listview.getAdapter().getCount(); i++) {
+								listview.setItemChecked(i, false);
+							}
+							adapter.clearSelection();
+							actionMode.finish();
+						}
+
+						break;
+
+					case R.id.contextual_menu_list_user_item_send_sms:
+						nr = 0;
+						sendSMS();
+						for ( int i=0; i < listview.getAdapter().getCount(); i++) {
+							listview.setItemChecked(i, false);
+						}
+						adapter.clearSelection();
+						actionMode.finish();
+						break;
+				}
+				return false;
+			}
+
+			@Override
+			public void onDestroyActionMode(android.view.ActionMode actionMode) {
+				adapter.clearSelection();
+				if(isOneItemSelected)
+					return;
+
+				/** get list user */
+				list = getListUser("");
+				bindData();
+				/*
+				if(positionClicked>list.size()){
+					listview.setSelection(list.size());
+				}else{
+					listview.setSelection(positionClicked);
+				}
+				*/
+			}
+		});
+
+		listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
+				BoomMenuButton bmbMenu = (BoomMenuButton)view.findViewById(R.id.bmbMenu);
+				info = (User) bmbMenu.getTag();
+				/** lưu vị trí đã chọn */
+				positionClicked = index;
+				//BOOM MENU SETTTING
+				bmbMenu.clearBuilders();
+				for (int i = 0; i < bmbMenu.getPiecePlaceEnum().pieceNumber(); i++)
+					bmbMenu.addBuilder(new HamButton.Builder()
+							.normalImageRes(getImageResource())
+							.normalTextRes(getTextDisplay(i))
+							.subNormalText(info.full_name)
+							.listener(new OnBMClickListener() {
+								@Override
+								public void onBoomButtonClick(int index) {
+
+									// When the boom-button corresponding this builder is clicked.
+									switch (index) {
+										case 0:
+											/** tạo mới từ user có sẵn */
+											/**  chỉnh sửa */
+											Intent intentCopy = new Intent(getApplicationContext(), EditUserMainActivity.class);
+											Bundle bundleCopy = new Bundle();
+											/**lấy code của user*/
+											info.code = 0;
+											info.img_fullpath = "";
+											info.full_name = "";
+											info.mobile = "";
+											info.email = "";
+											info.address = "";
+											bundleCopy.putInt(DatabaseAdapter.KEY_CODE, info.code);
+											bundleCopy.putParcelable(MasterConstants.TAB_USER_TAG, info);
+											/**gán vào bundle để gửi cùng với intent */
+											intentCopy.putExtras(bundleCopy);
+
+											/**khởi tạo activity dùng để edit  */
+											startActivityForResult(intentCopy, MasterConstants.CALL_USER_ACTIVITY_CODE);
+
+											break;
+
+										case 1:
+											/**  chỉnh sửa */
+											Intent intent = new Intent(getApplicationContext(), EditUserMainActivity.class);
+											Bundle bundle = new Bundle();
+											/**lấy code của user*/
+											bundle.putInt(DatabaseAdapter.KEY_CODE, info.code);
+											bundle.putParcelable(MasterConstants.TAB_USER_TAG, info);
+											bundle.putString(MasterConstants.LISTVIEW_CURRENT_POSITION, String.valueOf(positionClicked));
+											/**gán vào bundle để gửi cùng với intent */
+											intent.putExtras(bundle);
+
+											/**khởi tạo activity dùng để edit  */
+											startActivityForResult(intent, MasterConstants.CALL_USER_ACTIVITY_CODE);
+											break;
+										case 2:
+											/** xem thong tin lich su */
+											Intent intentHis = new Intent(getApplicationContext(), ExpandableListUserHisActivity.class);
+											Bundle bundleHis = new Bundle();
+											/**lấy code của user*/
+											bundleHis.putInt(DatabaseAdapter.KEY_CODE, info.code);
+											bundleHis.putParcelable(MasterConstants.TAB_USER_TAG, info);
+											/**gán vào bundle để gửi cùng với intent */
+											intentHis.putExtras(bundleHis);
+
+											/**khởi tạo activity dùng để edit  */
+											startActivity(intentHis);
+											break;
+										case 3:
+											if (info != null) {
+												if (info.mobile != null && !info.mobile.equals("")) {
+
+													Intent dialIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + info.mobile));
+													dialIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+													if (ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+														return;
+													}
+													startActivity(dialIntent);
+												}
+											}
+											break;
+									}
+								}
+							})
+					);
+
+				bmbMenu.boom();
+
+			}
+		});
     }
-    
+
     /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-     * luu thông tin trình tự sort 
-     * 
-     ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/   
+     * luu thông tin trình tự sort
+     *
+     ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
     public void storeCurrentSortByInSharedPreferences(SharedPreferences pre, String xSortAscOrDesc){
     	Editor edit = pre.edit();
     	edit.putString("pre_SortBy",xSortAscOrDesc );
     	edit.commit();
     }
-    
+
     /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-     * 
+     *
      * set tri cho title bar cua man hinh dang ky user
-     * 
+     *
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
     public void setUserTitleBar(String value){
     	if(value.equals("") || value==null){
@@ -1036,11 +1242,11 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 		}
 
     }
-    
+
     /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-     * 
+     *
      * gan check cho cac item tren list
-     * 
+     *
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
 	private void setCheckAll(){
 
@@ -1049,14 +1255,14 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 		    CheckBox cb = (CheckBox)itemLayout.findViewById(R.id.chkListUserSelect);
 		    cb.setChecked(true);
 		}
-	
+
 		adapter.setCheckAll(true);
 
 	}
     /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-     * 
+     *
      *  bo check cho cac item tren list
-     * 
+     *
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
 	private void setUnCheckAll(){
 
@@ -1071,45 +1277,45 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 
 	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * ẩn/hiển thị search view
-     * 
+     *
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
 	private void setSearchViewShowHide(View v , int showHide) {
 		layoutSearch.setVisibility(showHide);
 	}
 	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * ẩn/hiển thị menu
-     * 
+     *
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
 	private void setMenuShowHide(View v , int showHide) {
 		layoutMenu.setVisibility(showHide);
 	}
 	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * ẩn bàn phím
-     * 
+     *
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
 	private void setHideKeyboard(){
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(txtFilterText.getWindowToken(), 0);
 	}
-	
+
 	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * nhận về trạng thái của SearchView
-     * 
+     *
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
 	private int getSearchViewShowHide(View v ) {
 		return layoutSearch.getVisibility();
 	}
 	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * nhận về trạng thái của menu
-     * 
+     *
      ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
 	private int getMenuShowHide(View v ) {
 		return layoutMenu.getVisibility();
 	}
-	
+
 	@Override
 	public boolean onClose() {
-		
+
 		return false;
 	}
 	@Override
@@ -1226,79 +1432,28 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 		}
 	}
 */
-	private static int imageResourceIndex = 0;
 
-	static int getImageResource() {
-		if (imageResourceIndex >= imageResources.length) imageResourceIndex = 0;
-		return imageResources[imageResourceIndex++];
-	}
-
-	/**
-	 * An / Hien FAM
-	 * @param isVisible
-     */
-	private void setFAMVisible(boolean isVisible){
-		if(isVisible){
-			materialDesignFAM.setVisibility(View.VISIBLE);
-		}else{
-			materialDesignFAM.setVisibility(View.INVISIBLE);
-		}
-	}
 	/**
 	 * Material design floatin action button menu
 	 */
 	protected void materialFAM(){
 		materialDesignFAM = (FloatingActionMenu) findViewById(R.id.material_design_android_floating_action_menu);
-		fab_menu_list_user_checkall = (FloatingActionButton) findViewById(R.id.fab_menu_list_user_check_all);
-		fab_menu_list_user_uncheckall = (FloatingActionButton) findViewById(R.id.fab_menu_list_user_uncheck_all);
-		fab_menu_list_user_delete = (FloatingActionButton) findViewById(R.id.fab_menu_list_user_delete);
-		fab_menu_list_user_undelete= (FloatingActionButton) findViewById(R.id.fab_menu_list_user_undelete);
-		fab_menu_list_user_send_email = (FloatingActionButton) findViewById(R.id.fab_menu_list_user_send_email);
-		fab_menu_list_user_send_sms = (FloatingActionButton) findViewById(R.id.fab_menu_list_user_send_sms);
+		fab_menu_list_user_add= (FloatingActionButton) findViewById(R.id.fab_menu_list_user_add);
+		fab_menu_list_user_add.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+			//add user moi
+				Intent addUserIntent = new Intent(getBaseContext(),EditUserMainActivity.class);
+				/** gọi màn hình edit thông tin nhân viên */
+				startActivity(addUserIntent);
+			}
+		});
 
-		fab_menu_list_user_checkall.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				//check all
-				setCheckAll();
-			}
-		});
-		fab_menu_list_user_uncheckall.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				//uncheck all
-				setUnCheckAll();
-			}
-		});
-		fab_menu_list_user_delete.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				//delete user
-				deleteUser();
-			}
-		});
-		fab_menu_list_user_undelete.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				//phuc hoi user da xoa
-				unDeleteUser();
-
-			}
-		});
-		fab_menu_list_user_send_email.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				//TODO something when floating action menu third item clicked
-
-			}
-		});
-		fab_menu_list_user_send_sms.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				//send sms
-				sendSMS();
-			}
-		});
 	}
 
 	/**
 	 * Xoa cac user duoc chon
 	 */
-	private void deleteUser(){
+	private boolean deleteUser(){
 		/** get các item được gán check */
 		List<User> listUser =adapter.getListViewData();
 		int index=0;
@@ -1316,26 +1471,27 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 		if(listCode.trim().isEmpty()){
 			/** không có dòng nào được chọn*/
 			ShowAlertDialog.showTitleAndMessageDialog(this, "Xóa nhân viên", getResources().getString(R.string.titleNoItemSelected));
-			return;
+			return false;
 		}
 		/** Xóa các nhân viên đã chọn */
 		deleteUser(listCode);
 		/** setting so nhan vien */
 		setUserTitleBar(String.valueOf(adapter.getCount()));
 		setBadgeCount(this, iconBadgeSearchSetting, String.valueOf(adapter.getCount()));
+		return true;
 	}
 
 	/**
 	 * Phuc hoi cac user da xoa
 	 */
-	private void unDeleteUser(){
+	private boolean unDeleteUser(){
 		/** kiểm tra xem trạng thái của delete user setting tại màn hình setting điều kiện*/
 		if (GetSearchItemSetting.getIsDeleted()){
 		}else{
 			ShowAlertDialog.showTitleAndMessageDialog(this
 					, getResources().getString(R.string.titleUnDelete)
 					,"Vì các nhân viên đang hiển thị là chưa bị xóa nên không thể phục hồi.");
-			return;
+			return false;
 
 		}
 		/** get các item được gán check */
@@ -1355,19 +1511,20 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 		if(listCodeUndelete.trim().isEmpty()){
 			/** không có dòng nào được chọn*/
 			ShowAlertDialog.showTitleAndMessageDialog(this, getResources().getString(R.string.titleUnDelete), getResources().getString(R.string.titleNoItemSelected));
-			return;
+			return false;
 		}
 		/** Xóa các nhân viên đã chọn */
 		unDeleteUser(listCodeUndelete);
 		/** setting so nhan vien */
 		setUserTitleBar(String.valueOf(adapter.getCount()));
 		setBadgeCount(this, iconBadgeSearchSetting, String.valueOf(adapter.getCount()));
+		return true;
 	}
 
 	/**
 	 * Gui SMS toi cac user duoc chon(se ton phi)
 	 */
-	private  void sendSMS(){
+	private boolean sendSMS(){
 		//TODO something when floating action menu third item clicked
 		/** get các item được gán check */
 		List<User> listUserSendSms =adapter.getListViewData();
@@ -1389,7 +1546,7 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 		if(listCodeSendSms.trim().isEmpty()){
 			/** không có dòng nào được chọn*/
 			ShowAlertDialog.showTitleAndMessageDialog(this, getResources().getString(R.string.send_sms_titleInfo), getResources().getString(R.string.titleNoItemSelected));
-			return;
+			return false;
 		}
 		arrUserChecked=new User[listUserChecked.size()];
 
@@ -1408,7 +1565,7 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 
 		/**khởi tạo activity dùng để edit  */
 		startActivity(intentSendSms);
-
+		return true;
 	}
 
 	public void setBadgeCount(Context context, LayerDrawable icon, String count) {
@@ -1418,11 +1575,7 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 		if(icon==null) return;
 		// Reuse drawable if possible
 		Drawable reuse = icon.findDrawableByLayerId(R.id.ic_badge);
-		/*
-		if(reuse==null) {
-			reuse = geSingleDrawable(iconBadgeSearchSetting);
-		}
-		*/
+
 		if (reuse != null && reuse instanceof BadgeDrawableHelper) {
 			badge = (BadgeDrawableHelper) reuse;
 		} else {
@@ -1452,34 +1605,32 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 		inputMethodManager.showSoftInput(view, 0);
 	}
 
-	/***
-	 * Get Drawable from LayerDrawable
-	 * @param layerDrawable
-     * @return
-     */
-	public Drawable geSingleDrawable(LayerDrawable layerDrawable){
+	private int imageResourceIndex = 0;
+	private int textDisplayResourceIndex = 0;
+	private int getImageResource() {
+		if (imageResourceIndex >= imageResources.length) imageResourceIndex = 0;
+		return imageResources[imageResourceIndex++];
+	}
 
-		int resourceBitmapHeight = 136, resourceBitmapWidth = 153;
+	private int getTextDisplay(int i){
+		int idx =0;
+		switch (i){
+			case 0 :
+				idx= R.string.maddcopy;
+				break;
+			case 1 :
+				idx= R.string.medit;
+				break;
+			case 2 :
+				idx= R.string.mshowhistory;
+				break;
+			case 3 :
+				idx= R.string.mcall;
+				break;
+			case 4 :
 
-		float widthInInches = 0.9f;
-
-		int widthInPixels = (int)(widthInInches * getResources().getDisplayMetrics().densityDpi);
-		int heightInPixels = (int)(widthInPixels * resourceBitmapHeight / resourceBitmapWidth);
-
-		int insetLeft = 10, insetTop = 10, insetRight = 10, insetBottom = 10;
-
-		layerDrawable.setLayerInset(1, insetLeft, insetTop, insetRight, insetBottom);
-
-		Bitmap bitmap = Bitmap.createBitmap(widthInPixels, heightInPixels, Bitmap.Config.ARGB_8888);
-
-		Canvas canvas = new Canvas(bitmap);
-		layerDrawable.setBounds(0, 0, widthInPixels, heightInPixels);
-		layerDrawable.draw(canvas);
-
-		BitmapDrawable bitmapDrawable = new BitmapDrawable(getResources(), bitmap);
-		bitmapDrawable.setBounds(0, 0, widthInPixels, heightInPixels);
-
-		return bitmapDrawable;
+				break;
+		}return idx;
 	}
 
 }

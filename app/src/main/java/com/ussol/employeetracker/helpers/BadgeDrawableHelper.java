@@ -72,16 +72,16 @@ public class BadgeDrawableHelper extends Drawable {
             canvas.drawCircle(centerX, centerY, (int)(radius+5.5), mBadgePaint);
         }
         else{
-            canvas.drawCircle(centerX, centerY, (int)(radius+8.5), mBadgePaint1);
-            canvas.drawCircle(centerX, centerY, (int)(radius+6.5), mBadgePaint);
+            canvas.drawCircle(centerX, centerY, (int)(radius+9.5), mBadgePaint1);
+            canvas.drawCircle(centerX, centerY, (int)(radius+7.5), mBadgePaint);
 //	        	canvas.drawRoundRect(radius, radius, radius, radius, 10, 10, mBadgePaint);
         }
         // Draw badge count text inside the circle.
         mTextPaint.getTextBounds(mCount, 0, mCount.length(), mTxtRect);
         float textHeight = mTxtRect.bottom - mTxtRect.top;
         float textY = centerY + (textHeight / 2f);
-        if(mCount.length() > 2)
-            canvas.drawText("99+", centerX, textY, mTextPaint);
+        if(mCount.length() > 3)
+            canvas.drawText("999+", centerX, textY, mTextPaint);
         else
             canvas.drawText(mCount, centerX, textY, mTextPaint);
     }

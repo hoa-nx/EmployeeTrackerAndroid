@@ -7,6 +7,7 @@ package com.ussol.employeetracker;
 import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomButtons.SimpleCircleButton;
 import com.nightonke.boommenu.Util;
+import com.ussol.employeetracker.helpers.ConvertCursorToListString;
 import com.ussol.employeetracker.helpers.DatabaseAdapter;
 import com.ussol.employeetracker.models.*;
 import android.Manifest;
@@ -26,12 +27,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum;
 import com.nightonke.boommenu.BoomMenuButton;
 import com.nightonke.boommenu.ButtonEnum;
 import com.nightonke.boommenu.Piece.PiecePlaceEnum;
 import android.graphics.Color;
+
+import java.util.List;
+
 /**
  * 
  * @author hoa-nx
@@ -43,6 +49,7 @@ public class MainActivity extends Activity {
 	public static final String  KEY_TYPE = "type";
 	//DB adapter
 	DatabaseAdapter mDatabaseAdapter;
+	ConvertCursorToListString mConvertCursorToListString;
 	/** lưu tên của package chính */
 	public static  String PACKAGE_NAME;
 	private static final int ASK_MULTIPLE_PERMISSION_REQUEST_CODE = 112; 
@@ -70,6 +77,10 @@ public class MainActivity extends Activity {
 	private static int[] imageResources = new int[]{ R.drawable.searchitem, R.drawable.sort_list_small,
 		R.drawable.gnome_system_config, R.drawable.backup };
 	private BoomMenuButton bmb;
+	private TextView txt_main_listuser_badge_count ;
+	/** List  data  */
+	private List<User> listUser;
+
     /**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      * onCreate
      * 
@@ -106,6 +117,9 @@ public class MainActivity extends Activity {
     			//mDatabaseAdapter.close();
 /*    			InitDatabase init = new InitDatabase(getBaseContext());
     			init.InitAllData();*/
+
+				/* get control */
+				getControl();
 
     			/** chức năng phòng ban */
     			Button btnDepartment = (Button) findViewById(R.id.main_deparment);
@@ -284,12 +298,26 @@ public class MainActivity extends Activity {
     					startActivity(contactInt);
     				}
     			});
-    			
+
+				/* hien thi so nhan vien */
+				setBadgeCountListUser();
+
     	}catch (Exception e){
     		Log.v(TAG,e.getMessage());
     	}
 
     }
+
+	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	 * get data cho list
+	 *
+	 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
+	public List<User> getListUser(String xWhere){
+		/** chuyển đổi từ Cursor thành List */
+		mConvertCursorToListString = new ConvertCursorToListString(this);
+		listUser = mConvertCursorToListString.getUserList(xWhere);
+		return listUser;
+	}
 	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
      *  xử lý các báo cáo
      * 
@@ -331,7 +359,7 @@ public class MainActivity extends Activity {
         switch (item.getItemId()) {
         case R.id.menu_search_item_settings:
         	Intent intent = new Intent(this, SearchItemMainActivity.class);
-			startActivity(intent);
+			startActivityForResult(intent,MasterConstants.CALL_SEARCH_ITEM_ACTIVITY_CODE);
             return true;
         case R.id.menu_sort_item_settings:
         	Intent intSort = new Intent(this, DragNDropListActivity.class);
@@ -358,6 +386,10 @@ public class MainActivity extends Activity {
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
+
+		/* hien thi so nhan vien */
+		setBadgeCountListUser();
+
 		switch(resultCode){
 			case MasterConstants.RESULT_CLOSE_ALL:
 				setResult(MasterConstants.RESULT_CLOSE_ALL);
@@ -374,7 +406,7 @@ public class MainActivity extends Activity {
 				break;
 			case MasterConstants.CALL_SEARCH_ITEM_ACTIVITY_CODE:
 				if (resultCode==RESULT_OK){
-	    	      
+
 				}
 				break;
 			case MasterConstants.CALL_SORT_ITEM_ACTIVITY_CODE:
@@ -394,8 +426,44 @@ public class MainActivity extends Activity {
 				break;
 		}
 	}
-    
-	
+
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		/* hien thi so nhan vien */
+		//setBadgeCountListUser();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		/* hien thi so nhan vien */
+		setBadgeCountListUser();
+	}
+
+	/**▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+	 * get các control trên màn hình
+	 *
+	 ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲*/
+	private void getControl(){
+		txt_main_listuser_badge_count= (TextView) findViewById(R.id.txt_main_listuser_badge_count);
+	}
+
+	/**
+	 * Hien thi so nhan vien
+	 */
+	private void setBadgeCountListUser(){
+		int user_count =0;
+		/** get list user */
+		listUser = getListUser("");
+		if(listUser!=null){
+			user_count = listUser.size();
+		}
+		if(txt_main_listuser_badge_count!=null){
+			txt_main_listuser_badge_count.setText(String.valueOf(user_count));
+		}
+	}
+
 	/***
 	 * kiem tra quyen doc va ghi file
 	 */

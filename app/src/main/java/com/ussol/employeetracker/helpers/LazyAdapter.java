@@ -14,7 +14,17 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
+import com.nightonke.boommenu.BoomButtons.HamButton;
+import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
+import com.nightonke.boommenu.BoomMenuButton;
+import com.ussol.employeetracker.EditUserMainActivity;
+import com.ussol.employeetracker.ExpandableListUserActivity;
+import com.ussol.employeetracker.ExpandableListUserHisActivity;
+import com.ussol.employeetracker.GenerateReport;
+import com.ussol.employeetracker.ListUserMainActivity;
+import com.ussol.employeetracker.models.IExpGroup;
 import com.ussol.employeetracker.models.MasterConstants;
 import com.ussol.employeetracker.models.User;
 import com.ussol.employeetracker.utils.DateTimeUtil;
@@ -22,8 +32,13 @@ import com.ussol.employeetracker.utils.Utils;
 import com.ussol.employeetracker.R;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,6 +51,8 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
 /**
  * @author Hoa-NX
  * Dùng để load data cho list nhân viên 
@@ -48,6 +65,12 @@ public class LazyAdapter extends BaseAdapter {
     private UserFilter filter;
     /** layout từng dòng hiển thị*/
     private static LayoutInflater inflater=null;
+	View vi;
+	ViewHolder holder;
+
+	private HashMap<Integer, Boolean> mSelection = new HashMap<Integer, Boolean>();
+	private static int[] imageResources = new int[]{R.drawable.addcopy,R.drawable.edit_user , R.drawable.history_position, R.drawable.call};
+	private User info = null;
 
     static class ViewHolder {
     	  /** tên nhân viên */
@@ -86,6 +109,7 @@ public class LazyAdapter extends BaseAdapter {
     	  ImageView imgUserBirthday;
 		  /** các thông tin khác */
 		  TextView txtUserOtherInformation;
+		  BoomMenuButton bmbMenu;
     	 }
     private String  txtUserInfo="";
     
@@ -95,7 +119,43 @@ public class LazyAdapter extends BaseAdapter {
         originaldata= d;
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
      }
-    
+    //Contextual-Action-Bar START
+	public void setNewSelection(int position, boolean value) {
+		mSelection.put(position, value);
+		notifyDataSetChanged();
+	}
+
+	public boolean isPositionChecked(int position) {
+		Boolean result = mSelection.get(position);
+		return result == null ? false : result;
+	}
+
+	public Set<Integer> getCurrentCheckedPosition() {
+		return mSelection.keySet();
+	}
+
+	public void removeSelection(int position) {
+		mSelection.remove(position);
+		User model =new User();
+		User item =null;
+		for(User usr: data ){
+			model = usr;
+			item = usr;
+			if (item.code == data.get(position).code ){
+				model.isselected = false;
+				holder.chkListUser.setChecked(false);
+				break;
+			}
+		}
+		notifyDataSetChanged();
+	}
+
+	public void clearSelection() {
+		mSelection = new HashMap<Integer, Boolean>();
+		notifyDataSetChanged();
+		removeAllCheckedItem();
+	}
+	//Contextual-Action-Bar END
     public int getCount() {
         return data.size();
     }
@@ -143,15 +203,29 @@ public class LazyAdapter extends BaseAdapter {
         return true;
     }
 
+	/**
+	 * Get user by code
+	 * @param code
+     * @return
+     */
+	private User findUserByCode(int code ){
+		User  value=new User();
+		for(User usr: originaldata ){
+			if (usr.code == code ){
+				value = usr.clone();
+				break;
+			}
+		}
+		return value;
+	}
     public Filter getFilter() {
     	if (filter == null){
     		filter  = new UserFilter();
     	}
     	return filter;
     }
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View vi=convertView;
-        ViewHolder holder;
+    public View getView(final int position, View convertView, ViewGroup parent) {
+		vi=convertView;
         ImageView iv = null;
         String textDisplayOnImage ="";
         
@@ -179,6 +253,8 @@ public class LazyAdapter extends BaseAdapter {
 			holder.imgUserImageYasumi=(ImageView)vi.findViewById(R.id.imgListUserYasumi);
 			holder.imgUserBirthday = (ImageView) vi.findViewById(R.id.imgListUserBirthday);
 			holder.txtUserOtherInformation=(TextView)vi.findViewById(R.id.txtOtherInfomation);
+
+			holder.bmbMenu = (BoomMenuButton) vi.findViewById(R.id.bmbMenu);
 
             iv = (ImageView) vi.findViewById(R.id.imgListUser);
             vi.setTag(holder);
@@ -439,7 +515,101 @@ public class LazyAdapter extends BaseAdapter {
 		holder.chkListUser.setTag(model);
 		/** gán sự kiện cho checkbox*/
 		addClickHandlerToCheckBox(holder.chkListUser,position );
-		
+
+		//Contextual-Action-Bar START
+		//View v = super.getView(position, convertView, parent);//let the adapter handle setting up the row views
+		vi.setBackgroundColor( activity.getResources().getColor(android.R.color.transparent)); //default color
+		if (mSelection.get(position) != null) {
+			if (item.code == data.get(position).code ){
+				model.isselected = true;
+				holder.chkListUser.setChecked(true);
+			}
+			vi.setBackgroundColor(activity.getResources().getColor(android.R.color.holo_blue_light));// this is a selected position so make it red
+		}
+		//Contextual-Action-Bar END
+
+		//BOOM MENU SETTTING
+		holder.bmbMenu.clearBuilders();
+
+		for (int i = 0; i < holder.bmbMenu.getPiecePlaceEnum().pieceNumber(); i++)
+			holder.bmbMenu.addBuilder(new HamButton.Builder()
+					.normalImageRes(getImageResource())
+					.normalTextRes(getTextDisplay(i))
+					.subNormalTextRes(getTextDisplay(i))
+					/*.listener(new OnBMClickListener() {
+						@Override
+						public void onBoomButtonClick(int index) {
+							info = (User) holder.bmbMenu.getTag();
+							// When the boom-button corresponding this builder is clicked.
+							switch (index) {
+								case 0:
+									*//**//** tạo mới từ user có sẵn *//**//*
+									*//**//**  chỉnh sửa *//**//*
+									Intent intentCopy = new Intent(activity, EditUserMainActivity.class);
+									Bundle bundleCopy = new Bundle();
+									*//**//**lấy code của user*//**//*
+									info.code = 0;
+									info.img_fullpath = "";
+									info.full_name = "";
+									info.mobile = "";
+									info.email = "";
+									info.address = "";
+									bundleCopy.putInt(DatabaseAdapter.KEY_CODE, info.code);
+									bundleCopy.putParcelable(MasterConstants.TAB_USER_TAG, info);
+									*//**//**gán vào bundle để gửi cùng với intent *//**//*
+									intentCopy.putExtras(bundleCopy);
+
+									*//**//**khởi tạo activity dùng để edit  *//**//*
+									activity.startActivityForResult(intentCopy, MasterConstants.CALL_USER_ACTIVITY_CODE);
+
+									break;
+
+								case 1:
+									*//**//**  chỉnh sửa *//**//*
+									Intent intent = new Intent(activity, EditUserMainActivity.class);
+									Bundle bundle = new Bundle();
+									*//**//**lấy code của user*//**//*
+									bundle.putInt(DatabaseAdapter.KEY_CODE, info.code);
+									bundle.putParcelable(MasterConstants.TAB_USER_TAG, info);
+									bundle.putString(MasterConstants.LISTVIEW_CURRENT_POSITION, String.valueOf(position));
+									*//**//**gán vào bundle để gửi cùng với intent *//**//*
+									intent.putExtras(bundle);
+
+									*//**//**khởi tạo activity dùng để edit  *//**//*
+									activity.startActivityForResult(intent, MasterConstants.CALL_USER_ACTIVITY_CODE);
+									break;
+								case 2:
+									*//**//** xem thong tin lich su *//**//*
+									Intent intentHis = new Intent(activity, ExpandableListUserHisActivity.class);
+									Bundle bundleHis = new Bundle();
+									*//**//**lấy code của user*//**//*
+									bundleHis.putInt(DatabaseAdapter.KEY_CODE, info.code);
+									bundleHis.putParcelable(MasterConstants.TAB_USER_TAG, info);
+									*//**//**gán vào bundle để gửi cùng với intent *//**//*
+									intentHis.putExtras(bundleHis);
+
+									*//**//**khởi tạo activity dùng để edit  *//**//*
+									activity.startActivity(intentHis);
+									break;
+								case 3:
+									if (info != null) {
+										if (info.mobile != null && !info.mobile.equals("")) {
+											Intent dialIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + info.mobile));
+											dialIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+											if (ActivityCompat.checkSelfPermission(activity, android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+												return;
+											}
+											activity.startActivity(dialIntent);
+										}
+									}
+									break;
+							}
+						}
+					})*/
+			);
+
+		holder.bmbMenu.setTag(model);
+
         return vi;
     }
     
@@ -501,6 +671,35 @@ public class LazyAdapter extends BaseAdapter {
 	        }
         });
     }
+
+
+	private int imageResourceIndex = 0;
+	private int textDisplayResourceIndex = 0;
+	private int getImageResource() {
+		if (imageResourceIndex >= imageResources.length) imageResourceIndex = 0;
+		return imageResources[imageResourceIndex++];
+	}
+	private int getTextDisplay(int i){
+		int idx =0;
+		switch (i){
+			case 0 :
+				idx= R.string.maddcopy;
+				break;
+			case 1 :
+				idx= R.string.medit;
+				break;
+			case 2 :
+				idx= R.string.mshowhistory;
+				break;
+			case 3 :
+				idx= R.string.mcall;
+				break;
+			case 4 :
+
+				break;
+		}return idx;
+	}
+
     /** dùng để filter data trên list */
     private class UserFilter extends Filter{
 

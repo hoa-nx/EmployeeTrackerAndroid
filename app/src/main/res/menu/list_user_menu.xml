@@ -4,7 +4,7 @@
     <item android:id="@+id/menu_list_user_item_settings"
         android:title="@string/menu_search_item_settings"
         android:orderInCategory="100"
-        android:icon="@drawable/preferences_contact_list"
+        android:icon="@drawable/ic_menu_list_user_badge"
         app:showAsAction="always" />
 	<item android:id="@+id/menu_list_user_item_setting_sort"
         android:title="@string/menu_report_sortlist"

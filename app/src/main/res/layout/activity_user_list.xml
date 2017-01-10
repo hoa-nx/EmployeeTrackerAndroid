@@ -138,7 +138,9 @@
 		android:layout_weight="1"
 		android:divider="#b5b5b5"
 		android:dividerHeight="2dp"
-		android:hardwareAccelerated="true" />
+		android:hardwareAccelerated="true"
+		android:choiceMode="multipleChoice"
+		/>
 	<RelativeLayout
 		android:id="@+id/bottom_control_bar"
 		android:layout_width="fill_parent"
@@ -264,48 +266,12 @@
 		app:menu_showShadow="true">
 
 		<com.github.clans.fab.FloatingActionButton
-			android:id="@+id/fab_menu_list_user_check_all"
+			android:id="@+id/fab_menu_list_user_add"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:src="@drawable/ic_check_box_white_24dp"
+			android:src="@drawable/ic_account_plus_black_24dp"
 			app:fab_label=""
 			app:fab_size="mini" />
 
-		<com.github.clans.fab.FloatingActionButton
-			android:id="@+id/fab_menu_list_user_uncheck_all"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:src="@drawable/ic_check_box_outline_blank_white_24dp"
-			app:fab_label=""
-			app:fab_size="mini" />
-
-		<com.github.clans.fab.FloatingActionButton
-			android:id="@+id/fab_menu_list_user_delete"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:src="@drawable/account_minus"
-			app:fab_label=""
-			app:fab_size="mini" />
-		<com.github.clans.fab.FloatingActionButton
-			android:id="@+id/fab_menu_list_user_undelete"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:src="@drawable/account_switch"
-			app:fab_label=""
-			app:fab_size="mini" />
-		<com.github.clans.fab.FloatingActionButton
-			android:id="@+id/fab_menu_list_user_send_email"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:src="@drawable/ic_mail_outline_white_24dp"
-			app:fab_label=""
-			app:fab_size="mini" />
-		<com.github.clans.fab.FloatingActionButton
-			android:id="@+id/fab_menu_list_user_send_sms"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:src="@drawable/ic_message_white_24dp"
-			app:fab_label=""
-			app:fab_size="mini" />
 	</com.github.clans.fab.FloatingActionMenu>
 </RelativeLayout>
