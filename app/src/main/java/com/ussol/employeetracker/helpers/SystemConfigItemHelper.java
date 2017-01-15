@@ -27,9 +27,18 @@ public  class SystemConfigItemHelper {
 	}
 	
 	/** thong tin trình tự sort */
-	public Boolean getEnableSortAllItem(){
+	/*public Boolean getEnableSortAllItem(){
 		settings=readSharedPreferencesSystemConfigItem();
 		return settings.getBoolean("config_enableSortFirstItem", false);
+	}*/
+	public String getTheFirstItemSort(){
+		settings=readSharedPreferencesSystemConfigItem();
+		return settings.getString("config_firstItemSort", "0");//neu khong co thi cho la toan bo
+	}
+	//config_displayStaffSalaryInList
+	public Boolean getcDisplayStaffSalaryInList(){
+		settings=readSharedPreferencesSystemConfigItem();
+		return settings.getBoolean("config_displayStaffSalaryInList", false);
 	}
 	/** thong tin trình tự sort */
 	public Boolean getNotDisplaySentMessage(){
@@ -50,13 +59,18 @@ public  class SystemConfigItemHelper {
 	public Boolean getEnableSendSmsTrainingConfiguration(){
 		settings = readSharedPreferencesSystemConfigItem();
 		return settings.getBoolean("config_enableSendSmsTrainingConfiguration", false);
-	}	
+	}
 	/** Sim dung de gui SMS*/
 	public String getSimSendSms(){
 		settings=readSharedPreferencesSystemConfigItem();
 		return settings.getString("config_SimSendSms", "0967808590");
 	}
-	
+
+	/** get thong tin gui sms chuc mung sinh nhat tu dong */
+	public Boolean getEmpNameSortEnabled(){
+		settings = readSharedPreferencesSystemConfigItem();
+		return settings.getBoolean("config_dialogEmpNameSortEnabled", false);
+	}
 	/** thong tin upload GoogleDrive*/
 	public Boolean getEnableGoogleDriveBackup(){
 		settings=readSharedPreferencesSystemConfigItem();

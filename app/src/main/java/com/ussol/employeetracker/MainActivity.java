@@ -8,6 +8,7 @@ import com.nightonke.boommenu.BoomButtons.OnBMClickListener;
 import com.nightonke.boommenu.BoomButtons.SimpleCircleButton;
 import com.nightonke.boommenu.Util;
 import com.ussol.employeetracker.helpers.ConvertCursorToListString;
+import com.ussol.employeetracker.helpers.CustomerGoalPagerAdapter;
 import com.ussol.employeetracker.helpers.DatabaseAdapter;
 import com.ussol.employeetracker.models.*;
 import android.Manifest;
@@ -298,6 +299,17 @@ public class MainActivity extends Activity {
     					startActivity(contactInt);
     				}
     			});
+
+				/** chức năng customer va goal */
+				Button btnCustomerGoal= (Button) findViewById(R.id.main_customer_goal);
+			btnCustomerGoal.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						Intent customerGoalInt = new Intent(getBaseContext(), CustomerGoalActivity.class);
+						startActivity(customerGoalInt);
+					}
+				});
 
 				/* hien thi so nhan vien */
 				setBadgeCountListUser();

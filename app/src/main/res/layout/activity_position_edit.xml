@@ -254,6 +254,7 @@
                         android:inputType="textCapWords|textMultiLine"
                         android:lines="3"
                         android:minLines="3"
+                        android:gravity="top"
                         android:textColor="@color/grey" />
 
 

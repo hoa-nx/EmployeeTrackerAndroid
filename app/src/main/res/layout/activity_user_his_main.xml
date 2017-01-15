@@ -239,6 +239,7 @@
                     android:hint="@string/userTitleNote"
                     android:inputType="textAutoComplete|textMultiLine"
                     android:lines="4"
+                    android:gravity="top"
                     android:textColor="@color/grey" />
 
                 <TextView

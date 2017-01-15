@@ -144,13 +144,15 @@
     </style>
     
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="@android:style/Theme.Holo.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- <item name="colorControlNormal">#ffffff</item>
         <item name="colorControlActivated">@color/accent</item>
         <item name="colorControlHighlight">@color/accent</item> -->
         <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
         <item name="android:autoCompleteTextViewStyle">@style/RobotoAutoCompleteTextViewStyle</item>
         <item name="android:editTextStyle">@style/RobotoEditTextStyle</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
 
     </style>
     <style name="RobotoTextViewStyle" parent="android:Widget.TextView">
@@ -170,7 +172,9 @@
         <item name="colorAccent">@color/light_gray</item>
         <item name="colorControlActivated">@color/list_row_selected</item>
         <item name="colorControlHighlight">@color/list_row_selected</item> -->
-
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColor">@color/passcodelock_button_text_color</item>
         <item name="android:textSize">@dimen/passcodelock_button_text_size</item>
         <item name="android:clickable">true</item>
@@ -259,4 +263,8 @@
         <item name="android:padding">@dimen/padding_new_tag</item>
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
 </resources>

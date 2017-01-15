@@ -137,7 +137,6 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
 
         mExpandableList.setOnChildClickListener(this);
         mExpandableList.setOnCreateContextMenuListener(this);
-        
         /**init the menu*/
         Resources res = getResources();
         iconContextMenu = new IconContextMenu(this, CONTEXT_MENU_ID);
@@ -829,4 +828,6 @@ public class ExpandableListUserActivity extends Activity implements OnChildClick
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+
 }

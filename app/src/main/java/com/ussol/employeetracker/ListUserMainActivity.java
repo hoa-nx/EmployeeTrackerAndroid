@@ -580,23 +580,23 @@ public class ListUserMainActivity extends AppCompatActivity  implements OnClickL
 				}
 				break;
 			case MasterConstants.CALL_CONFIG_ITEM_ACTIVITY_CODE:
-				if (resultCode==RESULT_OK){
-					/** get list user */
-					list = getListUser("");
-					/** hiển thị data*/
-					bindData();
-					/** di chuyen toi item cu**/
-					//final ListView listview = (ListView) findViewById(R.id.list);
-					//int h1 = listview.getHeight();
-					//int h2 = viewLayout.getHeight();
 
-					//listview.smoothScrollToPositionFromTop(positionClicked, h1/2 - h2/2, 100);
-					if(positionClicked>list.size()){
-						listview.setSelection(list.size());
-					}else{
-						listview.setSelection(positionClicked);
-					}
+				/** get list user */
+				list = getListUser("");
+				/** hiển thị data*/
+				bindData();
+				/** di chuyen toi item cu**/
+				//final ListView listview = (ListView) findViewById(R.id.list);
+				//int h1 = listview.getHeight();
+				//int h2 = viewLayout.getHeight();
+
+				//listview.smoothScrollToPositionFromTop(positionClicked, h1/2 - h2/2, 100);
+				if(positionClicked>list.size()){
+					listview.setSelection(list.size());
+				}else{
+					listview.setSelection(positionClicked);
 				}
+
 				break;
 		}
 	}

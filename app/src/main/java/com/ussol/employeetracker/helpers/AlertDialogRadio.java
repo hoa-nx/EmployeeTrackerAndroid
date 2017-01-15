@@ -5,10 +5,17 @@
 
 package com.ussol.employeetracker.helpers;
 
+import java.sql.Array;
+import java.text.Collator;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 import javax.crypto.spec.PSource;
 
+import com.ussol.employeetracker.EmployeeTrackerApplication;
 import com.ussol.employeetracker.R;
 import com.ussol.employeetracker.models.CustomerGroup;
 import com.ussol.employeetracker.models.Dept;
@@ -76,6 +83,8 @@ public class AlertDialogRadio  extends DialogFragment{
 	
 	AlertDialog.Builder b;
 	Bundle bundle=new Bundle();
+	SystemConfigItemHelper config ;
+
 	/** hàm khởi tạo trong trường hợp là common ( truyền vào mảng chuỗi) */
 	public AlertDialogRadio(String title , String[] data , int clickBtn){
 		_title = title;
@@ -90,6 +99,7 @@ public class AlertDialogRadio  extends DialogFragment{
 		_dataCustomerGroup=null ;
 		_dataDeptList=null;
 		_dataDeptCheck=null;
+
 	}
 	/** hàm khởi tạo trong trường hợp là user */
 	public AlertDialogRadio(String title , User[] data , int clickBtn){
@@ -105,6 +115,7 @@ public class AlertDialogRadio  extends DialogFragment{
 		_dataCustomerGroup=null ;
 		_dataDeptList=null;
 		_dataDeptCheck=null;
+
 	}
 	/** hàm khởi tạo trong trường hợp là phòng ban */
 	public AlertDialogRadio(String title , Dept[] data , int clickBtn){
@@ -120,6 +131,7 @@ public class AlertDialogRadio  extends DialogFragment{
 		_dataCustomerGroup=null ;
 		_dataDeptList=null;
 		_dataDeptCheck=null;
+
 	}
 	/** hàm khởi tạo trong trường hợp là nhóm -tổ */
 	public AlertDialogRadio(String title , Team[] data , int clickBtn){
@@ -135,6 +147,7 @@ public class AlertDialogRadio  extends DialogFragment{
 		_dataCustomerGroup=null ;
 		_dataDeptList=null;
 		_dataDeptCheck=null;
+
 	}
 	/** hàm khởi tạo trong trường hợp là chức vụ */
 	public AlertDialogRadio(String title , Position[] data , int clickBtn){
@@ -150,6 +163,7 @@ public class AlertDialogRadio  extends DialogFragment{
 		_dataCustomerGroup=null ;
 		_dataDeptList=null;
 		_dataDeptCheck=null;
+
 	}
 	/** hàm khởi tạo trong trường hợp là nhóm chức danh */
 	public AlertDialogRadio(String title , PositionGroup[] data , int clickBtn, List<UserPositionGroup> userPositionGroup , boolean isMultiSelect){
@@ -166,6 +180,7 @@ public class AlertDialogRadio  extends DialogFragment{
 		_dataCustomerGroup=null ;
 		_dataDeptList=null;
 		_dataDeptCheck=null;
+
 	}
 	
 	/** hàm khởi tạo trong trường hợp là khách hàng*/
@@ -183,6 +198,7 @@ public class AlertDialogRadio  extends DialogFragment{
 		_dataPositionGroup=null ;
 		_dataDeptList=null;
 		_dataDeptCheck=null;
+
 	}
 	/** hàm khởi tạo trong trường hợp là phòng ban-cho phép chọn nhiều record */
 	public AlertDialogRadio(String title , Dept[] data , int clickBtn, List<Dept> deptList , boolean isMultiSelect){
@@ -198,6 +214,7 @@ public class AlertDialogRadio  extends DialogFragment{
 		_dataPosition=null ;
 		_dataPositionGroup =null;
 		_dataCustomerGroup=null ;
+
 	}
 	
 	/** hàm khởi tạo trong trường hợp là phòng ban-cho phép chọn nhiều record */
@@ -216,6 +233,7 @@ public class AlertDialogRadio  extends DialogFragment{
 		_dataDeptCheck=null;
 		_dataPositionCheck=null;
 		_dataCustomerGroup=null ;
+
 	}
 	
 	/** hàm khởi tạo trong trường hợp là phòng ban-cho phép chọn nhiều record */
@@ -234,6 +252,7 @@ public class AlertDialogRadio  extends DialogFragment{
 		_dataDeptCheck=null;
 		_dataTeamCheck=null;
 		_dataCustomerGroup=null ;
+
 	}
 	
 	/** hàm khởi tạo trong trường hợp là user phép chọn nhiều record */
@@ -253,6 +272,7 @@ public class AlertDialogRadio  extends DialogFragment{
 		_dataTeamCheck=null;
 		_dataPositionCheck=null;
 		_dataCustomerGroup=null ;
+
 	}
 
 	/** An interface to be implemented in the hosting activity for "OK" button click listener */
@@ -400,6 +420,9 @@ public class AlertDialogRadio  extends DialogFragment{
 			b.setSingleChoiceItems(_data, position, null);
 		}else if(_dataUser!=null){
 			/** trường hợp là data user */
+			if(((EmployeeTrackerApplication)getActivity().getApplicationContext()).getEmpNameSortEnabled()) {
+				Arrays.sort(_dataUser);
+			}
 			adapter = new UserDialogAdapter(getActivity(), _dataUser);
 			b.setSingleChoiceItems(adapter, 0 ,mOnClickListener);
 		}else if(_dataDept!=null){
@@ -436,6 +459,23 @@ public class AlertDialogRadio  extends DialogFragment{
 			b.setAdapter(adapterPositionCheck, null);
 		}else if(_dataUserCheck!=null){
 			/** trường hợp là list user */
+			/** sort */
+			if(((EmployeeTrackerApplication)getActivity().getApplicationContext()).getEmpNameSortEnabled()) {
+				Arrays.sort(_dataUserCheck);
+			}
+			/*
+			if (_dataUserList.size() > 0) {
+				Collections.sort(_dataUserList, new Comparator<User>() {
+					@Override
+					public int compare(final User object1, final User object2) {
+						return object1.last_name.compareTo(object2.last_name);
+					}
+				});
+			}
+			*/
+			/** truong hop java 1.8 */
+			//_dataUserList.stream().sorted((object1, object2) -> object1.last_name.compareTo(object2.last_name));
+
 			adapterUserCheck = new DialogAdapterCheckBox<User>(getActivity(), _dataUserCheck,_dataUserList);
 			b.setAdapter(adapterUserCheck, null);
 		}

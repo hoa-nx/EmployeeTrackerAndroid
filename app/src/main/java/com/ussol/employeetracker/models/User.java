@@ -5,13 +5,14 @@
 package com.ussol.employeetracker.models;
 
 import com.ussol.employeetracker.utils.Utils;
+import com.ussol.employeetracker.utils.VietnameseComparator;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Parcelable;
 import android.os.Parcel;
 
-public class User implements Parcelable, Cloneable {
+public class User implements Parcelable, Cloneable, Comparable<User>  {
 	/*public int code=0;
 	public String first_name="";
 	public String last_name="";
@@ -466,6 +467,13 @@ public class User implements Parcelable, Cloneable {
 	{
 	  return (User)Utils.clone(this);
 	}
-	
-	
+
+	public String toString() {
+		return ( last_name );
+	}
+	@Override
+	public int compareTo(User user) {
+		//return toString().compareTo(user.toString());
+		return new VietnameseComparator().compare(toString(),user.toString());
+	}
 }

@@ -140,6 +140,20 @@
     <string name="positionTitleNote">Ghi chú</string>
     <string name="positionBtnUpdate">Chỉnh sửa</string>
     <string name="positionTitleInfor">Thông tin chi tiết chức vụ</string>
+    <!-- Master cong ty -->
+    <string name="companyTitleCode">Mã công ty</string>
+    <string name="companyTitleName">Tên công ty</string>
+    <string name="companyTitleRyaku">Tên tắt công ty</string>
+    <string name="companyTitleCreateDate">Ngày thành lập</string>
+    <string name="companyTitleShihon">Vốn cơ bản</string>
+    <string name="companyTitleTaxCode">Mã số thuế</string>
+    <string name="companyTitleAddress">Địa chỉ công ty</string>
+    <string name="companyTitleHomeTel">Điện thoại</string>
+    <string name="companyTitleFax">Fax</string>
+    <string name="companyTitleVoucherAddress">Địa chỉ gửi hóa đơn</string>
+    <string name="companyTitleWebSite">Website</string>
+    <string name="companyTitleNote">Ghi chú</string>
+    <string name="companyTitleInfor">Công ty</string>
     <!-- Master nhân viên -->
     <string name="userTitleList">Danh sách nhân viên</string>
     <string name="userTitleInfor">Thông tin chi tiết nhân viên</string>

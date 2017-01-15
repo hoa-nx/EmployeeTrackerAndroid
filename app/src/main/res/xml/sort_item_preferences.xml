@@ -40,7 +40,7 @@
             android:title="Sort item 6" />
    		<EditTextPreference
             android:name="Sort item 7"
-            android:defaultValue="Giới tính"
+            android:defaultValue="Hệ só đánh giá"
             android:key="pre_SortItem_7"
             android:summary="Sort item 7"
             android:title="Sort item 7" />
@@ -52,7 +52,7 @@
             android:title="Sort item 8" />
    		<EditTextPreference
             android:name="Sort item 9"
-            android:defaultValue="Ngày vào nhóm labor"
+            android:defaultValue="Ngày học việc"
             android:key="pre_SortItem_9"
             android:summary="Sort item 9"
             android:title="Sort item 9" />
@@ -80,6 +80,18 @@
             android:key="pre_SortItem_13"
             android:summary="Sort item 13"
             android:title="Sort item 13" />
+		<EditTextPreference
+			android:name="Sort item 14"
+			android:defaultValue="PC nghiệp vụ"
+			android:key="pre_SortItem_14"
+			android:summary="Sort item 14"
+			android:title="Sort item 14" />
+		<EditTextPreference
+			android:name="Sort item 15"
+			android:defaultValue="PC BSE"
+			android:key="pre_SortItem_15"
+			android:summary="Sort item 15"
+			android:title="Sort item 15" />
 		<EditTextPreference
             android:name="Sort by(Asc,Desc)"
             android:defaultValue="Trình tự sort tăng hay giảm"

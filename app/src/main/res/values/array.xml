@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="listArraySort">
+        <item>Sắp xếp theo tất cả các hạng mục</item>
+        <item>Sắp xếp theo 1 hạng mục đầu tiên</item>
+        <item>Sắp xếp theo 2 hạng mục đầu tiên</item>
+        <item>Sắp xếp theo 3 hạng mục đầu tiên</item>
+        <item>Sắp xếp theo 4 hạng mục đầu tiên</item>
+        <item>Sắp xếp theo 5 hạng mục đầu tiên</item>
+        <item>Sắp xếp theo 6 hạng mục đầu tiên</item>
+        <item>Sắp xếp theo 7 hạng mục đầu tiên</item>
+        <item>Sắp xếp theo 8 hạng mục đầu tiên</item>
+        <item>Sắp xếp theo 9 hạng mục đầu tiên</item>
+        <item>Sắp xếp theo 10 hạng mục đầu tiên</item>
+        <item>Sắp xếp theo 11 hạng mục đầu tiên</item>
+        <item>Sắp xếp theo 12 hạng mục đầu tiên</item>
+        <item>Sắp xếp theo 13 hạng mục đầu tiên</item>
+        <item>Sắp xếp theo 14 hạng mục đầu tiên</item>
+    </string-array>
+
+    <string-array name="listValuesSort">
+        <item>15</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+    </string-array>
+
+</resources>

@@ -151,18 +151,19 @@
 				        android:drawableStart="@drawable/search" />
 
 				    <EditText
-				        android:id="@+id/txtDepartmentNote"
-				        android:layout_width="wrap_content"
-				        android:layout_height="wrap_content"
-				        android:layout_alignParentLeft="true"
-				        android:layout_alignParentRight="true"
-				        android:layout_below="@+id/lblDepartmentNote"
-				        android:layout_marginTop="10dp"
-				        android:background="@drawable/edittext_modified_states"
-				        android:ems="10"
-				        android:hint="@string/deptTitleNote"
-				        android:inputType="textMultiLine"
-				        android:lines="3"
+						android:id="@+id/txtDepartmentNote"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_alignParentLeft="true"
+						android:layout_alignParentRight="true"
+						android:layout_below="@+id/lblDepartmentNote"
+						android:layout_marginTop="10dp"
+						android:background="@drawable/edittext_modified_states"
+						android:ems="10"
+						android:hint="@string/deptTitleNote"
+						android:inputType="textMultiLine"
+						android:lines="3"
+						android:gravity="top"
 				        android:textColor="@color/grey" />
 
 				    <TextView

@@ -169,5 +169,12 @@ public class EmployeeTrackerApplication extends Application {
     	}
         return keikenMonthSystem;
     }
-	
+
+	/**
+	 * Khi hien thi tai dialog user thi hien thi sort theo ten khong
+	 * @return
+     */
+	public boolean getEmpNameSortEnabled(){
+		return systemConfig.getEmpNameSortEnabled();
+	}
 }

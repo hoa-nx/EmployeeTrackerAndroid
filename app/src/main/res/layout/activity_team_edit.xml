@@ -173,7 +173,8 @@
 				        android:ems="10"
 				        android:hint="@string/teamTitleNote"
 				        android:inputType="textMultiLine|textCapWords"
-				        android:lines="2"
+				        android:lines="4"
+						android:gravity="top"
 				        android:textColor="@color/grey" />
 
 				    <TextView

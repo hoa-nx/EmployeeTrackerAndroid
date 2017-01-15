@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
     
-    <PreferenceCategory android:title="Thiết lập công việc chạy nền" >
+    <PreferenceCategory android:title="Thiết lập công việc chạy nền"
+		>
+		<SwitchPreference
+			android:key="config_displayStaffSalaryInList"
+			android:defaultValue="false"
+			android:title="Cho phép hiển thị lương cơ bản tại danh sách nhân viên"
+			/>
+
 		<SwitchPreference
 			android:key="config_enableBackgroundJob"
 			android:title="Cấu hình cho phép thực hiện job tự động" 
@@ -12,21 +19,21 @@
 		/>
 		<SwitchPreference
 			android:key="config_enableSendSmsBirthdayConfiguration"
-			android:title="Tự động gửi sms chúc mừng SN" 
+			android:title="Tự động gửi tin nhắn chúc mừng SN"
 		/>
 		<SwitchPreference
 			android:key="config_enableSendSmsYasumiConfiguration"
-			android:title="Tự động gửi sms cám ơn đã cống hiến khi nghỉ việc" 
+			android:title="Tự động gửi tin nhắn cám ơn đã cống hiến khi nghỉ việc"
 		/>	
 		<SwitchPreference
 			android:key="config_enableSendSmsTrainingConfiguration"
-			android:title="Tự động gửi sms sau khi kết thúc thử việc" 
+			android:title="Tự động gửi tin nhắn sau khi kết thúc thử việc"
 		/>	
 		<EditTextPreference
             android:name="SimSendSms"
             android:defaultValue="0967808590"
             android:key="config_SimSendSms"
-            android:summary="Sim dùng để gửi SMS"
+            android:summary="Sim dùng để gửi tin nhắn"
             android:title="Sim số dùng để gửi text message" />
 		<EditTextPreference
             android:name="config_birthdayMsgCode"
@@ -61,11 +68,21 @@
 	</PreferenceCategory>
 	
     <PreferenceCategory android:title="Thiết lập trình tự sort dữ liệu" >
+		<ListPreference android:title="Chỉ định số item được sắp xếp"
+			android:summary="Chọn số item sẽ được sắp xếp"
+			android:key="config_firstItemSort"
+			android:defaultValue="1"
+			android:entries="@array/listArraySort"
+			android:entryValues="@array/listValuesSort" />
+
 		<SwitchPreference
-			android:key="config_enableSortFirstItem"
-			android:title="Chỉ sort theo item đầu tiên" 
+			android:key="config_dialogEmpNameSortEnabled"
+			android:title="Sắp xếp theo tên nhân viên tại các dialog"
+
 		/>
+
 	</PreferenceCategory>
+
     <PreferenceCategory android:title="Thiết lập backup dữ liệu" >
 		<SwitchPreference
 			android:key="config_enableGoogleDriveBackup"

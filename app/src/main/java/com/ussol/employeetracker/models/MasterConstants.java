@@ -57,7 +57,14 @@ public class MasterConstants {
 	public static final int MASTER_MKBN_BUSINESS_GROUP = 5;
 	/** master các khách hàng */
 	public static final int MASTER_MKBN_CUSTOMER_GROUP = 6;
-	
+
+	/** master công ty*/
+	public static final int MASTER_MKBN_COMPANY = 10;
+	/** master KH*/
+	public static final int MASTER_MKBN_CUSTOMER = 11;
+	/** master DU AN*/
+	public static final int MASTER_MKBN_PROJECT = 12;
+
 	/** chưa delete */ 
 	public static final int MASTER_UNDELETED = 0;
 	/** đã delete ( về mặt logic) */

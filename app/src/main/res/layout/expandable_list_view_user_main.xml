@@ -25,10 +25,12 @@
   	    android:id="@+id/expandable_list" 
   	    android:layout_width="fill_parent" 
   	    android:layout_height="wrap_content"
-  	    android:transcriptMode="alwaysScroll"
+  	    android:transcriptMode="disabled"
   	    android:layout_alignParentLeft="true" 
   	    android:layout_below="@+id/fdLinearLayoutSearch"
-  	    android:groupIndicator="@drawable/group_indicator">
+  	    android:groupIndicator="@drawable/group_indicator"
+
+		>
 
 	</ExpandableListView>
 </RelativeLayout>

@@ -61,6 +61,9 @@ public class DatabaseAdapter {
 	private final String TABLE_M_USER_SALARY_SUMMARY = "m_user_salary_summary";
 	private final String TABLE_M_MEI = "m_mei";
 	private final String TABLE_M_COMPANY = "m_company";
+	private final String TABLE_M_CUSTOMER = "m_customer";
+	private final String TABLE_M_GOAL = "m_goal";
+	private final String TABLE_M_PROJECT = "m_project";
 	/**
 	 * Doanh thu
 	 */
@@ -368,6 +371,7 @@ public class DatabaseAdapter {
 	public static final String KEY_REVENUE_MAINTERNANCE="MAINTERNANCE";
 	public static final String KEY_REVENUE_START_DATE="START_DATE";
 	public static final String KEY_REVENUE_END_DATE="END_DATE";
+	public static final String KEY_REVENUE_SIME="SIME";
 	public static final String KEY_REVENUE_UNIT_PRICE_CODE="UNIT_PRICE_CODE";
 	public static final String KEY_REVENUE_UNIT_PRICE="UNIT_PRICE";
 	public static final String KEY_REVENUE_UNIT="UNIT";
@@ -385,6 +389,49 @@ public class DatabaseAdapter {
 	public static final String KEY_REVENUE_MONTHLY_REVENUE="MONTHLY_REVENUE";
 	public static final String KEY_REVENUE_MONTHLY_COST="MONTHLY_COST";
 	public static final String KEY_REVENUE_MONTHLY_REVENUE_MINUS="MONTHLY_REVENUE_MINUS";
+
+	/* table khach hang */
+	public static final String KEY_SIME="SIME";
+	public static final String KEY_CONTRACT_DATE="CONTRACT_DATE";
+
+	/* table muc tieu */
+	public static final String KEY_GOAL_YEAR="GOAL_YEAR";
+	public static final String KEY_GOAL_REVENUE_YEAR="GOAL_REVENUE_YEAR";
+	public static final String KEY_GOAL_STAFF_QTY_YEAR="GOAL_STAFF_QTY_YEAR";
+	public static final String KEY_GOAL_JAPANESE_N1_YEAR="GOAL_JAPANESE_N1_YEAR";
+	public static final String KEY_GOAL_JAPANESE_N2_YEAR="GOAL_JAPANESE_N2_YEAR";
+	public static final String KEY_GOAL_JAPANESE_N3_YEAR="GOAL_JAPANESE_N3_YEAR";
+	public static final String KEY_GOAL_JAPANESE_N4_YEAR="GOAL_JAPANESE_N4_YEAR";
+	public static final String KEY_GOAL_JAPANESE_N5_YEAR="GOAL_JAPANESE_N5_YEAR";
+	public static final String KEY_GOAL_ONSITE_YEAR="GOAL_ONSITE_YEAR";
+	public static final String KEY_GOAL_STAFF_M2_YEAR="GOAL_STAFF_M2_YEAR";
+	public static final String KEY_GOAL_STAFF_M1_YEAR="GOAL_STAFF_M1_YEAR";
+	public static final String KEY_GOAL_STAFF_M0_YEAR="GOAL_STAFF_M0_YEAR";
+
+	public static final String KEY_GOAL_STAFF_L1_YEAR="GOAL_STAFF_L1_YEAR";
+	public static final String KEY_GOAL_STAFF_L2_YEAR="GOAL_STAFF_L2_YEAR";
+
+	public static final String KEY_GOAL_STAFF_TL1_YEAR="GOAL_STAFF_TL1_YEAR";
+	public static final String KEY_GOAL_STAFF_TL2_YEAR="GOAL_STAFF_TL2_YEAR";
+
+	public static final String KEY_GOAL_STAFF_S2_YEAR="GOAL_STAFF_S2_YEAR";
+	public static final String KEY_GOAL_STAFF_TS2_YEAR="GOAL_STAFF_TS2_YEAR";
+	public static final String KEY_GOAL_STAFF_S1_YEAR="GOAL_STAFF_S1_YEAR";
+	public static final String KEY_GOAL_STAFF_TS1_YEAR="GOAL_STAFF_TS1_YEAR";
+
+	/* table du an */
+	public static final String KEY_START_DATE="START_DATE";
+	public static final String KEY_END_DATE="END_DATE";
+	//public static final String KEY_CONTRACT_DATE="CONTRACT_DATE";
+	public static final String KEY_TOTAL_MM="TOTAL_MM";
+	public static final String KEY_ESTIMATE_MM="ESTIMATE_MM";
+	public static final String KEY_DEV_MM="DEV_MM";
+	public static final String KEY_MAN_MM="MAN_MM";
+	public static final String KEY_TRANS_MM="TRANS_MM";
+	public static final String KEY_MANAGER="MANAGER";
+	public static final String KEY_PM="PM";
+	public static final String KEY_PL="PL";
+	public static final String KEY_STAFF_QTY="STAFF_QTY";
 
 	/** các item dùng chung */
 	public static final String KEY_ISDELETED="ISDELETED";
@@ -1042,6 +1089,154 @@ public class DatabaseAdapter {
 			+ KEY_AD_DATE 		+ " TEXT 				,"
 			+ KEY_OPID 			+ " TEXT DEFAULT '' "
 			+ ")";
+
+	/* quan ly khach hang */
+	private final String M_CUSTOMER_TABLE_CREATE = "create table if not exists "
+			+ TABLE_M_CUSTOMER + "("
+			+ KEY_CODE 			+ " INTEGER PRIMARY KEY AUTOINCREMENT ,"
+			+ KEY_MKBN			+ " INTEGER NOT NULL 	,"
+			+ KEY_NAME		 	+ " TEXT DEFAULT ''  	,"
+			+ KEY_RYAKU		 	+ " TEXT DEFAULT ''  	,"
+			+ KEY_CREATE_DATE	+ " TEXT DEFAULT ''  	,"
+			+ KEY_CONTRACT_DATE + " TEXT DEFAULT '' 	,"	//ngay ky hd quan ke hop tac
+			+ KEY_SIME		 	+ " REAL DEFAULT 0 		,"
+			+ KEY_ADDRESS 		+ " TEXT DEFAULT ''		,"
+			+ KEY_HOME_TEL 		+ " TEXT DEFAULT ''		,"
+			+ KEY_MOBILE 		+ " TEXT DEFAULT ''		,"
+			+ KEY_FAX 			+ " TEXT DEFAULT ''		,"
+			+ KEY_WEBSITE	 	+ " TEXT DEFAULT ''  	,"
+			+ KEY_ISDELETED 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_NOTE 			+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_CODE1 	+ " INTEGER DEFAULT 0 	,"
+			+ KEY_YOBI_CODE2 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_YOBI_CODE3 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_YOBI_CODE4 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_YOBI_CODE5 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_YOBI_TEXT1 	+ " TEXT DEFAULT ''		,"
+			+ KEY_YOBI_TEXT2 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_TEXT3 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_TEXT4 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_TEXT5 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_DATE1 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_DATE2 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_DATE3 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_DATE4 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_DATE5 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_REAL1 	+ " REAL DEFAULT 0  	,"
+			+ KEY_YOBI_REAL2 	+ " REAL DEFAULT 0  	,"
+			+ KEY_YOBI_REAL3 	+ " REAL DEFAULT 0  	,"
+			+ KEY_YOBI_REAL4 	+ " REAL DEFAULT 0  	,"
+			+ KEY_YOBI_REAL5 	+ " REAL DEFAULT 0  	,"
+			+ KEY_UP_DATE 		+ " TEXT  ,"
+			+ KEY_AD_DATE 		+ " TEXT  ,"
+			+ KEY_OPID 			+ " TEXT DEFAULT '' "
+			+ ")";
+
+	/* quan ly du an */
+	private final String M_PROJECT_TABLE_CREATE = "create table if not exists "
+			+ TABLE_M_PROJECT + "("
+			+ KEY_CODE 			+ " INTEGER PRIMARY KEY AUTOINCREMENT ,"
+			+ KEY_MKBN			+ " INTEGER NOT NULL 	,"
+			+ KEY_NAME		 	+ " TEXT DEFAULT ''  	,"
+			+ KEY_RYAKU		 	+ " TEXT DEFAULT ''  	,"
+			+ KEY_CREATE_DATE	+ " TEXT DEFAULT ''  	,"
+			+ KEY_START_DATE	+ " TEXT DEFAULT ''  	,"
+			+ KEY_END_DATE		+ " TEXT DEFAULT ''  	,"
+			+ KEY_CONTRACT_DATE + " TEXT DEFAULT '' 	,"	//ngay ky hd quan ke hop tac
+			+ KEY_SIME		 	+ " REAL DEFAULT 0 		,"
+
+			+ KEY_TOTAL_MM 		+ " REAL DEFAULT 0  	,"
+			+ KEY_ESTIMATE_MM 	+ " REAL DEFAULT 0  	,"
+			+ KEY_DEV_MM 		+ " REAL DEFAULT 0  	,"
+			+ KEY_MAN_MM 		+ " REAL DEFAULT 0  	,"
+			+ KEY_TRANS_MM 		+ " REAL DEFAULT 0  	,"
+			+ KEY_MANAGER		+ " TEXT DEFAULT '' 	,"
+			+ KEY_PM 			+ " TEXT DEFAULT '' 	,"
+			+ KEY_PL 			+ " TEXT DEFAULT '' 	,"
+			+ KEY_STAFF_QTY 	+ " REAL DEFAULT 0  	,"
+
+			+ KEY_ISDELETED 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_NOTE 			+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_CODE1 	+ " INTEGER DEFAULT 0 	,"
+			+ KEY_YOBI_CODE2 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_YOBI_CODE3 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_YOBI_CODE4 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_YOBI_CODE5 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_YOBI_TEXT1 	+ " TEXT DEFAULT ''		,"
+			+ KEY_YOBI_TEXT2 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_TEXT3 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_TEXT4 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_TEXT5 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_DATE1 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_DATE2 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_DATE3 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_DATE4 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_DATE5 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_REAL1 	+ " REAL DEFAULT 0  	,"
+			+ KEY_YOBI_REAL2 	+ " REAL DEFAULT 0  	,"
+			+ KEY_YOBI_REAL3 	+ " REAL DEFAULT 0  	,"
+			+ KEY_YOBI_REAL4 	+ " REAL DEFAULT 0  	,"
+			+ KEY_YOBI_REAL5 	+ " REAL DEFAULT 0  	,"
+			+ KEY_UP_DATE 		+ " TEXT  ,"
+			+ KEY_AD_DATE 		+ " TEXT  ,"
+			+ KEY_OPID 			+ " TEXT DEFAULT '' "
+			+ ")";
+
+	/* quan ly du an */
+	private final String M_GOAL_TABLE_CREATE = "create table if not exists "
+			+ TABLE_M_GOAL + "("
+			+ KEY_CODE 			+ " INTEGER PRIMARY KEY AUTOINCREMENT ,"
+			+ KEY_NAME		 	+ " TEXT DEFAULT ''  	,"
+			+ KEY_RYAKU		 	+ " TEXT DEFAULT ''  	,"
+			+ KEY_GOAL_YEAR		+ " TEXT DEFAULT ''  	,"
+			+ KEY_GOAL_REVENUE_YEAR		 	+ " REAL DEFAULT 0 	,"
+			+ KEY_GOAL_STAFF_QTY_YEAR 		+ " REAL DEFAULT 0	,"
+
+			+ KEY_GOAL_JAPANESE_N1_YEAR 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_GOAL_JAPANESE_N2_YEAR 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_GOAL_JAPANESE_N3_YEAR 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_GOAL_JAPANESE_N4_YEAR 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_GOAL_JAPANESE_N5_YEAR 	+ " INTEGER DEFAULT 0	,"
+
+			+ KEY_GOAL_STAFF_M2_YEAR 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_GOAL_STAFF_M1_YEAR 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_GOAL_STAFF_M0_YEAR 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_GOAL_STAFF_L2_YEAR 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_GOAL_STAFF_L1_YEAR 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_GOAL_STAFF_TL1_YEAR 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_GOAL_STAFF_TL2_YEAR 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_GOAL_STAFF_S2_YEAR	+ " INTEGER DEFAULT 0	,"
+			+ KEY_GOAL_STAFF_S1_YEAR	+ " INTEGER DEFAULT 0	,"
+			+ KEY_GOAL_STAFF_TS2_YEAR	+ " INTEGER DEFAULT 0	,"
+			+ KEY_GOAL_STAFF_TS1_YEAR	+ " INTEGER DEFAULT 0	,"
+
+			+ KEY_ISDELETED 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_NOTE 			+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_CODE1 	+ " INTEGER DEFAULT 0 	,"
+			+ KEY_YOBI_CODE2 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_YOBI_CODE3 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_YOBI_CODE4 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_YOBI_CODE5 	+ " INTEGER DEFAULT 0	,"
+			+ KEY_YOBI_TEXT1 	+ " TEXT DEFAULT ''		,"
+			+ KEY_YOBI_TEXT2 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_TEXT3 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_TEXT4 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_TEXT5 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_DATE1 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_DATE2 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_DATE3 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_DATE4 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_DATE5 	+ " TEXT DEFAULT '' 	,"
+			+ KEY_YOBI_REAL1 	+ " REAL DEFAULT 0  	,"
+			+ KEY_YOBI_REAL2 	+ " REAL DEFAULT 0  	,"
+			+ KEY_YOBI_REAL3 	+ " REAL DEFAULT 0  	,"
+			+ KEY_YOBI_REAL4 	+ " REAL DEFAULT 0  	,"
+			+ KEY_YOBI_REAL5 	+ " REAL DEFAULT 0  	,"
+			+ KEY_UP_DATE 		+ " TEXT  ,"
+			+ KEY_AD_DATE 		+ " TEXT  ,"
+			+ KEY_OPID 			+ " TEXT DEFAULT '' "
+			+ ")";
+
 	/** câu lệnh tạo view  user customer group */
 	private final String VIEW_M_USER_CUSTOMER_GROUP_VIEW_CREATE = "create view if not exists "
 			+ VIEW_M_USER_CUSTOMER_GROUP + " AS "

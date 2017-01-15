@@ -110,13 +110,15 @@ public class Utils {
 		, "Mã nhân viên"
 		, "Tên nhân viên"
 		, "Ngày sinh"
-		, "Giới tính"
+		, "Hệ số đánh giá"
 		, "Ngày ký HĐLĐ"
-		, "Ngày vào nhóm labor"
+		, "Ngày học việc"
 		, "Trình độ nhật ngữ"
 		, "Ngày vào thử việc"
 		, "Ngày nghỉ việc"
 		, "Lương cơ bản"
+		, "PC nghiệp vụ"
+		, "PC BSE"
 		};
 	/**
 	 * trinh tu sort ung voi item trong DB
@@ -126,15 +128,17 @@ public class Utils {
 		,	DatabaseAdapter.KEY_TEAM
 		,	DatabaseAdapter.KEY_POSITION
 		,	DatabaseAdapter.KEY_CODE
-		,	DatabaseAdapter.KEY_FULL_NAME
+		,	DatabaseAdapter.KEY_LAST_NAME   			//change FULL NAME TO LAST NAME
 		,	DatabaseAdapter.KEY_BIRTHDAY
-		,	DatabaseAdapter.KEY_SEX
+		,	DatabaseAdapter.KEY_ESTIMATE_POINT			// SEX CHANGE TO HE SO DANH GIA
 		,	DatabaseAdapter.KEY_IN_DATE
-		,	DatabaseAdapter.KEY_JOIN_DATE
+		,	DatabaseAdapter.KEY_LEARN_TRAINING_DATE	//JOIN DATE CHANGE TO NGAY HOC VIEC
 		,	DatabaseAdapter.KEY_JAPANESE
 		,	DatabaseAdapter.KEY_TRAINING_DATE
 		,	DatabaseAdapter.KEY_OUT_DATE
 		,	DatabaseAdapter.KEY_SALARY_NOTALOWANCE
+		,	DatabaseAdapter.KEY_ALLOWANCE_BUSINESS	//phu cap nghiep vu
+		,	DatabaseAdapter.KEY_ALLOWANCE_BSE	//phu cap BSE
 		};
 	
 	private static int findPositionByValue(String value){
@@ -174,6 +178,10 @@ public class Utils {
 			if (sortCol.equals(DatabaseAdapter.KEY_OUT_DATE)){
 				sortCol =" case when "+ DatabaseAdapter.KEY_OUT_DATE + " is null then 1 else 0 end ,  date(COALESCE("+ sortCol + ",'1900-01-01'))  "; 
 			}
+			if (sortCol.equals(DatabaseAdapter.KEY_LEARN_TRAINING_DATE)){
+				sortCol =" case when "+ DatabaseAdapter.KEY_LEARN_TRAINING_DATE + " is null then 1 else 0 end ,  date(COALESCE("+ sortCol + ",'1900-01-01'))  ";
+			}
+
 			//return mListColumn[pos];
 			return sortCol;
 		}

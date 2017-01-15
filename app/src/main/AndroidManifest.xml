@@ -302,6 +302,12 @@
             android:name=".MessageTemplateAddActivity"
             android:label="@string/title_activity_message_template_add" >
         </activity>
+        <activity
+            android:name=".CustomerGoalActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden"
+            android:label="" >
+        </activity>
     </application>
 
 </manifest>
