@@ -25,11 +25,20 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <!-- Samsung -->
     <uses-permission android:name="com.sec.android.provider.badge.permission.READ" />
     <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE" />
-	
+
+    <!-- Sony -->
+    <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE" />
+
+    <!-- HTC -->
+    <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT" />
+
     <uses-sdk
-        android:minSdkVersion="16"
+        android:minSdkVersion="21"
         android:targetSdkVersion="23" />
 
     <application
@@ -241,10 +250,12 @@
 
         <activity
             android:name=".passcodelock.PasscodeUnlockActivity"
+            android:theme="@style/Theme.AppCompat.DayNight"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
             android:name=".passcodelock.PasscodeManagePasswordActivity"
+            android:theme="@style/Theme.AppCompat.DayNight"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity

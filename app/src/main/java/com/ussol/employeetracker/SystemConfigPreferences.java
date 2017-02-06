@@ -19,12 +19,15 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
+import android.util.Log;
+
+import me.leolin.shortcutbadger.ShortcutBadger;
 //import android.support.v4.media.routing.MediaRouterJellybeanMr1.ActiveScanWorkaround;
 
 public class SystemConfigPreferences extends PreferenceFragment {
 	SharedPreferences mPrefs;
 	public static final String  KEY_TYPE = "type";
-	
+	private static final String TAG = "SystemConfigPreferences";
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -76,11 +79,13 @@ public class SystemConfigPreferences extends PreferenceFragment {
 				Bundle bundleBackgroundJob = new Bundle();
 				
 				/** Tao badge */
-    	        BadgeAction badge = new BadgeAction(getActivity());
-    	        badge.deleteBagde(true);
+    	        //BadgeAction badge = new BadgeAction(getActivity());
+    	        //badge.deleteBagde(true);
     	        /** reset icon **/
-    	        badge.clearBadgeIcon();
-    	        
+    	        //badge.clearBadgeIcon();
+				ShortcutBadger.removeCount(getActivity()); //for 1.1.4+
+
+
 				if(isBackgroundJobOn)
 				{
 					//goi toi Intent de setting thuc thi background jobs

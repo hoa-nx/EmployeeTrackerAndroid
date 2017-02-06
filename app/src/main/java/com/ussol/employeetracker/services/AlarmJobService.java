@@ -51,6 +51,8 @@ import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
+import me.leolin.shortcutbadger.ShortcutBadger;
+
 /**
  * JobService to be scheduled by the JobScheduler. Requests scheduled with
  * the JobScheduler ultimately land on this service's "onStartJob" method.
@@ -100,8 +102,11 @@ public class AlarmJobService  extends JobService{
 		
 		if(countBadge!=0){
 			/** Tao badge */
-	        BadgeAction badge = new BadgeAction(ctx);
-	        badge.setBadgeIcon(countBadge);
+	        //BadgeAction badge = new BadgeAction(ctx);
+	        //badge.setBadgeIcon(countBadge);
+
+			ShortcutBadger.applyCount(ctx, countBadge); //for 1.1.4+
+
 		}
 		
 		systemConfig = new SystemConfigItemHelper(ctx);
